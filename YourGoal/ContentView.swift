@@ -11,59 +11,72 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @State var showingAddNewGoal = false
+    @State var progressValue: CGFloat = 0.4
 
     var body: some View {
-        List {
-            ForEach(items) { item in
-                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-            }
-            .onDelete(perform: deleteItems)
-        }
-        .toolbar {
-            #if os(iOS)
-            EditButton()
-            #endif
+        TabView {
+            ZStack {
+                Color.black
+                    .edgesIgnoringSafeArea(.all)
+                VStack {
+                    HorizontalCalendarView()
 
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
-            }
-        }
+                    Spacer()
+
+                    GoalProgressView(progress: progressValue).padding(15.0)
+
+                    Text("Leggi Shantaram")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.white)
+
+                    Spacer(minLength: 50)
+
+                    Button(action: {
+                        self.showingAddNewGoal.toggle()
+                    }) {
+                        HStack {
+                            Image(systemName: "plus.rectangle.fill").foregroundColor(.green)
+                        }
+                        .padding(15.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15.0)
+                                .stroke(lineWidth: 2.0)
+                        )
+                    }.accentColor(.green)
+                    .sheet(isPresented: $showingAddNewGoal) {
+                        AddNewGoalView()
+                    }
+
+                    Spacer()
+                }
+            }.tabItem {
+                Image.init(systemName: "house.fill")
+                Text("Obiettivi")
+            }.tag(1)
+
+            Image(systemName: "person.circle.fill").font(.largeTitle)
+                .tabItem {
+                    Image.init(systemName: "person.circle.fill")
+                    Text("Statistiche")
+                }.tag(2)
+
+            Image(systemName: "magnifyingglass").font(.largeTitle)
+                .tabItem {
+                    Image.init(systemName: "magnifyingglass")
+                    Text("Settimana")
+                }.tag(3)
+        }.accentColor(.red)
+            .colorScheme(.light)
+            .edgesIgnoringSafeArea(.top)
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    func incrementProgress() {
+        let randomValue = CGFloat([0.012, 0.022, 0.034, 0.016, 0.11].randomElement()!)
+        self.progressValue += randomValue
     }
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
 }
 
 private let itemFormatter: DateFormatter = {
