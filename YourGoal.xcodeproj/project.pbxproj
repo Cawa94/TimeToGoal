@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0502862526166E000C4DC0 /* Date+Extensions.swift */; };
+		DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05028B25264263000C4DC0 /* Color+Extensions.swift */; };
 		DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* AddNewGoalView.swift */; };
+		DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */; };
 		DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */; };
 		DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC79252232130087F9C8 /* YourGoalApp.swift */; };
 		DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC7B252232130087F9C8 /* ContentView.swift */; };
@@ -38,7 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA0502862526166E000C4DC0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		DA05028B25264263000C4DC0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		DA582A58252518CA00A37693 /* AddNewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGoalView.swift; sourceTree = "<group>"; };
+		DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		DAB7DC76252232130087F9C8 /* YourGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB7DC79252232130087F9C8 /* YourGoalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourGoalApp.swift; sourceTree = "<group>"; };
@@ -82,12 +88,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA0502852526165B000C4DC0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DA0502862526166E000C4DC0 /* Date+Extensions.swift */,
+				DA05028B25264263000C4DC0 /* Color+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DA582A5D252518DA00A37693 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				DA582A58252518CA00A37693 /* AddNewGoalView.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DA6566B82525E61A00923688 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		DA6EE2242524BF6E0064D2CE /* Views */ = {
@@ -130,6 +153,8 @@
 				DAB7DC82252232130087F9C8 /* Persistence.swift */,
 				DA582A5D252518DA00A37693 /* ViewControllers */,
 				DA6EE2242524BF6E0064D2CE /* Views */,
+				DA6566B82525E61A00923688 /* Models */,
+				DA0502852526165B000C4DC0 /* Extensions */,
 				DAB7DC7F252232130087F9C8 /* Preview Content */,
 			);
 			path = YourGoal;
@@ -290,9 +315,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */,
 				DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */,
+				DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */,
 				DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */,
 				DAB7DC83252232130087F9C8 /* Persistence.swift in Sources */,
+				DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */,
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
 				DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */,

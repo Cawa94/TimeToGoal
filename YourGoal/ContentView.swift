@@ -9,10 +9,19 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+
     @Environment(\.managedObjectContext) private var viewContext
 
     @State var showingAddNewGoal = false
-    @State var progressValue: CGFloat = 0.4
+
+    @FetchRequest(
+        entity: Goal.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Goal.createdAt, ascending: true)
+        ]
+    ) var goals: FetchedResults<Goal>
+
+    @State var currentGoal: Goal?
 
     var body: some View {
         TabView {
@@ -24,9 +33,9 @@ struct ContentView: View {
 
                     Spacer()
 
-                    GoalProgressView(progress: progressValue).padding(15.0)
+                    GoalProgressView(goal: $currentGoal).padding(15.0)
 
-                    Text("Leggi Shantaram")
+                    Text(currentGoal?.name ?? "Sconosciuto")
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(.white)
@@ -37,7 +46,8 @@ struct ContentView: View {
                         self.showingAddNewGoal.toggle()
                     }) {
                         HStack {
-                            Image(systemName: "plus.rectangle.fill").foregroundColor(.green)
+                            Image(systemName: "plus.rectangle.fill")
+                                .foregroundColor(.green)
                         }
                         .padding(15.0)
                         .overlay(
@@ -45,11 +55,15 @@ struct ContentView: View {
                                 .stroke(lineWidth: 2.0)
                         )
                     }.accentColor(.green)
-                    .sheet(isPresented: $showingAddNewGoal) {
-                        AddNewGoalView()
+                    .sheet(isPresented: $showingAddNewGoal, onDismiss: {
+                        currentGoal = goals.last
+                    }) {
+                        AddNewGoalView(isPresented: $showingAddNewGoal)
+                            .environment(\.managedObjectContext,
+                                         PersistenceController.shared.container.viewContext)
                     }
 
-                    Spacer()
+                    Spacer(minLength: 20)
                 }
             }.tabItem {
                 Image.init(systemName: "house.fill")
@@ -65,29 +79,38 @@ struct ContentView: View {
             Image(systemName: "magnifyingglass").font(.largeTitle)
                 .tabItem {
                     Image.init(systemName: "magnifyingglass")
-                    Text("Settimana")
+                    Text("Calendario")
                 }.tag(3)
-        }.accentColor(.red)
-            .colorScheme(.light)
+        }.accentColor(.green)
+            .colorScheme(.dark)
             .edgesIgnoringSafeArea(.top)
+        .onAppear(perform: {
+            currentGoal = goals.last
+            UITableView.appearance().backgroundColor = .clear
+            UITableView.appearance().sectionIndexBackgroundColor = .clear
+            UITableView.appearance().sectionIndexColor = .clear
+        })
     }
 
-    func incrementProgress() {
-        let randomValue = CGFloat([0.012, 0.022, 0.034, 0.016, 0.11].randomElement()!)
-        self.progressValue += randomValue
+    func updateGoal() {
+        guard let currentGoal = self.currentGoal
+            else { return }
+        currentGoal.timeRequired = 4
+        PersistenceController.shared.saveContext()
+    }
+
+    func deleteGoal() {
+        guard let currentGoal = self.currentGoal
+            else { return }
+        viewContext.delete(currentGoal)
+        PersistenceController.shared.saveContext()
     }
 
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView().environment(\.managedObjectContext,
+                                  PersistenceController.shared.container.viewContext)
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct WeekDay: Identifiable {
     var id: Int64
 
-    var number: Int
+    var number: String
     var name: String
 }
 
@@ -22,39 +22,43 @@ struct DayCell: View {
             Text(weekDay.name)
                 .fontWeight(.semibold)
                 .padding([.leading, .trailing, .bottom], 5)
+                .foregroundColor(.black)
 
-            Text("\(weekDay.number)")
+            Text(weekDay.number)
                 .fontWeight(.semibold)
                 .padding([.leading, .trailing, .bottom], 5)
+                .foregroundColor(.black)
         }
     }
 }
 
 struct HorizontalCalendarView: View {
 
-    @State var days = [
-        WeekDay(id: 0, number: 1, name: "Lu"),
-        WeekDay(id: 1, number: 2, name: "Ma"),
-        WeekDay(id: 2, number: 3, name: "Me"),
-        WeekDay(id: 3, number: 4, name: "Gi"),
-        WeekDay(id: 4, number: 5, name: "Ve"),
-        WeekDay(id: 5, number: 6, name: "Sa"),
-        WeekDay(id: 6, number: 7, name: "Do")]
+    var days: [WeekDay] {
+        let startOfWeek = Date().startOfWeek ?? Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+
+        return [
+            WeekDay(id: 0, number: formatter.string(from: startOfWeek), name: "Lu"),
+            WeekDay(id: 1, number: formatter.string(from: startOfWeek.adding(days: 1)), name: "Ma"),
+            WeekDay(id: 2, number: formatter.string(from: startOfWeek.adding(days: 2)), name: "Me"),
+            WeekDay(id: 3, number: formatter.string(from: startOfWeek.adding(days: 3)), name: "Gi"),
+            WeekDay(id: 4, number: formatter.string(from: startOfWeek.adding(days: 4)), name: "Ve"),
+            WeekDay(id: 5, number: formatter.string(from: startOfWeek.adding(days: 5)), name: "Sa"),
+            WeekDay(id: 6, number: formatter.string(from: startOfWeek.adding(days: 6)), name: "Do")
+        ]
+    }
 
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(alignment: .center, spacing: 5, content: {
-                Spacer()
-                ForEach(days) {
-                    DayCell(weekDay: $0)
-                        .background(Color.green)
-                        .cornerRadius(5)
-                        .padding(5)
-                        .border(Color.black, width: 0)
-                }
-                Spacer()
-            })
-        }
+        HStack(content: {
+            ForEach(days) {
+                DayCell(weekDay: $0)
+                    .background(Color.green)
+                    .cornerRadius(5)
+                    .padding(5)
+                    .border(Color.black, width: 0)
+            }}).frame(width: .infinity, height: 100, alignment: .center)
     }
 
 }
