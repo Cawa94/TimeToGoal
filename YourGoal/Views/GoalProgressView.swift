@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+private extension Color {
+
+    static let textForegroundColor: Color = .black
+
+}
+
 struct GoalProgressView: View {
     @Binding var goal: Goal?
 
@@ -16,7 +22,7 @@ struct GoalProgressView: View {
 
     var body: some View {
         ZStack {
-            Color.black
+            Color.pageBackground
 
             Circle()
                 .trim(from: 0.0,
@@ -24,8 +30,8 @@ struct GoalProgressView: View {
                 .stroke(style: StrokeStyle(lineWidth: 40.0,
                                            lineCap: .round,
                                            lineJoin: .round))
-                .background(Circle().stroke(lineWidth: 40.0).opacity(0.3).foregroundColor(Color.green))
-                .foregroundColor(Color.green)
+                .background(Circle().stroke(lineWidth: 40.0).opacity(0.3).foregroundColor(Color.goalColor))
+                .foregroundColor(Color.goalColor)
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.easeInOut(duration: 1))
                 .onAppear() {
@@ -40,20 +46,20 @@ struct GoalProgressView: View {
                 Text("\(goal?.timeRequired ?? 0)")
                     .font(.largeTitle)
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(.textForegroundColor)
                 Text("Ore rimaste")
                     .font(.title)
                     .bold()
-                    .foregroundColor(.white)
-                    .padding(.bottom, 15)
+                    .foregroundColor(.textForegroundColor)
+                    .padding(.bottom, 10)
                 Text("Raggiungerai il tuo\nobiettivo il")
                     .font(.title2)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.white)
+                    .foregroundColor(.textForegroundColor)
                 Text("\(completionDate.formatted)")
                     .font(.largeTitle)
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(.textForegroundColor)
                     .padding(.bottom, 20)
                 Spacer()
             }
@@ -63,7 +69,7 @@ struct GoalProgressView: View {
                 completionDate = goal.completionDateExtimated ?? Date()
             } else {
                 progressCompletion = 0.4
-                completionDate = Date().addingTimeInterval(.init(500))
+                completionDate = Date().adding(days: 10)
             }
         })
     }

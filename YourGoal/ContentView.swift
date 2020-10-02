@@ -12,8 +12,6 @@ struct ContentView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State var showingAddNewGoal = false
-
     @FetchRequest(
         entity: Goal.entity(),
         sortDescriptors: [
@@ -21,51 +19,40 @@ struct ContentView: View {
         ]
     ) var goals: FetchedResults<Goal>
 
+    @State var showingAddNewGoal = false
     @State var currentGoal: Goal?
 
     var body: some View {
         TabView {
-            ZStack {
-                Color.black
-                    .edgesIgnoringSafeArea(.all)
-                VStack {
-                    HorizontalCalendarView()
-
-                    Spacer()
-
-                    GoalProgressView(goal: $currentGoal).padding(15.0)
-
-                    Text(currentGoal?.name ?? "Sconosciuto")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.white)
-
-                    Spacer(minLength: 50)
-
-                    Button(action: {
-                        self.showingAddNewGoal.toggle()
-                    }) {
-                        HStack {
-                            Image(systemName: "plus.rectangle.fill")
-                                .foregroundColor(.green)
-                        }
-                        .padding(15.0)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15.0)
-                                .stroke(lineWidth: 2.0)
-                        )
-                    }.accentColor(.green)
-                    .sheet(isPresented: $showingAddNewGoal, onDismiss: {
-                        currentGoal = goals.last
-                    }) {
-                        AddNewGoalView(isPresented: $showingAddNewGoal)
-                            .environment(\.managedObjectContext,
-                                         PersistenceController.shared.container.viewContext)
+            VStack {
+                TrackGoalView(currentGoal: $currentGoal)
+                Button(action: {
+                    self.showingAddNewGoal.toggle()
+                }) {
+                    HStack {
+                        Image(systemName: "plus.rectangle.fill")
+                            .foregroundColor(.goalColor)
                     }
-
-                    Spacer(minLength: 20)
+                    .padding(15.0)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15.0)
+                            .stroke(lineWidth: 2.0)
+                    )
+                }.accentColor(.goalColor)
+                .sheet(isPresented: $showingAddNewGoal, onDismiss: {
+                    currentGoal = goals.last
+                }) {
+                    AddNewGoalView(isPresented: $showingAddNewGoal)
+                        .environment(\.managedObjectContext,
+                                     PersistenceController.shared.container.viewContext)
                 }
-            }.tabItem {
+
+                Spacer(minLength: 20)
+            }.background(Color.pageBackground)
+            .onAppear(perform: {
+                currentGoal = goals.last
+            })
+            .tabItem {
                 Image.init(systemName: "house.fill")
                 Text("Obiettivi")
             }.tag(1)
@@ -81,15 +68,14 @@ struct ContentView: View {
                     Image.init(systemName: "magnifyingglass")
                     Text("Calendario")
                 }.tag(3)
-        }.accentColor(.green)
+        }.accentColor(.goalColor)
             .colorScheme(.dark)
             .edgesIgnoringSafeArea(.top)
-        .onAppear(perform: {
-            currentGoal = goals.last
-            UITableView.appearance().backgroundColor = .clear
-            UITableView.appearance().sectionIndexBackgroundColor = .clear
-            UITableView.appearance().sectionIndexColor = .clear
-        })
+            .onAppear(perform: {
+                UITableView.appearance().backgroundColor = UIColor.pageBackground
+                UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
+                UITableView.appearance().sectionIndexColor = UIColor.pageBackground
+            })
     }
 
     func updateGoal() {
