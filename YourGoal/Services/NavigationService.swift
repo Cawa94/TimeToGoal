@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NavigationService: UIViewControllerRepresentable {
+
     var configure: (UINavigationController) -> Void = { _ in }
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationService>) -> UIViewController {

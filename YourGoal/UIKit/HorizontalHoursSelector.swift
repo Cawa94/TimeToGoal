@@ -19,16 +19,16 @@ class PickerRowView: UIView {
 
         super.init(frame: frame)
 
-        updateLabelFont(isSelected: isSelected, text: "\(control.hours[row])")
+        updateLabelFont(isSelected: isSelected, text: control.hours[row].stringWithTwoDecimals)
         self.addSubview(label)
     }
 
     func updateLabelFont(isSelected: Bool, text: String) {
         var font: UIFont
         if isSelected {
-            font = UIFont.systemFont(ofSize: 18, weight: .bold)
+            font = UIFont.systemFont(ofSize: 17, weight: .bold)
         } else {
-            font = UIFont.systemFont(ofSize: 18, weight: .regular)
+            font = UIFont.systemFont(ofSize: 17, weight: .regular)
         }
 
         let attributes: [NSAttributedString.Key: Any] = [
@@ -48,7 +48,15 @@ struct HorizontalPickerView: UIViewRepresentable {
 
     @Binding var selectedValue: String
 
-    let hours = Array(0...23)
+    var hours: [Double] {
+        var hoursArray: [Double] = []
+        for hour in 0...23 {
+            for minutes in [00, 15, 30, 45] {
+                hoursArray.append(Double("\(hour).\(minutes)") ?? 0.00)
+            }
+        }
+        return hoursArray
+    }
     let size: CGSize
 
     func makeUIView(context: Context) -> UIPickerView {
@@ -89,7 +97,7 @@ struct HorizontalPickerView: UIViewRepresentable {
         }
 
         func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-            return control.size.width - 10
+            return control.size.width
         }
 
         func pickerView(_ pickerView: UIPickerView, viewForRow row: Int,
@@ -103,11 +111,11 @@ struct HorizontalPickerView: UIViewRepresentable {
         }
 
         func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            control.selectedValue = "\(control.hours[row])"
+            control.selectedValue = control.hours[row].stringWithTwoDecimals
 
             if let rowView = pickerView.view(forRow: row, forComponent: component) as? PickerRowView {
                 rowView.updateLabelFont(isSelected: pickerView.selectedRow(inComponent: component) == row,
-                                        text: "\(control.hours[row])")
+                                        text: control.hours[row].stringWithTwoDecimals)
             }
         }
 

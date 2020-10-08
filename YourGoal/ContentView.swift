@@ -19,35 +19,25 @@ struct ContentView: View {
         ]
     ) var goals: FetchedResults<Goal>
 
+    @State var showingTrackGoal = false
     @State var showingAddNewGoal = false
     @State var currentGoal: Goal?
 
+    @ViewBuilder
     var body: some View {
         TabView {
             VStack {
-                TrackGoalView(currentGoal: $currentGoal)
-                Button(action: {
-                    self.showingAddNewGoal.toggle()
-                }) {
-                    HStack {
-                        Image(systemName: "plus.rectangle.fill")
-                            .foregroundColor(.goalColor)
-                    }
-                    .padding(15.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15.0)
-                            .stroke(lineWidth: 2.0)
-                    )
-                }.accentColor(.goalColor)
-                .sheet(isPresented: $showingAddNewGoal, onDismiss: {
-                    currentGoal = goals.last
-                }) {
-                    AddNewGoalView(isPresented: $showingAddNewGoal)
-                        .environment(\.managedObjectContext,
-                                     PersistenceController.shared.container.viewContext)
+                MainGoalView(currentGoal: $currentGoal)
+                HStack {
+                    Spacer()
+                    trackTimeButton
+                        .frame(maxWidth: .infinity)
+                    newGoalButton
+                        .frame(maxWidth: .infinity)
+                    Spacer()
                 }
 
-                Spacer(minLength: 20)
+                Spacer(minLength: 40)
             }.background(Color.pageBackground)
             .onAppear(perform: {
                 currentGoal = goals.last
@@ -60,17 +50,11 @@ struct ContentView: View {
             Image(systemName: "person.circle.fill").font(.largeTitle)
                 .tabItem {
                     Image.init(systemName: "person.circle.fill")
-                    Text("Statistiche")
-                }.tag(2)
-
-            Image(systemName: "magnifyingglass").font(.largeTitle)
-                .tabItem {
-                    Image.init(systemName: "magnifyingglass")
                     Text("Calendario")
-                }.tag(3)
+                }.tag(2)
         }.accentColor(.goalColor)
             .colorScheme(.dark)
-            .edgesIgnoringSafeArea(.top)
+            .ignoresSafeArea()
             .onAppear(perform: {
                 UITableView.appearance().backgroundColor = UIColor.pageBackground
                 UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
@@ -90,6 +74,59 @@ struct ContentView: View {
             else { return }
         viewContext.delete(currentGoal)
         PersistenceController.shared.saveContext()
+    }
+
+    var trackTimeButton: some View {
+        HStack {
+            Button(action: {
+                self.showingTrackGoal.toggle()
+            }) {
+                HStack {
+                    Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
+                    Text("Traccia progressi").bold().foregroundColor(.goalColor)
+                }
+                .padding(15.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(.goalColor)
+                )
+            }.accentColor(.goalColor)
+            .fullScreenCover(isPresented: $showingTrackGoal, onDismiss: {
+                currentGoal = goals.last
+            }, content: {
+                TrackHoursSpentView(isPresented: $showingTrackGoal)
+                    .environment(\.managedObjectContext,
+                                 PersistenceController.shared.container.viewContext)
+                    .background(Color.clear)
+            })
+        }
+    }
+
+    var newGoalButton: some View {
+        HStack {
+            Button(action: {
+                self.showingAddNewGoal.toggle()
+            }) {
+                HStack {
+                    Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
+                    Text("Nuovo obiettivo").bold().foregroundColor(.goalColor)
+                }
+                .padding(15.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(.goalColor)
+                )
+            }.accentColor(.goalColor)
+            .sheet(isPresented: $showingAddNewGoal, onDismiss: {
+                currentGoal = goals.last
+            }, content: {
+                AddNewGoalView(isPresented: $showingAddNewGoal)
+                    .environment(\.managedObjectContext,
+                                 PersistenceController.shared.container.viewContext)
+            })
+        }
     }
 
 }

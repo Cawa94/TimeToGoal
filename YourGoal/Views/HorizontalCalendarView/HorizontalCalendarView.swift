@@ -13,24 +13,23 @@ struct HorizontalCalendarViewModel {
 
     var days: [WeekDay] {
         let startOfWeek = Date().startOfWeek ?? Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
+
+        let monday = startOfWeek
+        let tuesday = startOfWeek.adding(days: 1)
+        let wednesday = startOfWeek.adding(days: 2)
+        let thursday = startOfWeek.adding(days: 3)
+        let friday = startOfWeek.adding(days: 4)
+        let saturday = startOfWeek.adding(days: 5)
+        let sunday = startOfWeek.adding(days: 6)
 
         return [
-            WeekDay(id: 0, number: formatter.string(from: startOfWeek),
-                    name: "Lu", isToday: Date().dayNumber == 2, isWorkingDay: goal?.workOnMonday),
-            WeekDay(id: 1, number: formatter.string(from: startOfWeek.adding(days: 1)),
-                    name: "Ma", isToday: Date().dayNumber == 3, isWorkingDay: goal?.workOnTuesday),
-            WeekDay(id: 2, number: formatter.string(from: startOfWeek.adding(days: 2)),
-                    name: "Me", isToday: Date().dayNumber == 4, isWorkingDay: goal?.workOnWednesday),
-            WeekDay(id: 3, number: formatter.string(from: startOfWeek.adding(days: 3)),
-                    name: "Gi", isToday: Date().dayNumber == 5, isWorkingDay: goal?.workOnThursday),
-            WeekDay(id: 4, number: formatter.string(from: startOfWeek.adding(days: 4)),
-                    name: "Ve", isToday: Date().dayNumber == 6, isWorkingDay: goal?.workOnFriday),
-            WeekDay(id: 5, number: formatter.string(from: startOfWeek.adding(days: 5)),
-                    name: "Sa", isToday: Date().dayNumber == 7, isWorkingDay: goal?.workOnSaturday),
-            WeekDay(id: 6, number: formatter.string(from: startOfWeek.adding(days: 6)),
-                    name: "Do", isToday: Date().dayNumber == 1, isWorkingDay: goal?.workOnSunday)
+            WeekDay(id: 0, date: monday, isToday: Date().dayNumber == 2, isWorkingDay: goal?.workOnMonday),
+            WeekDay(id: 1, date: tuesday, isToday: Date().dayNumber == 3, isWorkingDay: goal?.workOnTuesday),
+            WeekDay(id: 2, date: wednesday, isToday: Date().dayNumber == 4, isWorkingDay: goal?.workOnWednesday),
+            WeekDay(id: 3, date: thursday, isToday: Date().dayNumber == 5, isWorkingDay: goal?.workOnThursday),
+            WeekDay(id: 4, date: friday, isToday: Date().dayNumber == 6, isWorkingDay: goal?.workOnFriday),
+            WeekDay(id: 5, date: saturday, isToday: Date().dayNumber == 7, isWorkingDay: goal?.workOnSaturday),
+            WeekDay(id: 6, date: sunday, isToday: Date().dayNumber == 1, isWorkingDay: goal?.workOnSunday)
         ]
     }
 

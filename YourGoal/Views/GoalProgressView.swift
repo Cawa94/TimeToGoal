@@ -43,7 +43,7 @@ struct GoalProgressView: View {
 
             VStack {
                 Spacer()
-                Text("\(goal?.timeRequired ?? 0)")
+                Text((goal?.timeRequired ?? 0).stringWithTwoDecimals)
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)

@@ -104,7 +104,7 @@ struct AddNewGoalView: View {
         NavigationView {
             ZStack {
                 Color.viewBackgroundColor
-                    .edgesIgnoringSafeArea(.all)
+                    .ignoresSafeArea()
                 Form {
                     Section(header: Text("Che obiettivo vuoi raggiungere?")) {
                         TextField("", text: $nameFieldValue)
@@ -156,7 +156,7 @@ struct AddNewGoalView: View {
                                             .cornerRadius(.defaultRadius)
                                         HorizontalPickerView(selectedValue: tuesdayBinding,
                                                              size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width - 25, height: 30, alignment: .center)
+                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                             .clipped()
                                     }
                                 }.clipped()
@@ -311,14 +311,14 @@ struct AddNewGoalView: View {
             let newGoal = Goal(context: viewContext)
             newGoal.name = nameFieldValue
             newGoal.createdAt = Date()
-            newGoal.timeRequired = Int32(timeRequiredFieldValue) ?? 0
-            newGoal.mondayHours = Int16(mondayHoursValue) ?? 0
-            newGoal.tuesdayHours = Int16(tuesdayHoursValue) ?? 0
-            newGoal.wednesdayHours = Int16(wednesdayHoursValue) ?? 0
-            newGoal.thursdayHours = Int16(thursdayHoursValue) ?? 0
-            newGoal.fridayHours = Int16(fridayHoursValue) ?? 0
-            newGoal.saturdayHours = Int16(saturdayHoursValue) ?? 0
-            newGoal.sundayHours = Int16(sundayHoursValue) ?? 0
+            newGoal.timeRequired = Double(timeRequiredFieldValue) ?? 0
+            newGoal.mondayHours = Double(mondayHoursValue) ?? 0
+            newGoal.tuesdayHours = Double(tuesdayHoursValue) ?? 0
+            newGoal.wednesdayHours = Double(wednesdayHoursValue) ?? 0
+            newGoal.thursdayHours = Double(thursdayHoursValue) ?? 0
+            newGoal.fridayHours = Double(fridayHoursValue) ?? 0
+            newGoal.saturdayHours = Double(saturdayHoursValue) ?? 0
+            newGoal.sundayHours = Double(sundayHoursValue) ?? 0
             newGoal.completionDateExtimated = Date().adding(days: 46)
             PersistenceController.shared.saveContext()
             self.isPresented = false
@@ -326,21 +326,21 @@ struct AddNewGoalView: View {
     }
 
     func isValid() -> Bool {
-        if !nameFieldValue.isEmpty, Int32(timeRequiredFieldValue) ?? 0 != 0, atLeastOneDayWorking {
+        if !nameFieldValue.isEmpty, Double(timeRequiredFieldValue) ?? 0 != 0, atLeastOneDayWorking {
             return true
         }
         return false
     }
 
     func updateCompletionDate() {
-        if let timeRequired = Int32(timeRequiredFieldValue), atLeastOneDayWorking {
-            let mondayHours = Int32(mondayHoursValue) ?? 0
-            let tuesdayHours = Int32(tuesdayHoursValue) ?? 0
-            let wednesdayHours = Int32(wednesdayHoursValue) ?? 0
-            let thursdayHours = Int32(thursdayHoursValue) ?? 0
-            let fridayHours = Int32(fridayHoursValue) ?? 0
-            let saturdayHours = Int32(saturdayHoursValue) ?? 0
-            let sundayHours = Int32(sundayHoursValue) ?? 0
+        if let timeRequired = Double(timeRequiredFieldValue), atLeastOneDayWorking {
+            let mondayHours = Double(mondayHoursValue) ?? 0
+            let tuesdayHours = Double(tuesdayHoursValue) ?? 0
+            let wednesdayHours = Double(wednesdayHoursValue) ?? 0
+            let thursdayHours = Double(thursdayHoursValue) ?? 0
+            let fridayHours = Double(fridayHoursValue) ?? 0
+            let saturdayHours = Double(saturdayHoursValue) ?? 0
+            let sundayHours = Double(sundayHoursValue) ?? 0
 
             let dayHours = [sundayHours, mondayHours, tuesdayHours, wednesdayHours, thursdayHours, fridayHours, saturdayHours]
             var daysRequired = -1
@@ -362,10 +362,10 @@ struct AddNewGoalView: View {
     }
 
     var atLeastOneDayWorking: Bool {
-        Int32(mondayHoursValue) ?? 0 != 0 || Int32(tuesdayHoursValue) ?? 0 != 0
-            || Int32(wednesdayHoursValue) ?? 0 != 0 || Int32(thursdayHoursValue) ?? 0 != 0
-            || Int32(fridayHoursValue) ?? 0 != 0 || Int32(saturdayHoursValue) ?? 0 != 0
-            || Int32(sundayHoursValue) ?? 0 != 0
+        Double(mondayHoursValue) ?? 0 != 0 || Double(tuesdayHoursValue) ?? 0 != 0
+            || Double(wednesdayHoursValue) ?? 0 != 0 || Double(thursdayHoursValue) ?? 0 != 0
+            || Double(fridayHoursValue) ?? 0 != 0 || Double(saturdayHoursValue) ?? 0 != 0
+            || Double(sundayHoursValue) ?? 0 != 0
     }
 
 }

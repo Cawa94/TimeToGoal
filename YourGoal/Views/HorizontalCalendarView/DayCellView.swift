@@ -13,13 +13,20 @@ struct WeekDay: Identifiable {
     var name: String
     var isToday: Bool
     var isWorkingDay: Bool
+    var isInFuture: Bool
 
-    init(id: Int64, number: String, name: String, isToday: Bool, isWorkingDay: Bool?) {
+    init(id: Int64, date: Date, isToday: Bool, isWorkingDay: Bool?) {
+        let numberFormatter = DateFormatter()
+        numberFormatter.dateFormat = "d"
+        var calendar = Calendar.current
+        calendar.locale = Locale(identifier: "IT")
+
         self.id = id
-        self.number = number
-        self.name = name
+        self.number = numberFormatter.string(from: date)
+        self.name = calendar.veryShortWeekdaySymbols[date.dayNumber - 1]
         self.isToday = isToday
         self.isWorkingDay = isWorkingDay ?? false
+        self.isInFuture = date > Date()
     }
 
 }
@@ -37,14 +44,14 @@ struct DayCellView: View {
                         .foregroundColor(.goalColor)
                     Text(weekDay.name)
                         .fontWeight(.semibold)
-                        .foregroundColor(.black)
+                        .foregroundColor(weekDay.isInFuture ? .gray : .black)
                         .padding([.bottom, .top], 6)
                 }
             } else {
                 Text(weekDay.name)
                     .fontWeight(.semibold)
                     .padding([.bottom, .top], 6)
-                    .foregroundColor(.black)
+                    .foregroundColor(weekDay.isInFuture ? .gray : .black)
             }
 
             if weekDay.isToday {
@@ -54,13 +61,13 @@ struct DayCellView: View {
                     Text(weekDay.number)
                         .fontWeight(.semibold)
                         .padding([.bottom, .top], 6)
-                        .foregroundColor(.black)
+                        .foregroundColor(weekDay.isInFuture ? .gray : .black)
                 }
             } else {
                 Text(weekDay.number)
                     .fontWeight(.semibold)
                     .padding([.top, .bottom], 6)
-                    .foregroundColor(.black)
+                    .foregroundColor(weekDay.isInFuture ? .gray : .black)
             }
         }
     }
@@ -68,9 +75,9 @@ struct DayCellView: View {
 
 struct DayCellView_Previews: PreviewProvider {
     static var previews: some View {
-        DayCellView(weekDay: .init(id: 0, number: "10", name: "Me", isToday: true, isWorkingDay: true))
+        DayCellView(weekDay: .init(id: 0, date: Date(), isToday: true, isWorkingDay: true))
             .previewLayout(.fixed(width: 50, height: 85))
-        DayCellView(weekDay: .init(id: 0, number: "10", name: "Me", isToday: true, isWorkingDay: false))
+        DayCellView(weekDay: .init(id: 0, date: Date(), isToday: true, isWorkingDay: false))
             .previewLayout(.fixed(width: 50, height: 85))
     }
 }

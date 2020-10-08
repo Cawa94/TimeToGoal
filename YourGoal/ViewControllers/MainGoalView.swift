@@ -1,5 +1,5 @@
 //
-//  TrackGoalView.swift
+//  MainGoalView.swift
 //  YourGoal
 //
 //  Created by Yuri Cavallin on 02/10/2020.
@@ -13,27 +13,30 @@ private extension Color {
 
 }
 
-struct TrackGoalView: View {
+struct MainGoalView: View {
 
     @Binding var currentGoal: Goal?
 
     var body: some View {
         ZStack {
             Color.pageBackground
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea()
             VStack {
                 Spacer(minLength: 10)
+
                 HorizontalCalendarView(viewModel: HorizontalCalendarViewModel(goal: $currentGoal))
                     .padding([.leading, .trailing])
+
+                Spacer(minLength: 25)
+
+                Text(currentGoal?.name ?? "Il Mio Obiettivo")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundColor(.textForegroundColor)
 
                 Spacer()
 
                 GoalProgressView(goal: $currentGoal).padding(15.0)
-
-                Text(currentGoal?.name ?? "Sconosciuto")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.textForegroundColor)
 
                 Spacer(minLength: 50)
             }
@@ -41,9 +44,9 @@ struct TrackGoalView: View {
     }
 }
 
-struct TrackGoalView_Previews: PreviewProvider {
+struct MainGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackGoalView(currentGoal: .constant(Goal()))
+        MainGoalView(currentGoal: .constant(Goal()))
     }
 }
 
