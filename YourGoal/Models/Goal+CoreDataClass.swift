@@ -40,4 +40,22 @@ public class Goal: NSManagedObject {
         self.sundayHours > 0
     }
 
+    var updatedCompletionDate: Date {
+        let dayHours = [sundayHours, mondayHours, tuesdayHours, wednesdayHours, thursdayHours, fridayHours, saturdayHours]
+        var daysRequired = -1
+        var decreasingTotal = timeRequired
+        var dayNumber = Date().dayNumber
+
+        while decreasingTotal > 0 {
+            daysRequired += 1
+            decreasingTotal -= dayHours[dayNumber - 1]
+            dayNumber += 1
+            if dayNumber == 8 {
+                dayNumber = 1
+            }
+        }
+
+        return Date().adding(days: daysRequired)
+    }
+
 }

@@ -13,12 +13,15 @@ private extension Color {
 
 }
 
-struct GoalProgressView: View {
-    @Binding var goal: Goal?
+public class GoalProgressViewModel: ObservableObject {
 
-    @State var progressToggle = false
-    @State var progressCompletion: Double = 0.0
-    @State var completionDate: Date = Date()
+    @Published var goal: Goal?
+
+}
+
+struct GoalProgressView: View {
+
+    @ObservedObject var viewModel = GoalProgressViewModel()
 
     var body: some View {
         ZStack {
@@ -26,7 +29,7 @@ struct GoalProgressView: View {
 
             Circle()
                 .trim(from: 0.0,
-                      to: progressToggle ? CGFloat(min(progressCompletion, 1.0)) : 0)
+                      to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
                 .stroke(style: StrokeStyle(lineWidth: 40.0,
                                            lineCap: .round,
                                            lineJoin: .round))
@@ -34,16 +37,11 @@ struct GoalProgressView: View {
                 .foregroundColor(Color.goalColor)
                 .rotationEffect(Angle(degrees: 270.0))
                 .animation(.easeInOut(duration: 1))
-                .onAppear() {
-                    withAnimation(.easeInOut(duration: 1)) {
-                        self.progressToggle.toggle()
-                    }
-                }
                 .padding()
 
             VStack {
                 Spacer()
-                Text((goal?.timeRequired ?? 0).stringWithTwoDecimals)
+                Text(Double((viewModel.goal?.timeRequired ?? 0) - (viewModel.goal?.timeCompleted ?? 0)).stringWithTwoDecimals)
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
@@ -52,32 +50,27 @@ struct GoalProgressView: View {
                     .bold()
                     .foregroundColor(.textForegroundColor)
                     .padding(.bottom, 10)
+                Spacer()
+                    .frame(height: 5)
                 Text("Raggiungerai il tuo\nobiettivo il")
                     .font(.title2)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.textForegroundColor)
-                Text("\(completionDate.formatted)")
+                Text("\((viewModel.goal?.updatedCompletionDate ?? Date()).formatted)")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
                     .padding(.bottom, 20)
                 Spacer()
             }
-        }.onAppear(perform: {
-            if let goal = $goal.wrappedValue {
-                progressCompletion = Double(goal.timeCompleted / goal.timeRequired)
-                completionDate = goal.completionDateExtimated ?? Date()
-            } else {
-                progressCompletion = 0.4
-                completionDate = Date().adding(days: 10)
-            }
-        })
+        }
     }
 }
-
+/*
 struct GoalProgressView_Previews: PreviewProvider {
     static var previews: some View {
         GoalProgressView(goal: .constant(Goal()))
             .previewLayout(.fixed(width: 375, height: 400))
     }
 }
+*/

@@ -13,9 +13,23 @@ private extension Color {
 
 }
 
+public class MainGoalViewModel: ObservableObject {
+
+    @Published var goal: Goal? {
+        didSet {
+            progressViewModel.goal = goal
+            calendarViewModel.goal = goal
+        }
+    }
+
+    @Published var progressViewModel = GoalProgressViewModel()
+    @Published var calendarViewModel = HorizontalCalendarViewModel()
+
+}
+
 struct MainGoalView: View {
 
-    @Binding var currentGoal: Goal?
+    @ObservedObject var viewModel = MainGoalViewModel()
 
     var body: some View {
         ZStack {
@@ -24,29 +38,30 @@ struct MainGoalView: View {
             VStack {
                 Spacer(minLength: 10)
 
-                HorizontalCalendarView(viewModel: HorizontalCalendarViewModel(goal: $currentGoal))
+                HorizontalCalendarView(viewModel: viewModel.calendarViewModel)
                     .padding([.leading, .trailing])
 
                 Spacer(minLength: 25)
 
-                Text(currentGoal?.name ?? "Il Mio Obiettivo")
+                Text(viewModel.goal?.name ?? "Il Mio Obiettivo")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
 
                 Spacer()
 
-                GoalProgressView(goal: $currentGoal).padding(15.0)
+                GoalProgressView(viewModel: viewModel.progressViewModel)
+                    .padding([.leading, .trailing], 7)
 
-                Spacer(minLength: 50)
+                Spacer(minLength: 25)
             }
         }
     }
 }
-
+/*
 struct MainGoalView_Previews: PreviewProvider {
     static var previews: some View {
-        MainGoalView(currentGoal: .constant(Goal()))
+        MainGoalView(viewModel: .init(goal: .constant(Goal())))
     }
 }
-
+*/

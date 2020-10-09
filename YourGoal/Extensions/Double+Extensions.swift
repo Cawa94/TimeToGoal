@@ -13,4 +13,8 @@ extension Double {
         String(format: "%.2f", self)
     }
 
+    var stringWithoutDecimals: String {
+        String(format: "%.0f", self)
+    }
+
 }

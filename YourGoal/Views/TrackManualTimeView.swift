@@ -9,11 +9,14 @@ import SwiftUI
 
 struct TrackManualTimeView: View {
 
-    @State var hoursSpent: Double = 0
+    @Binding var isPresented: Bool
+    @Binding var currentGoal: Goal?
+
+    @State var hoursSpent: Int = 0
     @State var minutesSpent: Double = 00
 
     @State var hours: [Int] = Array(0...23)
-    @State var minutes: [Int] = [00, 15, 30, 45]
+    @State var minutes: [Double] = [00, 15, 30, 45]
 
     var body: some View {
         VStack {
@@ -21,9 +24,9 @@ struct TrackManualTimeView: View {
                 HStack {
                     Spacer()
 
-                    Picker(selection: self.$hoursSpent, label: Text("Numbers")) {
-                        ForEach(self.hours, id: \.self) { integer in
-                            Text("\(integer)")
+                    Picker(selection: self.$hoursSpent, label: Text("")) {
+                        ForEach(self.hours, id: \.self) { double in
+                            Text("\(double)")
                         }
                     }
                     .frame(maxWidth: geometry.size.width / 3.5)
@@ -31,9 +34,9 @@ struct TrackManualTimeView: View {
 
                     Text("Ore")
 
-                    Picker(selection: self.$minutesSpent, label: Text("Numbers")) {
-                        ForEach(self.minutes, id: \.self) { integer in
-                            Text("\(integer)")
+                    Picker(selection: self.$minutesSpent, label: Text("")) {
+                        ForEach(self.minutes, id: \.self) { double in
+                            Text(double.stringWithoutDecimals)
                         }
                     }
                     .frame(maxWidth: geometry.size.width / 3.5)
@@ -46,7 +49,9 @@ struct TrackManualTimeView: View {
             }
             Spacer()
             Button(action: {
-                // TODO
+                currentGoal?.timeCompleted += Double(hoursSpent) + (Double("0.\(minutesSpent.stringWithoutDecimals)") ?? 0.00)
+                PersistenceController.shared.saveContext()
+                self.isPresented = false
             }) {
                 HStack {
                     Text("Aggiungi").bold().foregroundColor(.goalColor)
@@ -67,7 +72,7 @@ struct TrackManualTimeView: View {
 
 struct TrackManualTimeView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackManualTimeView()
+        TrackManualTimeView(isPresented: .constant(true), currentGoal: .constant(Goal()))
             .previewLayout(.fixed(width: 375, height: 250))
     }
 }

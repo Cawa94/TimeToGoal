@@ -8,6 +8,20 @@
 import SwiftUI
 import CoreData
 
+public class ContentViewViewModel: ObservableObject {
+
+    @Binding var currentGoal: Goal?
+
+    init(goal: Binding<Goal?>) {
+        self._currentGoal = goal
+    }
+
+    func updateView(){
+        self.objectWillChange.send()
+    }
+
+}
+
 struct ContentView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
@@ -21,13 +35,20 @@ struct ContentView: View {
 
     @State var showingTrackGoal = false
     @State var showingAddNewGoal = false
-    @State var currentGoal: Goal?
+
+    @State var currentGoal: Goal? {
+        didSet{
+            mainGoalViewModel.goal = currentGoal
+        }
+    }
+
+    var mainGoalViewModel = MainGoalViewModel()
 
     @ViewBuilder
     var body: some View {
         TabView {
             VStack {
-                MainGoalView(currentGoal: $currentGoal)
+                MainGoalView(viewModel: mainGoalViewModel)
                 HStack {
                     Spacer()
                     trackTimeButton
@@ -62,20 +83,6 @@ struct ContentView: View {
             })
     }
 
-    func updateGoal() {
-        guard let currentGoal = self.currentGoal
-            else { return }
-        currentGoal.timeRequired = 4
-        PersistenceController.shared.saveContext()
-    }
-
-    func deleteGoal() {
-        guard let currentGoal = self.currentGoal
-            else { return }
-        viewContext.delete(currentGoal)
-        PersistenceController.shared.saveContext()
-    }
-
     var trackTimeButton: some View {
         HStack {
             Button(action: {
@@ -92,13 +99,12 @@ struct ContentView: View {
                         .foregroundColor(.goalColor)
                 )
             }.accentColor(.goalColor)
-            .fullScreenCover(isPresented: $showingTrackGoal, onDismiss: {
-                currentGoal = goals.last
+            .sheet(isPresented: $showingTrackGoal, onDismiss: {
+                currentGoal = currentGoal
             }, content: {
-                TrackHoursSpentView(isPresented: $showingTrackGoal)
+                TrackHoursSpentView(isPresented: $showingTrackGoal, currentGoal: $currentGoal)
                     .environment(\.managedObjectContext,
                                  PersistenceController.shared.container.viewContext)
-                    .background(Color.clear)
             })
         }
     }

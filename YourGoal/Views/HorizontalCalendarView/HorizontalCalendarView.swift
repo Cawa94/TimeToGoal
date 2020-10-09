@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct HorizontalCalendarViewModel {
+public class HorizontalCalendarViewModel: ObservableObject {
 
-    @Binding var goal: Goal?
+    @Published var goal: Goal?
 
     var days: [WeekDay] {
         let startOfWeek = Date().startOfWeek ?? Date()
@@ -37,7 +37,7 @@ struct HorizontalCalendarViewModel {
 
 struct HorizontalCalendarView: View {
 
-    let viewModel: HorizontalCalendarViewModel!
+    @ObservedObject var viewModel = HorizontalCalendarViewModel()
 
     var body: some View {
         HStack(content: {
@@ -53,10 +53,11 @@ struct HorizontalCalendarView: View {
     }
 
 }
-
+/*
 struct HorizontalCalendarView_Previews: PreviewProvider {
     static var previews: some View {
         HorizontalCalendarView(viewModel: HorizontalCalendarViewModel(goal: .constant(Goal())))
             .previewLayout(.fixed(width: 375, height: 80))
     }
 }
+*/

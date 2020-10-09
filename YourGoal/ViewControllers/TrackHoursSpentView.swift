@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TrackHoursSpentView: View {
-    
-    @Environment(\.managedObjectContext) private var viewContext
 
     @Binding var isPresented: Bool
+    @Binding var currentGoal: Goal?
+
     @State private var trackMode = 0
 
     @ViewBuilder
@@ -40,7 +40,7 @@ struct TrackHoursSpentView: View {
                     .padding([.leading, .trailing])
                     Spacer()
                     if trackMode == 0 {
-                        TrackManualTimeView()
+                        TrackManualTimeView(isPresented: $isPresented, currentGoal: $currentGoal)
                     } else {
                         
                     }
@@ -57,8 +57,6 @@ struct TrackHoursSpentView: View {
 
 struct TrackHoursSpentView_Previews: PreviewProvider {
     static var previews: some View {
-        TrackHoursSpentView(isPresented: .constant(true))
-            .environment(\.managedObjectContext,
-                         PersistenceController.shared.container.viewContext)
+        TrackHoursSpentView(isPresented: .constant(true), currentGoal: .constant(Goal()))
     }
 }
