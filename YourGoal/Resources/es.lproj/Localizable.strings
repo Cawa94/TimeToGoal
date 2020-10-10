@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  YourGoal
+
+  Created by Yuri Cavallin on 10/10/2020.
+  
+*/
+
+"add_goal_days_required" = "% @ días";
+"add_goal_extimated_date_title" = "Alcanzará su objetivo el:";
+"add_goal_hours_for_day_title" = "¿Cuántas horas al día trabajará allí?";
+"add_goal_hours_required_title" = "¿Cuántas horas se necesitan?";
+"add_goal_name_title" = "¿Qué objetivo desea alcanzar?";
+
+"global_add" = "Agregar";
+"global_friday" = "Viernes";
+"global_hours" = "Horas";
+"global_minutes" = "Minutos";
+"global_monday" = "Lunes";
+"global_new_goal" = "Nuevo objetivo";
+"global_saturday" = "sábado";
+"global_sunday" = "Domingo";
+"global_thursday" = "jueves";
+"global_tuesday" = "martes";
+"global_wednesday" = "Miércoles";
+
+"main_hours_required" = "Quedan horas";
+"main_my_goal" = "Mi objetivo";
+"main_track_progress" = "Seguimiento del progreso";
+"main_will_reach_goal" = "Alcanzarás tu\nobjetivo el";
+
+"track_popup_title" = "¿Cuánto tiempo trabajaste en él hoy?";

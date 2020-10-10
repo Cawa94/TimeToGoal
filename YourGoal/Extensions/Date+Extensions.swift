@@ -5,7 +5,7 @@ extension Date {
     var formatted: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MMM-yyyy"
-        dateFormatter.locale = Locale(identifier: "IT")
+        dateFormatter.locale = Locale(identifier: Locale.current.languageCode ?? "en")
         return dateFormatter.string(from: self)
     }
 

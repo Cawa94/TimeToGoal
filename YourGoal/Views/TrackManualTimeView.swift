@@ -32,7 +32,7 @@ struct TrackManualTimeView: View {
                     .frame(maxWidth: geometry.size.width / 3.5)
                     .clipped()
 
-                    Text("Ore")
+                    Text("global_hours".localized())
 
                     Picker(selection: self.$minutesSpent, label: Text("")) {
                         ForEach(self.minutes, id: \.self) { double in
@@ -42,7 +42,7 @@ struct TrackManualTimeView: View {
                     .frame(maxWidth: geometry.size.width / 3.5)
                     .clipped()
 
-                    Text("Minuti")
+                    Text("global_minutes".localized())
 
                     Spacer()
                 }
@@ -54,7 +54,7 @@ struct TrackManualTimeView: View {
                 self.isPresented = false
             }) {
                 HStack {
-                    Text("Aggiungi").bold().foregroundColor(.goalColor)
+                    Text("global_add".localized()).bold().foregroundColor(.goalColor)
                 }
                 .padding([.leading, .trailing], 60)
                 .padding([.top, .bottom], 15)

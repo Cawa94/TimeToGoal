@@ -19,7 +19,7 @@ struct WeekDay: Identifiable {
         let numberFormatter = DateFormatter()
         numberFormatter.dateFormat = "d"
         var calendar = Calendar.current
-        calendar.locale = Locale(identifier: "IT")
+        calendar.locale = Locale(identifier: Locale.current.languageCode ?? "en")
 
         self.id = id
         self.number = numberFormatter.string(from: date)

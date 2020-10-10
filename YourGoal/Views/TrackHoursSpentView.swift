@@ -26,19 +26,19 @@ struct TrackHoursSpentView: View {
                 VStack {
                     Spacer()
                         .frame(height: 30)
-                    Text("Come vuoi tracciare il tempo?")
+                    Text("track_popup_title".localized())
                         .font(.title)
                         .bold()
                         .multilineTextAlignment(.center)
                         .foregroundColor(.goalColor)
-                    Spacer()
+                    /*Spacer()
                         .frame(height: 20)
                     Picker(selection: $trackMode, label: Text("")) {
                         Text("Manuale").tag(0)
                         Text("Timer").tag(1)
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .padding([.leading, .trailing])
+                    .padding([.leading, .trailing])*/
                     Spacer()
                     if trackMode == 0 {
                         TrackManualTimeView(isPresented: $isPresented, currentGoal: $currentGoal)
@@ -47,7 +47,7 @@ struct TrackHoursSpentView: View {
                     }
                 }
             }
-            .frame(height: 450, alignment: .center)
+            .frame(height: 400, alignment: .center)
             .padding([.leading, .trailing], 15)
         }
     }

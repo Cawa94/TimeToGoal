@@ -106,7 +106,7 @@ struct AddNewGoalView: View {
             NavigationView {
                 ZStack {
                     Form {
-                        Section(header: Text("Che obiettivo vuoi raggiungere?")) {
+                        Section(header: Text("add_goal_name_title".localized())) {
                             TextField("", text: $nameFieldValue)
                                 .padding()
                                 .foregroundColor(.fieldsTextForegroundColor)
@@ -116,7 +116,7 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.viewBackgroundColor)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("Quante ore ci vogliono?")) {
+                        Section(header: Text("add_goal_hours_required_title".localized())) {
                             TextField("", text: timeRequiredBinding)
                                 .padding()
                                 .keyboardType(.numberPad)
@@ -127,11 +127,11 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.viewBackgroundColor)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("Quante ore al giorno ci lavorerai?")) {
+                        Section(header: Text("add_goal_hours_for_day_title".localized())) {
                             HStack {
                                 GeometryReader { vContainer in
                                     VStack {
-                                        Text("Lunedì").foregroundColor(.subFieldsTextColor).bold()
+                                        Text("global_monday".localized()).foregroundColor(.subFieldsTextColor).bold()
                                         ZStack {
                                             TextField("", text: mondayBinding)
                                                 .padding()
@@ -147,7 +147,7 @@ struct AddNewGoalView: View {
                                 }
                                 GeometryReader { vContainer in
                                     VStack {
-                                        Text("Martedì").foregroundColor(.subFieldsTextColor).bold()
+                                        Text("global_tuesday".localized()).foregroundColor(.subFieldsTextColor).bold()
                                         ZStack {
                                             TextField("", text: tuesdayBinding)
                                                 .padding()
@@ -163,7 +163,7 @@ struct AddNewGoalView: View {
                                 }
                                 GeometryReader { vContainer in
                                     VStack {
-                                        Text("Mercoledì").foregroundColor(.subFieldsTextColor).bold()
+                                        Text("global_wednesday".localized()).foregroundColor(.subFieldsTextColor).bold()
                                         ZStack {
                                             TextField("", text: wednesdayBinding)
                                                 .padding()
@@ -181,7 +181,7 @@ struct AddNewGoalView: View {
                             HStack {
                                 GeometryReader { vContainer in
                                     VStack {
-                                        Text("Giovedì").foregroundColor(.subFieldsTextColor).bold()
+                                        Text("global_thursday".localized()).foregroundColor(.subFieldsTextColor).bold()
                                         ZStack {
                                             TextField("", text: thursdayBinding)
                                                 .padding()
@@ -197,7 +197,7 @@ struct AddNewGoalView: View {
                                 }
                                 GeometryReader { vContainer in
                                     VStack {
-                                        Text("Venerdì").foregroundColor(.subFieldsTextColor).bold()
+                                        Text("global_friday".localized()).foregroundColor(.subFieldsTextColor).bold()
                                         ZStack {
                                             TextField("", text: fridayBinding)
                                                 .padding()
@@ -215,7 +215,7 @@ struct AddNewGoalView: View {
                             HStack {
                                 GeometryReader { vContainer in
                                     VStack {
-                                        Text("Sabato").foregroundColor(.subFieldsTextColor).bold()
+                                        Text("global_saturday".localized()).foregroundColor(.subFieldsTextColor).bold()
                                         ZStack {
                                             TextField("", text: saturdayBinding)
                                                 .padding()
@@ -231,7 +231,7 @@ struct AddNewGoalView: View {
                                 }
                                 GeometryReader { vContainer in
                                     VStack {
-                                        Text("Domenica").foregroundColor(.subFieldsTextColor).bold()
+                                        Text("global_sunday".localized()).foregroundColor(.subFieldsTextColor).bold()
                                         ZStack {
                                             TextField("", text: sundayBinding)
                                                 .padding()
@@ -250,7 +250,7 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.viewBackgroundColor)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("Raggiungerai il tuo obiettivo il:")) {
+                        Section(header: Text("add_goal_extimated_date_title".localized())) {
                             VStack {
                                 Text(completionDate?.formatted ?? Date().formatted)
                                     .font(.largeTitle)
@@ -258,7 +258,7 @@ struct AddNewGoalView: View {
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
                                     .foregroundColor(.subFieldsTextColor)
-                                Text("(\(daysRequired) giorni)")
+                                Text(String(format: "add_goal_days_required".localized(), arguments: [daysRequired]))
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
@@ -276,7 +276,7 @@ struct AddNewGoalView: View {
                                     Spacer()
                                     HStack {
                                         Image(systemName: "plus.rectangle.fill").foregroundColor(.subFieldsTextColor)
-                                        Text("Aggiungi").bold().foregroundColor(.subFieldsTextColor)
+                                        Text("global_add".localized()).bold().foregroundColor(.subFieldsTextColor)
                                     }
                                     .padding(15.0)
                                     .overlay(
@@ -290,7 +290,7 @@ struct AddNewGoalView: View {
                         }
                         .padding(.bottom, 20)
                     }
-                    .navigationBarTitle("Nuovo obiettivo", displayMode: .large)
+                    .navigationBarTitle("global_new_goal".localized(), displayMode: .large)
                     .background(NavigationService { navService in
                         navService.navigationBar.barTintColor = .pageBackground
                         navService.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.goalColor]

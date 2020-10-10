@@ -61,7 +61,7 @@ struct MainGoalView: View {
 
                     Spacer(minLength: 25)
 
-                    Text(viewModel.goal?.name ?? "Il Mio Obiettivo")
+                    Text(viewModel.goal?.name ?? "main_my_goal".localized())
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(.textForegroundColor)
@@ -109,7 +109,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
-                    Text("Traccia progressi").bold().foregroundColor(.goalColor)
+                    Text("main_track_progress".localized()).bold().foregroundColor(.goalColor)
                 }
                 .padding(15.0)
                 .overlay(
@@ -128,7 +128,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
-                    Text("Nuovo obiettivo").bold().foregroundColor(.goalColor)
+                    Text("global_new_goal".localized()).bold().foregroundColor(.goalColor)
                 }
                 .padding(15.0)
                 .overlay(
