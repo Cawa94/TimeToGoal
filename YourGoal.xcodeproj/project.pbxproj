@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0502862526166E000C4DC0 /* Date+Extensions.swift */; };
 		DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05028B25264263000C4DC0 /* Color+Extensions.swift */; };
+		DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861AF2531F66300C4A3DD /* UIApplication+Extensions.swift */; };
+		DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */; };
 		DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */; };
 		DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A340B25275E3400597C73 /* DayCellView.swift */; };
 		DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A3413252761A600597C73 /* MainGoalView.swift */; };
@@ -51,6 +53,8 @@
 /* Begin PBXFileReference section */
 		DA0502862526166E000C4DC0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		DA05028B25264263000C4DC0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		DA0861AF2531F66300C4A3DD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHoursSpentView.swift; sourceTree = "<group>"; };
 		DA3A340B25275E3400597C73 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
 		DA3A3413252761A600597C73 /* MainGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGoalView.swift; sourceTree = "<group>"; };
@@ -107,10 +111,11 @@
 		DA0502852526165B000C4DC0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DA0502862526166E000C4DC0 /* Date+Extensions.swift */,
-				DA05028B25264263000C4DC0 /* Color+Extensions.swift */,
 				DA794BC125272180005D8423 /* CGFloat+Extensions.swift */,
+				DA05028B25264263000C4DC0 /* Color+Extensions.swift */,
+				DA0502862526166E000C4DC0 /* Date+Extensions.swift */,
 				DAB4CE71252B556900DAA871 /* Double+Extensions.swift */,
+				DA0861AF2531F66300C4A3DD /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -129,7 +134,6 @@
 			children = (
 				DA582A58252518CA00A37693 /* AddNewGoalView.swift */,
 				DA3A3413252761A600597C73 /* MainGoalView.swift */,
-				DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -146,7 +150,9 @@
 			isa = PBXGroup;
 			children = (
 				DA3A340A25275E2000597C73 /* HorizontalCalendarView */,
+				DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
+				DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */,
 				DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */,
 			);
 			path = Views;
@@ -365,6 +371,7 @@
 			files = (
 				DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */,
 				DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */,
+				DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */,
 				DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */,
 				DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */,
 				DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */,
@@ -372,6 +379,7 @@
 				DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */,
 				DAB7DC83252232130087F9C8 /* Persistence.swift in Sources */,
 				DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */,
+				DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */,
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DA794BB725271A5D005D8423 /* NavigationService.swift in Sources */,

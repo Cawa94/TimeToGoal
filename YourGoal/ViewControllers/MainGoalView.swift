@@ -24,39 +24,129 @@ public class MainGoalViewModel: ObservableObject {
 
     @Published var progressViewModel = GoalProgressViewModel()
     @Published var calendarViewModel = HorizontalCalendarViewModel()
+    @Published var showingTrackGoal = false
 
 }
 
 struct MainGoalView: View {
 
-    @ObservedObject var viewModel = MainGoalViewModel()
+    @FetchRequest(
+        entity: Goal.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Goal.createdAt, ascending: true)
+        ]
+    ) var goals: FetchedResults<Goal>
 
-    var body: some View {
-        ZStack {
-            Color.pageBackground
-                .ignoresSafeArea()
-            VStack {
-                Spacer(minLength: 10)
-
-                HorizontalCalendarView(viewModel: viewModel.calendarViewModel)
-                    .padding([.leading, .trailing])
-
-                Spacer(minLength: 25)
-
-                Text(viewModel.goal?.name ?? "Il Mio Obiettivo")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.textForegroundColor)
-
-                Spacer()
-
-                GoalProgressView(viewModel: viewModel.progressViewModel)
-                    .padding([.leading, .trailing], 7)
-
-                Spacer(minLength: 25)
-            }
+    @State var currentGoal: Goal? {
+        didSet{
+            viewModel.goal = currentGoal
         }
     }
+
+    @ObservedObject var viewModel = MainGoalViewModel()
+
+    @State var showingAddNewGoal = false
+
+    @ViewBuilder
+    var body: some View {
+        BackgroundView(color: .pageBackground) {
+            ZStack {
+                Color.pageBackground
+                    .ignoresSafeArea()
+                VStack {
+                    Spacer(minLength: 10)
+
+                    HorizontalCalendarView(viewModel: viewModel.calendarViewModel)
+                        .padding([.leading, .trailing])
+
+                    Spacer(minLength: 25)
+
+                    Text(viewModel.goal?.name ?? "Il Mio Obiettivo")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.textForegroundColor)
+
+                    Spacer()
+
+                    GoalProgressView(viewModel: viewModel.progressViewModel)
+                        .padding([.leading, .trailing], 15)
+
+                    Spacer(minLength: 25)
+                    
+                    HStack {
+                        Spacer()
+                        trackTimeButton
+                            .frame(maxWidth: .infinity)
+                        newGoalButton
+                            .frame(maxWidth: .infinity)
+                        Spacer()
+                    }
+
+                    Spacer(minLength: 40)
+                }
+
+                if viewModel.showingTrackGoal {
+                    TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal, currentGoal: $viewModel.goal)
+                        .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
+                            if !isShowing {
+                                viewModel.goal = currentGoal
+                            }
+                        })
+                }
+            }
+        }.onAppear(perform: {
+            currentGoal = goals.last
+            UITableView.appearance().backgroundColor = UIColor.pageBackground
+            UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
+            UITableView.appearance().sectionIndexColor = UIColor.pageBackground
+        })
+    }
+
+    var trackTimeButton: some View {
+        HStack {
+            Button(action: {
+                viewModel.showingTrackGoal.toggle()
+            }) {
+                HStack {
+                    Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
+                    Text("Traccia progressi").bold().foregroundColor(.goalColor)
+                }
+                .padding(15.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(.goalColor)
+                )
+            }.accentColor(.goalColor)
+        }
+    }
+
+    var newGoalButton: some View {
+        HStack {
+            Button(action: {
+                self.showingAddNewGoal.toggle()
+            }) {
+                HStack {
+                    Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
+                    Text("Nuovo obiettivo").bold().foregroundColor(.goalColor)
+                }
+                .padding(15.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(.goalColor)
+                )
+            }.accentColor(.goalColor)
+            .sheet(isPresented: $showingAddNewGoal, onDismiss: {
+                currentGoal = goals.last
+            }, content: {
+                AddNewGoalView(isPresented: $showingAddNewGoal)
+                    .environment(\.managedObjectContext,
+                                 PersistenceController.shared.container.viewContext)
+            })
+        }
+    }
+
 }
 /*
 struct MainGoalView_Previews: PreviewProvider {

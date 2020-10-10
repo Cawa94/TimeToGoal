@@ -20,6 +20,7 @@ private extension Color {
 private extension CGFloat {
 
     static let hoursFieldsHeight: CGFloat = 85
+    static let pickerViewWidht: CGFloat = 40 // because it's rotated 90º
 
 }
 
@@ -101,203 +102,203 @@ struct AddNewGoalView: View {
             updateCompletionDate()
         })
 
-        NavigationView {
-            ZStack {
-                Color.viewBackgroundColor
-                    .ignoresSafeArea()
-                Form {
-                    Section(header: Text("Che obiettivo vuoi raggiungere?")) {
-                        TextField("", text: $nameFieldValue)
-                            .padding()
-                            .foregroundColor(.fieldsTextForegroundColor)
-                            .background(Color.fieldsBackgroundColor)
-                            .cornerRadius(.defaultRadius)
-                    }
-                    .listRowBackground(Color.viewBackgroundColor)
-                    .foregroundColor(.fieldsTitleForegroundColor)
-
-                    Section(header: Text("Quante ore ci vogliono?")) {
-                        TextField("", text: timeRequiredBinding)
-                            .padding()
-                            .keyboardType(.numberPad)
-                            .foregroundColor(.fieldsTextForegroundColor)
-                            .background(Color.fieldsBackgroundColor)
-                            .cornerRadius(.defaultRadius)
-                    }
-                    .listRowBackground(Color.viewBackgroundColor)
-                    .foregroundColor(.fieldsTitleForegroundColor)
-
-                    Section(header: Text("Quante ore al giorno ci lavorerai?")) {
-                        HStack {
-                            GeometryReader { vContainer in
-                                VStack {
-                                    Text("Lunedì").foregroundColor(.subFieldsTextColor).bold()
-                                    ZStack {
-                                        TextField("", text: mondayBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsBackgroundColor)
-                                            .background(Color.fieldsBackgroundColor)
-                                            .cornerRadius(.defaultRadius)
-                                        HorizontalPickerView(selectedValue: mondayBinding,
-                                                             size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                            .clipped()
-                                    }
-                                }.clipped()
-                            }
-                            GeometryReader { vContainer in
-                                VStack {
-                                    Text("Martedì").foregroundColor(.subFieldsTextColor).bold()
-                                    ZStack {
-                                        TextField("", text: tuesdayBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsBackgroundColor)
-                                            .background(Color.fieldsBackgroundColor)
-                                            .cornerRadius(.defaultRadius)
-                                        HorizontalPickerView(selectedValue: tuesdayBinding,
-                                                             size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                            .clipped()
-                                    }
-                                }.clipped()
-                            }
-                            GeometryReader { vContainer in
-                                VStack {
-                                    Text("Mercoledì").foregroundColor(.subFieldsTextColor).bold()
-                                    ZStack {
-                                        TextField("", text: wednesdayBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsBackgroundColor)
-                                            .background(Color.fieldsBackgroundColor)
-                                            .cornerRadius(.defaultRadius)
-                                        HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                             size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                            .clipped()
-                                    }
-                                }.clipped()
-                            }
-                        }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
-                        HStack {
-                            GeometryReader { vContainer in
-                                VStack {
-                                    Text("Giovedì").foregroundColor(.subFieldsTextColor).bold()
-                                    ZStack {
-                                        TextField("", text: thursdayBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsBackgroundColor)
-                                            .background(Color.fieldsBackgroundColor)
-                                            .cornerRadius(.defaultRadius)
-                                        HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                             size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                            .clipped()
-                                    }
-                                }.clipped()
-                            }
-                            GeometryReader { vContainer in
-                                VStack {
-                                    Text("Venerdì").foregroundColor(.subFieldsTextColor).bold()
-                                    ZStack {
-                                        TextField("", text: fridayBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsBackgroundColor)
-                                            .background(Color.fieldsBackgroundColor)
-                                            .cornerRadius(.defaultRadius)
-                                        HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                             size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                            .clipped()
-                                    }
-                                }.clipped()
-                            }
-                        }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
-                        HStack {
-                            GeometryReader { vContainer in
-                                VStack {
-                                    Text("Sabato").foregroundColor(.subFieldsTextColor).bold()
-                                    ZStack {
-                                        TextField("", text: saturdayBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsBackgroundColor)
-                                            .background(Color.fieldsBackgroundColor)
-                                            .cornerRadius(.defaultRadius)
-                                        HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                             size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                            .clipped()
-                                    }
-                                }.clipped()
-                            }
-                            GeometryReader { vContainer in
-                                VStack {
-                                    Text("Domenica").foregroundColor(.subFieldsTextColor).bold()
-                                    ZStack {
-                                        TextField("", text: sundayBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsBackgroundColor)
-                                            .background(Color.fieldsBackgroundColor)
-                                            .cornerRadius(.defaultRadius)
-                                        HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                             size: .init(width: vContainer.size.width, height: 30))
-                                            .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                            .clipped()
-                                    }
-                                }.clipped()
-                            }
-                        }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
-                    }
-                    .listRowBackground(Color.viewBackgroundColor)
-                    .foregroundColor(.fieldsTitleForegroundColor)
-
-                    Section(header: Text("Raggiungerai il tuo obiettivo il:")) {
-                        VStack {
-                            Text(completionDate?.formatted ?? Date().formatted)
-                                .font(.largeTitle)
-                                .bold()
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .background(Color.clear)
-                                .foregroundColor(.subFieldsTextColor)
-                            Text("(\(daysRequired) giorni)")
-                                .bold()
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .background(Color.clear)
-                                .foregroundColor(.subFieldsTextColor)
+        BackgroundView(color: .pageBackground) {
+            NavigationView {
+                ZStack {
+                    Form {
+                        Section(header: Text("Che obiettivo vuoi raggiungere?")) {
+                            TextField("", text: $nameFieldValue)
+                                .padding()
+                                .foregroundColor(.fieldsTextForegroundColor)
+                                .background(Color.fieldsBackgroundColor)
+                                .cornerRadius(.defaultRadius)
                         }
-                    }
-                    .listRowBackground(Color.viewBackgroundColor)
-                    .foregroundColor(.fieldsTitleForegroundColor)
-
-                    Section {
-                        Button(action: {
-                            storeNewGoal()
-                        }) {
-                            HStack {
-                                Spacer()
-                                HStack {
-                                    Image(systemName: "plus.rectangle.fill").foregroundColor(.subFieldsTextColor)
-                                    Text("Aggiungi").bold().foregroundColor(.subFieldsTextColor)
-                                }
-                                .padding(15.0)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: .defaultRadius)
-                                        .stroke(lineWidth: 2.0)
-                                        .foregroundColor(.subFieldsTextColor)
-                                )
-                            }
-                        }.accentColor(.subFieldsTextColor)
                         .listRowBackground(Color.viewBackgroundColor)
+                        .foregroundColor(.fieldsTitleForegroundColor)
+
+                        Section(header: Text("Quante ore ci vogliono?")) {
+                            TextField("", text: timeRequiredBinding)
+                                .padding()
+                                .keyboardType(.numberPad)
+                                .foregroundColor(.fieldsTextForegroundColor)
+                                .background(Color.fieldsBackgroundColor)
+                                .cornerRadius(.defaultRadius)
+                        }
+                        .listRowBackground(Color.viewBackgroundColor)
+                        .foregroundColor(.fieldsTitleForegroundColor)
+
+                        Section(header: Text("Quante ore al giorno ci lavorerai?")) {
+                            HStack {
+                                GeometryReader { vContainer in
+                                    VStack {
+                                        Text("Lunedì").foregroundColor(.subFieldsTextColor).bold()
+                                        ZStack {
+                                            TextField("", text: mondayBinding)
+                                                .padding()
+                                                .foregroundColor(.fieldsBackgroundColor)
+                                                .background(Color.fieldsBackgroundColor)
+                                                .cornerRadius(.defaultRadius)
+                                            HorizontalPickerView(selectedValue: mondayBinding,
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
+                                                .clipped()
+                                        }
+                                    }.clipped()
+                                }
+                                GeometryReader { vContainer in
+                                    VStack {
+                                        Text("Martedì").foregroundColor(.subFieldsTextColor).bold()
+                                        ZStack {
+                                            TextField("", text: tuesdayBinding)
+                                                .padding()
+                                                .foregroundColor(.fieldsBackgroundColor)
+                                                .background(Color.fieldsBackgroundColor)
+                                                .cornerRadius(.defaultRadius)
+                                            HorizontalPickerView(selectedValue: tuesdayBinding,
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
+                                                .clipped()
+                                        }
+                                    }.clipped()
+                                }
+                                GeometryReader { vContainer in
+                                    VStack {
+                                        Text("Mercoledì").foregroundColor(.subFieldsTextColor).bold()
+                                        ZStack {
+                                            TextField("", text: wednesdayBinding)
+                                                .padding()
+                                                .foregroundColor(.fieldsBackgroundColor)
+                                                .background(Color.fieldsBackgroundColor)
+                                                .cornerRadius(.defaultRadius)
+                                            HorizontalPickerView(selectedValue: wednesdayBinding,
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
+                                                .clipped()
+                                        }
+                                    }.clipped()
+                                }
+                            }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
+                            HStack {
+                                GeometryReader { vContainer in
+                                    VStack {
+                                        Text("Giovedì").foregroundColor(.subFieldsTextColor).bold()
+                                        ZStack {
+                                            TextField("", text: thursdayBinding)
+                                                .padding()
+                                                .foregroundColor(.fieldsBackgroundColor)
+                                                .background(Color.fieldsBackgroundColor)
+                                                .cornerRadius(.defaultRadius)
+                                            HorizontalPickerView(selectedValue: wednesdayBinding,
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
+                                                .clipped()
+                                        }
+                                    }.clipped()
+                                }
+                                GeometryReader { vContainer in
+                                    VStack {
+                                        Text("Venerdì").foregroundColor(.subFieldsTextColor).bold()
+                                        ZStack {
+                                            TextField("", text: fridayBinding)
+                                                .padding()
+                                                .foregroundColor(.fieldsBackgroundColor)
+                                                .background(Color.fieldsBackgroundColor)
+                                                .cornerRadius(.defaultRadius)
+                                            HorizontalPickerView(selectedValue: wednesdayBinding,
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
+                                                .clipped()
+                                        }
+                                    }.clipped()
+                                }
+                            }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
+                            HStack {
+                                GeometryReader { vContainer in
+                                    VStack {
+                                        Text("Sabato").foregroundColor(.subFieldsTextColor).bold()
+                                        ZStack {
+                                            TextField("", text: saturdayBinding)
+                                                .padding()
+                                                .foregroundColor(.fieldsBackgroundColor)
+                                                .background(Color.fieldsBackgroundColor)
+                                                .cornerRadius(.defaultRadius)
+                                            HorizontalPickerView(selectedValue: wednesdayBinding,
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
+                                                .clipped()
+                                        }
+                                    }.clipped()
+                                }
+                                GeometryReader { vContainer in
+                                    VStack {
+                                        Text("Domenica").foregroundColor(.subFieldsTextColor).bold()
+                                        ZStack {
+                                            TextField("", text: sundayBinding)
+                                                .padding()
+                                                .foregroundColor(.fieldsBackgroundColor)
+                                                .background(Color.fieldsBackgroundColor)
+                                                .cornerRadius(.defaultRadius)
+                                            HorizontalPickerView(selectedValue: wednesdayBinding,
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
+                                                .clipped()
+                                        }
+                                    }.clipped()
+                                }
+                            }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
+                        }
+                        .listRowBackground(Color.viewBackgroundColor)
+                        .foregroundColor(.fieldsTitleForegroundColor)
+
+                        Section(header: Text("Raggiungerai il tuo obiettivo il:")) {
+                            VStack {
+                                Text(completionDate?.formatted ?? Date().formatted)
+                                    .font(.largeTitle)
+                                    .bold()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .background(Color.clear)
+                                    .foregroundColor(.subFieldsTextColor)
+                                Text("(\(daysRequired) giorni)")
+                                    .bold()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .background(Color.clear)
+                                    .foregroundColor(.subFieldsTextColor)
+                            }
+                        }
+                        .listRowBackground(Color.viewBackgroundColor)
+                        .foregroundColor(.fieldsTitleForegroundColor)
+
+                        Section {
+                            Button(action: {
+                                storeNewGoal()
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    HStack {
+                                        Image(systemName: "plus.rectangle.fill").foregroundColor(.subFieldsTextColor)
+                                        Text("Aggiungi").bold().foregroundColor(.subFieldsTextColor)
+                                    }
+                                    .padding(15.0)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .stroke(lineWidth: 2.0)
+                                            .foregroundColor(.subFieldsTextColor)
+                                    )
+                                }
+                            }.accentColor(.subFieldsTextColor)
+                            .listRowBackground(Color.viewBackgroundColor)
+                        }
+                        .padding(.bottom, 20)
                     }
-                    .padding(.bottom, 20)
+                    .navigationBarTitle("Nuovo obiettivo", displayMode: .large)
+                    .background(NavigationService { navService in
+                        navService.navigationBar.barTintColor = .pageBackground
+                        navService.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.goalColor]
+                    })
+                    .padding(.top, 10)
+                    .foregroundColor(Color.subFieldsTextColor)
+                    .background(Color.viewBackgroundColor)
                 }
-                .navigationBarTitle("Nuovo obiettivo", displayMode: .large)
-                .background(NavigationService { navService in
-                    navService.navigationBar.barTintColor = .pageBackground
-                    navService.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.goalColor]
-                })
-                .padding(.top, 10)
-                .foregroundColor(Color.subFieldsTextColor)
-                .background(Color.viewBackgroundColor)
             }
         }.onAppear(perform: {
             UITableView.appearance().backgroundColor = .pageBackground
@@ -371,9 +372,11 @@ struct AddNewGoalView: View {
 }
 
 struct AddNewGoalView_Previews: PreviewProvider {
+
     static var previews: some View {
         AddNewGoalView(isPresented: .constant(true))
             .environment(\.managedObjectContext,
                          PersistenceController.shared.container.viewContext)
     }
+
 }

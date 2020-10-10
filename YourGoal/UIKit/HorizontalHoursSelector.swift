@@ -13,7 +13,7 @@ class PickerRowView: UIView {
 
     init(frame: CGRect, control: HorizontalPickerView, row: Int, isSelected: Bool) {
         label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: control.size.width - 0.1, height: control.size.height)
+        label.frame = CGRect(x: 0, y: 0, width: control.size.width, height: control.size.height)
         label.textAlignment = .center
         label.textColor = .white
 

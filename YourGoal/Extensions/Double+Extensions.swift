@@ -10,7 +10,7 @@ import Foundation
 extension Double {
 
     var stringWithTwoDecimals: String {
-        String(format: "%.2f", self)
+        self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(format: "%.2f", self)
     }
 
     var stringWithoutDecimals: String {

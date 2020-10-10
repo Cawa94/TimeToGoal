@@ -17,7 +17,7 @@ struct TrackHoursSpentView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
-            Color.black.opacity(0.5)
+            Color.black.opacity(0.75)
                 .ignoresSafeArea()
             ZStack {
                 RoundedRectangle(cornerRadius: .defaultRadius)
@@ -25,9 +25,9 @@ struct TrackHoursSpentView: View {
                     .cornerRadius(50)
                 VStack {
                     Spacer()
-                        .frame(height: 40)
+                        .frame(height: 30)
                     Text("Come vuoi tracciare il tempo?")
-                        .font(.title2)
+                        .font(.title)
                         .bold()
                         .multilineTextAlignment(.center)
                         .foregroundColor(.goalColor)
@@ -36,7 +36,8 @@ struct TrackHoursSpentView: View {
                     Picker(selection: $trackMode, label: Text("")) {
                         Text("Manuale").tag(0)
                         Text("Timer").tag(1)
-                    }.pickerStyle(SegmentedPickerStyle())
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
                     .padding([.leading, .trailing])
                     Spacer()
                     if trackMode == 0 {
@@ -45,13 +46,10 @@ struct TrackHoursSpentView: View {
                         
                     }
                 }
-            }.frame(height: 430, alignment: .center)
+            }
+            .frame(height: 450, alignment: .center)
             .padding([.leading, .trailing], 15)
-        }.onAppear(perform: {
-            UITableView.appearance().backgroundColor = .clear
-            UITableView.appearance().sectionIndexBackgroundColor = .clear
-            UITableView.appearance().sectionIndexColor = .clear
-        })
+        }
     }
 }
 
