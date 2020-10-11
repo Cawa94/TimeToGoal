@@ -20,7 +20,7 @@ private extension Color {
 private extension CGFloat {
 
     static let hoursFieldsHeight: CGFloat = 85
-    static let pickerViewWidht: CGFloat = 40 // because it's rotated 90º
+    static let pickerViewWidth: CGFloat = 40 // because it's rotated 90º
 
 }
 
@@ -139,7 +139,7 @@ struct AddNewGoalView: View {
                                                 .background(Color.fieldsBackgroundColor)
                                                 .cornerRadius(.defaultRadius)
                                             HorizontalPickerView(selectedValue: mondayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                                                 .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                                 .clipped()
                                         }
@@ -155,7 +155,7 @@ struct AddNewGoalView: View {
                                                 .background(Color.fieldsBackgroundColor)
                                                 .cornerRadius(.defaultRadius)
                                             HorizontalPickerView(selectedValue: tuesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                                                 .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                                 .clipped()
                                         }
@@ -171,7 +171,7 @@ struct AddNewGoalView: View {
                                                 .background(Color.fieldsBackgroundColor)
                                                 .cornerRadius(.defaultRadius)
                                             HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                                                 .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                                 .clipped()
                                         }
@@ -189,7 +189,7 @@ struct AddNewGoalView: View {
                                                 .background(Color.fieldsBackgroundColor)
                                                 .cornerRadius(.defaultRadius)
                                             HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                                                 .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                                 .clipped()
                                         }
@@ -205,7 +205,7 @@ struct AddNewGoalView: View {
                                                 .background(Color.fieldsBackgroundColor)
                                                 .cornerRadius(.defaultRadius)
                                             HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                                                 .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                                 .clipped()
                                         }
@@ -223,7 +223,7 @@ struct AddNewGoalView: View {
                                                 .background(Color.fieldsBackgroundColor)
                                                 .cornerRadius(.defaultRadius)
                                             HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                                                 .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                                 .clipped()
                                         }
@@ -239,7 +239,7 @@ struct AddNewGoalView: View {
                                                 .background(Color.fieldsBackgroundColor)
                                                 .cornerRadius(.defaultRadius)
                                             HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidht))
+                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                                                 .frame(width: vContainer.size.width, height: 30, alignment: .center)
                                                 .clipped()
                                         }
@@ -252,13 +252,13 @@ struct AddNewGoalView: View {
 
                         Section(header: Text("add_goal_extimated_date_title".localized())) {
                             VStack {
-                                Text(completionDate?.formatted ?? Date().formatted)
+                                Text(completionDate?.formattedAsDate ?? Date().formattedAsDate)
                                     .font(.largeTitle)
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
                                     .foregroundColor(.subFieldsTextColor)
-                                Text(String(format: "add_goal_days_required".localized(), arguments: [daysRequired]))
+                                Text(String(format: "add_goal_days_required".localized(), "\(daysRequired)"))
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
@@ -320,7 +320,7 @@ struct AddNewGoalView: View {
             newGoal.fridayHours = Double(fridayHoursValue) ?? 0
             newGoal.saturdayHours = Double(saturdayHoursValue) ?? 0
             newGoal.sundayHours = Double(sundayHoursValue) ?? 0
-            newGoal.completionDateExtimated = Date().adding(days: 46)
+            newGoal.completionDateExtimated = Date().adding(days: daysRequired)
             PersistenceController.shared.saveContext()
             self.isPresented = false
         }
@@ -335,22 +335,22 @@ struct AddNewGoalView: View {
 
     func updateCompletionDate() {
         if let timeRequired = Double(timeRequiredFieldValue), atLeastOneDayWorking {
-            let mondayHours = Double(mondayHoursValue) ?? 0
-            let tuesdayHours = Double(tuesdayHoursValue) ?? 0
-            let wednesdayHours = Double(wednesdayHoursValue) ?? 0
-            let thursdayHours = Double(thursdayHoursValue) ?? 0
-            let fridayHours = Double(fridayHoursValue) ?? 0
-            let saturdayHours = Double(saturdayHoursValue) ?? 0
-            let sundayHours = Double(sundayHoursValue) ?? 0
+            let mondayHours = (Double(mondayHoursValue) ?? 0).asHourWithMinutes
+            let tuesdayHours = (Double(tuesdayHoursValue) ?? 0).asHourWithMinutes
+            let wednesdayHours = (Double(wednesdayHoursValue) ?? 0).asHourWithMinutes
+            let thursdayHours = (Double(thursdayHoursValue) ?? 0).asHourWithMinutes
+            let fridayHours = (Double(fridayHoursValue) ?? 0).asHourWithMinutes
+            let saturdayHours = (Double(saturdayHoursValue) ?? 0).asHourWithMinutes
+            let sundayHours = (Double(sundayHoursValue) ?? 0).asHourWithMinutes
 
             let dayHours = [sundayHours, mondayHours, tuesdayHours, wednesdayHours, thursdayHours, fridayHours, saturdayHours]
             var daysRequired = -1
-            var decreasingTotal = timeRequired
+            var decreasingTotal = timeRequired.asDaysWithHoursAndMinutes
             var dayNumber = Date().dayNumber
 
-            while decreasingTotal > 0 {
+            while decreasingTotal > Date().zeroHours {
                 daysRequired += 1
-                decreasingTotal -= dayHours[dayNumber - 1]
+                decreasingTotal = decreasingTotal.remove(dayHours[dayNumber - 1])
                 dayNumber += 1
                 if dayNumber == 8 {
                     dayNumber = 1

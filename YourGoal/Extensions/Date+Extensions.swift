@@ -2,9 +2,23 @@ import Foundation
 
 extension Date {
 
-    var formatted: String {
+    var formattedAsDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MMM-yyyy"
+        dateFormatter.locale = Locale(identifier: Locale.current.languageCode ?? "en")
+        return dateFormatter.string(from: self)
+    }
+
+    var formattedWithDaysAndHours: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd HH-mm"
+        dateFormatter.locale = Locale(identifier: Locale.current.languageCode ?? "en")
+        return dateFormatter.string(from: self)
+    }
+
+    var formattedWithHours: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH-mm"
         dateFormatter.locale = Locale(identifier: Locale.current.languageCode ?? "en")
         return dateFormatter.string(from: self)
     }
@@ -25,6 +39,25 @@ extension Date {
         let gregorian = Calendar(identifier: .gregorian)
         guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
         return gregorian.date(byAdding: .day, value: 1, to: sunday)
+    }
+
+    var zeroHours: Date {
+        var components = DateComponents()
+        components.day = 0
+        components.hour = 0
+        components.minute = 0
+        return Calendar.current.date(from: components) ?? Date()
+    }
+
+    func remove(_ date: Date) -> Date {
+        debugPrint("SELF: \(self.formattedWithDaysAndHours) - DATE:\(date.formattedWithHours)")
+        let differenceComponents = Calendar.current.dateComponents([.day, .hour, .minute,], from: date, to: self)
+        let differenceDate = Calendar.current.date(from: differenceComponents) ?? Date()
+        debugPrint("DIFFERENCE: \(differenceDate.formattedWithDaysAndHours)")
+        let newDateComponents = Calendar.current.dateComponents([.day, .hour, .minute,], from: differenceDate, to: self)
+        let newDate = Calendar.current.date(from: newDateComponents) ?? Date()
+        debugPrint("UPDATED: \(newDate.formattedWithDaysAndHours)")
+        return newDate
     }
 
 }

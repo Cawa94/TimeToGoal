@@ -56,7 +56,7 @@ struct GoalProgressView: View {
                     .font(.title2)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.textForegroundColor)
-                Text("\((viewModel.goal?.updatedCompletionDate ?? Date()).formatted)")
+                Text("\((viewModel.goal?.updatedCompletionDate ?? Date()).formattedAsDate)")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
