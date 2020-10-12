@@ -11,9 +11,7 @@ private extension Color {
 
     static let fieldsTitleForegroundColor: Color = .black
     static let fieldsTextForegroundColor: Color = .white
-    static let fieldsBackgroundColor: Color = .grayFields
     static let viewBackgroundColor: Color = .pageBackground
-    static let subFieldsTextColor: Color = .goalColor
 
 }
 
@@ -29,7 +27,9 @@ struct AddNewGoalView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @Binding var isPresented: Bool
+    @State var isColorsVisible = false
     @State var contentOffset: CGFloat = 0
+    @State var selectedColor = "greenGoal"
 
     @State var nameFieldValue: String = ""
     @State var timeRequiredFieldValue: String = ""
@@ -45,6 +45,9 @@ struct AddNewGoalView: View {
 
     @State var completionDate: Date?
 
+    var colors = ["greenGoal", "yellowGoal", "redGoal", "orangeGoal", "blueGoal", "purpleGoal"]
+
+    @ViewBuilder
     var body: some View {
         let timeRequiredBinding = Binding<String>(get: {
             self.timeRequiredFieldValue
@@ -110,141 +113,64 @@ struct AddNewGoalView: View {
                             TextField("", text: $nameFieldValue)
                                 .padding()
                                 .foregroundColor(.fieldsTextForegroundColor)
-                                .background(Color.fieldsBackgroundColor)
+                                .background(Color.grayFields)
                                 .cornerRadius(.defaultRadius)
                         }
                         .listRowBackground(Color.viewBackgroundColor)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text("add_goal_hours_required_title".localized())) {
-                            TextField("", text: timeRequiredBinding)
-                                .padding()
-                                .keyboardType(.numberPad)
-                                .foregroundColor(.fieldsTextForegroundColor)
-                                .background(Color.fieldsBackgroundColor)
-                                .cornerRadius(.defaultRadius)
+                            GeometryReader { vContainer in
+                                HStack {
+                                    TextField("", text: timeRequiredBinding)
+                                        .frame(width: vContainer.size.width / 3)
+                                        .padding()
+                                        .keyboardType(.numberPad)
+                                        .foregroundColor(.fieldsTextForegroundColor)
+                                        .background(Color.grayFields)
+                                        .cornerRadius(.defaultRadius)
+                                    Spacer()
+                                    Spacer()
+                                    Text("\("global_color".localized()):")
+                                    Button(action: {
+                                        self.isColorsVisible.toggle()
+                                    }) {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: .defaultRadius)
+                                                .fill(Color.grayFields)
+                                                .aspectRatio(1.0, contentMode: .fit)
+                                            Circle()
+                                                .fill(Color.goalColor)
+                                                .aspectRatio(1.0, contentMode: .fit)
+                                                .padding(12.5)
+                                        }
+                                    }.accentColor(.goalColor)
+                                }
+                            }.frame(height: 55)
                         }
                         .listRowBackground(Color.viewBackgroundColor)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text("add_goal_hours_for_day_title".localized())) {
                             HStack {
-                                GeometryReader { vContainer in
-                                    VStack {
-                                        Text("global_monday".localized()).foregroundColor(.subFieldsTextColor).bold()
-                                        ZStack {
-                                            TextField("", text: mondayBinding)
-                                                .padding()
-                                                .foregroundColor(.fieldsBackgroundColor)
-                                                .background(Color.fieldsBackgroundColor)
-                                                .cornerRadius(.defaultRadius)
-                                            HorizontalPickerView(selectedValue: mondayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                                .clipped()
-                                        }
-                                    }.clipped()
-                                }
-                                GeometryReader { vContainer in
-                                    VStack {
-                                        Text("global_tuesday".localized()).foregroundColor(.subFieldsTextColor).bold()
-                                        ZStack {
-                                            TextField("", text: tuesdayBinding)
-                                                .padding()
-                                                .foregroundColor(.fieldsBackgroundColor)
-                                                .background(Color.fieldsBackgroundColor)
-                                                .cornerRadius(.defaultRadius)
-                                            HorizontalPickerView(selectedValue: tuesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                                .clipped()
-                                        }
-                                    }.clipped()
-                                }
-                                GeometryReader { vContainer in
-                                    VStack {
-                                        Text("global_wednesday".localized()).foregroundColor(.subFieldsTextColor).bold()
-                                        ZStack {
-                                            TextField("", text: wednesdayBinding)
-                                                .padding()
-                                                .foregroundColor(.fieldsBackgroundColor)
-                                                .background(Color.fieldsBackgroundColor)
-                                                .cornerRadius(.defaultRadius)
-                                            HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                                .clipped()
-                                        }
-                                    }.clipped()
-                                }
+                                HoursSelectorView(viewModel: .init(title: "global_monday".localized(),
+                                                                   bindingString: mondayBinding))
+                                HoursSelectorView(viewModel: .init(title: "global_tuesday".localized(),
+                                                                   bindingString: tuesdayBinding))
+                                HoursSelectorView(viewModel: .init(title: "global_wednesday".localized(),
+                                                                   bindingString: wednesdayBinding))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
-                                GeometryReader { vContainer in
-                                    VStack {
-                                        Text("global_thursday".localized()).foregroundColor(.subFieldsTextColor).bold()
-                                        ZStack {
-                                            TextField("", text: thursdayBinding)
-                                                .padding()
-                                                .foregroundColor(.fieldsBackgroundColor)
-                                                .background(Color.fieldsBackgroundColor)
-                                                .cornerRadius(.defaultRadius)
-                                            HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                                .clipped()
-                                        }
-                                    }.clipped()
-                                }
-                                GeometryReader { vContainer in
-                                    VStack {
-                                        Text("global_friday".localized()).foregroundColor(.subFieldsTextColor).bold()
-                                        ZStack {
-                                            TextField("", text: fridayBinding)
-                                                .padding()
-                                                .foregroundColor(.fieldsBackgroundColor)
-                                                .background(Color.fieldsBackgroundColor)
-                                                .cornerRadius(.defaultRadius)
-                                            HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                                .clipped()
-                                        }
-                                    }.clipped()
-                                }
+                                HoursSelectorView(viewModel: .init(title: "global_thursday".localized(),
+                                                                   bindingString: thursdayBinding))
+                                HoursSelectorView(viewModel: .init(title: "global_friday".localized(),
+                                                                   bindingString: fridayBinding))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
-                                GeometryReader { vContainer in
-                                    VStack {
-                                        Text("global_saturday".localized()).foregroundColor(.subFieldsTextColor).bold()
-                                        ZStack {
-                                            TextField("", text: saturdayBinding)
-                                                .padding()
-                                                .foregroundColor(.fieldsBackgroundColor)
-                                                .background(Color.fieldsBackgroundColor)
-                                                .cornerRadius(.defaultRadius)
-                                            HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                                .clipped()
-                                        }
-                                    }.clipped()
-                                }
-                                GeometryReader { vContainer in
-                                    VStack {
-                                        Text("global_sunday".localized()).foregroundColor(.subFieldsTextColor).bold()
-                                        ZStack {
-                                            TextField("", text: sundayBinding)
-                                                .padding()
-                                                .foregroundColor(.fieldsBackgroundColor)
-                                                .background(Color.fieldsBackgroundColor)
-                                                .cornerRadius(.defaultRadius)
-                                            HorizontalPickerView(selectedValue: wednesdayBinding,
-                                                                 size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                                                .frame(width: vContainer.size.width, height: 30, alignment: .center)
-                                                .clipped()
-                                        }
-                                    }.clipped()
-                                }
+                                HoursSelectorView(viewModel: .init(title: "global_saturday".localized(),
+                                                                   bindingString: saturdayBinding))
+                                HoursSelectorView(viewModel: .init(title: "global_sunday".localized(),
+                                                                   bindingString: sundayBinding))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                         }
                         .listRowBackground(Color.viewBackgroundColor)
@@ -257,12 +183,12 @@ struct AddNewGoalView: View {
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
-                                    .foregroundColor(.subFieldsTextColor)
+                                    .foregroundColor(.goalColor)
                                 Text(String(format: "add_goal_days_required".localized(), "\(daysRequired)"))
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
-                                    .foregroundColor(.subFieldsTextColor)
+                                    .foregroundColor(.goalColor)
                             }
                         }
                         .listRowBackground(Color.viewBackgroundColor)
@@ -275,36 +201,78 @@ struct AddNewGoalView: View {
                                 HStack {
                                     Spacer()
                                     HStack {
-                                        Image(systemName: "plus.rectangle.fill").foregroundColor(.subFieldsTextColor)
-                                        Text("global_add".localized()).bold().foregroundColor(.subFieldsTextColor)
+                                        Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
+                                        Text("global_add".localized()).bold().foregroundColor(.goalColor)
                                     }
                                     .padding(15.0)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: .defaultRadius)
                                             .stroke(lineWidth: 2.0)
-                                            .foregroundColor(.subFieldsTextColor)
+                                            .foregroundColor(.goalColor)
                                     )
                                 }
-                            }.accentColor(.subFieldsTextColor)
-                            .listRowBackground(Color.viewBackgroundColor)
+                            }.accentColor(.goalColor)
                         }
+                        .listRowBackground(Color.viewBackgroundColor)
                         .padding(.bottom, 20)
                     }
-                    .navigationBarTitle("global_new_goal".localized(), displayMode: .large)
-                    .background(NavigationService { navService in
-                        navService.navigationBar.barTintColor = .pageBackground
-                        navService.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.goalColor]
-                    })
-                    .padding(.top, 10)
-                    .foregroundColor(Color.subFieldsTextColor)
-                    .background(Color.viewBackgroundColor)
-                }
+                    if isColorsVisible {
+                        ZStack {
+                            GeometryReader { container in
+                                Color.black.opacity(0.75)
+                                    .ignoresSafeArea()
+                                VStack() {
+                                    Spacer().frame(maxWidth: .infinity)
+                                    HStack {
+                                        Spacer().frame(maxWidth: .infinity)
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: .defaultRadius)
+                                                .fill(Color.white)
+                                                .cornerRadius(50)
+                                            VStack {
+                                                Spacer()
+                                                HStack(spacing: 20) {
+                                                    ForEach(self.colors.prefix(3), id: \.self) { color in
+                                                        Button(action: {
+                                                            Color.goalColor = Color(color)
+                                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
+                                                            self.selectedColor = color
+                                                            self.isColorsVisible.toggle()
+                                                        }) {
+                                                            Circle()
+                                                                .fill(Color(color))
+                                                                .aspectRatio(1.0, contentMode: .fit)
+                                                        }
+                                                    }
+                                                }.frame(height: 55)
+                                                Spacer()
+                                                HStack(spacing: 20) {
+                                                    ForEach(self.colors.suffix(3), id: \.self) { color in
+                                                        Button(action: {
+                                                            Color.goalColor = Color(color)
+                                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
+                                                            self.selectedColor = color
+                                                            self.isColorsVisible.toggle()
+                                                        }) {
+                                                            Circle()
+                                                                .fill(Color(color))
+                                                                .aspectRatio(1.0, contentMode: .fit)
+                                                        }
+                                                    }
+                                                }.frame(height: 55)
+                                                Spacer()
+                                            }
+                                        }.frame(width: container.size.width / 1.5, height: 200, alignment: .center)
+                                        Spacer().frame(maxWidth: .infinity)
+                                    }
+                                    Spacer().frame(maxWidth: .infinity)
+                                }
+                            }
+                        }
+                    }
+                }.navigationBarTitle("global_new_goal".localized(), displayMode: .large)
             }
-        }.onAppear(perform: {
-            UITableView.appearance().backgroundColor = .pageBackground
-            UITableView.appearance().sectionIndexBackgroundColor = .pageBackground
-            UITableView.appearance().sectionIndexColor = .pageBackground
-        })
+        }
     }
 
     func storeNewGoal() {
@@ -320,13 +288,15 @@ struct AddNewGoalView: View {
             newGoal.fridayHours = Double(fridayHoursValue) ?? 0
             newGoal.saturdayHours = Double(saturdayHoursValue) ?? 0
             newGoal.sundayHours = Double(sundayHoursValue) ?? 0
-            newGoal.completionDateExtimated = Date().adding(days: daysRequired)
+            newGoal.completionDateExtimated = self.completionDate
+            newGoal.color = self.selectedColor
             PersistenceController.shared.saveContext()
             self.isPresented = false
         }
     }
 
     func isValid() -> Bool {
+        debugPrint("\(self.selectedColor)")
         if !nameFieldValue.isEmpty, Double(timeRequiredFieldValue) ?? 0 != 0, atLeastOneDayWorking {
             return true
         }
@@ -335,17 +305,17 @@ struct AddNewGoalView: View {
 
     func updateCompletionDate() {
         if let timeRequired = Double(timeRequiredFieldValue), atLeastOneDayWorking {
-            let mondayHours = (Double(mondayHoursValue) ?? 0).asHourWithMinutes
-            let tuesdayHours = (Double(tuesdayHoursValue) ?? 0).asHourWithMinutes
-            let wednesdayHours = (Double(wednesdayHoursValue) ?? 0).asHourWithMinutes
-            let thursdayHours = (Double(thursdayHoursValue) ?? 0).asHourWithMinutes
-            let fridayHours = (Double(fridayHoursValue) ?? 0).asHourWithMinutes
-            let saturdayHours = (Double(saturdayHoursValue) ?? 0).asHourWithMinutes
-            let sundayHours = (Double(sundayHoursValue) ?? 0).asHourWithMinutes
+            let mondayHours = (Double(mondayHoursValue) ?? 0).asHoursAndMinutes
+            let tuesdayHours = (Double(tuesdayHoursValue) ?? 0).asHoursAndMinutes
+            let wednesdayHours = (Double(wednesdayHoursValue) ?? 0).asHoursAndMinutes
+            let thursdayHours = (Double(thursdayHoursValue) ?? 0).asHoursAndMinutes
+            let fridayHours = (Double(fridayHoursValue) ?? 0).asHoursAndMinutes
+            let saturdayHours = (Double(saturdayHoursValue) ?? 0).asHoursAndMinutes
+            let sundayHours = (Double(sundayHoursValue) ?? 0).asHoursAndMinutes
 
             let dayHours = [sundayHours, mondayHours, tuesdayHours, wednesdayHours, thursdayHours, fridayHours, saturdayHours]
             var daysRequired = -1
-            var decreasingTotal = timeRequired.asDaysWithHoursAndMinutes
+            var decreasingTotal = timeRequired.asHoursAndMinutes
             var dayNumber = Date().dayNumber
 
             while decreasingTotal > Date().zeroHours {

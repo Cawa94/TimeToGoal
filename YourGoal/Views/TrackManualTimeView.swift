@@ -27,6 +27,7 @@ struct TrackManualTimeView: View {
                     Picker(selection: self.$hoursSpent, label: Text("")) {
                         ForEach(self.hours, id: \.self) { double in
                             Text("\(double)")
+                                .foregroundColor(.black)
                         }
                     }
                     .frame(maxWidth: geometry.size.width / 3.5)
@@ -37,6 +38,7 @@ struct TrackManualTimeView: View {
                     Picker(selection: self.$minutesSpent, label: Text("")) {
                         ForEach(self.minutes, id: \.self) { double in
                             Text(double.stringWithoutDecimals)
+                                .foregroundColor(.black)
                         }
                     }
                     .frame(maxWidth: geometry.size.width / 3.5)
@@ -66,7 +68,7 @@ struct TrackManualTimeView: View {
             }.accentColor(.goalColor)
             Spacer()
                 .frame(height: 20)
-        }
+        }.foregroundColor(.black)
     }
 }
 

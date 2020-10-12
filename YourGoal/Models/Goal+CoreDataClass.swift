@@ -41,21 +41,34 @@ public class Goal: NSManagedObject {
     }
 
     var updatedCompletionDate: Date {
-        let dayHours = [sundayHours, mondayHours, tuesdayHours, wednesdayHours, thursdayHours, fridayHours, saturdayHours]
+        let dayHours = [sundayHours.asHoursAndMinutes,
+                        mondayHours.asHoursAndMinutes,
+                        tuesdayHours.asHoursAndMinutes,
+                        wednesdayHours.asHoursAndMinutes,
+                        thursdayHours.asHoursAndMinutes,
+                        fridayHours.asHoursAndMinutes,
+                        saturdayHours.asHoursAndMinutes]
+
         var daysRequired = -1
-        var decreasingTotal = timeRequired
+        var decreasingTotal = self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes)
         var dayNumber = Date().dayNumber
 
-        while decreasingTotal > 0 {
+        while decreasingTotal > Date().zeroHours {
             daysRequired += 1
-            decreasingTotal -= dayHours[dayNumber - 1]
+            decreasingTotal = decreasingTotal.remove(dayHours[dayNumber - 1])
             dayNumber += 1
             if dayNumber == 8 {
                 dayNumber = 1
             }
         }
 
+        self.daysRequired = Int16(daysRequired)
+
         return Date().adding(days: daysRequired)
+    }
+
+    var isCompleted: Bool {
+        return !(self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes) > Date().zeroHours)
     }
 
 }

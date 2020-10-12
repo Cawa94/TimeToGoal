@@ -19,6 +19,8 @@ public class MainGoalViewModel: ObservableObject {
         didSet {
             progressViewModel.goal = goal
             calendarViewModel.goal = goal
+            Color.goalColor = Color(goal?.color ?? "greenGoal")
+            UIColor.goalColor = UIColor(named: goal?.color ?? "greenGoal") ?? .goalColor
         }
     }
 
@@ -36,12 +38,6 @@ struct MainGoalView: View {
             NSSortDescriptor(keyPath: \Goal.createdAt, ascending: true)
         ]
     ) var goals: FetchedResults<Goal>
-
-    @State var currentGoal: Goal? {
-        didSet{
-            viewModel.goal = currentGoal
-        }
-    }
 
     @ObservedObject var viewModel = MainGoalViewModel()
 
@@ -89,13 +85,13 @@ struct MainGoalView: View {
                     TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal, currentGoal: $viewModel.goal)
                         .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
                             if !isShowing {
-                                viewModel.goal = currentGoal
+                                viewModel.goal = viewModel.goal
                             }
                         })
                 }
             }
         }.onAppear(perform: {
-            currentGoal = goals.last
+            viewModel.goal = goals.last
             UITableView.appearance().backgroundColor = UIColor.pageBackground
             UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
             UITableView.appearance().sectionIndexColor = UIColor.pageBackground
@@ -105,7 +101,9 @@ struct MainGoalView: View {
     var trackTimeButton: some View {
         HStack {
             Button(action: {
-                viewModel.showingTrackGoal.toggle()
+                if !(viewModel.goal?.isCompleted ?? true) {
+                    viewModel.showingTrackGoal.toggle()
+                }
             }) {
                 HStack {
                     Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
@@ -138,7 +136,7 @@ struct MainGoalView: View {
                 )
             }.accentColor(.goalColor)
             .sheet(isPresented: $showingAddNewGoal, onDismiss: {
-                currentGoal = goals.last
+                viewModel.goal = goals.last
             }, content: {
                 AddNewGoalView(isPresented: $showingAddNewGoal)
                     .environment(\.managedObjectContext,

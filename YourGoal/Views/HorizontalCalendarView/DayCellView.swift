@@ -32,6 +32,7 @@ struct WeekDay: Identifiable {
 }
 
 struct DayCellView: View {
+
     let weekDay: WeekDay
 
     @ViewBuilder

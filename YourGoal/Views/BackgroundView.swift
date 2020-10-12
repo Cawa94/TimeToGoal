@@ -21,7 +21,15 @@ struct BackgroundView<Content: View>: View {
     var body: some View {
         Color(self.color)
             .ignoresSafeArea()
-            .overlay(content)
+            .overlay(content.onAppear(perform: {
+                UINavigationBar.appearance().barTintColor = .white
+                UINavigationBar.appearance().tintColor = .white
+                UINavigationBar.appearance().backgroundColor = .white
+                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.goalColor]
+                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+                UINavigationBar.appearance().isTranslucent = false
+                UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+            }))
     }
 
 }

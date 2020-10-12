@@ -13,11 +13,12 @@
 "add_goal_name_title" = "What goal do you want to reach?";
 
 "global_add" = "Add";
+"global_color" = "Color";
 "global_friday" = "Friday";
 "global_hours" = "Hours";
 "global_minutes" = "Minutes";
 "global_monday" = "Monday";
-"global_new_goal" = "New goal";
+"global_new_goal" = "New Goal";
 "global_saturday" = "Saturday";
 "global_sunday" = "Sunday";
 "global_thursday" = "Thursday";

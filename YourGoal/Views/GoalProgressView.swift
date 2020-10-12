@@ -41,7 +41,7 @@ struct GoalProgressView: View {
 
             VStack {
                 Spacer()
-                Text(Double((viewModel.goal?.timeRequired ?? 0) - (viewModel.goal?.timeCompleted ?? 0)).stringWithTwoDecimals)
+                Text(self.hoursRemaining)
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
@@ -56,7 +56,7 @@ struct GoalProgressView: View {
                     .font(.title2)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.textForegroundColor)
-                Text("\((viewModel.goal?.updatedCompletionDate ?? Date()).formattedAsDate)")
+                Text(self.completionDate)
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
@@ -65,6 +65,24 @@ struct GoalProgressView: View {
             }
         }
     }
+
+    var hoursRemaining: String {
+        if viewModel.goal?.isCompleted ?? false {
+            return "0"
+        } else {
+            return (Double(viewModel.goal?.timeRequired ?? 0).asHoursAndMinutes
+                        .remove(Double(viewModel.goal?.timeCompleted ?? 0).asHoursAndMinutes)).formattedAsHours
+        }
+    }
+
+    var completionDate: String {
+        if viewModel.goal?.isCompleted ?? false {
+            return Date().formattedAsDate
+        } else {
+            return (viewModel.goal?.updatedCompletionDate ?? Date()).formattedAsDate
+        }
+    }
+
 }
 /*
 struct GoalProgressView_Previews: PreviewProvider {

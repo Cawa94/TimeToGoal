@@ -9,18 +9,14 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 
-    var formattedWithDaysAndHours: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd HH-mm"
-        dateFormatter.locale = Locale(identifier: Locale.current.languageCode ?? "en")
-        return dateFormatter.string(from: self)
-    }
-
-    var formattedWithHours: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH-mm"
-        dateFormatter.locale = Locale(identifier: Locale.current.languageCode ?? "en")
-        return dateFormatter.string(from: self)
+    var formattedAsHours: String {
+        let days = Calendar.current.component(.day, from: self)
+        var hours = Calendar.current.component(.hour, from: self)
+        if days != 31 { // sometimes days are set as 31 instead of 0
+            hours += days * 24
+        }
+        let minutes = Calendar.current.component(.minute, from: self)
+        return minutes != 0 ? "\(hours).\(minutes)" : "\(hours)"
     }
 
     func adding(days: Int) -> Date {
@@ -50,14 +46,11 @@ extension Date {
     }
 
     func remove(_ date: Date) -> Date {
-        debugPrint("SELF: \(self.formattedWithDaysAndHours) - DATE:\(date.formattedWithHours)")
+        //debugPrint("SELF: \(self.formattedWithDaysAndHours) - DATE:\(date.formattedWithDaysAndHours)")
         let differenceComponents = Calendar.current.dateComponents([.day, .hour, .minute,], from: date, to: self)
         let differenceDate = Calendar.current.date(from: differenceComponents) ?? Date()
-        debugPrint("DIFFERENCE: \(differenceDate.formattedWithDaysAndHours)")
-        let newDateComponents = Calendar.current.dateComponents([.day, .hour, .minute,], from: differenceDate, to: self)
-        let newDate = Calendar.current.date(from: newDateComponents) ?? Date()
-        debugPrint("UPDATED: \(newDate.formattedWithDaysAndHours)")
-        return newDate
+        //debugPrint("DIFFERENCE: \(differenceDate.formattedWithDaysAndHours)")
+        return differenceDate
     }
 
 }
