@@ -71,4 +71,16 @@ public class Goal: NSManagedObject {
         return !(self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes) > Date().zeroHours)
     }
 
+    var isValid: Bool {
+        if !(name?.isEmpty ?? true), timeRequired != 0, atLeastOneDayWorking {
+            return true
+        }
+        return false
+    }
+
+    var atLeastOneDayWorking: Bool {
+        mondayHours != 0 || tuesdayHours != 0 || wednesdayHours != 0 || thursdayHours != 0
+            || fridayHours != 0 || saturdayHours != 0 || sundayHours != 0
+    }
+
 }

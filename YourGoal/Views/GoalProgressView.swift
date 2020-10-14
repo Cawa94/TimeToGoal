@@ -17,12 +17,35 @@ public class GoalProgressViewModel: ObservableObject {
 
     @Published var goal: Goal?
 
+    var isCompleted: Bool {
+        return goal?.isCompleted ?? false
+    }
+
+    var hoursRemaining: String {
+        let dateRemaining = Double(goal?.timeRequired ?? 0).asHoursAndMinutes
+            .remove(Double(goal?.timeCompleted ?? 0).asHoursAndMinutes)
+        if dateRemaining > Date().zeroHours {
+            return dateRemaining.formattedAsHoursString
+        } else {
+            return "0"
+        }
+    }
+
+    var completionDate: String {
+        return (goal?.updatedCompletionDate ?? Date()).formattedAsDateString
+    }
+
+    var isLateThanOriginal: Bool {
+        return goal?.updatedCompletionDate.withoutHours ?? Date() > goal?.completionDateExtimated?.withoutHours ?? Date()
+    }
+
 }
 
 struct GoalProgressView: View {
 
     @ObservedObject var viewModel = GoalProgressViewModel()
 
+    @ViewBuilder
     var body: some View {
         ZStack {
             Color.pageBackground
@@ -41,7 +64,7 @@ struct GoalProgressView: View {
 
             VStack {
                 Spacer()
-                Text(self.hoursRemaining)
+                Text(viewModel.hoursRemaining)
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
@@ -52,34 +75,34 @@ struct GoalProgressView: View {
                     .padding(.bottom, 10)
                 Spacer()
                     .frame(height: 5)
-                Text("main_will_reach_goal".localized())
-                    .font(.title2)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.textForegroundColor)
-                Text(self.completionDate)
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.textForegroundColor)
-                    .padding(.bottom, 20)
+                if viewModel.goal == nil {
+                    Text("main_add_new_goal".localized())
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.textForegroundColor)
+                } else if viewModel.isCompleted {
+                    Text("main_weel_done".localized())
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.textForegroundColor)
+                    Text("main_goal_completed".localized())
+                        .font(.title2)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.textForegroundColor)
+                } else {
+                    Text("main_will_reach_goal".localized())
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.textForegroundColor)
+                    Text(viewModel.completionDate)
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(viewModel.isLateThanOriginal ? .red : .textForegroundColor)
+                        .padding(.bottom, 20)
+                }
                 Spacer()
             }
-        }
-    }
-
-    var hoursRemaining: String {
-        if viewModel.goal?.isCompleted ?? false {
-            return "0"
-        } else {
-            return (Double(viewModel.goal?.timeRequired ?? 0).asHoursAndMinutes
-                        .remove(Double(viewModel.goal?.timeCompleted ?? 0).asHoursAndMinutes)).formattedAsHours
-        }
-    }
-
-    var completionDate: String {
-        if viewModel.goal?.isCompleted ?? false {
-            return Date().formattedAsDate
-        } else {
-            return (viewModel.goal?.updatedCompletionDate ?? Date()).formattedAsDate
         }
     }
 

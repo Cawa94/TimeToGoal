@@ -25,6 +25,10 @@
 "global_tuesday" = "martes";
 "global_wednesday" = "Miércoles";
 
+"main_weel_done" = "Well done!";
+"main_edit_goal" = "Edit goal";
+"main_goal_completed" = "You reached your goal";
+"main_add_new_goal" = "Add a new goal to start!";
 "main_hours_required" = "Quedan horas";
 "main_my_goal" = "Mi objetivo";
 "main_track_progress" = "Seguimiento del progreso";

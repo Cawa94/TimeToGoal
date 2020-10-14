@@ -19,29 +19,36 @@ public class MainGoalViewModel: ObservableObject {
         didSet {
             progressViewModel.goal = goal
             calendarViewModel.goal = goal
-            Color.goalColor = Color(goal?.color ?? "greenGoal")
-            UIColor.goalColor = UIColor(named: goal?.color ?? "greenGoal") ?? .goalColor
+            showFireworks = goal?.isCompleted ?? false
+            //Color.goalColor = Color(goal?.color ?? "greenGoal")
+            //UIColor.goalColor = UIColor(named: goal?.color ?? "greenGoal") ?? .goalColor
         }
     }
 
     @Published var progressViewModel = GoalProgressViewModel()
     @Published var calendarViewModel = HorizontalCalendarViewModel()
+
     @Published var showingTrackGoal = false
+    @Published var showingAddNewGoal = false
+    @Published var showFireworks = false
 
 }
 
 struct MainGoalView: View {
 
-    @FetchRequest(
-        entity: Goal.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Goal.createdAt, ascending: true)
-        ]
-    ) var goals: FetchedResults<Goal>
+    var goalsRequest: FetchRequest<Goal>
+    var goals: FetchedResults<Goal> { goalsRequest.wrappedValue }
 
     @ObservedObject var viewModel = MainGoalViewModel()
 
-    @State var showingAddNewGoal = false
+    init() {
+        self.goalsRequest = FetchRequest(
+            entity: Goal.entity(),
+            sortDescriptors: [
+                NSSortDescriptor(keyPath: \Goal.createdAt, ascending: true)
+            ]
+        )
+    }
 
     @ViewBuilder
     var body: some View {
@@ -49,6 +56,7 @@ struct MainGoalView: View {
             ZStack {
                 Color.pageBackground
                     .ignoresSafeArea()
+
                 VStack {
                     Spacer(minLength: 10)
 
@@ -71,10 +79,15 @@ struct MainGoalView: View {
                     
                     HStack {
                         Spacer()
-                        trackTimeButton
-                            .frame(maxWidth: .infinity)
-                        newGoalButton
-                            .frame(maxWidth: .infinity)
+                        if (viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil {
+                            newGoalButton
+                                .frame(maxWidth: .infinity)
+                        } else {
+                            trackTimeButton
+                                .frame(maxWidth: .infinity)
+                            editGoalButton
+                                .frame(maxWidth: .infinity)
+                        }
                         Spacer()
                     }
 
@@ -89,12 +102,15 @@ struct MainGoalView: View {
                             }
                         })
                 }
+
+                if viewModel.showFireworks {
+                    FireworksView(isPresented: $viewModel.showFireworks)
+                        .ignoresSafeArea()
+                        .allowsHitTesting(false)
+                }
             }
         }.onAppear(perform: {
             viewModel.goal = goals.last
-            UITableView.appearance().backgroundColor = UIColor.pageBackground
-            UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
-            UITableView.appearance().sectionIndexColor = UIColor.pageBackground
         })
     }
 
@@ -106,8 +122,12 @@ struct MainGoalView: View {
                 }
             }) {
                 HStack {
-                    Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
-                    Text("main_track_progress".localized()).bold().foregroundColor(.goalColor)
+                    Image(systemName: "plus.rectangle.fill")
+                        .foregroundColor(.goalColor)
+                    Text("main_track_progress".localized())
+                        .bold()
+                        .foregroundColor(.goalColor)
+                        .font(.title2)
                 }
                 .padding(15.0)
                 .overlay(
@@ -122,11 +142,15 @@ struct MainGoalView: View {
     var newGoalButton: some View {
         HStack {
             Button(action: {
-                self.showingAddNewGoal.toggle()
+                viewModel.showingAddNewGoal.toggle()
             }) {
                 HStack {
-                    Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
-                    Text("global_new_goal".localized()).bold().foregroundColor(.goalColor)
+                    Image(systemName: "plus.rectangle.fill")
+                        .foregroundColor(.goalColor)
+                    Text("global_new_goal".localized())
+                        .bold()
+                        .foregroundColor(.goalColor)
+                        .font(.title)
                 }
                 .padding(15.0)
                 .overlay(
@@ -135,10 +159,42 @@ struct MainGoalView: View {
                         .foregroundColor(.goalColor)
                 )
             }.accentColor(.goalColor)
-            .sheet(isPresented: $showingAddNewGoal, onDismiss: {
+            .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
                 viewModel.goal = goals.last
             }, content: {
-                AddNewGoalView(isPresented: $showingAddNewGoal)
+                AddNewGoalView(viewModel: .init(),
+                               isPresented: $viewModel.showingAddNewGoal)
+                    .environment(\.managedObjectContext,
+                                 PersistenceController.shared.container.viewContext)
+            })
+        }
+    }
+
+    var editGoalButton: some View {
+        HStack {
+            Button(action: {
+                viewModel.showingAddNewGoal.toggle()
+            }) {
+                HStack {
+                    Image(systemName: "plus.rectangle.fill")
+                        .foregroundColor(.goalColor)
+                    Text("main_edit_goal".localized())
+                        .bold()
+                        .foregroundColor(.goalColor)
+                        .font(.title3)
+                }
+                .padding(15.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(.goalColor)
+                )
+            }.accentColor(.goalColor)
+            .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
+                viewModel.goal = goals.last
+            }, content: {
+                AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
+                               isPresented: $viewModel.showingAddNewGoal)
                     .environment(\.managedObjectContext,
                                  PersistenceController.shared.container.viewContext)
             })

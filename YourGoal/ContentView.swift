@@ -8,30 +8,14 @@
 import SwiftUI
 import CoreData
 
-public class ContentViewViewModel: ObservableObject {
-
-    @Binding var currentGoal: Goal?
-
-    init(goal: Binding<Goal?>) {
-        self._currentGoal = goal
-    }
-
-    func updateView(){
-        self.objectWillChange.send()
-    }
-
-}
-
 struct ContentView: View {
-
-    @Environment(\.managedObjectContext) private var viewContext
 
     var mainGoalViewModel = MainGoalViewModel()
 
     @ViewBuilder
     var body: some View {
         //TabView {
-            MainGoalView(viewModel: mainGoalViewModel)
+            MainGoalView()
         /*.tabItem {
                 Image.init(systemName: "house.fill")
                 Text("Obiettivi")
@@ -56,7 +40,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext,
-                                  PersistenceController.shared.container.viewContext)
+        ContentView()
     }
 }

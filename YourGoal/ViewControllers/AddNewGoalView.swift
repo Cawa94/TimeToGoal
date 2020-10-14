@@ -15,6 +15,25 @@ private extension Color {
 
 }
 
+public class AddNewGoalViewModel: ObservableObject {
+
+    @Published var goal: Goal
+    @Published var isColorsVisible = false
+
+    var colors = ["greenGoal", "yellowGoal", "redGoal",
+                  "orangeGoal", "blueGoal", "purpleGoal"]
+
+    init(existingGoal: Goal? = nil) {
+        if let existingGoal = existingGoal {
+            goal = existingGoal
+        } else {
+            goal = Goal(context: PersistenceController.shared.container.viewContext)
+            goal.color = UserDefaults.standard.goalColor ?? "greenGoal"
+        }
+    }
+
+}
+
 private extension CGFloat {
 
     static let hoursFieldsHeight: CGFloat = 85
@@ -24,84 +43,72 @@ private extension CGFloat {
 
 struct AddNewGoalView: View {
 
-    @Environment(\.managedObjectContext) private var viewContext
-
+    @ObservedObject var viewModel = AddNewGoalViewModel()
     @Binding var isPresented: Bool
-    @State var isColorsVisible = false
-    @State var contentOffset: CGFloat = 0
-    @State var selectedColor = "greenGoal"
 
-    @State var nameFieldValue: String = ""
-    @State var timeRequiredFieldValue: String = ""
-    @State var daysRequired: Int = 0
-
-    @State var mondayHoursValue: String = "0"
-    @State var tuesdayHoursValue: String = "0"
-    @State var wednesdayHoursValue: String = "0"
-    @State var thursdayHoursValue: String = "0"
-    @State var fridayHoursValue: String = "0"
-    @State var saturdayHoursValue: String = "0"
-    @State var sundayHoursValue: String = "0"
-
-    @State var completionDate: Date?
-
-    var colors = ["greenGoal", "yellowGoal", "redGoal", "orangeGoal", "blueGoal", "purpleGoal"]
+    @State var completionDate = Date()
 
     @ViewBuilder
     var body: some View {
-        let timeRequiredBinding = Binding<String>(get: {
-            self.timeRequiredFieldValue
+        let nameBinding = Binding<String>(get: {
+            "\(viewModel.goal.name ?? "")"
         }, set: {
-            self.timeRequiredFieldValue = $0
+            viewModel.goal.name = $0
+        })
+
+        let timeRequiredBinding = Binding<String>(get: {
+            viewModel.goal.timeRequired.stringWithoutDecimals
+        }, set: {
+            viewModel.goal.timeRequired = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let mondayBinding = Binding<String>(get: {
-            self.mondayHoursValue
+            return "\(viewModel.goal.mondayHours)"
         }, set: {
-            self.mondayHoursValue = $0
+            viewModel.goal.mondayHours = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let tuesdayBinding = Binding<String>(get: {
-            self.tuesdayHoursValue
+            "\(viewModel.goal.tuesdayHours)"
         }, set: {
-            self.tuesdayHoursValue = $0
+            viewModel.goal.tuesdayHours = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let wednesdayBinding = Binding<String>(get: {
-            self.wednesdayHoursValue
+            "\(viewModel.goal.wednesdayHours)"
         }, set: {
-            self.wednesdayHoursValue = $0
+            viewModel.goal.wednesdayHours = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let thursdayBinding = Binding<String>(get: {
-            self.thursdayHoursValue
+            "\(viewModel.goal.thursdayHours)"
         }, set: {
-            self.thursdayHoursValue = $0
+            viewModel.goal.thursdayHours = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let fridayBinding = Binding<String>(get: {
-            self.fridayHoursValue
+            "\(viewModel.goal.fridayHours)"
         }, set: {
-            self.fridayHoursValue = $0
+            viewModel.goal.fridayHours = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let saturdayBinding = Binding<String>(get: {
-            self.saturdayHoursValue
+            "\(viewModel.goal.saturdayHours)"
         }, set: {
-            self.saturdayHoursValue = $0
+            viewModel.goal.saturdayHours = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let sundayBinding = Binding<String>(get: {
-            self.sundayHoursValue
+            "\(viewModel.goal.sundayHours)"
         }, set: {
-            self.sundayHoursValue = $0
+            viewModel.goal.sundayHours = Double($0) ?? 0
             updateCompletionDate()
         })
 
@@ -110,7 +117,7 @@ struct AddNewGoalView: View {
                 ZStack {
                     Form {
                         Section(header: Text("add_goal_name_title".localized())) {
-                            TextField("", text: $nameFieldValue)
+                            TextField("", text: nameBinding)
                                 .padding()
                                 .foregroundColor(.fieldsTextForegroundColor)
                                 .background(Color.grayFields)
@@ -133,7 +140,7 @@ struct AddNewGoalView: View {
                                     Spacer()
                                     Text("\("global_color".localized()):")
                                     Button(action: {
-                                        self.isColorsVisible.toggle()
+                                        viewModel.isColorsVisible.toggle()
                                     }) {
                                         ZStack {
                                             RoundedRectangle(cornerRadius: .defaultRadius)
@@ -178,13 +185,14 @@ struct AddNewGoalView: View {
 
                         Section(header: Text("add_goal_extimated_date_title".localized())) {
                             VStack {
-                                Text(completionDate?.formattedAsDate ?? Date().formattedAsDate)
+                                Text(completionDate.formattedAsDateString)
                                     .font(.largeTitle)
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
                                     .foregroundColor(.goalColor)
-                                Text(String(format: "add_goal_days_required".localized(), "\(daysRequired)"))
+                                Text(String(format: "add_goal_days_required".localized(),
+                                            "\(viewModel.goal.daysRequired)"))
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
@@ -216,7 +224,7 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.viewBackgroundColor)
                         .padding(.bottom, 20)
                     }
-                    if isColorsVisible {
+                    if viewModel.isColorsVisible {
                         ZStack {
                             GeometryReader { container in
                                 Color.black.opacity(0.75)
@@ -232,12 +240,12 @@ struct AddNewGoalView: View {
                                             VStack {
                                                 Spacer()
                                                 HStack(spacing: 20) {
-                                                    ForEach(self.colors.prefix(3), id: \.self) { color in
+                                                    ForEach(viewModel.colors.prefix(3), id: \.self) { color in
                                                         Button(action: {
                                                             Color.goalColor = Color(color)
                                                             UIColor.goalColor = UIColor(named: color) ?? .goalColor
-                                                            self.selectedColor = color
-                                                            self.isColorsVisible.toggle()
+                                                            viewModel.goal.color = color
+                                                            viewModel.isColorsVisible.toggle()
                                                         }) {
                                                             Circle()
                                                                 .fill(Color(color))
@@ -247,12 +255,12 @@ struct AddNewGoalView: View {
                                                 }.frame(height: 55)
                                                 Spacer()
                                                 HStack(spacing: 20) {
-                                                    ForEach(self.colors.suffix(3), id: \.self) { color in
+                                                    ForEach(viewModel.colors.suffix(3), id: \.self) { color in
                                                         Button(action: {
                                                             Color.goalColor = Color(color)
                                                             UIColor.goalColor = UIColor(named: color) ?? .goalColor
-                                                            self.selectedColor = color
-                                                            self.isColorsVisible.toggle()
+                                                            self.viewModel.goal.color = color
+                                                            viewModel.isColorsVisible.toggle()
                                                         }) {
                                                             Circle()
                                                                 .fill(Color(color))
@@ -276,71 +284,35 @@ struct AddNewGoalView: View {
     }
 
     func storeNewGoal() {
-        if isValid() {
-            let newGoal = Goal(context: viewContext)
-            newGoal.name = nameFieldValue
+        if viewModel.goal.isValid {
+            viewModel.goal.createdAt = Date()
+            /*newGoal.name = goal.name
             newGoal.createdAt = Date()
-            newGoal.timeRequired = Double(timeRequiredFieldValue) ?? 0
-            newGoal.mondayHours = Double(mondayHoursValue) ?? 0
-            newGoal.tuesdayHours = Double(tuesdayHoursValue) ?? 0
-            newGoal.wednesdayHours = Double(wednesdayHoursValue) ?? 0
-            newGoal.thursdayHours = Double(thursdayHoursValue) ?? 0
-            newGoal.fridayHours = Double(fridayHoursValue) ?? 0
-            newGoal.saturdayHours = Double(saturdayHoursValue) ?? 0
-            newGoal.sundayHours = Double(sundayHoursValue) ?? 0
-            newGoal.completionDateExtimated = self.completionDate
-            newGoal.color = self.selectedColor
+            newGoal.timeRequired = goal.timeRequired
+            newGoal.mondayHours = goal.mondayHours
+            newGoal.tuesdayHours = goal.tuesdayHours
+            newGoal.wednesdayHours = goal.wednesdayHours
+            newGoal.thursdayHours = goal.thursdayHours
+            newGoal.fridayHours = goal.fridayHours
+            newGoal.saturdayHours = goal.saturdayHours
+            newGoal.sundayHours = goal.sundayHours
+            newGoal.completionDateExtimated = goal.completionDateExtimated
+            newGoal.color = goal.color*/
+            UserDefaults.standard.goalColor = viewModel.goal.color
             PersistenceController.shared.saveContext()
             self.isPresented = false
         }
     }
 
-    func isValid() -> Bool {
-        debugPrint("\(self.selectedColor)")
-        if !nameFieldValue.isEmpty, Double(timeRequiredFieldValue) ?? 0 != 0, atLeastOneDayWorking {
-            return true
-        }
-        return false
-    }
-
     func updateCompletionDate() {
-        if let timeRequired = Double(timeRequiredFieldValue), atLeastOneDayWorking {
-            let mondayHours = (Double(mondayHoursValue) ?? 0).asHoursAndMinutes
-            let tuesdayHours = (Double(tuesdayHoursValue) ?? 0).asHoursAndMinutes
-            let wednesdayHours = (Double(wednesdayHoursValue) ?? 0).asHoursAndMinutes
-            let thursdayHours = (Double(thursdayHoursValue) ?? 0).asHoursAndMinutes
-            let fridayHours = (Double(fridayHoursValue) ?? 0).asHoursAndMinutes
-            let saturdayHours = (Double(saturdayHoursValue) ?? 0).asHoursAndMinutes
-            let sundayHours = (Double(sundayHoursValue) ?? 0).asHoursAndMinutes
-
-            let dayHours = [sundayHours, mondayHours, tuesdayHours, wednesdayHours, thursdayHours, fridayHours, saturdayHours]
-            var daysRequired = -1
-            var decreasingTotal = timeRequired.asHoursAndMinutes
-            var dayNumber = Date().dayNumber
-
-            while decreasingTotal > Date().zeroHours {
-                daysRequired += 1
-                decreasingTotal = decreasingTotal.remove(dayHours[dayNumber - 1])
-                dayNumber += 1
-                if dayNumber == 8 {
-                    dayNumber = 1
-                }
-            }
-
-            self.daysRequired = daysRequired
-            completionDate = Date().adding(days: daysRequired)
+        if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
+            completionDate = viewModel.goal.updatedCompletionDate
+            viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
         }
-    }
-
-    var atLeastOneDayWorking: Bool {
-        Double(mondayHoursValue) ?? 0 != 0 || Double(tuesdayHoursValue) ?? 0 != 0
-            || Double(wednesdayHoursValue) ?? 0 != 0 || Double(thursdayHoursValue) ?? 0 != 0
-            || Double(fridayHoursValue) ?? 0 != 0 || Double(saturdayHoursValue) ?? 0 != 0
-            || Double(sundayHoursValue) ?? 0 != 0
     }
 
 }
-
+/*
 struct AddNewGoalView_Previews: PreviewProvider {
 
     static var previews: some View {
@@ -350,3 +322,4 @@ struct AddNewGoalView_Previews: PreviewProvider {
     }
 
 }
+*/

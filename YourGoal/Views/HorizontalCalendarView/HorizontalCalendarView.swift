@@ -23,13 +23,20 @@ public class HorizontalCalendarViewModel: ObservableObject {
         let sunday = startOfWeek.adding(days: 6)
 
         return [
-            WeekDay(id: 0, date: monday, isToday: Date().dayNumber == 2, isWorkingDay: goal?.workOnMonday),
-            WeekDay(id: 1, date: tuesday, isToday: Date().dayNumber == 3, isWorkingDay: goal?.workOnTuesday),
-            WeekDay(id: 2, date: wednesday, isToday: Date().dayNumber == 4, isWorkingDay: goal?.workOnWednesday),
-            WeekDay(id: 3, date: thursday, isToday: Date().dayNumber == 5, isWorkingDay: goal?.workOnThursday),
-            WeekDay(id: 4, date: friday, isToday: Date().dayNumber == 6, isWorkingDay: goal?.workOnFriday),
-            WeekDay(id: 5, date: saturday, isToday: Date().dayNumber == 7, isWorkingDay: goal?.workOnSaturday),
-            WeekDay(id: 6, date: sunday, isToday: Date().dayNumber == 1, isWorkingDay: goal?.workOnSunday)
+            WeekDay(id: 0, date: monday, isToday: Date().dayNumber == 2,
+                    isWorkingDay: goal?.workOnMonday, goalColor: goal?.color),
+            WeekDay(id: 1, date: tuesday, isToday: Date().dayNumber == 3,
+                    isWorkingDay: goal?.workOnTuesday, goalColor: goal?.color),
+            WeekDay(id: 2, date: wednesday, isToday: Date().dayNumber == 4,
+                    isWorkingDay: goal?.workOnWednesday, goalColor: goal?.color),
+            WeekDay(id: 3, date: thursday, isToday: Date().dayNumber == 5,
+                    isWorkingDay: goal?.workOnThursday, goalColor: goal?.color),
+            WeekDay(id: 4, date: friday, isToday: Date().dayNumber == 6,
+                    isWorkingDay: goal?.workOnFriday, goalColor: goal?.color),
+            WeekDay(id: 5, date: saturday, isToday: Date().dayNumber == 7,
+                    isWorkingDay: goal?.workOnSaturday, goalColor: goal?.color),
+            WeekDay(id: 6, date: sunday, isToday: Date().dayNumber == 1,
+                    isWorkingDay: goal?.workOnSunday, goalColor: goal?.color)
         ]
     }
 

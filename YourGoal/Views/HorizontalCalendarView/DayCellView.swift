@@ -14,8 +14,9 @@ struct WeekDay: Identifiable {
     var isToday: Bool
     var isWorkingDay: Bool
     var isInFuture: Bool
+    var goalColor: Color
 
-    init(id: Int64, date: Date, isToday: Bool, isWorkingDay: Bool?) {
+    init(id: Int64, date: Date, isToday: Bool, isWorkingDay: Bool?, goalColor: String?) {
         let numberFormatter = DateFormatter()
         numberFormatter.dateFormat = "d"
         var calendar = Calendar.current
@@ -27,6 +28,7 @@ struct WeekDay: Identifiable {
         self.isToday = isToday
         self.isWorkingDay = isWorkingDay ?? false
         self.isInFuture = date > Date()
+        self.goalColor = Color(goalColor ?? "greenGoal")
     }
 
 }
@@ -42,7 +44,7 @@ struct DayCellView: View {
                 ZStack {
                     Circle()
                         .stroke(lineWidth: 2.0)
-                        .foregroundColor(.goalColor)
+                        .foregroundColor(weekDay.goalColor)
                     Text(weekDay.name)
                         .fontWeight(.semibold)
                         .foregroundColor(weekDay.isInFuture ? .gray : .black)
@@ -58,7 +60,7 @@ struct DayCellView: View {
             if weekDay.isToday {
                 ZStack {
                     Circle()
-                        .fill(Color.goalColor)
+                        .fill(weekDay.goalColor)
                     Text(weekDay.number)
                         .fontWeight(.semibold)
                         .padding([.bottom, .top], 6)
@@ -76,9 +78,9 @@ struct DayCellView: View {
 
 struct DayCellView_Previews: PreviewProvider {
     static var previews: some View {
-        DayCellView(weekDay: .init(id: 0, date: Date(), isToday: true, isWorkingDay: true))
+        DayCellView(weekDay: .init(id: 0, date: Date(), isToday: true, isWorkingDay: true, goalColor: "greenGoal"))
             .previewLayout(.fixed(width: 50, height: 85))
-        DayCellView(weekDay: .init(id: 0, date: Date(), isToday: true, isWorkingDay: false))
+        DayCellView(weekDay: .init(id: 0, date: Date(), isToday: true, isWorkingDay: false, goalColor: "orangeGoal"))
             .previewLayout(.fixed(width: 50, height: 85))
     }
 }

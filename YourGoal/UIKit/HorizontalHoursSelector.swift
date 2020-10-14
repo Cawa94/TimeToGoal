@@ -64,6 +64,10 @@ struct HorizontalPickerView: UIViewRepresentable {
         pickerView.delegate = context.coordinator
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180))
+        if selectedValue != "0", let valueAsDouble = Double(selectedValue),
+           let index = hours.firstIndex(of: valueAsDouble) {
+            pickerView.selectRow(index, inComponent: 0, animated: false)
+        }
         return pickerView
     }
 

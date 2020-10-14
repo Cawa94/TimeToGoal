@@ -11,7 +11,7 @@ import SwiftUI
 extension Color {
 
     static let pageBackground = Color.white
-    static var goalColor = Color.greenGoal
+    static var goalColor = Color(UserDefaults.standard.goalColor ?? "greenGoal")
 
 }
 
@@ -23,15 +23,12 @@ extension Color {
     // Gray
     static let grayFields      = Color("grayFields")
 
-    // Green
-    static let greenGoal       = Color("greenGoal")
-
 }
 
 extension UIColor {
 
     static let pageBackground = UIColor.white
-    static var goalColor = UIColor.greenGoal
+    static var goalColor = UIColor.named(UserDefaults.standard.goalColor ?? "greenGoal")
 
 }
 
@@ -42,9 +39,6 @@ extension UIColor {
 
     // Gray
     static let grayFields      = UIColor.named("grayFields")
-
-    // Green
-    static let greenGoal       = UIColor.named("greenGoal")
 
     private static func named(_ name: String) -> UIColor {
         return UIColor(named: name) ?? UIColor()

@@ -29,6 +29,10 @@ struct BackgroundView<Content: View>: View {
                 UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
                 UINavigationBar.appearance().isTranslucent = false
                 UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+
+                UITableView.appearance().backgroundColor = UIColor.pageBackground
+                UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
+                UITableView.appearance().sectionIndexColor = UIColor.pageBackground
             }))
     }
 
