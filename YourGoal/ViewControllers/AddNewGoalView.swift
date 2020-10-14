@@ -20,10 +20,14 @@ public class AddNewGoalViewModel: ObservableObject {
     @Published var goal: Goal
     @Published var isColorsVisible = false
 
+    var isNewGoal: Bool
+
     var colors = ["greenGoal", "yellowGoal", "redGoal",
                   "orangeGoal", "blueGoal", "purpleGoal"]
 
     init(existingGoal: Goal? = nil) {
+        self.isNewGoal = existingGoal == nil
+
         if let existingGoal = existingGoal {
             goal = existingGoal
         } else {
@@ -155,6 +159,7 @@ struct AddNewGoalView: View {
                                 }
                             }.frame(height: 55)
                         }
+                        .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.viewBackgroundColor)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
@@ -210,7 +215,8 @@ struct AddNewGoalView: View {
                                     Spacer()
                                     HStack {
                                         Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
-                                        Text("global_add".localized()).bold().foregroundColor(.goalColor)
+                                        Text(viewModel.isNewGoal ? "global_add".localized() : "global_update".localized())
+                                            .bold().foregroundColor(.goalColor)
                                     }
                                     .padding(15.0)
                                     .overlay(
@@ -221,83 +227,23 @@ struct AddNewGoalView: View {
                                 }
                             }.accentColor(.goalColor)
                         }
+                        .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.viewBackgroundColor)
                         .padding(.bottom, 20)
                     }
                     if viewModel.isColorsVisible {
-                        ZStack {
-                            GeometryReader { container in
-                                Color.black.opacity(0.75)
-                                    .ignoresSafeArea()
-                                VStack() {
-                                    Spacer().frame(maxWidth: .infinity)
-                                    HStack {
-                                        Spacer().frame(maxWidth: .infinity)
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: .defaultRadius)
-                                                .fill(Color.white)
-                                                .cornerRadius(50)
-                                            VStack {
-                                                Spacer()
-                                                HStack(spacing: 20) {
-                                                    ForEach(viewModel.colors.prefix(3), id: \.self) { color in
-                                                        Button(action: {
-                                                            Color.goalColor = Color(color)
-                                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
-                                                            viewModel.goal.color = color
-                                                            viewModel.isColorsVisible.toggle()
-                                                        }) {
-                                                            Circle()
-                                                                .fill(Color(color))
-                                                                .aspectRatio(1.0, contentMode: .fit)
-                                                        }
-                                                    }
-                                                }.frame(height: 55)
-                                                Spacer()
-                                                HStack(spacing: 20) {
-                                                    ForEach(viewModel.colors.suffix(3), id: \.self) { color in
-                                                        Button(action: {
-                                                            Color.goalColor = Color(color)
-                                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
-                                                            self.viewModel.goal.color = color
-                                                            viewModel.isColorsVisible.toggle()
-                                                        }) {
-                                                            Circle()
-                                                                .fill(Color(color))
-                                                                .aspectRatio(1.0, contentMode: .fit)
-                                                        }
-                                                    }
-                                                }.frame(height: 55)
-                                                Spacer()
-                                            }
-                                        }.frame(width: container.size.width / 1.5, height: 200, alignment: .center)
-                                        Spacer().frame(maxWidth: .infinity)
-                                    }
-                                    Spacer().frame(maxWidth: .infinity)
-                                }
-                            }
-                        }
+                        colorsView
                     }
                 }.navigationBarTitle("global_new_goal".localized(), displayMode: .large)
             }
+        }.onTapGesture {
+            UIApplication.shared.endEditing()
         }
     }
 
     func storeNewGoal() {
         if viewModel.goal.isValid {
             viewModel.goal.createdAt = Date()
-            /*newGoal.name = goal.name
-            newGoal.createdAt = Date()
-            newGoal.timeRequired = goal.timeRequired
-            newGoal.mondayHours = goal.mondayHours
-            newGoal.tuesdayHours = goal.tuesdayHours
-            newGoal.wednesdayHours = goal.wednesdayHours
-            newGoal.thursdayHours = goal.thursdayHours
-            newGoal.fridayHours = goal.fridayHours
-            newGoal.saturdayHours = goal.saturdayHours
-            newGoal.sundayHours = goal.sundayHours
-            newGoal.completionDateExtimated = goal.completionDateExtimated
-            newGoal.color = goal.color*/
             UserDefaults.standard.goalColor = viewModel.goal.color
             PersistenceController.shared.saveContext()
             self.isPresented = false
@@ -308,6 +254,66 @@ struct AddNewGoalView: View {
         if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
             completionDate = viewModel.goal.updatedCompletionDate
             viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
+        }
+    }
+
+    var colorsView: some View {
+        ZStack {
+            GeometryReader { container in
+                Color.black.opacity(0.75)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        viewModel.isColorsVisible.toggle()
+                    }
+                VStack() {
+                    Spacer().frame(maxWidth: .infinity)
+                    HStack {
+                        Spacer().frame(maxWidth: .infinity)
+                        ZStack {
+                            RoundedRectangle(cornerRadius: .defaultRadius)
+                                .fill(Color.white)
+                                .cornerRadius(50)
+                            VStack {
+                                Spacer()
+                                HStack(spacing: 20) {
+                                    ForEach(viewModel.colors.prefix(3), id: \.self) { color in
+                                        Button(action: {
+                                            Color.goalColor = Color(color)
+                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
+                                            viewModel.goal.color = color
+                                            viewModel.isColorsVisible.toggle()
+                                        }) {
+                                            Circle()
+                                                .fill(Color(color))
+                                                .aspectRatio(1.0, contentMode: .fit)
+                                        }
+                                    }
+                                }.frame(height: 55)
+                                .buttonStyle(PlainButtonStyle())
+                                Spacer()
+                                HStack(spacing: 20) {
+                                    ForEach(viewModel.colors.suffix(3), id: \.self) { color in
+                                        Button(action: {
+                                            Color.goalColor = Color(color)
+                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
+                                            self.viewModel.goal.color = color
+                                            viewModel.isColorsVisible.toggle()
+                                        }) {
+                                            Circle()
+                                                .fill(Color(color))
+                                                .aspectRatio(1.0, contentMode: .fit)
+                                        }
+                                    }
+                                }.frame(height: 55)
+                                .buttonStyle(PlainButtonStyle())
+                                Spacer()
+                            }
+                        }.frame(width: container.size.width / 1.5, height: 200, alignment: .center)
+                        Spacer().frame(maxWidth: .infinity)
+                    }
+                    Spacer().frame(maxWidth: .infinity)
+                }
+            }
         }
     }
 

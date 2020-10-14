@@ -73,7 +73,7 @@ struct MainGoalView: View {
                     Spacer()
 
                     GoalProgressView(viewModel: viewModel.progressViewModel)
-                        .padding([.leading, .trailing], 15)
+                        .padding([.leading, .trailing], 30)
 
                     Spacer(minLength: 25)
                     
@@ -127,7 +127,7 @@ struct MainGoalView: View {
                     Text("main_track_progress".localized())
                         .bold()
                         .foregroundColor(.goalColor)
-                        .font(.title2)
+                        .font(.title3)
                 }
                 .padding(15.0)
                 .overlay(

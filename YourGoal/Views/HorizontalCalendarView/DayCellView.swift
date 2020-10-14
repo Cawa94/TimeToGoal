@@ -41,36 +41,37 @@ struct DayCellView: View {
     var body: some View {
         VStack {
             if weekDay.isWorkingDay {
-                ZStack {
+                /*ZStack {
                     Circle()
                         .stroke(lineWidth: 2.0)
-                        .foregroundColor(weekDay.goalColor)
+                        .foregroundColor(weekDay.goalColor)*/
                     Text(weekDay.name)
-                        .fontWeight(.semibold)
-                        .foregroundColor(weekDay.isInFuture ? .gray : .black)
+                        .bold()
+                        .foregroundColor(weekDay.isInFuture ? weekDay.goalColor.opacity(0.7) : weekDay.goalColor)
                         .padding([.bottom, .top], 6)
-                }
+                //}
             } else {
                 Text(weekDay.name)
-                    .fontWeight(.semibold)
+                    //.fontWeight(.semibold)
                     .padding([.bottom, .top], 6)
-                    .foregroundColor(weekDay.isInFuture ? .gray : .black)
+                    .foregroundColor(weekDay.isInFuture ? Color.black.opacity(0.5) : .black)
             }
 
             if weekDay.isToday {
                 ZStack {
                     Circle()
-                        .fill(weekDay.goalColor)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(weekDay.goalColor)
                     Text(weekDay.number)
-                        .fontWeight(.semibold)
+                        .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
                         .padding([.bottom, .top], 6)
-                        .foregroundColor(weekDay.isInFuture ? .gray : .black)
+                        .foregroundColor(weekDay.isInFuture ? Color.black.opacity(0.5) : .black)
                 }
             } else {
                 Text(weekDay.number)
-                    .fontWeight(.semibold)
+                    .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
                     .padding([.top, .bottom], 6)
-                    .foregroundColor(weekDay.isInFuture ? .gray : .black)
+                    .foregroundColor(weekDay.isInFuture ? Color.black.opacity(0.5) : .black)
             }
         }
     }

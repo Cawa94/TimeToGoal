@@ -19,6 +19,9 @@ struct TrackHoursSpentView: View {
         ZStack {
             Color.black.opacity(0.75)
                 .ignoresSafeArea()
+                .onTapGesture {
+                    isPresented.toggle()
+                }
             ZStack {
                 RoundedRectangle(cornerRadius: .defaultRadius)
                     .fill(Color.white)
@@ -40,11 +43,11 @@ struct TrackHoursSpentView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .padding([.leading, .trailing])*/
                     Spacer()
-                    if trackMode == 0 {
+                    //if trackMode == 0 {
                         TrackManualTimeView(isPresented: $isPresented, currentGoal: $currentGoal)
-                    } else {
+                    /*} else {
                         
-                    }
+                    }*/
                 }
             }
             .frame(height: 400, alignment: .center)

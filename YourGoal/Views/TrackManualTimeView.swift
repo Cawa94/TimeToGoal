@@ -18,6 +18,8 @@ struct TrackManualTimeView: View {
     @State var hours: [Int] = Array(0...23)
     @State var minutes: [Double] = [00, 15, 30, 45]
 
+    @State private var feedback = UINotificationFeedbackGenerator()
+
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -53,6 +55,7 @@ struct TrackManualTimeView: View {
             Button(action: {
                 currentGoal?.timeCompleted += Double(hoursSpent) + (Double("0.\(minutesSpent.stringWithoutDecimals)") ?? 0.00)
                 PersistenceController.shared.saveContext()
+                self.feedback.notificationOccurred(.success)
                 self.isPresented = false
             }) {
                 HStack {
@@ -69,6 +72,7 @@ struct TrackManualTimeView: View {
             Spacer()
                 .frame(height: 20)
         }.foregroundColor(.black)
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

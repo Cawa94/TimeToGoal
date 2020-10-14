@@ -23,6 +23,7 @@
 "global_sunday" = "Domenica";
 "global_thursday" = "Giovedì";
 "global_tuesday" = "Martedì";
+"global_update" = "Aggiorna";
 "global_wednesday" = "Mercoledì";
 
 "main_weel_done" = "Ben fatto!";
