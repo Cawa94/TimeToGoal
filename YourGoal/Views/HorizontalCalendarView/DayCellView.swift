@@ -40,22 +40,22 @@ struct DayCellView: View {
     @ViewBuilder
     var body: some View {
         VStack {
-            if weekDay.isWorkingDay {
+            /*if weekDay.isWorkingDay {
                 /*ZStack {
                     Circle()
                         .stroke(lineWidth: 2.0)
                         .foregroundColor(weekDay.goalColor)*/
                     Text(weekDay.name)
-                        .bold()
-                        .foregroundColor(weekDay.isInFuture ? weekDay.goalColor.opacity(0.7) : weekDay.goalColor)
+                        //.bold()
+                        .foregroundColor(Color.black.opacity(0.5))
                         .padding([.bottom, .top], 6)
                 //}
-            } else {
+            } else {*/
                 Text(weekDay.name)
                     //.fontWeight(.semibold)
                     .padding([.bottom, .top], 6)
-                    .foregroundColor(weekDay.isInFuture ? Color.black.opacity(0.5) : .black)
-            }
+                    .foregroundColor(Color.black.opacity(0.5))
+            //}
 
             if weekDay.isToday {
                 ZStack {
@@ -65,13 +65,13 @@ struct DayCellView: View {
                     Text(weekDay.number)
                         .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
                         .padding([.bottom, .top], 6)
-                        .foregroundColor(weekDay.isInFuture ? Color.black.opacity(0.5) : .black)
+                        .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)
                 }
             } else {
                 Text(weekDay.number)
                     .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
                     .padding([.top, .bottom], 6)
-                    .foregroundColor(weekDay.isInFuture ? Color.black.opacity(0.5) : .black)
+                    .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)
             }
         }
     }

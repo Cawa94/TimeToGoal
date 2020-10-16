@@ -59,7 +59,7 @@ struct GoalProgressView: View {
                 .background(Circle().stroke(lineWidth: 40.0).opacity(0.3).foregroundColor(Color.goalColor))
                 .foregroundColor(Color.goalColor)
                 .rotationEffect(Angle(degrees: 270.0))
-                .animation(.easeInOut(duration: 1))
+                .animation(.easeInOut(duration: 0.75))
 
             VStack {
                 Spacer()

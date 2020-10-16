@@ -13,7 +13,7 @@ struct BackgroundView<Content: View>: View {
     private var content: Content
 
     init(color: UIColor, @ViewBuilder content: @escaping () -> Content) {
-        self.color = color
+        self.color = UIColor(Color.goalColor).withAlphaComponent(0.2)
         self.content = content()
     }
 
@@ -25,14 +25,14 @@ struct BackgroundView<Content: View>: View {
                 UINavigationBar.appearance().barTintColor = .white
                 UINavigationBar.appearance().tintColor = .white
                 UINavigationBar.appearance().backgroundColor = .white
-                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.goalColor]
+                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(Color.goalColor)]
                 UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
                 UINavigationBar.appearance().isTranslucent = false
                 UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
 
-                UITableView.appearance().backgroundColor = UIColor.pageBackground
-                UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
-                UITableView.appearance().sectionIndexColor = UIColor.pageBackground
+                UITableView.appearance().backgroundColor = self.color
+                UITableView.appearance().sectionIndexBackgroundColor = self.color
+                UITableView.appearance().sectionIndexColor = self.color
             }))
     }
 

@@ -51,26 +51,37 @@ struct TrackManualTimeView: View {
                     Spacer()
                 }
             }
+
             Spacer()
+
             Button(action: {
-                currentGoal?.timeCompleted += Double(hoursSpent) + (Double("0.\(minutesSpent.stringWithoutDecimals)") ?? 0.00)
-                PersistenceController.shared.saveContext()
-                self.feedback.notificationOccurred(.success)
-                self.isPresented = false
+                withAnimation {
+                    currentGoal?.timeCompleted += Double(hoursSpent) + (Double("0.\(minutesSpent.stringWithoutDecimals)") ?? 0.00)
+                    PersistenceController.shared.saveContext()
+                    self.feedback.notificationOccurred(.success)
+                    self.isPresented = false
+                }
             }) {
                 HStack {
-                    Text("global_add".localized()).bold().foregroundColor(.goalColor)
+                    Spacer()
+                    Text("global_add".localized())
+                        .bold()
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding([.top], 15)
+                        .padding([.bottom], 15)
+                    Spacer()
                 }
-                .padding([.leading, .trailing], 60)
-                .padding([.top, .bottom], 15)
-                .overlay(
-                    RoundedRectangle(cornerRadius: .defaultRadius)
-                        .stroke(lineWidth: 2.0)
-                        .foregroundColor(.goalColor)
-                )
-            }.accentColor(.goalColor)
+                .background(Color.goalColor)
+                .cornerRadius(.defaultRadius)
+            }
+            .accentColor(.goalColor)
+            .padding([.leading, .trailing], 30)
+            .padding([.bottom], 10)
+
             Spacer()
-                .frame(height: 20)
+                .frame(height: 15)
         }.foregroundColor(.black)
         .buttonStyle(PlainButtonStyle())
     }

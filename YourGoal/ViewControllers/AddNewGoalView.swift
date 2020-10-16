@@ -11,7 +11,6 @@ private extension Color {
 
     static let fieldsTitleForegroundColor: Color = .black
     static let fieldsTextForegroundColor: Color = .white
-    static let viewBackgroundColor: Color = .pageBackground
 
 }
 
@@ -127,7 +126,7 @@ struct AddNewGoalView: View {
                                 .background(Color.grayFields)
                                 .cornerRadius(.defaultRadius)
                         }
-                        .listRowBackground(Color.viewBackgroundColor)
+                        .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text("add_goal_hours_required_title".localized())) {
@@ -160,7 +159,7 @@ struct AddNewGoalView: View {
                             }.frame(height: 55)
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .listRowBackground(Color.viewBackgroundColor)
+                        .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text("add_goal_hours_for_day_title".localized())) {
@@ -185,7 +184,7 @@ struct AddNewGoalView: View {
                                                                    bindingString: sundayBinding))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                         }
-                        .listRowBackground(Color.viewBackgroundColor)
+                        .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text("add_goal_extimated_date_title".localized())) {
@@ -204,7 +203,7 @@ struct AddNewGoalView: View {
                                     .foregroundColor(.goalColor)
                             }
                         }
-                        .listRowBackground(Color.viewBackgroundColor)
+                        .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section {
@@ -213,23 +212,20 @@ struct AddNewGoalView: View {
                             }) {
                                 HStack {
                                     Spacer()
-                                    HStack {
-                                        Image(systemName: "plus.rectangle.fill").foregroundColor(.goalColor)
-                                        Text(viewModel.isNewGoal ? "global_add".localized() : "global_update".localized())
-                                            .bold().foregroundColor(.goalColor)
-                                    }
-                                    .padding(15.0)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: .defaultRadius)
-                                            .stroke(lineWidth: 2.0)
-                                            .foregroundColor(.goalColor)
-                                    )
+                                    Text(viewModel.isNewGoal ? "global_add".localized() : "global_update".localized())
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .font(.title2)
+                                        .multilineTextAlignment(.center)
+                                    Spacer()
                                 }
+                                .padding([.top, .bottom], 15)
+                                .background(Color.goalColor)
+                                .cornerRadius(.defaultRadius)
                             }.accentColor(.goalColor)
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .listRowBackground(Color.viewBackgroundColor)
-                        .padding(.bottom, 20)
+                        .listRowBackground(Color.pageBackground)
                     }
                     if viewModel.isColorsVisible {
                         colorsView
@@ -259,12 +255,12 @@ struct AddNewGoalView: View {
 
     var colorsView: some View {
         ZStack {
+            Color.black.opacity(0.75)
+                .ignoresSafeArea()
+                .onTapGesture {
+                    viewModel.isColorsVisible.toggle()
+                }
             GeometryReader { container in
-                Color.black.opacity(0.75)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        viewModel.isColorsVisible.toggle()
-                    }
                 VStack() {
                     Spacer().frame(maxWidth: .infinity)
                     HStack {

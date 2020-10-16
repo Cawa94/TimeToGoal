@@ -75,27 +75,30 @@ struct MainGoalView: View {
                     GoalProgressView(viewModel: viewModel.progressViewModel)
                         .padding([.leading, .trailing], 30)
 
-                    Spacer(minLength: 25)
+                    Spacer()
+                        .frame(height: 20)
                     
-                    HStack {
-                        Spacer()
+                    VStack {
                         if (viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil {
                             newGoalButton
-                                .frame(maxWidth: .infinity)
+                                .padding([.leading, .trailing], 15)
                         } else {
                             trackTimeButton
-                                .frame(maxWidth: .infinity)
+                                .padding([.leading, .trailing], 15)
+                            Spacer()
+                                .frame(height: 15)
                             editGoalButton
-                                .frame(maxWidth: .infinity)
+                                .padding([.leading, .trailing], 15)
                         }
-                        Spacer()
                     }
 
-                    Spacer(minLength: 40)
+                    Spacer()
+                        .frame(height: 15)
                 }
 
                 if viewModel.showingTrackGoal {
                     TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal, currentGoal: $viewModel.goal)
+                        .transition(.move(edge: .bottom))
                         .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
                             if !isShowing {
                                 viewModel.goal = viewModel.goal
@@ -117,24 +120,24 @@ struct MainGoalView: View {
     var trackTimeButton: some View {
         HStack {
             Button(action: {
-                if !(viewModel.goal?.isCompleted ?? true) {
-                    viewModel.showingTrackGoal.toggle()
+                withAnimation {
+                    if !(viewModel.goal?.isCompleted ?? true) {
+                        viewModel.showingTrackGoal.toggle()
+                    }
                 }
             }) {
                 HStack {
-                    Image(systemName: "plus.rectangle.fill")
-                        .foregroundColor(.goalColor)
+                    Spacer()
                     Text("main_track_progress".localized())
                         .bold()
-                        .foregroundColor(.goalColor)
-                        .font(.title3)
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                    Spacer()
                 }
-                .padding(15.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: .defaultRadius)
-                        .stroke(lineWidth: 2.0)
-                        .foregroundColor(.goalColor)
-                )
+                .padding([.top, .bottom], 15)
+                .background(Color.goalColor)
+                .cornerRadius(.defaultRadius)
             }.accentColor(.goalColor)
         }
     }
@@ -145,18 +148,17 @@ struct MainGoalView: View {
                 viewModel.showingAddNewGoal.toggle()
             }) {
                 HStack {
-                    Image(systemName: "plus.rectangle.fill")
-                        .foregroundColor(.goalColor)
+                    Spacer()
                     Text("global_new_goal".localized())
                         .bold()
-                        .foregroundColor(.goalColor)
+                        .foregroundColor(.white)
                         .font(.title)
+                    Spacer()
                 }
                 .padding(15.0)
                 .overlay(
                     RoundedRectangle(cornerRadius: .defaultRadius)
-                        .stroke(lineWidth: 2.0)
-                        .foregroundColor(.goalColor)
+                        .fill(Color.goalColor)
                 )
             }.accentColor(.goalColor)
             .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
@@ -176,12 +178,14 @@ struct MainGoalView: View {
                 viewModel.showingAddNewGoal.toggle()
             }) {
                 HStack {
-                    Image(systemName: "plus.rectangle.fill")
-                        .foregroundColor(.goalColor)
+                    Spacer()
+                    /*Image(systemName: "plus.rectangle.fill")
+                        .foregroundColor(.goalColor)*/
                     Text("main_edit_goal".localized())
                         .bold()
                         .foregroundColor(.goalColor)
                         .font(.title3)
+                    Spacer()
                 }
                 .padding(15.0)
                 .overlay(

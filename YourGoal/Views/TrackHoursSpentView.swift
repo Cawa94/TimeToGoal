@@ -20,38 +20,44 @@ struct TrackHoursSpentView: View {
             Color.black.opacity(0.75)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    isPresented.toggle()
-                }
-            ZStack {
-                RoundedRectangle(cornerRadius: .defaultRadius)
-                    .fill(Color.white)
-                    .cornerRadius(50)
-                VStack {
-                    Spacer()
-                        .frame(height: 30)
-                    Text("track_popup_title".localized())
-                        .font(.title)
-                        .bold()
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.goalColor)
-                    /*Spacer()
-                        .frame(height: 20)
-                    Picker(selection: $trackMode, label: Text("")) {
-                        Text("Manuale").tag(0)
-                        Text("Timer").tag(1)
+                    withAnimation {
+                        isPresented.toggle()
                     }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding([.leading, .trailing])*/
-                    Spacer()
-                    //if trackMode == 0 {
-                        TrackManualTimeView(isPresented: $isPresented, currentGoal: $currentGoal)
-                    /*} else {
-                        
-                    }*/
                 }
+            VStack {
+                Spacer()
+
+                ZStack {
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .fill(Color.white)
+                        .cornerRadius(50)
+                    VStack {
+                        Spacer()
+                            .frame(height: 30)
+                        Text("track_popup_title".localized())
+                            .font(.title)
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.goalColor)
+                        /*Spacer()
+                            .frame(height: 20)
+                        Picker(selection: $trackMode, label: Text("")) {
+                            Text("Manuale").tag(0)
+                            Text("Timer").tag(1)
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding([.leading, .trailing])*/
+                        Spacer()
+                        //if trackMode == 0 {
+                            TrackManualTimeView(isPresented: $isPresented, currentGoal: $currentGoal)
+                        /*} else {
+                            
+                        }*/
+                    }
+                }
+                .frame(height: 400)
+                .padding([.leading, .trailing], 10)
             }
-            .frame(height: 400, alignment: .center)
-            .padding([.leading, .trailing], 15)
         }
     }
 }
