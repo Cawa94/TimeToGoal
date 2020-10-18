@@ -98,6 +98,11 @@ struct GoalProgressView: View {
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(viewModel.isLateThanOriginal ? .red : .textForegroundColor)
+                    Text("(\(String(format: "add_goal_days_required".localized(), "\(viewModel.goal?.daysRequired ?? 0)")))")
+                        .font(.title3)
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.textForegroundColor)
                         .padding(.bottom, 20)
                 }
                 Spacer()

@@ -20,8 +20,6 @@ public class MainGoalViewModel: ObservableObject {
             progressViewModel.goal = goal
             calendarViewModel.goal = goal
             showFireworks = goal?.isCompleted ?? false
-            //Color.goalColor = Color(goal?.color ?? "greenGoal")
-            //UIColor.goalColor = UIColor(named: goal?.color ?? "greenGoal") ?? .goalColor
         }
     }
 
@@ -58,19 +56,39 @@ struct MainGoalView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    Spacer(minLength: 10)
+                    Spacer()
+                        .frame(height: 10)
 
                     HorizontalCalendarView(viewModel: viewModel.calendarViewModel)
                         .padding([.leading, .trailing])
 
-                    Spacer(minLength: 25)
+                    Spacer()
+                        .frame(height: 15)
 
-                    Text(viewModel.goal?.name ?? "main_my_goal".localized())
+                    Text(viewModel.goal?.name ?? "global_new_goal".localized())
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(.textForegroundColor)
+                        .multilineTextAlignment(.center)
+                    if !((viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil) {
+                        Spacer()
+                            .frame(height: 5)
+                        HStack {
+                            Spacer()
+                            Text("\("global_estimated".localized()):")
+                                .font(.title3)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.textForegroundColor)
+                            Text("\(viewModel.goal?.completionDateExtimated?.formattedAsDateString ?? "")")
+                                .font(.title3)
+                                .bold()
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.textForegroundColor)
+                            Spacer()
+                        }
+                    }
 
-                    Spacer()
+                    Spacer(minLength: 15)
 
                     GoalProgressView(viewModel: viewModel.progressViewModel)
                         .padding([.leading, .trailing], 30)
@@ -82,6 +100,8 @@ struct MainGoalView: View {
                         if (viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil {
                             newGoalButton
                                 .padding([.leading, .trailing], 15)
+                            Spacer()
+                                .frame(height: 15)
                         } else {
                             trackTimeButton
                                 .padding([.leading, .trailing], 15)
@@ -114,6 +134,20 @@ struct MainGoalView: View {
             }
         }.onAppear(perform: {
             viewModel.goal = goals.last
+            if viewModel.goal == nil {
+                viewModel.showingAddNewGoal = true
+            }
+        })
+        .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
+            if goals.last?.isValid ?? false {
+                viewModel.goal = goals.last
+            } else if let goal = goals.last {
+                PersistenceController.shared.container.viewContext.delete(goal)
+            }
+        }, content: {
+            AddNewGoalView(viewModel: ((viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil)
+                            ? .init() : .init(existingGoal: viewModel.goal),
+                           isPresented: $viewModel.showingAddNewGoal)
         })
     }
 
@@ -149,25 +183,26 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("global_new_goal".localized())
+                    Text("global_add_goal".localized())
                         .bold()
                         .foregroundColor(.white)
-                        .font(.title)
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
                     Spacer()
                 }
-                .padding(15.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: .defaultRadius)
-                        .fill(Color.goalColor)
-                )
+                .padding([.top, .bottom], 15)
+                .background(Color.goalColor)
+                .cornerRadius(.defaultRadius)
             }.accentColor(.goalColor)
             .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
-                viewModel.goal = goals.last
+                if goals.last?.isValid ?? false {
+                    viewModel.goal = goals.last
+                } else if let goal = goals.last {
+                    PersistenceController.shared.container.viewContext.delete(goal)
+                }
             }, content: {
                 AddNewGoalView(viewModel: .init(),
                                isPresented: $viewModel.showingAddNewGoal)
-                    .environment(\.managedObjectContext,
-                                 PersistenceController.shared.container.viewContext)
             })
         }
     }
@@ -179,8 +214,6 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    /*Image(systemName: "plus.rectangle.fill")
-                        .foregroundColor(.goalColor)*/
                     Text("main_edit_goal".localized())
                         .bold()
                         .foregroundColor(.goalColor)
@@ -195,12 +228,14 @@ struct MainGoalView: View {
                 )
             }.accentColor(.goalColor)
             .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
-                viewModel.goal = goals.last
+                if goals.last?.isValid ?? false {
+                    viewModel.goal = goals.last
+                } else if let goal = goals.last {
+                    PersistenceController.shared.container.viewContext.delete(goal)
+                }
             }, content: {
                 AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
                                isPresented: $viewModel.showingAddNewGoal)
-                    .environment(\.managedObjectContext,
-                                 PersistenceController.shared.container.viewContext)
             })
         }
     }

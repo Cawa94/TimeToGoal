@@ -28,7 +28,7 @@ struct WeekDay: Identifiable {
         self.isToday = isToday
         self.isWorkingDay = isWorkingDay ?? false
         self.isInFuture = date > Date()
-        self.goalColor = Color(goalColor ?? "greenGoal")
+        self.goalColor = Color(goalColor ?? "orangeGoal")
     }
 
 }

@@ -13,7 +13,9 @@
 "add_goal_name_title" = "What goal do you want to reach?";
 
 "global_add" = "Add";
+"global_add_goal" = "Add Goal";
 "global_color" = "Color";
+"global_estimated" = "Date estimated";
 "global_friday" = "Friday";
 "global_hours" = "Hours";
 "global_minutes" = "Minutes";

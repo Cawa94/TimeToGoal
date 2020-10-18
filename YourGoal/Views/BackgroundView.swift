@@ -13,7 +13,7 @@ struct BackgroundView<Content: View>: View {
     private var content: Content
 
     init(color: UIColor, @ViewBuilder content: @escaping () -> Content) {
-        self.color = UIColor(Color.goalColor).withAlphaComponent(0.2)
+        self.color = color
         self.content = content()
     }
 

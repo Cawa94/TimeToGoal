@@ -21,8 +21,8 @@ public class AddNewGoalViewModel: ObservableObject {
 
     var isNewGoal: Bool
 
-    var colors = ["greenGoal", "yellowGoal", "redGoal",
-                  "orangeGoal", "blueGoal", "purpleGoal"]
+    var colors = ["orangeGoal", "yellowGoal", "redGoal",
+                  "greenGoal", "blueGoal", "purpleGoal"]
 
     init(existingGoal: Goal? = nil) {
         self.isNewGoal = existingGoal == nil
@@ -31,7 +31,7 @@ public class AddNewGoalViewModel: ObservableObject {
             goal = existingGoal
         } else {
             goal = Goal(context: PersistenceController.shared.container.viewContext)
-            goal.color = UserDefaults.standard.goalColor ?? "greenGoal"
+            goal.color = UserDefaults.standard.goalColor ?? "orangeGoal"
         }
     }
 
@@ -46,7 +46,7 @@ private extension CGFloat {
 
 struct AddNewGoalView: View {
 
-    @ObservedObject var viewModel = AddNewGoalViewModel()
+    @ObservedObject var viewModel: AddNewGoalViewModel
     @Binding var isPresented: Bool
 
     @State var completionDate = Date()
