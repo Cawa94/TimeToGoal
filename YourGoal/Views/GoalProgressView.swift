@@ -50,16 +50,24 @@ struct GoalProgressView: View {
         ZStack {
             Color.pageBackground
 
+            Circle().stroke(lineWidth: 40.0).opacity(0.3).foregroundColor(Color.goalColor)
+
             Circle()
-                .trim(from: 0.0,
-                      to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 40.0,
-                                           lineCap: .round,
-                                           lineJoin: .round))
-                .background(Circle().stroke(lineWidth: 40.0).opacity(0.3).foregroundColor(Color.goalColor))
-                .foregroundColor(Color.goalColor)
-                .rotationEffect(Angle(degrees: 270.0))
-                .animation(.easeInOut(duration: 0.75))
+                .strokeBorder(AngularGradient(
+                                gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]),
+                                center: .center,
+                                startAngle: .zero,
+                                endAngle: .degrees(360)),
+                              lineWidth: 40)
+                .mask(Circle()
+                        .trim(from: 0.0,
+                              to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
+                        .stroke(style: StrokeStyle(lineWidth: 40.0, lineCap: .round, lineJoin: .round))
+                        .animation(.easeInOut(duration: 0.75))
+                        .padding(20)
+                )
+                .rotationEffect(Angle(degrees: 270))
+                .padding(-20)
 
             VStack {
                 Spacer()

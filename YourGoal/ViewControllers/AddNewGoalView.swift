@@ -60,7 +60,7 @@ struct AddNewGoalView: View {
         })
 
         let timeRequiredBinding = Binding<String>(get: {
-            viewModel.goal.timeRequired.stringWithoutDecimals
+            return viewModel.goal.timeRequired.stringWithoutDecimals == "0" ? "" : viewModel.goal.timeRequired.stringWithoutDecimals
         }, set: {
             viewModel.goal.timeRequired = Double($0) ?? 0
             updateCompletionDate()
