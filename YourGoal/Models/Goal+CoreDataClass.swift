@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 @objc(Goal)
 public class Goal: NSManagedObject {
@@ -81,6 +82,52 @@ public class Goal: NSManagedObject {
     var atLeastOneDayWorking: Bool {
         mondayHours != 0 || tuesdayHours != 0 || wednesdayHours != 0 || thursdayHours != 0
             || fridayHours != 0 || saturdayHours != 0 || sundayHours != 0
+    }
+
+    var circleGradientColors: [Color] {
+        if self.isValid {
+            switch self.color {
+            case "orangeGoal":
+                return [.orangeGoal, .orangeGradient1, .orangeGradient2, .orangeGradient2, .orangeGradient1, .orangeGoal]
+            case "blueGoal":
+                return [.blueGoal, .blueGradient1, .blueGradient2, .blueGradient2, .blueGradient1, .blueGoal]
+            case "greenGoal":
+                return [.greenGoal, .greenGradient1, .greenGradient2, .greenGradient2, .greenGradient1, .greenGoal]
+            case "purpleGoal":
+                return [.purpleGoal, .purpleGradient1, .purpleGradient2, .purpleGradient2, .purpleGradient1, .purpleGoal]
+            case "yellowGoal":
+                return [.yellowGoal, .yellowGradient1, .yellowGradient2, .yellowGradient2, .yellowGradient1, .yellowGoal]
+            case "grayGoal":
+                return [.grayGoal, .grayGradient1, .grayGradient2, .grayGradient2, .grayGradient1, .grayGoal]
+            default:
+                return []
+            }
+        } else {
+            return Color.rainbowClosed
+        }
+    }
+
+    var rectGradientColors: [Color] {
+        if self.isValid {
+            switch self.color {
+            case "orangeGoal":
+                return [.orangeGoal, .orangeGradient1, .orangeGradient2]
+            case "blueGoal":
+                return [.blueGoal, .blueGradient1, .blueGradient2]
+            case "greenGoal":
+                return [.greenGoal, .greenGradient1, .greenGradient2]
+            case "purpleGoal":
+                return [.purpleGoal, .purpleGradient1, .purpleGradient2]
+            case "yellowGoal":
+                return [.yellowGoal, .yellowGradient1, .yellowGradient2]
+            case "grayGoal":
+                return [.grayGoal, .grayGradient1, .grayGradient2]
+            default:
+                return []
+            }
+        } else {
+            return [.orangeGoal, .orangeGradient1, .orangeGradient2]
+        }
     }
 
 }

@@ -15,6 +15,7 @@ struct WeekDay: Identifiable {
     var isWorkingDay: Bool
     var isInFuture: Bool
     var goalColor: Color
+    var isValidGoal: Bool
 
     init(id: Int64, date: Date, isToday: Bool, isWorkingDay: Bool?, goalColor: String?) {
         let numberFormatter = DateFormatter()
@@ -29,6 +30,7 @@ struct WeekDay: Identifiable {
         self.isWorkingDay = isWorkingDay ?? false
         self.isInFuture = date > Date()
         self.goalColor = Color(goalColor ?? "orangeGoal")
+        self.isValidGoal = isWorkingDay != nil
     }
 
 }
@@ -57,7 +59,7 @@ struct DayCellView: View {
                     .foregroundColor(Color.black.opacity(0.5))
             //}
 
-            if weekDay.isToday {
+            if weekDay.isToday && weekDay.isValidGoal {
                 ZStack {
                     Circle()
                         .stroke(lineWidth: 2.0)

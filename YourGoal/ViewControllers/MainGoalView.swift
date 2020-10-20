@@ -170,8 +170,10 @@ struct MainGoalView: View {
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(Color.goalColor)
+                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal?.rectGradientColors ?? Color.rainbow),
+                                           startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
+                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }.accentColor(.goalColor)
         }
     }
@@ -191,8 +193,10 @@ struct MainGoalView: View {
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(Color.goalColor)
+                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal?.rectGradientColors ?? Color.rainbow),
+                                           startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
+                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }.accentColor(.goalColor)
             .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
                 if goals.last?.isValid ?? false {
@@ -225,6 +229,7 @@ struct MainGoalView: View {
                     RoundedRectangle(cornerRadius: .defaultRadius)
                         .stroke(lineWidth: 2.0)
                         .foregroundColor(.goalColor)
+                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
             }.accentColor(.goalColor)
             .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {

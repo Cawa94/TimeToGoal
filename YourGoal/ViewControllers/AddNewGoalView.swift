@@ -21,8 +21,8 @@ public class AddNewGoalViewModel: ObservableObject {
 
     var isNewGoal: Bool
 
-    var colors = ["orangeGoal", "yellowGoal", "redGoal",
-                  "greenGoal", "blueGoal", "purpleGoal"]
+    var colors = ["orangeGoal", "yellowGoal", "greenGoal",
+                  "blueGoal", "purpleGoal", "grayGoal"]
 
     init(existingGoal: Goal? = nil) {
         self.isNewGoal = existingGoal == nil
@@ -220,10 +220,13 @@ struct AddNewGoalView: View {
                                     Spacer()
                                 }
                                 .padding([.top, .bottom], 15)
-                                .background(Color.goalColor)
+                                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                                           startPoint: .topLeading, endPoint: .bottomTrailing))
                                 .cornerRadius(.defaultRadius)
+                                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                             }.accentColor(.goalColor)
                         }
+                        .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageBackground)
                     }

@@ -73,8 +73,10 @@ struct TrackManualTimeView: View {
                         .padding([.bottom], 15)
                     Spacer()
                 }
-                .background(Color.goalColor)
+                .background(LinearGradient(gradient: Gradient(colors: currentGoal?.rectGradientColors ?? Color.rainbow),
+                                           startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
+                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }
             .accentColor(.goalColor)
             .padding([.leading, .trailing], 30)

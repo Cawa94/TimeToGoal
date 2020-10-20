@@ -50,13 +50,21 @@ struct GoalProgressView: View {
         ZStack {
             Color.pageBackground
 
-            Circle().stroke(lineWidth: 40.0).opacity(0.3).foregroundColor(Color.goalColor)
+            Circle().strokeBorder(AngularGradient(
+                                    gradient: Gradient(colors: viewModel.goal?.circleGradientColors ?? Color.rainbowClosed),
+                                    center: .center,
+                                    startAngle: .degrees(0),
+                                    endAngle: .degrees(360)),
+                                  lineWidth: 40)
+                .shadow(color: .black, radius: 5, x: 5, y: 5)
+                .opacity(0.3)
+                .padding(-20)
 
             Circle()
                 .strokeBorder(AngularGradient(
-                                gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]),
+                                gradient: Gradient(colors: viewModel.goal?.circleGradientColors ?? Color.rainbowClosed),
                                 center: .center,
-                                startAngle: .zero,
+                                startAngle: .degrees(0),
                                 endAngle: .degrees(360)),
                               lineWidth: 40)
                 .mask(Circle()
