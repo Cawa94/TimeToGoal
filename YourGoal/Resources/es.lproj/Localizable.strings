@@ -7,34 +7,34 @@
 */
 
 "add_goal_days_required" = "% @ días";
-"add_goal_extimated_date_title" = "Alcanzará su objetivo el:";
-"add_goal_hours_for_day_title" = "¿Cuántas horas al día trabajará allí?";
+"add_goal_extimated_date_title" = "Alcanzarás tu objetivo el:";
+"add_goal_hours_for_day_title" = "¿Cuántas horas al día trabajaras en ello?";
 "add_goal_hours_required_title" = "¿Cuántas horas se necesitan?";
-"add_goal_name_title" = "¿Qué objetivo desea alcanzar?";
+"add_goal_name_title" = "¿Qué objetivo deseas alcanzar?";
 
 "global_add" = "Agregar";
-"global_add_goal" = "Aggiungi Obiettivo";
+"global_add_goal" = "Agregar Objetivo";
 "global_color" = "Color";
-"global_estimated" = "Estimated";
+"global_estimated" = "Fecha estimada";
 "global_friday" = "Viernes";
 "global_hours" = "Horas";
 "global_minutes" = "Minutos";
 "global_monday" = "Lunes";
 "global_new_goal" = "Nuevo objetivo";
-"global_saturday" = "sábado";
+"global_saturday" = "Sábado";
 "global_sunday" = "Domingo";
-"global_thursday" = "jueves";
-"global_tuesday" = "martes";
+"global_thursday" = "Jueves";
+"global_tuesday" = "Martes";
 "global_update" = "Update";
 "global_wednesday" = "Miércoles";
 
-"main_weel_done" = "Well done!";
-"main_edit_goal" = "Edit goal";
-"main_goal_completed" = "You reached your goal";
-"main_add_new_goal" = "Add a new goal to start!";
-"main_hours_required" = "Quedan horas";
+"main_weel_done" = "Bien Echo!";
+"main_edit_goal" = "Editar objetivo";
+"main_goal_completed" = "Has alcanzado tu objetivo";
+"main_add_new_goal" = "Agrega una nueva meta para comenzar!";
+"main_hours_required" = "Horas requeridas";
 "main_my_goal" = "Mi objetivo";
-"main_track_progress" = "Seguimiento del progreso";
+"main_track_progress" = "Agregar horas";
 "main_will_reach_goal" = "Alcanzarás tu\nobjetivo el";
 
 "track_popup_title" = "¿Cuánto tiempo trabajaste en él hoy?";
