@@ -57,19 +57,20 @@ struct MainGoalView: View {
 
                 VStack {
                     Spacer()
-                        .frame(height: 10)
+                        .frame(height: 15)
 
                     HorizontalCalendarView(viewModel: viewModel.calendarViewModel)
                         .padding([.leading, .trailing])
 
                     Spacer()
-                        .frame(height: 15)
+                        .frame(height: DeviceFix.isSmallScreen ? 15 : 30)
 
                     Text(viewModel.goal?.name ?? "global_new_goal".localized())
-                        .font(.largeTitle)
+                        .font(.title)
                         .bold()
                         .foregroundColor(.textForegroundColor)
                         .multilineTextAlignment(.center)
+                        .padding([.leading, .trailing], 10)
                     if !((viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil) {
                         Spacer()
                             .frame(height: 5)
@@ -88,13 +89,14 @@ struct MainGoalView: View {
                         }
                     }
 
-                    Spacer(minLength: 15)
+                    Spacer()
+                        .frame(height: 30)
 
                     GoalProgressView(viewModel: viewModel.progressViewModel)
                         .padding([.leading, .trailing], 30)
 
                     Spacer()
-                        .frame(height: 20)
+                        .frame(height: 30)
                     
                     VStack {
                         if (viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil {

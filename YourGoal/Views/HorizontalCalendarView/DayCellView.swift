@@ -42,37 +42,25 @@ struct DayCellView: View {
     @ViewBuilder
     var body: some View {
         VStack {
-            /*if weekDay.isWorkingDay {
-                /*ZStack {
-                    Circle()
-                        .stroke(lineWidth: 2.0)
-                        .foregroundColor(weekDay.goalColor)*/
-                    Text(weekDay.name)
-                        //.bold()
-                        .foregroundColor(Color.black.opacity(0.5))
-                        .padding([.bottom, .top], 6)
-                //}
-            } else {*/
+            if !DeviceFix.isSmallScreen {
                 Text(weekDay.name)
-                    //.fontWeight(.semibold)
-                    .padding([.bottom, .top], 6)
                     .foregroundColor(Color.black.opacity(0.5))
-            //}
+            }
 
             if weekDay.isToday && weekDay.isValidGoal {
                 ZStack {
                     Circle()
                         .stroke(lineWidth: 2.0)
                         .foregroundColor(weekDay.goalColor)
-                    Text(weekDay.number)
+                    Text(DeviceFix.isSmallScreen ? weekDay.name : weekDay.number)
                         .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
-                        .padding([.bottom, .top], 6)
+                        .padding([.bottom, .top], 5)
                         .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)
                 }
             } else {
-                Text(weekDay.number)
+                Text(DeviceFix.isSmallScreen ? weekDay.name : weekDay.number)
                     .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
-                    .padding([.top, .bottom], 6)
+                    .padding([.top, .bottom], 5)
                     .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)
             }
         }

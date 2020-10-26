@@ -108,24 +108,21 @@ public class Goal: NSManagedObject {
     }
 
     var rectGradientColors: [Color] {
-        if self.isValid {
-            switch self.color {
-            case "orangeGoal":
-                return [.orangeGoal, .orangeGradient1, .orangeGradient2]
-            case "blueGoal":
-                return [.blueGoal, .blueGradient1, .blueGradient2]
-            case "greenGoal":
-                return [.greenGoal, .greenGradient1, .greenGradient2]
-            case "purpleGoal":
-                return [.purpleGoal, .purpleGradient1, .purpleGradient2]
-            case "yellowGoal":
-                return [.yellowGoal, .yellowGradient1, .yellowGradient2]
-            case "grayGoal":
-                return [.grayGoal, .grayGradient1, .grayGradient2]
-            default:
-                return []
-            }
-        } else {
+        let color = self.isValid ? self.color : UserDefaults.standard.goalColor
+        switch color {
+        case "orangeGoal":
+            return [.orangeGoal, .orangeGradient1, .orangeGradient2]
+        case "blueGoal":
+            return [.blueGoal, .blueGradient1, .blueGradient2]
+        case "greenGoal":
+            return [.greenGoal, .greenGradient1, .greenGradient2]
+        case "purpleGoal":
+            return [.purpleGoal, .purpleGradient1, .purpleGradient2]
+        case "yellowGoal":
+            return [.yellowGoal, .yellowGradient1, .yellowGradient2]
+        case "grayGoal":
+            return [.grayGoal, .grayGradient1, .grayGradient2]
+        default:
             return [.orangeGoal, .orangeGradient1, .orangeGradient2]
         }
     }

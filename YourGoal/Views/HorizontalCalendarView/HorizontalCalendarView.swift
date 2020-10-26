@@ -56,7 +56,7 @@ struct HorizontalCalendarView: View {
                            minHeight: 0,
                            maxHeight: .infinity)
             }
-        }).frame(width: .infinity, height: 80, alignment: .center)
+        }).frame(width: .infinity, height: DeviceFix.isSmallScreen ? 20 : 50, alignment: .center)
     }
 
 }

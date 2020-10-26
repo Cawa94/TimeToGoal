@@ -40,7 +40,7 @@ public class AddNewGoalViewModel: ObservableObject {
 private extension CGFloat {
 
     static let hoursFieldsHeight: CGFloat = 85
-    static let pickerViewWidth: CGFloat = 40 // because it's rotated 90º
+    static let pickerViewWidth: CGFloat = 40 // it's actually height, because it's rotated 90º
 
 }
 
@@ -243,7 +243,6 @@ struct AddNewGoalView: View {
     func storeNewGoal() {
         if viewModel.goal.isValid {
             viewModel.goal.createdAt = Date()
-            UserDefaults.standard.goalColor = viewModel.goal.color
             PersistenceController.shared.saveContext()
             self.isPresented = false
         }
@@ -279,6 +278,7 @@ struct AddNewGoalView: View {
                                         Button(action: {
                                             Color.goalColor = Color(color)
                                             UIColor.goalColor = UIColor(named: color) ?? .goalColor
+                                            UserDefaults.standard.goalColor = color
                                             viewModel.goal.color = color
                                             viewModel.isColorsVisible.toggle()
                                         }) {
@@ -295,7 +295,8 @@ struct AddNewGoalView: View {
                                         Button(action: {
                                             Color.goalColor = Color(color)
                                             UIColor.goalColor = UIColor(named: color) ?? .goalColor
-                                            self.viewModel.goal.color = color
+                                            UserDefaults.standard.goalColor = color
+                                            viewModel.goal.color = color
                                             viewModel.isColorsVisible.toggle()
                                         }) {
                                             Circle()

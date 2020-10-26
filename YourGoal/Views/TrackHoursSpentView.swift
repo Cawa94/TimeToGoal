@@ -39,6 +39,7 @@ struct TrackHoursSpentView: View {
                             .bold()
                             .multilineTextAlignment(.center)
                             .foregroundColor(.goalColor)
+                            .padding([.leading, .trailing], 10)
                         /*Spacer()
                             .frame(height: 20)
                         Picker(selection: $trackMode, label: Text("")) {

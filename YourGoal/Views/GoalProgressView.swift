@@ -78,7 +78,6 @@ struct GoalProgressView: View {
                 .padding(-20)
 
             VStack {
-                Spacer()
                 Text(viewModel.hoursRemaining)
                     .font(.largeTitle)
                     .bold()
@@ -121,7 +120,6 @@ struct GoalProgressView: View {
                         .foregroundColor(.textForegroundColor)
                         .padding(.bottom, 20)
                 }
-                Spacer()
             }
         }
     }
