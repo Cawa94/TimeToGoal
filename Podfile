@@ -8,5 +8,6 @@ target 'YourGoal' do
 
   # Pods for YourGoal
   pod 'DeviceKit'
+  pod 'Firebase/Analytics'
 
 end

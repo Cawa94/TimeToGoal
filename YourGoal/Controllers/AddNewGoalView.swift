@@ -31,7 +31,7 @@ public class AddNewGoalViewModel: ObservableObject {
             goal = existingGoal
         } else {
             goal = Goal(context: PersistenceController.shared.container.viewContext)
-            goal.color = UserDefaults.standard.goalColor ?? "orangeGoal"
+            goal.color = "orangeGoal"
         }
     }
 
@@ -150,11 +150,11 @@ struct AddNewGoalView: View {
                                                 .fill(Color.grayFields)
                                                 .aspectRatio(1.0, contentMode: .fit)
                                             Circle()
-                                                .fill(Color.goalColor)
+                                                .fill(viewModel.goal.wrappedColor)
                                                 .aspectRatio(1.0, contentMode: .fit)
                                                 .padding(12.5)
                                         }
-                                    }.accentColor(.goalColor)
+                                    }.accentColor(viewModel.goal.wrappedColor)
                                 }
                             }.frame(height: 55)
                         }
@@ -165,23 +165,30 @@ struct AddNewGoalView: View {
                         Section(header: Text("add_goal_hours_for_day_title".localized())) {
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_monday".localized(),
-                                                                   bindingString: mondayBinding))
+                                                                   bindingString: mondayBinding,
+                                                                   color: viewModel.goal.wrappedColor))
                                 HoursSelectorView(viewModel: .init(title: "global_tuesday".localized(),
-                                                                   bindingString: tuesdayBinding))
+                                                                   bindingString: tuesdayBinding,
+                                                                   color: viewModel.goal.wrappedColor))
                                 HoursSelectorView(viewModel: .init(title: "global_wednesday".localized(),
-                                                                   bindingString: wednesdayBinding))
+                                                                   bindingString: wednesdayBinding,
+                                                                   color: viewModel.goal.wrappedColor))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_thursday".localized(),
-                                                                   bindingString: thursdayBinding))
+                                                                   bindingString: thursdayBinding,
+                                                                   color: viewModel.goal.wrappedColor))
                                 HoursSelectorView(viewModel: .init(title: "global_friday".localized(),
-                                                                   bindingString: fridayBinding))
+                                                                   bindingString: fridayBinding,
+                                                                   color: viewModel.goal.wrappedColor))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_saturday".localized(),
-                                                                   bindingString: saturdayBinding))
+                                                                   bindingString: saturdayBinding,
+                                                                   color: viewModel.goal.wrappedColor))
                                 HoursSelectorView(viewModel: .init(title: "global_sunday".localized(),
-                                                                   bindingString: sundayBinding))
+                                                                   bindingString: sundayBinding,
+                                                                   color: viewModel.goal.wrappedColor))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                         }
                         .listRowBackground(Color.pageBackground)
@@ -194,13 +201,13 @@ struct AddNewGoalView: View {
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
-                                    .foregroundColor(.goalColor)
+                                    .foregroundColor(viewModel.goal.wrappedColor)
                                 Text(String(format: "add_goal_days_required".localized(),
                                             "\(viewModel.goal.daysRequired)"))
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
-                                    .foregroundColor(.goalColor)
+                                    .foregroundColor(viewModel.goal.wrappedColor)
                             }
                         }
                         .listRowBackground(Color.pageBackground)
@@ -224,7 +231,7 @@ struct AddNewGoalView: View {
                                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                                 .cornerRadius(.defaultRadius)
                                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-                            }.accentColor(.goalColor)
+                            }.accentColor(viewModel.goal.wrappedColor)
                         }
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
@@ -243,6 +250,9 @@ struct AddNewGoalView: View {
     func storeNewGoal() {
         if viewModel.goal.isValid {
             viewModel.goal.createdAt = Date()
+            viewModel.goal.editedAt = Date()
+            viewModel.goal.timesHasBeenTracked = 0
+            FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
             PersistenceController.shared.saveContext()
             self.isPresented = false
         }
@@ -250,6 +260,7 @@ struct AddNewGoalView: View {
 
     func updateCompletionDate() {
         if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
+            FirebaseService.logEvent(.updateCompletionDate)
             completionDate = viewModel.goal.updatedCompletionDate
             viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
         }
@@ -276,9 +287,6 @@ struct AddNewGoalView: View {
                                 HStack(spacing: 20) {
                                     ForEach(viewModel.colors.prefix(3), id: \.self) { color in
                                         Button(action: {
-                                            Color.goalColor = Color(color)
-                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
-                                            UserDefaults.standard.goalColor = color
                                             viewModel.goal.color = color
                                             viewModel.isColorsVisible.toggle()
                                         }) {
@@ -293,9 +301,6 @@ struct AddNewGoalView: View {
                                 HStack(spacing: 20) {
                                     ForEach(viewModel.colors.suffix(3), id: \.self) { color in
                                         Button(action: {
-                                            Color.goalColor = Color(color)
-                                            UIColor.goalColor = UIColor(named: color) ?? .goalColor
-                                            UserDefaults.standard.goalColor = color
                                             viewModel.goal.color = color
                                             viewModel.isColorsVisible.toggle()
                                         }) {

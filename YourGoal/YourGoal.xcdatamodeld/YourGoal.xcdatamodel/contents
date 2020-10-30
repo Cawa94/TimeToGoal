@@ -3,10 +3,13 @@
     <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="category">
         <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="completedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="completionDateExtimated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="daysRequired" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="editedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fridayHours" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isVisible" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="mondayHours" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="saturdayHours" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
@@ -14,10 +17,11 @@
         <attribute name="thursdayHours" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeCompleted" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="timeRequired" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timesHasBeenTracked" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tuesdayHours" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="wednesdayHours" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Goal" positionX="-63" positionY="-18" width="128" height="268"/>
+        <element name="Goal" positionX="-63" positionY="-18" width="128" height="328"/>
     </elements>
 </model>

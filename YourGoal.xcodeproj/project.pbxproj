@@ -15,6 +15,8 @@
 		DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA0861D325323DEB00C4A3DD /* Localizable.strings */; };
 		DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861D925323E5200C4A3DD /* String+Extensions.swift */; };
 		DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */; };
+		DA352831254ADA2C00FF19FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */; };
+		DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA352844254ADD6500FF19FB /* AppDelegate.swift */; };
 		DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A340B25275E3400597C73 /* DayCellView.swift */; };
 		DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A3413252761A600597C73 /* MainGoalView.swift */; };
 		DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA47599A25470DE800A1ADA6 /* DeviceFix.swift */; };
@@ -38,6 +40,8 @@
 		DAB7DC9C252232140087F9C8 /* YourGoalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC9B252232140087F9C8 /* YourGoalUITests.swift */; };
 		DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */; };
 		DAD03BF12535A4B6006A93E9 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD03BF02535A4B6006A93E9 /* HostingController.swift */; };
+		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
+		DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */; };
 		DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +73,8 @@
 		DA0861D825323DF000C4A3DD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0861D925323E5200C4A3DD /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHoursSpentView.swift; sourceTree = "<group>"; };
+		DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA352844254ADD6500FF19FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A340B25275E3400597C73 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
 		DA3A3413252761A600597C73 /* MainGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGoalView.swift; sourceTree = "<group>"; };
 		DA47599A25470DE800A1ADA6 /* DeviceFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFix.swift; sourceTree = "<group>"; };
@@ -98,6 +104,8 @@
 		DAB7DC9D252232140087F9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendarView.swift; sourceTree = "<group>"; };
 		DAD03BF02535A4B6006A93E9 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoursSelectorView.swift; sourceTree = "<group>"; };
 		E11DA627FA8B9B831F4EE348 /* Pods-YourGoal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YourGoal.release.xcconfig"; path = "Target Support Files/Pods-YourGoal/Pods-YourGoal.release.xcconfig"; sourceTree = "<group>"; };
 		ECE80D526B591ED8FAE53F3C /* Pods-YourGoal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YourGoal.debug.xcconfig"; path = "Target Support Files/Pods-YourGoal/Pods-YourGoal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +161,7 @@
 				DA794BC125272180005D8423 /* CGFloat+Extensions.swift */,
 				DA05028B25264263000C4DC0 /* Color+Extensions.swift */,
 				DA0502862526166E000C4DC0 /* Date+Extensions.swift */,
+				DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */,
 				DAB4CE71252B556900DAA871 /* Double+Extensions.swift */,
 				DA0861D925323E5200C4A3DD /* String+Extensions.swift */,
 			);
@@ -181,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				DA47599A25470DE800A1ADA6 /* DeviceFix.swift */,
+				DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -269,6 +279,9 @@
 			isa = PBXGroup;
 			children = (
 				DAB7DC87252232130087F9C8 /* Info.plist */,
+				DAB7DC84252232130087F9C8 /* YourGoal.xcdatamodeld */,
+				DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */,
+				DA352844254ADD6500FF19FB /* AppDelegate.swift */,
 				DAB7DC7B252232130087F9C8 /* ContentView.swift */,
 				DAB7DC82252232130087F9C8 /* Persistence.swift */,
 				DAB7DC79252232130087F9C8 /* YourGoalApp.swift */,
@@ -280,7 +293,6 @@
 				DA47599625470DB200A1ADA6 /* Services */,
 				DA794BCE252733CC005D8423 /* UIKit */,
 				DA6EE2242524BF6E0064D2CE /* Views */,
-				DAB7DC84252232130087F9C8 /* YourGoal.xcdatamodeld */,
 			);
 			path = YourGoal;
 			sourceTree = "<group>";
@@ -419,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAB7DC81252232130087F9C8 /* Preview Assets.xcassets in Resources */,
+				DA352831254ADA2C00FF19FB /* GoogleService-Info.plist in Resources */,
 				DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */,
 				DAB7DC7E252232130087F9C8 /* Assets.xcassets in Resources */,
 			);
@@ -505,10 +518,13 @@
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
+				DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */,
 				DA938A272536F64D00446580 /* UserDefaults+GoalColor.swift in Sources */,
 				DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */,
 				DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */,
+				DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */,
 				DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */,
+				DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */,
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
 				DAD03BF12535A4B6006A93E9 /* HostingController.swift in Sources */,

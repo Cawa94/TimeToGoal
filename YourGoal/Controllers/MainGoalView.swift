@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 private extension Color {
 
@@ -20,32 +21,37 @@ public class MainGoalViewModel: ObservableObject {
             progressViewModel.goal = goal
             calendarViewModel.goal = goal
             showFireworks = goal?.isCompleted ?? false
+            if goal?.isCompleted ?? false {
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+            }
         }
     }
 
     @Published var progressViewModel = GoalProgressViewModel()
     @Published var calendarViewModel = HorizontalCalendarViewModel()
-
     @Published var showingTrackGoal = false
-    @Published var showingAddNewGoal = false
     @Published var showFireworks = false
+
+    @Binding var showingAddNewGoal: Bool
+
+    var isFirstGoal: Bool
+
+    init(goal: Goal?, isFirstGoal: Bool = false, showingAddNewGoal: Binding<Bool>) {
+        self.goal = goal
+        self.isFirstGoal = isFirstGoal
+        self._showingAddNewGoal = showingAddNewGoal
+    }
 
 }
 
 struct MainGoalView: View {
 
-    var goalsRequest: FetchRequest<Goal>
-    var goals: FetchedResults<Goal> { goalsRequest.wrappedValue }
+    @ObservedObject var viewModel: MainGoalViewModel
 
-    @ObservedObject var viewModel = MainGoalViewModel()
-
-    init() {
-        self.goalsRequest = FetchRequest(
-            entity: Goal.entity(),
-            sortDescriptors: [
-                NSSortDescriptor(keyPath: \Goal.createdAt, ascending: true)
-            ]
-        )
+    init(mainGoalViewModel: MainGoalViewModel) {
+        self.viewModel = mainGoalViewModel
     }
 
     @ViewBuilder
@@ -53,7 +59,6 @@ struct MainGoalView: View {
         BackgroundView(color: .pageBackground) {
             ZStack {
                 Color.pageBackground
-                    .ignoresSafeArea()
 
                 VStack {
                     Spacer()
@@ -115,7 +120,7 @@ struct MainGoalView: View {
                     }
 
                     Spacer()
-                        .frame(height: 15)
+                        .frame(height: 100)
                 }
 
                 if viewModel.showingTrackGoal {
@@ -134,22 +139,12 @@ struct MainGoalView: View {
                         .allowsHitTesting(false)
                 }
             }
-        }.onAppear(perform: {
-            viewModel.goal = goals.last
-            if viewModel.goal == nil {
+        }
+        .onAppear(perform: {
+            viewModel.goal = viewModel.goal
+            if viewModel.isFirstGoal {
                 viewModel.showingAddNewGoal = true
             }
-        })
-        .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
-            if goals.last?.isValid ?? false {
-                viewModel.goal = goals.last
-            } else if let goal = goals.last {
-                PersistenceController.shared.container.viewContext.delete(goal)
-            }
-        }, content: {
-            AddNewGoalView(viewModel: ((viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil)
-                            ? .init() : .init(existingGoal: viewModel.goal),
-                           isPresented: $viewModel.showingAddNewGoal)
         })
     }
 
@@ -158,6 +153,7 @@ struct MainGoalView: View {
             Button(action: {
                 withAnimation {
                     if !(viewModel.goal?.isCompleted ?? true) {
+                        FirebaseService.logEvent(.trackTimeButton)
                         viewModel.showingTrackGoal.toggle()
                     }
                 }
@@ -176,13 +172,14 @@ struct MainGoalView: View {
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(.goalColor)
+            }.accentColor(viewModel.goal?.wrappedColor)
         }
     }
 
     var newGoalButton: some View {
         HStack {
             Button(action: {
+                FirebaseService.logEvent(.addGoalButton)
                 viewModel.showingAddNewGoal.toggle()
             }) {
                 HStack {
@@ -199,30 +196,21 @@ struct MainGoalView: View {
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(.goalColor)
-            .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
-                if goals.last?.isValid ?? false {
-                    viewModel.goal = goals.last
-                } else if let goal = goals.last {
-                    PersistenceController.shared.container.viewContext.delete(goal)
-                }
-            }, content: {
-                AddNewGoalView(viewModel: .init(),
-                               isPresented: $viewModel.showingAddNewGoal)
-            })
+            }.accentColor(viewModel.goal?.wrappedColor)
         }
     }
 
     var editGoalButton: some View {
         HStack {
             Button(action: {
+                FirebaseService.logEvent(.editGoalButton)
                 viewModel.showingAddNewGoal.toggle()
             }) {
                 HStack {
                     Spacer()
                     Text("main_edit_goal".localized())
                         .bold()
-                        .foregroundColor(.goalColor)
+                        .foregroundColor(viewModel.goal?.wrappedColor)
                         .font(.title3)
                     Spacer()
                 }
@@ -230,16 +218,14 @@ struct MainGoalView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: .defaultRadius)
                         .stroke(lineWidth: 2.0)
-                        .foregroundColor(.goalColor)
+                        .foregroundColor(viewModel.goal?.wrappedColor)
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
-            }.accentColor(.goalColor)
+            }.accentColor(viewModel.goal?.wrappedColor)
             .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
-                if goals.last?.isValid ?? false {
-                    viewModel.goal = goals.last
-                } else if let goal = goals.last {
-                    PersistenceController.shared.container.viewContext.delete(goal)
-                }
+                /*if let goal = goals.first(where: { $0.id == viewModel.goal?.id }), goal.isValid {
+                    viewModel.goal = goal
+                }*/
             }, content: {
                 AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
                                isPresented: $viewModel.showingAddNewGoal)

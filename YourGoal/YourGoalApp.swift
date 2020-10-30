@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct YourGoalApp: App {
 
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
@@ -18,4 +19,5 @@ struct YourGoalApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
+
 }

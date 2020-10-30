@@ -11,7 +11,7 @@ import SwiftUI
 extension Color {
 
     static let pageBackground = Color.white
-    static var goalColor = Color(UserDefaults.standard.goalColor ?? "orangeGoal")
+    static var goalColor = Color("orangeGoal")
     static var rainbow: [Color] = [.orangeGoal, .yellowGoal, .greenGoal, .blueGoal]
     static var rainbowClosed: [Color] = rainbow + [.orangeGoal]
 
@@ -59,7 +59,7 @@ extension Color {
 extension UIColor {
 
     static let pageBackground = UIColor.white
-    static var goalColor = UIColor.named(UserDefaults.standard.goalColor ?? "orangeGoal")
+    static var goalColor = UIColor.named("orangeGoal")
 
 }
 

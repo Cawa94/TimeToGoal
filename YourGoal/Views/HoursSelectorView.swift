@@ -17,6 +17,7 @@ struct HoursSelectorViewModel {
 
     var title: String
     var bindingString: Binding<String>
+    var color: Color
 
 }
 
@@ -27,7 +28,7 @@ struct HoursSelectorView: View {
     var body: some View {
         GeometryReader { vContainer in
             VStack {
-                Text(viewModel.title).foregroundColor(.goalColor).bold()
+                Text(viewModel.title).foregroundColor(viewModel.color).bold()
                 ZStack {
                     TextField("", text: viewModel.bindingString)
                         .padding()

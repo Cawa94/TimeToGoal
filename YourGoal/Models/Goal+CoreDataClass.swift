@@ -108,8 +108,7 @@ public class Goal: NSManagedObject {
     }
 
     var rectGradientColors: [Color] {
-        let color = self.isValid ? self.color : UserDefaults.standard.goalColor
-        switch color {
+        switch self.color {
         case "orangeGoal":
             return [.orangeGoal, .orangeGradient1, .orangeGradient2]
         case "blueGoal":
@@ -125,6 +124,10 @@ public class Goal: NSManagedObject {
         default:
             return [.orangeGoal, .orangeGradient1, .orangeGradient2]
         }
+    }
+
+    var wrappedColor: Color {
+        Color(color ?? "orangeColor")
     }
 
 }

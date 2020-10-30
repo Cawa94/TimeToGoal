@@ -56,7 +56,15 @@ struct TrackManualTimeView: View {
 
             Button(action: {
                 withAnimation {
-                    currentGoal?.timeCompleted += Double(hoursSpent) + (Double("0.\(minutesSpent.stringWithoutDecimals)") ?? 0.00)
+                    currentGoal?.timesHasBeenTracked += 1
+                    let timeTracked = Double(hoursSpent) + (Double("0.\(minutesSpent.stringWithoutDecimals)") ?? 0.00)
+                    FirebaseService.logEvent(.timeTracked)
+                    currentGoal?.timeCompleted += timeTracked
+                    currentGoal?.editedAt = Date()
+                    if currentGoal?.isCompleted ?? false {
+                        currentGoal?.completedAt = Date()
+                        FirebaseService.logConversion(.goalCompleted, goal: currentGoal)
+                    }
                     PersistenceController.shared.saveContext()
                     self.feedback.notificationOccurred(.success)
                     self.isPresented = false
@@ -78,7 +86,7 @@ struct TrackManualTimeView: View {
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }
-            .accentColor(.goalColor)
+            .accentColor(currentGoal?.wrappedColor)
             .padding([.leading, .trailing], 30)
             .padding([.bottom], 10)
 

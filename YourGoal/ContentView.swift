@@ -8,32 +8,57 @@
 import SwiftUI
 import CoreData
 
+public class ContentViewModel: ObservableObject {
+
+    @Published var goals: [Goal] = []
+    @Published var showingAddNewGoal = false
+
+}
+
 struct ContentView: View {
 
-    var mainGoalViewModel = MainGoalViewModel()
+    @ObservedObject var viewModel = ContentViewModel()
+
+    var goalsRequest: FetchRequest<Goal>
+    var goals: FetchedResults<Goal> { goalsRequest.wrappedValue }
+
+    init() {
+        self.goalsRequest = FetchRequest(
+            entity: Goal.entity(),
+            sortDescriptors: [
+                NSSortDescriptor(keyPath: \Goal.editedAt, ascending: true)
+            ]
+        )
+    }
 
     @ViewBuilder
     var body: some View {
-        //TabView {
-            MainGoalView()
-        /*.tabItem {
-                Image.init(systemName: "house.fill")
-                Text("Obiettivi")
-            }.tag(1)
-
-            Image(systemName: "person.circle.fill").font(.largeTitle)
-                .tabItem {
-                    Image.init(systemName: "person.circle.fill")
-                    Text("Calendario")
-                }.tag(2)
-        }.accentColor(.goalColor)
-            .colorScheme(.dark)
+        VStack {
+            TabView {
+                ForEach(Array(viewModel.goals), id: \.self) { goal in
+                    MainGoalView(mainGoalViewModel: .init(goal: goal,
+                                                          showingAddNewGoal: $viewModel.showingAddNewGoal))
+                }
+                MainGoalView(mainGoalViewModel: .init(goal: nil,
+                                                      isFirstGoal: viewModel.goals.isEmpty,
+                                                      showingAddNewGoal: $viewModel.showingAddNewGoal))
+            }
             .ignoresSafeArea()
+            .tabViewStyle(PageTabViewStyle.init(indexDisplayMode: .automatic))
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+            .colorScheme(.light)
             .onAppear(perform: {
-                UITableView.appearance().backgroundColor = UIColor.pageBackground
-                UITableView.appearance().sectionIndexBackgroundColor = UIColor.pageBackground
-                UITableView.appearance().sectionIndexColor = UIColor.pageBackground
-            })*/
+                viewModel.goals = goals.filter { $0.isValid }
+            })
+            .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
+                viewModel.goals = goals.filter { $0.isValid }
+            }, content: {
+                AddNewGoalView(viewModel: .init(),
+                               isPresented: $viewModel.showingAddNewGoal)
+            })
+            Spacer()
+                .frame(height: 10)
+        }.ignoresSafeArea()
     }
 
 }
