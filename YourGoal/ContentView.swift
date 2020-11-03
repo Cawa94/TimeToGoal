@@ -36,9 +36,9 @@ struct ContentView: View {
         VStack {
             TabView {
                 ForEach(viewModel.goals + [nil], id: \.self) { goal in
-                    MainGoalView(mainGoalViewModel: .init(goal: goal,
-                                                          isFirstGoal: viewModel.goals.isEmpty,
-                                                          showingAddNewGoal: $viewModel.showingAddNewGoal))
+                    MainGoalView(viewModel: .init(goal: goal,
+                                                  isFirstGoal: viewModel.goals.isEmpty,
+                                                  showingAddNewGoal: $viewModel.showingAddNewGoal))
                 }
             }
             .id(viewModel.goals.count)

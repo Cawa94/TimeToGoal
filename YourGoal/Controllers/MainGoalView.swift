@@ -51,10 +51,6 @@ struct MainGoalView: View {
 
     @ObservedObject var viewModel: MainGoalViewModel
 
-    init(mainGoalViewModel: MainGoalViewModel) {
-        self.viewModel = mainGoalViewModel
-    }
-
     @ViewBuilder
     var body: some View {
         BackgroundView(color: .pageBackground) {
@@ -173,7 +169,7 @@ struct MainGoalView: View {
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal?.wrappedColor)
+            }.accentColor(viewModel.goal?.goalColor)
         }
     }
 
@@ -197,7 +193,7 @@ struct MainGoalView: View {
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal?.wrappedColor)
+            }.accentColor(viewModel.goal?.goalColor)
         }
     }
 
@@ -211,7 +207,7 @@ struct MainGoalView: View {
                     Spacer()
                     Text("main_edit_goal".localized())
                         .bold()
-                        .foregroundColor(viewModel.goal?.wrappedColor)
+                        .foregroundColor(viewModel.goal?.goalColor)
                         .font(.title3)
                     Spacer()
                 }
@@ -219,10 +215,10 @@ struct MainGoalView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: .defaultRadius)
                         .stroke(lineWidth: 2.0)
-                        .foregroundColor(viewModel.goal?.wrappedColor)
+                        .foregroundColor(viewModel.goal?.goalColor)
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
-            }.accentColor(viewModel.goal?.wrappedColor)
+            }.accentColor(viewModel.goal?.goalColor)
             .sheet(isPresented: $viewModel.showingEditGoal, onDismiss: {
                 /*if let goal = goals.first(where: { $0.id == viewModel.goal?.id }), goal.isValid {
                     viewModel.goal = goal

@@ -13,42 +13,57 @@ import SwiftUI
 @objc(Goal)
 public class Goal: NSManagedObject {
 
+    var goalType: GoalType {
+        get {
+            guard let type = self.type
+                else { return .custom}
+            return GoalType(rawValue: type) ?? .custom
+        }
+        set {
+            self.type = newValue.rawValue
+        }
+    }
+
+    var goalColor: Color {
+        Color(color ?? "orangeColor")
+    }
+
     var workOnMonday: Bool {
-        self.mondayHours > 0
+        self.monday > 0
     }
 
     var workOnTuesday: Bool {
-        self.tuesdayHours > 0
+        self.tuesday > 0
     }
 
     var workOnWednesday: Bool {
-        self.wednesdayHours > 0
+        self.wednesday > 0
     }
 
     var workOnThursday: Bool {
-        self.thursdayHours > 0
+        self.thursday > 0
     }
 
     var workOnFriday: Bool {
-        self.fridayHours > 0
+        self.friday > 0
     }
 
     var workOnSaturday: Bool {
-        self.saturdayHours > 0
+        self.saturday > 0
     }
 
     var workOnSunday: Bool {
-        self.sundayHours > 0
+        self.sunday > 0
     }
 
     var updatedCompletionDate: Date {
-        let dayHours = [sundayHours.asHoursAndMinutes,
-                        mondayHours.asHoursAndMinutes,
-                        tuesdayHours.asHoursAndMinutes,
-                        wednesdayHours.asHoursAndMinutes,
-                        thursdayHours.asHoursAndMinutes,
-                        fridayHours.asHoursAndMinutes,
-                        saturdayHours.asHoursAndMinutes]
+        let dayHours = [sunday.asHoursAndMinutes,
+                        monday.asHoursAndMinutes,
+                        tuesday.asHoursAndMinutes,
+                        wednesday.asHoursAndMinutes,
+                        thursday.asHoursAndMinutes,
+                        friday.asHoursAndMinutes,
+                        saturday.asHoursAndMinutes]
 
         var daysRequired = -1
         var decreasingTotal = self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes)
@@ -80,8 +95,8 @@ public class Goal: NSManagedObject {
     }
 
     var atLeastOneDayWorking: Bool {
-        mondayHours != 0 || tuesdayHours != 0 || wednesdayHours != 0 || thursdayHours != 0
-            || fridayHours != 0 || saturdayHours != 0 || sundayHours != 0
+        monday != 0 || tuesday != 0 || wednesday != 0 || thursday != 0
+            || friday != 0 || saturday != 0 || sunday != 0
     }
 
     var circleGradientColors: [Color] {
@@ -124,10 +139,6 @@ public class Goal: NSManagedObject {
         default:
             return [.orangeGoal, .orangeGradient1, .orangeGradient2]
         }
-    }
-
-    var wrappedColor: Color {
-        Color(color ?? "orangeColor")
     }
 
 }

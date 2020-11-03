@@ -16,13 +16,16 @@ private extension Color {
 
 public class AddNewGoalViewModel: ObservableObject {
 
-    @Published var goal: Goal
+    @Published var goal: Goal {
+        didSet {
+            goalTypeViewModel.goal = goal
+        }
+    }
+
     @Published var isColorsVisible = false
+    @Published var goalTypeViewModel = TypeSelectorViewModel()
 
     var isNewGoal: Bool
-
-    var colors = ["orangeGoal", "yellowGoal", "greenGoal",
-                  "blueGoal", "purpleGoal", "grayGoal"]
 
     init(existingGoal: Goal? = nil) {
         self.isNewGoal = existingGoal == nil
@@ -32,6 +35,7 @@ public class AddNewGoalViewModel: ObservableObject {
         } else {
             goal = Goal(context: PersistenceController.shared.container.viewContext)
             goal.color = "orangeGoal"
+            goalTypeViewModel.goal = goal
         }
     }
 
@@ -60,58 +64,59 @@ struct AddNewGoalView: View {
         })
 
         let timeRequiredBinding = Binding<String>(get: {
-            return viewModel.goal.timeRequired.stringWithoutDecimals == "0" ? "" : viewModel.goal.timeRequired.stringWithoutDecimals
+            return viewModel.goal.timeRequired.stringWithoutDecimals == "0"
+                ? "" : viewModel.goal.timeRequired.stringWithoutDecimals
         }, set: {
             viewModel.goal.timeRequired = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let mondayBinding = Binding<String>(get: {
-            return "\(viewModel.goal.mondayHours)"
+            return "\(viewModel.goal.monday)"
         }, set: {
-            viewModel.goal.mondayHours = Double($0) ?? 0
+            viewModel.goal.monday = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let tuesdayBinding = Binding<String>(get: {
-            "\(viewModel.goal.tuesdayHours)"
+            "\(viewModel.goal.tuesday)"
         }, set: {
-            viewModel.goal.tuesdayHours = Double($0) ?? 0
+            viewModel.goal.tuesday = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let wednesdayBinding = Binding<String>(get: {
-            "\(viewModel.goal.wednesdayHours)"
+            "\(viewModel.goal.wednesday)"
         }, set: {
-            viewModel.goal.wednesdayHours = Double($0) ?? 0
+            viewModel.goal.wednesday = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let thursdayBinding = Binding<String>(get: {
-            "\(viewModel.goal.thursdayHours)"
+            "\(viewModel.goal.thursday)"
         }, set: {
-            viewModel.goal.thursdayHours = Double($0) ?? 0
+            viewModel.goal.thursday = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let fridayBinding = Binding<String>(get: {
-            "\(viewModel.goal.fridayHours)"
+            "\(viewModel.goal.friday)"
         }, set: {
-            viewModel.goal.fridayHours = Double($0) ?? 0
+            viewModel.goal.friday = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let saturdayBinding = Binding<String>(get: {
-            "\(viewModel.goal.saturdayHours)"
+            "\(viewModel.goal.saturday)"
         }, set: {
-            viewModel.goal.saturdayHours = Double($0) ?? 0
+            viewModel.goal.saturday = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let sundayBinding = Binding<String>(get: {
-            "\(viewModel.goal.sundayHours)"
+            "\(viewModel.goal.sunday)"
         }, set: {
-            viewModel.goal.sundayHours = Double($0) ?? 0
+            viewModel.goal.sunday = Double($0) ?? 0
             updateCompletionDate()
         })
 
@@ -119,6 +124,13 @@ struct AddNewGoalView: View {
             NavigationView {
                 ZStack {
                     Form {
+                        Section(header: Text("Che tipo di obiettivo?".localized())) {
+                            TypeSelectorView(viewModel: viewModel.goalTypeViewModel)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .listRowBackground(Color.pageBackground)
+                        .foregroundColor(.fieldsTitleForegroundColor)
+
                         Section(header: Text("add_goal_name_title".localized())) {
                             TextField("", text: nameBinding)
                                 .padding()
@@ -150,11 +162,11 @@ struct AddNewGoalView: View {
                                                 .fill(Color.grayFields)
                                                 .aspectRatio(1.0, contentMode: .fit)
                                             Circle()
-                                                .fill(viewModel.goal.wrappedColor)
+                                                .fill(viewModel.goal.goalColor)
                                                 .aspectRatio(1.0, contentMode: .fit)
                                                 .padding(12.5)
                                         }
-                                    }.accentColor(viewModel.goal.wrappedColor)
+                                    }.accentColor(viewModel.goal.goalColor)
                                 }
                             }.frame(height: 55)
                         }
@@ -166,29 +178,29 @@ struct AddNewGoalView: View {
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_monday".localized(),
                                                                    bindingString: mondayBinding,
-                                                                   color: viewModel.goal.wrappedColor))
+                                                                   color: viewModel.goal.goalColor))
                                 HoursSelectorView(viewModel: .init(title: "global_tuesday".localized(),
                                                                    bindingString: tuesdayBinding,
-                                                                   color: viewModel.goal.wrappedColor))
+                                                                   color: viewModel.goal.goalColor))
                                 HoursSelectorView(viewModel: .init(title: "global_wednesday".localized(),
                                                                    bindingString: wednesdayBinding,
-                                                                   color: viewModel.goal.wrappedColor))
+                                                                   color: viewModel.goal.goalColor))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_thursday".localized(),
                                                                    bindingString: thursdayBinding,
-                                                                   color: viewModel.goal.wrappedColor))
+                                                                   color: viewModel.goal.goalColor))
                                 HoursSelectorView(viewModel: .init(title: "global_friday".localized(),
                                                                    bindingString: fridayBinding,
-                                                                   color: viewModel.goal.wrappedColor))
+                                                                   color: viewModel.goal.goalColor))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_saturday".localized(),
                                                                    bindingString: saturdayBinding,
-                                                                   color: viewModel.goal.wrappedColor))
+                                                                   color: viewModel.goal.goalColor))
                                 HoursSelectorView(viewModel: .init(title: "global_sunday".localized(),
                                                                    bindingString: sundayBinding,
-                                                                   color: viewModel.goal.wrappedColor))
+                                                                   color: viewModel.goal.goalColor))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                         }
                         .listRowBackground(Color.pageBackground)
@@ -201,13 +213,13 @@ struct AddNewGoalView: View {
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
-                                    .foregroundColor(viewModel.goal.wrappedColor)
+                                    .foregroundColor(viewModel.goal.goalColor)
                                 Text(String(format: "add_goal_days_required".localized(),
                                             "\(viewModel.goal.daysRequired)"))
                                     .bold()
                                     .frame(maxWidth: .infinity, alignment: .center)
                                     .background(Color.clear)
-                                    .foregroundColor(viewModel.goal.wrappedColor)
+                                    .foregroundColor(viewModel.goal.goalColor)
                             }
                         }
                         .listRowBackground(Color.pageBackground)
@@ -231,14 +243,15 @@ struct AddNewGoalView: View {
                                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                                 .cornerRadius(.defaultRadius)
                                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-                            }.accentColor(viewModel.goal.wrappedColor)
+                            }.accentColor(viewModel.goal.goalColor)
                         }
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageBackground)
                     }
                     if viewModel.isColorsVisible {
-                        colorsView
+                        ColorSelectorView(viewModel: .init(goal: $viewModel.goal),
+                                          isPresented: $viewModel.isColorsVisible)
                     }
                 }.navigationBarTitle("global_new_goal".localized(), displayMode: .large)
             }
@@ -263,62 +276,6 @@ struct AddNewGoalView: View {
             FirebaseService.logEvent(.updateCompletionDate)
             completionDate = viewModel.goal.updatedCompletionDate
             viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
-        }
-    }
-
-    var colorsView: some View {
-        ZStack {
-            Color.black.opacity(0.75)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    viewModel.isColorsVisible.toggle()
-                }
-            GeometryReader { container in
-                VStack() {
-                    Spacer().frame(maxWidth: .infinity)
-                    HStack {
-                        Spacer().frame(maxWidth: .infinity)
-                        ZStack {
-                            RoundedRectangle(cornerRadius: .defaultRadius)
-                                .fill(Color.white)
-                                .cornerRadius(50)
-                            VStack {
-                                Spacer()
-                                HStack(spacing: 20) {
-                                    ForEach(viewModel.colors.prefix(3), id: \.self) { color in
-                                        Button(action: {
-                                            viewModel.goal.color = color
-                                            viewModel.isColorsVisible.toggle()
-                                        }) {
-                                            Circle()
-                                                .fill(Color(color))
-                                                .aspectRatio(1.0, contentMode: .fit)
-                                        }
-                                    }
-                                }.frame(height: 55)
-                                .buttonStyle(PlainButtonStyle())
-                                Spacer()
-                                HStack(spacing: 20) {
-                                    ForEach(viewModel.colors.suffix(3), id: \.self) { color in
-                                        Button(action: {
-                                            viewModel.goal.color = color
-                                            viewModel.isColorsVisible.toggle()
-                                        }) {
-                                            Circle()
-                                                .fill(Color(color))
-                                                .aspectRatio(1.0, contentMode: .fit)
-                                        }
-                                    }
-                                }.frame(height: 55)
-                                .buttonStyle(PlainButtonStyle())
-                                Spacer()
-                            }
-                        }.frame(width: container.size.width / 1.5, height: 200, alignment: .center)
-                        Spacer().frame(maxWidth: .infinity)
-                    }
-                    Spacer().frame(maxWidth: .infinity)
-                }
-            }
         }
     }
 

@@ -86,7 +86,7 @@ struct TrackManualTimeView: View {
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }
-            .accentColor(currentGoal?.wrappedColor)
+            .accentColor(currentGoal?.goalColor)
             .padding([.leading, .trailing], 30)
             .padding([.bottom], 10)
 

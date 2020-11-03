@@ -38,7 +38,7 @@ struct TrackHoursSpentView: View {
                             .font(.title)
                             .bold()
                             .multilineTextAlignment(.center)
-                            .foregroundColor(currentGoal?.wrappedColor)
+                            .foregroundColor(currentGoal?.goalColor)
                             .padding([.leading, .trailing], 10)
                         /*Spacer()
                             .frame(height: 20)
