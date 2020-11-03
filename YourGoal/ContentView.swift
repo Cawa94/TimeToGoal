@@ -26,7 +26,7 @@ struct ContentView: View {
         self.goalsRequest = FetchRequest(
             entity: Goal.entity(),
             sortDescriptors: [
-                NSSortDescriptor(keyPath: \Goal.editedAt, ascending: true)
+                NSSortDescriptor(keyPath: \Goal.editedAt, ascending: false)
             ]
         )
     }
@@ -35,14 +35,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             TabView {
-                ForEach(Array(viewModel.goals), id: \.self) { goal in
+                ForEach(viewModel.goals + [nil], id: \.self) { goal in
                     MainGoalView(mainGoalViewModel: .init(goal: goal,
+                                                          isFirstGoal: viewModel.goals.isEmpty,
                                                           showingAddNewGoal: $viewModel.showingAddNewGoal))
                 }
-                MainGoalView(mainGoalViewModel: .init(goal: nil,
-                                                      isFirstGoal: viewModel.goals.isEmpty,
-                                                      showingAddNewGoal: $viewModel.showingAddNewGoal))
             }
+            .id(viewModel.goals.count)
             .ignoresSafeArea()
             .tabViewStyle(PageTabViewStyle.init(indexDisplayMode: .automatic))
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))

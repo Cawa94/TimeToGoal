@@ -33,6 +33,7 @@ public class MainGoalViewModel: ObservableObject {
     @Published var calendarViewModel = HorizontalCalendarViewModel()
     @Published var showingTrackGoal = false
     @Published var showFireworks = false
+    @Published var showingEditGoal = false
 
     @Binding var showingAddNewGoal: Bool
 
@@ -204,7 +205,7 @@ struct MainGoalView: View {
         HStack {
             Button(action: {
                 FirebaseService.logEvent(.editGoalButton)
-                viewModel.showingAddNewGoal.toggle()
+                viewModel.showingEditGoal.toggle()
             }) {
                 HStack {
                     Spacer()
@@ -222,13 +223,13 @@ struct MainGoalView: View {
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
             }.accentColor(viewModel.goal?.wrappedColor)
-            .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
+            .sheet(isPresented: $viewModel.showingEditGoal, onDismiss: {
                 /*if let goal = goals.first(where: { $0.id == viewModel.goal?.id }), goal.isValid {
                     viewModel.goal = goal
                 }*/
             }, content: {
                 AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
-                               isPresented: $viewModel.showingAddNewGoal)
+                               isPresented: $viewModel.showingEditGoal)
             })
         }
     }
