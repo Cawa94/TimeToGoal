@@ -16,12 +16,16 @@ public class Goal: NSManagedObject {
     var goalType: GoalType {
         get {
             guard let type = self.type
-                else { return .custom}
-            return GoalType(rawValue: type) ?? .custom
+                else { return .project }
+            return GoalType(rawValue: type) ?? .project
         }
         set {
             self.type = newValue.rawValue
         }
+    }
+
+    var trackingType: TimeTrackingType {
+        return goalType.timeTrackingType
     }
 
     var goalColor: Color {

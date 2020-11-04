@@ -19,7 +19,7 @@ class PickerRowView: UIView {
 
         super.init(frame: frame)
 
-        updateLabelFont(isSelected: isSelected, text: control.hours[row].stringWithTwoDecimals)
+        updateLabelFont(isSelected: isSelected, text: control.goal.trackingType.values[row].stringWithTwoDecimals)
         self.addSubview(label)
     }
 
@@ -47,25 +47,16 @@ class PickerRowView: UIView {
 struct HorizontalPickerView: UIViewRepresentable {
 
     @Binding var selectedValue: String
-
-    var hours: [Double] {
-        var hoursArray: [Double] = []
-        for hour in 0...23 {
-            for minutes in [00, 15, 30, 45] {
-                hoursArray.append(Double("\(hour).\(minutes)") ?? 0.00)
-            }
-        }
-        return hoursArray
-    }
+    @Binding var goal: Goal
     let size: CGSize
+    let pickerView = UIPickerView()
 
     func makeUIView(context: Context) -> UIPickerView {
-        let pickerView = UIPickerView()
         pickerView.delegate = context.coordinator
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180))
         if selectedValue != "0", let valueAsDouble = Double(selectedValue),
-           let index = hours.firstIndex(of: valueAsDouble) {
+           let index = goal.trackingType.values.firstIndex(of: valueAsDouble) {
             pickerView.selectRow(index, inComponent: 0, animated: false)
         }
         return pickerView
@@ -74,6 +65,7 @@ struct HorizontalPickerView: UIViewRepresentable {
     func updateUIView(_ uiView: UIPickerView,
                       context: UIViewRepresentableContext<HorizontalPickerView>) {
         // Perform any update tasks if necessary
+        context.coordinator.control.pickerView.reloadAllComponents()
     }
     
     func makeCoordinator() -> Coordinator {
@@ -93,7 +85,7 @@ struct HorizontalPickerView: UIViewRepresentable {
         }
 
         func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return control.hours.count
+            return control.goal.trackingType.values.count
         }
 
         func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -115,11 +107,11 @@ struct HorizontalPickerView: UIViewRepresentable {
         }
 
         func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            control.selectedValue = control.hours[row].stringWithTwoDecimals
+            control.selectedValue = control.goal.trackingType.values[row].stringWithTwoDecimals
 
             if let rowView = pickerView.view(forRow: row, forComponent: component) as? PickerRowView {
                 rowView.updateLabelFont(isSelected: pickerView.selectedRow(inComponent: component) == row,
-                                        text: control.hours[row].stringWithTwoDecimals)
+                                        text: control.goal.trackingType.values[row].stringWithTwoDecimals)
             }
         }
 

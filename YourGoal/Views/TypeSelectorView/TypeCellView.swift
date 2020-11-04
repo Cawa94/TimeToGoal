@@ -13,8 +13,9 @@ private extension CGFloat {
 
 }
 
-struct TypeCellViewModel {
+struct TypeCellViewModel: Identifiable {
 
+    let id: Int
     let type: GoalType
     let color: Color
     let isSelected: Bool
@@ -44,10 +45,11 @@ struct TypeCellView: View {
     }
 
 }
-
+/*
 struct TypeCellView_Previews: PreviewProvider {
     static var previews: some View {
-        TypeCellView(viewModel: .init(type: .book, color: .blue, isSelected: true))
+ TypeCellView(viewModel: .init(id: 0, type: .book, color: .blue, isSelected: true))
             .previewLayout(.fixed(width: 70, height: 70))
     }
 }
+*/

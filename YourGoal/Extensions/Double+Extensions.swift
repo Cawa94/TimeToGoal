@@ -18,7 +18,6 @@ extension Double {
     }
 
     var stringWithHoursAndMinutes: String {
-        debugPrint("SELF: \(self)")
         return "\(self)"
         /*let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute]

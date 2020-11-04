@@ -16,14 +16,9 @@ private extension Color {
 
 public class AddNewGoalViewModel: ObservableObject {
 
-    @Published var goal: Goal {
-        didSet {
-            goalTypeViewModel.goal = goal
-        }
-    }
+    @Published var goal: Goal
 
     @Published var isColorsVisible = false
-    @Published var goalTypeViewModel = TypeSelectorViewModel()
 
     var isNewGoal: Bool
 
@@ -33,9 +28,9 @@ public class AddNewGoalViewModel: ObservableObject {
         if let existingGoal = existingGoal {
             goal = existingGoal
         } else {
-            goal = Goal(context: PersistenceController.shared.container.viewContext)
+            let newGoal = Goal(context: PersistenceController.shared.container.viewContext)
+            goal = newGoal
             goal.color = "orangeGoal"
-            goalTypeViewModel.goal = goal
         }
     }
 
@@ -69,6 +64,13 @@ struct AddNewGoalView: View {
         }, set: {
             viewModel.goal.timeRequired = Double($0) ?? 0
             updateCompletionDate()
+        })
+
+        let customMeasureBinding = Binding<String>(get: {
+            "\(viewModel.goal.customTimeMeasure ?? "")"
+        }, set: {
+            viewModel.goal.customTimeMeasure = $0
+            viewModel.goal = viewModel.goal
         })
 
         let mondayBinding = Binding<String>(get: {
@@ -124,14 +126,14 @@ struct AddNewGoalView: View {
             NavigationView {
                 ZStack {
                     Form {
-                        Section(header: Text("Che tipo di obiettivo?".localized())) {
-                            TypeSelectorView(viewModel: viewModel.goalTypeViewModel)
+                        Section(header: Text("Che tipo di obiettivo vuoi raggiungere?".localized())) {
+                            TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
                         }
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("add_goal_name_title".localized())) {
+                        Section(header: Text(viewModel.goal.goalType.mainQuestion.localized())) {
                             TextField("", text: nameBinding)
                                 .padding()
                                 .foregroundColor(.fieldsTextForegroundColor)
@@ -141,19 +143,36 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("add_goal_hours_required_title".localized())) {
+                        Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion,
+                                                    customMeasureBinding.wrappedValue).localized())) {
                             GeometryReader { vContainer in
                                 HStack {
-                                    TextField("", text: timeRequiredBinding)
-                                        .frame(width: vContainer.size.width / 3)
-                                        .padding()
-                                        .keyboardType(.numberPad)
-                                        .foregroundColor(.fieldsTextForegroundColor)
-                                        .background(Color.grayFields)
-                                        .cornerRadius(.defaultRadius)
-                                    Spacer()
-                                    Spacer()
-                                    Text("\("global_color".localized()):")
+                                    if viewModel.goal.goalType == .custom {
+                                        TextField("", text: timeRequiredBinding)
+                                            .frame(width: vContainer.size.width / 6)
+                                            .padding()
+                                            .keyboardType(.numberPad)
+                                            .foregroundColor(.fieldsTextForegroundColor)
+                                            .background(Color.grayFields)
+                                            .cornerRadius(.defaultRadius)
+                                        TextField("", text: customMeasureBinding)
+                                            .padding()
+                                            .foregroundColor(.fieldsTextForegroundColor)
+                                            .background(Color.grayFields)
+                                            .cornerRadius(.defaultRadius)
+                                        Spacer()
+                                    } else {
+                                        TextField("", text: timeRequiredBinding)
+                                            .frame(width: vContainer.size.width / 3)
+                                            .padding()
+                                            .keyboardType(.numberPad)
+                                            .foregroundColor(.fieldsTextForegroundColor)
+                                            .background(Color.grayFields)
+                                            .cornerRadius(.defaultRadius)
+                                        Spacer()
+                                        Spacer()
+                                        Text("\("global_color".localized()):")
+                                    }
                                     Button(action: {
                                         viewModel.isColorsVisible.toggle()
                                     }) {
@@ -174,33 +193,41 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("add_goal_hours_for_day_title".localized())) {
+                        Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
+                                                    customMeasureBinding.wrappedValue).localized())) {
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_monday".localized(),
                                                                    bindingString: mondayBinding,
-                                                                   color: viewModel.goal.goalColor))
+                                                                   color: viewModel.goal.goalColor,
+                                                                   goal: $viewModel.goal))
                                 HoursSelectorView(viewModel: .init(title: "global_tuesday".localized(),
                                                                    bindingString: tuesdayBinding,
-                                                                   color: viewModel.goal.goalColor))
+                                                                   color: viewModel.goal.goalColor,
+                                                                   goal: $viewModel.goal))
                                 HoursSelectorView(viewModel: .init(title: "global_wednesday".localized(),
                                                                    bindingString: wednesdayBinding,
-                                                                   color: viewModel.goal.goalColor))
+                                                                   color: viewModel.goal.goalColor,
+                                                                   goal: $viewModel.goal))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_thursday".localized(),
                                                                    bindingString: thursdayBinding,
-                                                                   color: viewModel.goal.goalColor))
+                                                                   color: viewModel.goal.goalColor,
+                                                                   goal: $viewModel.goal))
                                 HoursSelectorView(viewModel: .init(title: "global_friday".localized(),
                                                                    bindingString: fridayBinding,
-                                                                   color: viewModel.goal.goalColor))
+                                                                   color: viewModel.goal.goalColor,
+                                                                   goal: $viewModel.goal))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_saturday".localized(),
                                                                    bindingString: saturdayBinding,
-                                                                   color: viewModel.goal.goalColor))
+                                                                   color: viewModel.goal.goalColor,
+                                                                   goal: $viewModel.goal))
                                 HoursSelectorView(viewModel: .init(title: "global_sunday".localized(),
                                                                    bindingString: sundayBinding,
-                                                                   color: viewModel.goal.goalColor))
+                                                                   color: viewModel.goal.goalColor,
+                                                                   goal: $viewModel.goal))
                             }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                         }
                         .listRowBackground(Color.pageBackground)
@@ -253,7 +280,7 @@ struct AddNewGoalView: View {
                         ColorSelectorView(viewModel: .init(goal: $viewModel.goal),
                                           isPresented: $viewModel.isColorsVisible)
                     }
-                }.navigationBarTitle("global_new_goal".localized(), displayMode: .large)
+                }.navigationBarTitle(viewModel.goal.goalType.title.localized(), displayMode: .large)
             }
         }.onTapGesture {
             UIApplication.shared.endEditing()

@@ -9,25 +9,33 @@ import SwiftUI
 
 public class TypeSelectorViewModel: ObservableObject {
 
-    @Published var goal: Goal?
+    @Binding var goal: Goal
+    @Published var goalTypesModels: [TypeCellViewModel]
 
-    var goalTypes = GoalType.allValues
+    init(goal: Binding<Goal>) {
+        self._goal = goal
+        self.goalTypesModels = GoalType.allValues.enumerated().map {
+            TypeCellViewModel(id: $0.offset,
+                              type: $0.element,
+                              color: goal.wrappedValue.goalColor,
+                              isSelected: goal.wrappedValue.goalType == $0.element)
+        }
+    }
 
 }
 
 struct TypeSelectorView: View {
 
-    @ObservedObject var viewModel = TypeSelectorViewModel()
+    @ObservedObject var viewModel: TypeSelectorViewModel
 
     var body: some View {
         HStack(content: {
-            ForEach(viewModel.goalTypes, id: \.self) { type in
+            ForEach(viewModel.goalTypesModels, id: \.id) { typeModel in
                 Button(action: {
-                    viewModel.goal?.goalType = type
+                    viewModel.goal.goalType = typeModel.type
+                    viewModel.goal = viewModel.goal
                 }) {
-                    TypeCellView(viewModel: .init(type: type,
-                                                  color: viewModel.goal?.goalColor ?? .goalColor,
-                                                  isSelected: viewModel.goal?.goalType == type))
+                    TypeCellView(viewModel: typeModel)
                         .frame(minWidth: 0,
                                maxWidth: .infinity,
                                minHeight: 0,

@@ -18,12 +18,13 @@ struct HoursSelectorViewModel {
     var title: String
     var bindingString: Binding<String>
     var color: Color
+    var goal: Binding<Goal>
 
 }
 
 struct HoursSelectorView: View {
 
-    var viewModel: HoursSelectorViewModel!
+    var viewModel: HoursSelectorViewModel
 
     var body: some View {
         GeometryReader { vContainer in
@@ -36,6 +37,7 @@ struct HoursSelectorView: View {
                         .background(Color.grayFields)
                         .cornerRadius(.defaultRadius)
                     HorizontalPickerView(selectedValue: viewModel.bindingString,
+                                         goal: viewModel.goal,
                                          size: .init(width: vContainer.size.width, height: .pickerViewWidth))
                         .frame(width: vContainer.size.width, height: 30, alignment: .center)
                         .clipped()
@@ -45,9 +47,10 @@ struct HoursSelectorView: View {
     }
 
 }
-
+/*
 struct HoursSelectorView_Previews: PreviewProvider {
     static var previews: some View {
         HoursSelectorView()
     }
 }
+*/
