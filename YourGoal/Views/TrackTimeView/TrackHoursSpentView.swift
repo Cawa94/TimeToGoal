@@ -34,7 +34,7 @@ struct TrackHoursSpentView: View {
                     VStack {
                         Spacer()
                             .frame(height: 30)
-                        Text("track_popup_title".localized())
+                        Text("\(currentGoal?.goalType.timeSpentQuestion ?? "")".localized())
                             .font(.title)
                             .bold()
                             .multilineTextAlignment(.center)

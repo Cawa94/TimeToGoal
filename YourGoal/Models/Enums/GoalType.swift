@@ -28,8 +28,10 @@ extension GoalType {
 
     var timeTrackingType: TimeTrackingType {
         switch self {
-        case .book, .run, .training, .custom:
+        case .book, .training, .custom:
             return .infinite
+        case .run:
+            return .double
         case .project:
             return .hoursWithMinutes
         }
@@ -38,7 +40,7 @@ extension GoalType {
     var title: String {
         switch self {
         case .book:
-            return "Lettura"
+            return "Libro"
         case .run:
             return "Corsa"
         case .training:
@@ -83,11 +85,11 @@ extension GoalType {
     var timeRequiredQuestion: String {
         switch self {
         case .book:
-            return "Quante pagine devi leggere?"
+            return "Quante pagine sono in tutto?"
         case .run:
-            return "Quanti km vuoi correre?"
+            return "Quanti km correrai in totale?"
         case .training:
-            return "Quante sessioni di allenamento vuoi fare?"
+            return "Quante sessioni di allenamento farai?"
         case .project:
             return "Quante ore di tempo richiede?"
         case .custom:
@@ -107,6 +109,21 @@ extension GoalType {
             return "Quante ore ci lavorerai ogni giorno?"
         case .custom:
             return "%@ al giorno"
+        }
+    }
+
+    var timeSpentQuestion: String {
+        switch self {
+        case .book:
+            return "Quante pagine hai letto?"
+        case .run:
+            return "Quanti km hai corso?"
+        case .training:
+            return "Quante sessioni di allenamento hai fatto?"
+        case .project:
+            return "Quante ore ci hai lavorato?"
+        case .custom:
+            return "Quanti progressi hai fatto?"
         }
     }
 

@@ -21,13 +21,23 @@ public class GoalProgressViewModel: ObservableObject {
         return goal?.isCompleted ?? false
     }
 
-    var hoursRemaining: String {
-        let dateRemaining = Double(goal?.timeRequired ?? 0).asHoursAndMinutes
-            .remove(Double(goal?.timeCompleted ?? 0).asHoursAndMinutes)
-        if dateRemaining > Date().zeroHours {
-            return dateRemaining.formattedAsHoursString
+    var timeRemaining: String {
+        if goal?.goalType.timeTrackingType == .hoursWithMinutes {
+            let dateRemaining = Double(goal?.timeRequired ?? 0).asHoursAndMinutes
+                .remove(Double(goal?.timeCompleted ?? 0).asHoursAndMinutes)
+            if dateRemaining > Date().zeroHours {
+                return dateRemaining.formattedAsHoursString
+            } else {
+                return "0"
+            }
         } else {
-            return "0"
+            let timeRemaining = Double(goal?.timeRequired ?? 0) - Double(goal?.timeCompleted ?? 0)
+            if timeRemaining > 0 {
+                return goal?.goalType.timeTrackingType == .double
+                    ? "\(timeRemaining.stringWithTwoDecimals)" : "\(timeRemaining.stringWithoutDecimals)"
+            } else {
+                return "0"
+            }
         }
     }
 
@@ -78,15 +88,24 @@ struct GoalProgressView: View {
                 .padding(-20)
 
             VStack {
-                Text(viewModel.hoursRemaining)
+                Text(viewModel.timeRemaining)
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.textForegroundColor)
-                Text("main_hours_required".localized())
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.textForegroundColor)
-                    .padding(.bottom, 10)
+                if let goal = viewModel.goal, goal.goalType == .custom {
+                    Text(String(format: "main_time_required".localized(), goal.customTimeMeasure ?? ""))
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(.textForegroundColor)
+                        .padding(.bottom, 10)
+                } else {
+                    Text(String(format: "main_time_required".localized(),
+                                viewModel.goal?.goalType.measureUnit ?? "\("global_hours".localized())"))
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(.textForegroundColor)
+                        .padding(.bottom, 10)
+                }
                 Spacer()
                     .frame(height: 5)
                 if viewModel.goal == nil {
@@ -113,7 +132,7 @@ struct GoalProgressView: View {
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(viewModel.isLateThanOriginal ? .red : .textForegroundColor)
-                    Text("(\(String(format: "add_goal_days_required".localized(), "\(viewModel.goal?.daysRequired ?? 0)")))")
+                    Text(String(format: "add_goal_days_required".localized(), "\(viewModel.goal?.daysRequired ?? 0)"))
                         .font(.title3)
                         .bold()
                         .multilineTextAlignment(.center)

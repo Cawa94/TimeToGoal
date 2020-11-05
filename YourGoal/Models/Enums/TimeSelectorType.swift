@@ -9,18 +9,12 @@ import Foundation
 
 enum TimeTrackingType: String {
 
-    case hours
     case hoursWithMinutes
+    case double
     case infinite
 
     var values: [Double] {
         switch self {
-        case .hours:
-            var hoursArray: [Double] = []
-            for hour in 0...23 {
-                hoursArray.append(Double(hour))
-            }
-            return hoursArray
         case .hoursWithMinutes:
             var hoursArray: [Double] = []
             for hour in 0...23 {
@@ -29,7 +23,7 @@ enum TimeTrackingType: String {
                 }
             }
             return hoursArray
-        case .infinite:
+        case .infinite, .double:
             var hoursArray: [Double] = []
             for hour in 0...100 {
                 hoursArray.append(Double(hour))

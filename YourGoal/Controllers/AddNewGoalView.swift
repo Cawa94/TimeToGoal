@@ -56,6 +56,7 @@ struct AddNewGoalView: View {
             "\(viewModel.goal.name ?? "")"
         }, set: {
             viewModel.goal.name = $0
+            viewModel.goal = viewModel.goal
         })
 
         let timeRequiredBinding = Binding<String>(get: {

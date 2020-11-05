@@ -17,16 +17,6 @@ extension Double {
         String(format: "%.0f", self)
     }
 
-    var stringWithHoursAndMinutes: String {
-        return "\(self)"
-        /*let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = .positional
-        guard let formattedString = formatter.string(from: self)
-            else { return "" }
-        return formattedString*/
-    }
-
     var asHoursAndMinutes: Date {
         var components = DateComponents()
         components.day = Int(self / 24)

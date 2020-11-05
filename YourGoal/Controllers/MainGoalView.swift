@@ -36,13 +36,15 @@ public class MainGoalViewModel: ObservableObject {
     @Published var showingEditGoal = false
 
     @Binding var showingAddNewGoal: Bool
+    @Binding var refreshAllGoals: Bool
 
     var isFirstGoal: Bool
 
-    init(goal: Goal?, isFirstGoal: Bool = false, showingAddNewGoal: Binding<Bool>) {
+    init(goal: Goal?, isFirstGoal: Bool = false, showingAddNewGoal: Binding<Bool>, refreshAllGoals: Binding<Bool>) {
         self.goal = goal
         self.isFirstGoal = isFirstGoal
         self._showingAddNewGoal = showingAddNewGoal
+        self._refreshAllGoals = refreshAllGoals
     }
 
 }
@@ -176,12 +178,18 @@ struct MainGoalView: View {
     var newGoalButton: some View {
         HStack {
             Button(action: {
-                FirebaseService.logEvent(.addGoalButton)
-                viewModel.showingAddNewGoal.toggle()
+                if let goal = viewModel.goal, goal.isCompleted {
+                    goal.isArchived = true
+                    PersistenceController.shared.saveContext()
+                    viewModel.refreshAllGoals = true
+                } else {
+                    FirebaseService.logEvent(.addGoalButton)
+                    viewModel.showingAddNewGoal.toggle()
+                }
             }) {
                 HStack {
                     Spacer()
-                    Text("global_add_goal".localized())
+                    Text(viewModel.goal?.isCompleted ?? false ? "global_archive".localized() : "global_add_goal".localized())
                         .bold()
                         .foregroundColor(.white)
                         .font(.title2)

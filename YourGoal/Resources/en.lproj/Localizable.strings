@@ -14,6 +14,7 @@
 
 "global_add" = "Add";
 "global_add_goal" = "Add Goal";
+"global_archive" = "Archive";
 "global_color" = "Color";
 "global_estimated" = "Date estimated";
 "global_friday" = "Friday";
@@ -32,7 +33,7 @@
 "main_edit_goal" = "Edit goal";
 "main_goal_completed" = "You reached your goal!";
 "main_add_new_goal" = "Add a new goal to start!";
-"main_hours_required" = "Hours left";
+"main_time_required" = "%@ left";
 "main_my_goal" = "My goal";
 "main_track_progress" = "Track progress";
 "main_will_reach_goal" = "You'll reach your\ngoal the";

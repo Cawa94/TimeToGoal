@@ -28,6 +28,8 @@ struct FirebaseService {
             Analytics.logEvent(conversion.rawValue,
                                parameters: ["name": (goal.name as NSObject?) ?? "nil",
                                             "time_required": (goal.timeRequired as NSObject?) ?? "nil",
+                                            "type": goal.goalType.rawValue as NSObject,
+                                            "time_measure": (goal.customTimeMeasure as NSObject?) ?? "nil",
                                             "color": (goal.color as NSObject?) ?? "nil",
                                             "monday": goal.monday as NSObject,
                                             "tuesday": goal.tuesday as NSObject,

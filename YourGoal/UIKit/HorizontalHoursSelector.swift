@@ -65,6 +65,7 @@ struct HorizontalPickerView: UIViewRepresentable {
     func updateUIView(_ uiView: UIPickerView,
                       context: UIViewRepresentableContext<HorizontalPickerView>) {
         // Perform any update tasks if necessary
+        pickerView.reloadAllComponents()
         context.coordinator.control.pickerView.reloadAllComponents()
     }
     

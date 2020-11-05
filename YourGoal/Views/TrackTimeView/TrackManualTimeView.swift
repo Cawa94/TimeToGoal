@@ -12,11 +12,31 @@ struct TrackManualTimeView: View {
     @Binding var isPresented: Bool
     @Binding var currentGoal: Goal?
 
-    @State var hoursSpent: Int = 0
-    @State var minutesSpent: Double = 00
+    @State var timeSpent: Int = 0
+    @State var decimalSpent: Double = 00
 
-    @State var hours: [Int] = Array(0...23)
-    @State var minutes: [Double] = [00, 15, 30, 45]
+    var timeOptions: [Int] {
+        switch currentGoal?.goalType.timeTrackingType {
+        case .infinite, .double:
+            return Array(0...100)
+        default:
+            return Array(0...23)
+        }
+    }
+    var decimalOptions: [Double] {
+        switch currentGoal?.goalType.timeTrackingType {
+        case .hoursWithMinutes:
+            return [00, 15, 30, 45]
+        case .double:
+            var hoursArray: [Double] = []
+            for hour in 0...99 {
+                hoursArray.append(Double(hour))
+            }
+            return hoursArray
+        default:
+            return []
+        }
+    }
 
     @State private var feedback = UINotificationFeedbackGenerator()
 
@@ -26,27 +46,54 @@ struct TrackManualTimeView: View {
                 HStack {
                     Spacer()
 
-                    Picker(selection: self.$hoursSpent, label: Text("")) {
-                        ForEach(self.hours, id: \.self) { double in
+                    Picker(selection: self.$timeSpent, label: Text("")) {
+                        ForEach(self.timeOptions, id: \.self) { double in
                             Text("\(double)")
                                 .foregroundColor(.black)
+                                .font(.title3)
+                                .bold()
                         }
                     }
                     .frame(maxWidth: geometry.size.width / 3.5)
                     .clipped()
 
-                    Text("global_hours".localized())
+                    if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes || currentGoal?.goalType.timeTrackingType == .double {
+                        if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
+                            Text("global_hours".localized())
+                                .font(.title3)
+                                .bold()
+                        } else {
+                            Text(".")
+                                .font(.title3)
+                                .bold()
+                        }
 
-                    Picker(selection: self.$minutesSpent, label: Text("")) {
-                        ForEach(self.minutes, id: \.self) { double in
-                            Text(double.stringWithoutDecimals)
-                                .foregroundColor(.black)
+                        Picker(selection: self.$decimalSpent, label: Text("")) {
+                            ForEach(self.decimalOptions, id: \.self) { double in
+                                Text(double.stringWithoutDecimals)
+                                    .foregroundColor(.black)
+                                    .font(.title3)
+                                    .bold()
+                            }
+                        }
+                        .frame(maxWidth: geometry.size.width / 3.5)
+                        .clipped()
+
+                        if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
+                            Text("global_minutes".localized())
+                                .font(.title3)
+                                .bold()
                         }
                     }
-                    .frame(maxWidth: geometry.size.width / 3.5)
-                    .clipped()
-
-                    Text("global_minutes".localized())
+                    if currentGoal?.goalType.timeTrackingType != .hoursWithMinutes && currentGoal?.goalType != .custom {
+                        Text("\(currentGoal?.goalType.measureUnit ?? "")".localized().capitalized)
+                            .font(.title2)
+                            .bold()
+                    } else if currentGoal?.goalType == .custom {
+                        Text("\(currentGoal?.customTimeMeasure ?? "")".capitalized)
+                            .font(.title2)
+                            .bold()
+                    }
 
                     Spacer()
                 }
@@ -57,7 +104,7 @@ struct TrackManualTimeView: View {
             Button(action: {
                 withAnimation {
                     currentGoal?.timesHasBeenTracked += 1
-                    let timeTracked = Double(hoursSpent) + (Double("0.\(minutesSpent.stringWithoutDecimals)") ?? 0.00)
+                    let timeTracked = Double(timeSpent) + (Double("0.\(decimalSpent.stringWithoutDecimals)") ?? 0.00)
                     FirebaseService.logEvent(.timeTracked)
                     currentGoal?.timeCompleted += timeTracked
                     currentGoal?.editedAt = Date()

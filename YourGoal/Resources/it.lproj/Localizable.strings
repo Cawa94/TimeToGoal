@@ -14,6 +14,7 @@
 
 "global_add" = "Aggiungi";
 "global_add_goal" = "Aggiungi Obiettivo";
+"global_archive" = "Archivia";
 "global_color" = "Colore";
 "global_estimated" = "Data stimata";
 "global_friday" = "Venerdì";
@@ -32,7 +33,7 @@
 "main_edit_goal" = "Modifica obiettivo";
 "main_goal_completed" = "Hai raggiunto il\ntuo obiettivo";
 "main_add_new_goal" = "Aggiungi un obiettivo\nper cominciare!";
-"main_hours_required" = "Ore rimaste";
+"main_time_required" = "%@ mancanti";
 "main_my_goal" = "Il mio obiettivo";
 "main_track_progress" = "Traccia progressi";
 "main_will_reach_goal" = "Raggiungerai il tuo\nobiettivo il";
