@@ -100,7 +100,7 @@ struct GoalProgressView: View {
                         .padding(.bottom, 10)
                 } else {
                     Text(String(format: "main_time_required".localized(),
-                                viewModel.goal?.goalType.measureUnit ?? "\("global_hours".localized())"))
+                                viewModel.goal?.goalType.measureUnit.localized() ?? "\("global_hours".localized())"))
                         .font(.title)
                         .bold()
                         .foregroundColor(.textForegroundColor)

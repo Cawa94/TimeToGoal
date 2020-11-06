@@ -86,7 +86,7 @@ struct TrackManualTimeView: View {
                         }
                     }
                     if currentGoal?.goalType.timeTrackingType != .hoursWithMinutes && currentGoal?.goalType != .custom {
-                        Text("\(currentGoal?.goalType.measureUnit ?? "")".localized().capitalized)
+                        Text("\(currentGoal?.goalType.measureUnit.localized() ?? "")".capitalized)
                             .font(.title2)
                             .bold()
                     } else if currentGoal?.goalType == .custom {

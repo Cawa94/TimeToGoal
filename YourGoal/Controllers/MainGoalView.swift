@@ -140,7 +140,7 @@ struct MainGoalView: View {
             }
         }
         .onAppear(perform: {
-            viewModel.goal = viewModel.goal
+            //viewModel.goal = viewModel.goal
             if viewModel.isFirstGoal {
                 viewModel.showingAddNewGoal = true
             }

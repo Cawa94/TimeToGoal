@@ -17,7 +17,6 @@ private extension Color {
 public class AddNewGoalViewModel: ObservableObject {
 
     @Published var goal: Goal
-
     @Published var isColorsVisible = false
 
     var isNewGoal: Bool

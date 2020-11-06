@@ -40,90 +40,90 @@ extension GoalType {
     var title: String {
         switch self {
         case .book:
-            return "Libro"
+            return "goal_book_title"
         case .run:
-            return "Corsa"
+            return "goal_run_title"
         case .training:
-            return "Allenamento"
+            return "goal_training_title"
         case .project:
-            return "Progetto"
+            return "goal_project_title"
         case .custom:
-            return "Personalizzato"
+            return "goal_custom_title"
         }
     }
 
     var measureUnit: String {
         switch self {
         case .book:
-            return "pagine"
+            return "goal_book_measure_unit"
         case .run:
-            return "km"
+            return "goal_run_measure_unit"
         case .training:
-            return "sessioni"
+            return "goal_training_measure_unit"
         case .project:
-            return "ore"
+            return "goal_project_measure_unit"
         case .custom:
-            return ""
+            return "goal_custom_measure_unit"
         }
     }
 
     var mainQuestion: String {
         switch self {
         case .book:
-            return "Che libro leggerai?"
+            return "goal_book_main_question"
         case .run:
-            return "Per quale motivo ti allenerai?"
+            return "goal_run_main_question"
         case .training:
-            return "Per quale motivo ti allenerai?"
+            return "goal_training_main_question"
         case .project:
-            return "Che progetto vuoi realizzare?"
+            return "goal_project_main_question"
         case .custom:
-            return "Dai un nome al tuo obiettivo"
+            return "goal_custom_main_question"
         }
     }
 
     var timeRequiredQuestion: String {
         switch self {
         case .book:
-            return "Quante pagine sono in tutto?"
+            return "goal_book_time_required"
         case .run:
-            return "Quanti km correrai in totale?"
+            return "goal_run_time_required"
         case .training:
-            return "Quante sessioni di allenamento farai?"
+            return "goal_training_time_required"
         case .project:
-            return "Quante ore di tempo richiede?"
+            return "goal_project_time_required"
         case .custom:
-            return "%@ richiesti per raggiungerlo"
+            return "goal_custom_time_required"
         }
     }
 
     var timeForDayQuestion: String {
         switch self {
         case .book:
-            return "Quante pagine leggerai al giorno?"
+            return "goal_book_time_for_day"
         case .run:
-            return "Quanti km correrai ogni giorno?"
+            return "goal_run_time_for_day"
         case .training:
-            return "Quante sessioni farai ogni giorni?"
+            return "goal_training_time_for_day"
         case .project:
-            return "Quante ore ci lavorerai ogni giorno?"
+            return "goal_project_time_for_day"
         case .custom:
-            return "%@ al giorno"
+            return "goal_custom_time_for_day"
         }
     }
 
     var timeSpentQuestion: String {
         switch self {
         case .book:
-            return "Quante pagine hai letto?"
+            return "goal_book_time_spent"
         case .run:
-            return "Quanti km hai corso?"
+            return "goal_run_time_spent"
         case .training:
-            return "Quante sessioni di allenamento hai fatto?"
+            return "goal_training_time_spent"
         case .project:
-            return "Quante ore ci hai lavorato?"
+            return "goal_project_time_spent"
         case .custom:
-            return "Quanti progressi hai fatto?"
+            return "goal_custom_time_spent"
         }
     }
 

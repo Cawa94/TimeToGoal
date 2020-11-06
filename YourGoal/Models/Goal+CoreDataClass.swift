@@ -105,7 +105,12 @@ public class Goal: NSManagedObject {
     }
 
     var isCompleted: Bool {
-        return !(self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes) > Date().zeroHours)
+        switch trackingType {
+        case .hoursWithMinutes:
+            return !(self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes) > Date().zeroHours)
+        default:
+            return !(self.timeRequired - self.timeCompleted > 0)
+        }
     }
 
     var isValid: Bool {

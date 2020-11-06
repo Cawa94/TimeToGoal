@@ -29,6 +29,37 @@
 "global_update" = "Update";
 "global_wednesday" = "Wednesday";
 
+"goal_book_main_question" = "Che libro leggerai?";
+"goal_run_main_question" = "Per quale motivo ti allenerai?";
+"goal_training_main_question" = "Per quale motivo ti allenerai?";
+"goal_project_main_question" = "Che progetto vuoi realizzare?";
+"goal_custom_main_question" = "Dai un nome al tuo obiettivo";
+"goal_book_title" = "Libro";
+"goal_run_title" = "Corsa";
+"goal_training_title" = "Allenamento";
+"goal_project_title" = "Progetto";
+"goal_custom_title" = "Personalizzato";
+"goal_book_measure_unit" = "pagine";
+"goal_run_measure_unit" = "km";
+"goal_training_measure_unit" = "sessioni";
+"goal_project_measure_unit" = "ore";
+"goal_custom_measure_unit" = "";
+"goal_book_time_required" = "Quante pagine sono in tutto?";
+"goal_run_time_required" = "Quanti km correrai in totale?";
+"goal_training_time_required" = "Quante sessioni di allenamento farai?";
+"goal_project_time_required" = "Quante ore di tempo richiede?";
+"goal_custom_time_required" = "%@ richiesti per raggiungerlo";
+"goal_book_time_for_day" = "Quante pagine leggerai al giorno?";
+"goal_run_time_for_day" = "Quanti km correrai ogni giorno?";
+"goal_training_time_for_day" = "Quante sessioni farai ogni giorni?";
+"goal_project_time_for_day" = "Quante ore ci lavorerai ogni giorno?";
+"goal_custom_time_for_day" = "%@ al giorno";
+"goal_book_time_spent" = "Quante pagine hai letto?";
+"goal_run_time_spent" = "Quanti km hai corso?";
+"goal_training_time_spent" = "Quante sessioni di allenamento hai fatto?";
+"goal_project_time_spent" = "Quante ore ci hai lavorato?";
+"goal_custom_time_spent" = "Quanti progressi hai fatto?";
+
 "main_weel_done" = "Well done!";
 "main_edit_goal" = "Edit goal";
 "main_goal_completed" = "You reached your goal!";
