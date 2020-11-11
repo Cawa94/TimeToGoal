@@ -60,7 +60,7 @@ struct TrackHoursSpentView: View {
                 .padding([.leading, .trailing], 10)
 
                 Spacer()
-                    .frame(height: 100)
+                    .frame(height: DeviceFix.isRoundedScreen ? 100 : 65)
             }
         }
     }

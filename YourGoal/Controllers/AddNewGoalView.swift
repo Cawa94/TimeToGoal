@@ -67,7 +67,13 @@ struct AddNewGoalView: View {
         })
 
         let customMeasureBinding = Binding<String>(get: {
-            "\(viewModel.goal.customTimeMeasure ?? "")"
+            if viewModel.goal.goalType == .custom {
+                let customMeasure = viewModel.goal.customTimeMeasure != nil
+                    ? viewModel.goal.customTimeMeasure : "goal_custom_measure_unit".localized()
+                return customMeasure ?? ""
+            } else {
+                return "\(viewModel.goal.customTimeMeasure ?? "")"
+            }
         }, set: {
             viewModel.goal.customTimeMeasure = $0
             viewModel.goal = viewModel.goal
@@ -126,7 +132,7 @@ struct AddNewGoalView: View {
             NavigationView {
                 ZStack {
                     Form {
-                        Section(header: Text("Che tipo di obiettivo vuoi raggiungere?".localized())) {
+                        Section(header: Text("add_goal_type_title".localized())) {
                             TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -139,12 +145,13 @@ struct AddNewGoalView: View {
                                 .foregroundColor(.fieldsTextForegroundColor)
                                 .background(Color.grayFields)
                                 .cornerRadius(.defaultRadius)
+                                .disableAutocorrection(true)
                         }
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion,
-                                                    customMeasureBinding.wrappedValue).localized())) {
+                        Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion.localized(),
+                                                    customMeasureBinding.wrappedValue))) {
                             GeometryReader { vContainer in
                                 HStack {
                                     if viewModel.goal.goalType == .custom {
@@ -160,6 +167,7 @@ struct AddNewGoalView: View {
                                             .foregroundColor(.fieldsTextForegroundColor)
                                             .background(Color.grayFields)
                                             .cornerRadius(.defaultRadius)
+                                            .disableAutocorrection(true)
                                         Spacer()
                                     } else {
                                         TextField("", text: timeRequiredBinding)
@@ -193,8 +201,8 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
-                                                    customMeasureBinding.wrappedValue).localized())) {
+                        Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion.localized(),
+                                                    customMeasureBinding.wrappedValue))) {
                             HStack {
                                 HoursSelectorView(viewModel: .init(title: "global_monday".localized(),
                                                                    bindingString: mondayBinding,
@@ -254,6 +262,7 @@ struct AddNewGoalView: View {
 
                         Section {
                             Button(action: {
+                                viewModel.goal.customTimeMeasure = customMeasureBinding.wrappedValue
                                 storeNewGoal()
                             }) {
                                 HStack {

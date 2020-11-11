@@ -67,7 +67,7 @@ struct MainGoalView: View {
                         .padding([.leading, .trailing])
 
                     Spacer()
-                        .frame(height: DeviceFix.isSmallScreen ? 15 : 30)
+                        .frame(height: DeviceFix.isRoundedScreen ? 30 : 15)
 
                     Text(viewModel.goal?.name ?? "global_new_goal".localized())
                         .font(.title)
@@ -119,7 +119,7 @@ struct MainGoalView: View {
                     }
 
                     Spacer()
-                        .frame(height: 100)
+                        .frame(height: DeviceFix.isRoundedScreen ? 100 : 65)
                 }
 
                 if viewModel.showingTrackGoal {

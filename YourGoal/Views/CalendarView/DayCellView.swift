@@ -14,7 +14,7 @@ struct DayCellView: View {
     @ViewBuilder
     var body: some View {
         VStack {
-            if !DeviceFix.isSmallScreen {
+            if DeviceFix.isRoundedScreen {
                 Text(weekDay.name)
                     .foregroundColor(Color.black.opacity(0.5))
             }
@@ -24,13 +24,13 @@ struct DayCellView: View {
                     Circle()
                         .stroke(lineWidth: 2.0)
                         .foregroundColor(weekDay.goalColor)
-                    Text(DeviceFix.isSmallScreen ? weekDay.name : weekDay.number)
+                    Text(DeviceFix.isRoundedScreen ? weekDay.number : weekDay.name)
                         .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
                         .padding([.bottom, .top], 5)
                         .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)
                 }
             } else {
-                Text(DeviceFix.isSmallScreen ? weekDay.name : weekDay.number)
+                Text(DeviceFix.isRoundedScreen ? weekDay.number : weekDay.name)
                     .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
                     .padding([.top, .bottom], 5)
                     .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)

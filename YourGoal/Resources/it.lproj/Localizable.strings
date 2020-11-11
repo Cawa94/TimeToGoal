@@ -10,7 +10,7 @@
 "add_goal_extimated_date_title" = "Raggiungerai il tuo obiettivo il:";
 "add_goal_hours_for_day_title" = "Quante ore al giorno ci lavorerai?";
 "add_goal_hours_required_title" = "Quante ore ci vogliono?";
-"add_goal_name_title" = "Che obiettivo vuoi raggiungere?";
+"add_goal_type_title" = "Che tipo di obiettivo vuoi raggiungere?";
 
 "global_add" = "Aggiungi";
 "global_add_goal" = "Aggiungi Obiettivo";
@@ -33,7 +33,7 @@
 "goal_run_main_question" = "Per quale motivo ti allenerai?";
 "goal_training_main_question" = "Per quale motivo ti allenerai?";
 "goal_project_main_question" = "Che progetto vuoi realizzare?";
-"goal_custom_main_question" = "Dai un nome al tuo obiettivo";
+"goal_custom_main_question" = "Nome dell'obiettivo";
 "goal_book_title" = "Libro";
 "goal_run_title" = "Corsa";
 "goal_training_title" = "Allenamento";
@@ -43,12 +43,12 @@
 "goal_run_measure_unit" = "km";
 "goal_training_measure_unit" = "sessioni";
 "goal_project_measure_unit" = "ore";
-"goal_custom_measure_unit" = "";
+"goal_custom_measure_unit" = "steps";
 "goal_book_time_required" = "Quante pagine sono in tutto?";
 "goal_run_time_required" = "Quanti km correrai in totale?";
-"goal_training_time_required" = "Quante sessioni di allenamento farai?";
+"goal_training_time_required" = "Quante sessioni farai in totale?";
 "goal_project_time_required" = "Quante ore di tempo richiede?";
-"goal_custom_time_required" = "%@ richiesti per raggiungerlo";
+"goal_custom_time_required" = "%@ per completarlo";
 "goal_book_time_for_day" = "Quante pagine leggerai al giorno?";
 "goal_run_time_for_day" = "Quanti km correrai ogni giorno?";
 "goal_training_time_for_day" = "Quante sessioni farai ogni giorni?";

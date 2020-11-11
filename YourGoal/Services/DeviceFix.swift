@@ -22,6 +22,10 @@ class DeviceFix: NSObject {
         is47Screen || is40Screen
     }
 
+    static var isRoundedScreen: Bool {
+        is58Screen || is65Screen
+    }
+
     static var is65Screen: Bool { // or 67
         currentDevice == .iPhoneXSMax
             || currentDevice == .iPhone11ProMax
