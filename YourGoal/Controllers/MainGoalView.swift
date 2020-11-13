@@ -139,12 +139,13 @@ struct MainGoalView: View {
                 }
             }
         }
-        .onAppear(perform: {
+        /*.onAppear(perform: {
+            debugPrint("MAIN APPEARED")
             //viewModel.goal = viewModel.goal
-            if viewModel.isFirstGoal {
+            if viewModel.isFirstGoal && !viewModel.showingAddNewGoal {
                 viewModel.showingAddNewGoal = true
             }
-        })
+        })*/
     }
 
     var trackTimeButton: some View {
