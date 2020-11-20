@@ -47,7 +47,7 @@
 "goal_book_time_required" = "Quante pagine sono in tutto?";
 "goal_run_time_required" = "Quanti km correrai in totale?";
 "goal_training_time_required" = "Quante sessioni farai in totale?";
-"goal_project_time_required" = "Quante ore di tempo richiede?";
+"goal_project_time_required" = "Quante ore di tempo richiederà?";
 "goal_custom_time_required" = "%@ per completarlo";
 "goal_book_time_for_day" = "Quante pagine leggerai al giorno?";
 "goal_run_time_for_day" = "Quanti km correrai ogni giorno?";
@@ -70,3 +70,12 @@
 "main_will_reach_goal" = "Raggiungerai il tuo\nobiettivo il";
 
 "track_popup_title" = "Quanto ci hai lavorato oggi?";
+
+"tutorial_first_step_text" = "Il primo step da fare";
+"tutorial_first_step_image" = "first_step_italian";
+"tutorial_second_step_text" = "Poi dopo il primo fai questo";
+"tutorial_second_step_image" = "second_step_italian";
+"tutorial_third_step_text" = "Il terzo step si fa così invece";
+"tutorial_third_step_image" = "third_step_italian";
+"tutorial_fourth_step_text" = "E questo e l'ultimo così hai finito";
+"tutorial_fourth_step_image" = "fourth_step_italian";

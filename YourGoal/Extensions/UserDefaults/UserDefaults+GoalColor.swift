@@ -4,21 +4,20 @@
 //
 //  Created by Yuri Cavallin on 14/10/2020.
 //
-/*
+
 import Foundation
 
 private extension String {
 
-    static let goalColor = "goal_color"
+    static let showTutorial = "show_tutorial"
 
 }
 
 extension UserDefaults {
 
-    var goalColor: String? {
-        get { object(forKey: .goalColor) as? String }
-        set { setValue(newValue, forKey: .goalColor) }
+    var showTutorial: Bool? {
+        get { object(forKey: .showTutorial) as? Bool }
+        set { setValue(newValue, forKey: .showTutorial) }
     }
 
 }
-*/

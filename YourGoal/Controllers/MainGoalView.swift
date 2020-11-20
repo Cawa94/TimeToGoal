@@ -35,15 +35,15 @@ public class MainGoalViewModel: ObservableObject {
     @Published var showFireworks = false
     @Published var showingEditGoal = false
 
-    @Binding var showingAddNewGoal: Bool
+    @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
 
     var isFirstGoal: Bool
 
-    init(goal: Goal?, isFirstGoal: Bool = false, showingAddNewGoal: Binding<Bool>, refreshAllGoals: Binding<Bool>) {
+    init(goal: Goal?, isFirstGoal: Bool = false, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
         self.goal = goal
         self.isFirstGoal = isFirstGoal
-        self._showingAddNewGoal = showingAddNewGoal
+        self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
     }
 
@@ -139,13 +139,6 @@ struct MainGoalView: View {
                 }
             }
         }
-        /*.onAppear(perform: {
-            debugPrint("MAIN APPEARED")
-            //viewModel.goal = viewModel.goal
-            if viewModel.isFirstGoal && !viewModel.showingAddNewGoal {
-                viewModel.showingAddNewGoal = true
-            }
-        })*/
     }
 
     var trackTimeButton: some View {
@@ -185,7 +178,7 @@ struct MainGoalView: View {
                     viewModel.refreshAllGoals = true
                 } else {
                     FirebaseService.logEvent(.addGoalButton)
-                    viewModel.showingAddNewGoal.toggle()
+                    viewModel.activeSheet = .newGoal
                 }
             }) {
                 HStack {
@@ -234,6 +227,7 @@ struct MainGoalView: View {
                 }*/
             }, content: {
                 AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
+                               activeSheet: .constant(nil),
                                isPresented: $viewModel.showingEditGoal)
             })
         }

@@ -8,10 +8,20 @@
 import SwiftUI
 import CoreData
 
+enum ActiveSheet: Identifiable { // Used to present controllers
+
+    case tutorial, newGoal
+
+    var id: Int {
+        hashValue
+    }
+
+}
+
 public class ContentViewModel: ObservableObject {
 
     @Published var goals: [Goal] = []
-    @Published var showingAddNewGoal = false
+    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var goalsModels: [MainGoalViewModel] = []
 
@@ -43,7 +53,7 @@ struct ContentView: View {
                 } else {
                     MainGoalView(viewModel: .init(goal: nil,
                                                   isFirstGoal: viewModel.goals.isEmpty,
-                                                  showingAddNewGoal: $viewModel.showingAddNewGoal,
+                                                  activeSheet: $viewModel.activeSheet,
                                                   refreshAllGoals: $viewModel.refreshAllGoals))
                 }
             }
@@ -56,16 +66,6 @@ struct ContentView: View {
         .onAppear(perform: {
             viewModel.refreshAllGoals = true
         })
-        .sheet(isPresented: $viewModel.showingAddNewGoal, onDismiss: {
-            for invalidGoal in goals.filter({ !$0.isValid }) {
-                PersistenceController.shared.container.viewContext.delete(invalidGoal)
-            }
-            PersistenceController.shared.saveContext()
-            viewModel.refreshAllGoals = true
-        }, content: {
-            AddNewGoalView(viewModel: .init(),
-                           isPresented: $viewModel.showingAddNewGoal)
-        })
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {
                 viewModel.goals = goals.filter { $0.isValid && !$0.isArchived }
@@ -73,12 +73,29 @@ struct ContentView: View {
                     let goal = $0
                     let model = MainGoalViewModel(goal: goal,
                                                   isFirstGoal: viewModel.goals.isEmpty,
-                                                  showingAddNewGoal: $viewModel.showingAddNewGoal,
+                                                  activeSheet: $viewModel.activeSheet,
                                                   refreshAllGoals: $viewModel.refreshAllGoals)
                     model.goal = goal
                     return model
                 }
                 viewModel.refreshAllGoals = false
+            }
+        })
+        .sheet(item: $viewModel.activeSheet, onDismiss: {
+            UserDefaults.standard.showTutorial = false
+            for invalidGoal in goals.filter({ !$0.isValid }) {
+                PersistenceController.shared.container.viewContext.delete(invalidGoal)
+            }
+            PersistenceController.shared.saveContext()
+            viewModel.refreshAllGoals = true
+        }, content: { item in
+            switch item {
+            case .tutorial:
+                TutorialView(activeSheet: $viewModel.activeSheet)
+            case .newGoal:
+                AddNewGoalView(viewModel: .init(),
+                               activeSheet: $viewModel.activeSheet,
+                               isPresented: .constant(true))
             }
         })
     }

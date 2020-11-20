@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "third_step_english.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

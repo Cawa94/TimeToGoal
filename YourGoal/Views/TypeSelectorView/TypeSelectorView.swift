@@ -36,10 +36,7 @@ struct TypeSelectorView: View {
                     viewModel.goal = viewModel.goal
                 }) {
                     TypeCellView(viewModel: typeModel)
-                        .frame(minWidth: 0,
-                               maxWidth: .infinity,
-                               minHeight: 0,
-                               maxHeight: .infinity)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 }
             }
         }).frame(width: .infinity, height: 45, alignment: .center)

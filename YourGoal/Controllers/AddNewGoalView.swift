@@ -45,6 +45,7 @@ private extension CGFloat {
 struct AddNewGoalView: View {
 
     @ObservedObject var viewModel: AddNewGoalViewModel
+    @Binding var activeSheet: ActiveSheet?
     @Binding var isPresented: Bool
 
     @State var completionDate = Date()
@@ -303,6 +304,7 @@ struct AddNewGoalView: View {
             viewModel.goal.timesHasBeenTracked = 0
             FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
             PersistenceController.shared.saveContext()
+            self.activeSheet = nil
             self.isPresented = false
         }
     }

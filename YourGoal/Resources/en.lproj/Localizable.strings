@@ -7,7 +7,7 @@
 */
 
 "add_goal_days_required" = "%@ days";
-"add_goal_extimated_date_title" = "You'll reach your goal the:";
+"add_goal_extimated_date_title" = "You'll reach your goal by the:";
 "add_goal_hours_for_day_title" = "How many hours you'll work each day?";
 "add_goal_hours_required_title" = "How many hours will it take?";
 "add_goal_type_title" = "What kind of goal do you want to reach?";
@@ -47,7 +47,7 @@
 "goal_book_time_required" = "How many pages are there in total?";
 "goal_run_time_required" = "How many km will you run in total?";
 "goal_training_time_required" = "How many sessions will you do?";
-"goal_project_time_required" = "How many hours does it take?";
+"goal_project_time_required" = "How many hours will it take?";
 "goal_custom_time_required" = "%@ required to reach it";
 "goal_book_time_for_day" = "How many pages will you read per day?";
 "goal_run_time_for_day" = "How many km will you run each day?";
@@ -67,6 +67,15 @@
 "main_time_required" = "%@ left";
 "main_my_goal" = "My goal";
 "main_track_progress" = "Track progress";
-"main_will_reach_goal" = "You'll reach your\ngoal the";
+"main_will_reach_goal" = "You'll reach your\ngoal by the";
 
 "track_popup_title" = "How much did you worked today?";
+
+"tutorial_first_step_text" = "";
+"tutorial_first_step_image" = "first_step_english";
+"tutorial_second_step_text" = "";
+"tutorial_second_step_image" = "second_step_english";
+"tutorial_third_step_text" = "";
+"tutorial_third_step_image" = "third_step_english";
+"tutorial_fourth_step_text" = "";
+"tutorial_fourth_step_image" = "fourth_step_english";

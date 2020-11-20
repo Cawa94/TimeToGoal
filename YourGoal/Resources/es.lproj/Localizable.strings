@@ -47,7 +47,7 @@
 "goal_book_time_required" = "¿Cuántas páginas hay en total?";
 "goal_run_time_required" = "¿Cuántos km correrás en total?";
 "goal_training_time_required" = "¿Cuántas sesiones harás en total?";
-"goal_project_time_required" = "¿Cuántas horas se necesitan?";
+"goal_project_time_required" = "¿Cuántas horas se necesitaràn?";
 "goal_custom_time_required" = "%@ requerido para alcanzarlo";
 "goal_book_time_for_day" = "¿Cuántas páginas leerás al día?";
 "goal_run_time_for_day" = "¿Cuántos km correrás cada día?";
@@ -63,10 +63,19 @@
 "main_weel_done" = "Bien Echo!";
 "main_edit_goal" = "Editar objetivo";
 "main_goal_completed" = "Has alcanzado tu objetivo";
-"main_add_new_goal" = "Agrega un nuevo objetivo para comenzar!";
+"main_add_new_goal" = "Agrega un nuevo objetivo\npara comenzar!";
 "main_time_required" = "%@ requeridas";
 "main_my_goal" = "Mi objetivo";
 "main_track_progress" = "Agregar progreso";
 "main_will_reach_goal" = "Alcanzarás tu\nobjetivo el";
 
 "track_popup_title" = "¿Cuánto tiempo trabajaste en él hoy?";
+
+"tutorial_first_step_text" = "";
+"tutorial_first_step_image" = "first_step_spanish";
+"tutorial_second_step_text" = "";
+"tutorial_second_step_image" = "second_step_spanish";
+"tutorial_third_step_text" = "";
+"tutorial_third_step_image" = "third_step_spanish";
+"tutorial_fourth_step_text" = "";
+"tutorial_fourth_step_image" = "fourth_step_spanish";
