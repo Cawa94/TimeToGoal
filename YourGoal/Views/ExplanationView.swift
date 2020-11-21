@@ -11,12 +11,12 @@ public class ExplanationViewModel: ObservableObject {
 
     @Published var text: String
     @Published var image: Image
-    @Published var showArrow: Bool
+    @Published var isLastScreen: Bool
 
-    init(text: String, image: String, showArrow: Bool = true) {
+    init(text: String, image: String, isLastScreen: Bool = false) {
         self.text = text
         self.image = Image(image)
-        self.showArrow = showArrow
+        self.isLastScreen = isLastScreen
     }
 
 }
@@ -31,7 +31,7 @@ struct ExplanationView: View {
         GeometryReader { container in
             VStack {
                 Spacer()
-                    .frame(height: 40)
+                    .frame(height: DeviceFix.isSmallScreen ? 20 : 40)
 
                 Text(viewModel.text)
                     .font(.title2)
@@ -40,7 +40,7 @@ struct ExplanationView: View {
                     .padding([.leading, .trailing], 25)
 
                 Spacer()
-                    .frame(height: 50)
+                    .frame(height: DeviceFix.isSmallScreen ? 25 : 50)
 
                 viewModel.image
                     .resizable()
@@ -49,23 +49,13 @@ struct ExplanationView: View {
 
                 Spacer()
 
-                if !viewModel.showArrow {
-                    /*HStack {
-                        Spacer()
-                        Image("arrow_right")
-                            .resizable()
-                            .aspectRatio(1.0, contentMode: .fit)
-                            .frame(height: 40)
-                        Spacer()
-                            .frame(width: 30)
-                    }
-                } else {*/
+                if viewModel.isLastScreen {
                     Button(action: {
                         self.activeSheet = nil
                     }) {
                         HStack {
                             Spacer()
-                            Text("OK HO CAPITO")
+                            Text("tutorial_close_button".localized().uppercased())
                                 .bold()
                                 .foregroundColor(.white)
                                 .font(.title2)
@@ -81,7 +71,7 @@ struct ExplanationView: View {
                 }
 
                 Spacer()
-                    .frame(height: 75)
+                    .frame(height: DeviceFix.isSmallScreen ? 50 : 75)
             }.frame(width: container.size.width, height: container.size.height)
         }
     }

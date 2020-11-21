@@ -71,6 +71,7 @@ class DeviceFix: NSObject {
             || currentDevice == .iPhone5s
             || currentDevice == .iPhoneSE
             || currentDevice == .iPhoneSE2
+            || currentDevice == .iPhone12Mini
             || currentDevice == .simulator(.iPhone4)
             || currentDevice == .simulator(.iPhone4s)
             || currentDevice == .simulator(.iPhone5)
@@ -78,6 +79,7 @@ class DeviceFix: NSObject {
             || currentDevice == .simulator(.iPhone5s)
             || currentDevice == .simulator(.iPhoneSE)
             || currentDevice == .simulator(.iPhoneSE2)
+            || currentDevice == .simulator(.iPhone12Mini)
     }
 
 }

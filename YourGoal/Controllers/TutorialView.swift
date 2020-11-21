@@ -27,14 +27,14 @@ struct TutorialView: View {
                                     activeSheet: $activeSheet)
                     ExplanationView(viewModel: .init(text: "tutorial_fourth_step_text".localized(),
                                                      image: "tutorial_fourth_step_image".localized(),
-                                                     showArrow: false),
+                                                     isLastScreen: true),
                                     activeSheet: $activeSheet)
                 }
                 .id(0)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .colorScheme(.light)
-                .navigationBarTitle("Come funziona?", displayMode: .large)
+                .navigationBarTitle("tutorial_title".localized(), displayMode: .large)
             }
         }
     }

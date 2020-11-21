@@ -71,11 +71,13 @@
 
 "track_popup_title" = "¿Cuánto tiempo trabajaste en él hoy?";
 
-"tutorial_first_step_text" = "";
+"tutorial_first_step_text" = "Crea un objetivo totalmente personalizable, con varias opciones para seguir tu progreso";
 "tutorial_first_step_image" = "first_step_spanish";
-"tutorial_second_step_text" = "";
+"tutorial_second_step_text" = "Establece cuánto piensas trabajar cada día y visualizas la fecha en que alcanzarás la meta";
 "tutorial_second_step_image" = "second_step_spanish";
-"tutorial_third_step_text" = "";
+"tutorial_third_step_text" = "Realiza un seguimiento de tus esfuerzos diarios tratando de seguir el plan original";
 "tutorial_third_step_image" = "third_step_spanish";
-"tutorial_fourth_step_text" = "";
+"tutorial_fourth_step_text" = "¡La fecha se acerca o aleja dependiendo de cuán constante seas en el tiempo!";
 "tutorial_fourth_step_image" = "fourth_step_spanish";
+"tutorial_close_button" = "Vale he entendido";
+"tutorial_title" = "¿Como funciona?";

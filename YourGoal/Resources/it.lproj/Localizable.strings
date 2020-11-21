@@ -71,11 +71,13 @@
 
 "track_popup_title" = "Quanto ci hai lavorato oggi?";
 
-"tutorial_first_step_text" = "Il primo step da fare";
+"tutorial_first_step_text" = "Crea un obiettivo completamente personalizzabile, con diverse opzioni per tracciare i tuoi progressi";
 "tutorial_first_step_image" = "first_step_italian";
-"tutorial_second_step_text" = "Poi dopo il primo fai questo";
+"tutorial_second_step_text" = "Imposta quanto hai intenzione di lavorarci ogni giorno e visualizza la data in cui raggiungerai l'obiettivo";
 "tutorial_second_step_image" = "second_step_italian";
-"tutorial_third_step_text" = "Il terzo step si fa così invece";
+"tutorial_third_step_text" = "Traccia i tuoi sforzi giornalieri cercando di restare fedele al piano impostato inizialmente";
 "tutorial_third_step_image" = "third_step_italian";
-"tutorial_fourth_step_text" = "E questo e l'ultimo così hai finito";
+"tutorial_fourth_step_text" = "La data si avvicinerà o allontanerà in base a quanto saprai essere costante nel tempo!";
 "tutorial_fourth_step_image" = "fourth_step_italian";
+"tutorial_close_button" = "Ok ho capito";
+"tutorial_title" = "Come funziona?";

@@ -71,11 +71,13 @@
 
 "track_popup_title" = "How much did you worked today?";
 
-"tutorial_first_step_text" = "";
+"tutorial_first_step_text" = "Create a fully customizable goal, with several options to track your progress";
 "tutorial_first_step_image" = "first_step_english";
-"tutorial_second_step_text" = "";
+"tutorial_second_step_text" = "Set how much you'll work on it every day and visualize the extimated date you will accomplish it";
 "tutorial_second_step_image" = "second_step_english";
-"tutorial_third_step_text" = "";
+"tutorial_third_step_text" = "Track your daily efforts, trying to stick to the original plan";
 "tutorial_third_step_image" = "third_step_english";
-"tutorial_fourth_step_text" = "";
+"tutorial_fourth_step_text" = "The date will move closer or further depending on how constant you'll be over time!";
 "tutorial_fourth_step_image" = "fourth_step_english";
+"tutorial_close_button" = "Ok I got it";
+"tutorial_title" = "How does it works?";
