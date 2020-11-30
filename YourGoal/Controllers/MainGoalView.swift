@@ -34,6 +34,7 @@ public class MainGoalViewModel: ObservableObject {
     @Published var showingTrackGoal = false
     @Published var showFireworks = false
     @Published var showingEditGoal = false
+    @Published var showMotivation = false
 
     @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
@@ -128,6 +129,12 @@ struct MainGoalView: View {
                         .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
                             if !isShowing {
                                 viewModel.goal = viewModel.goal
+                                if !ContentView.showedQuote {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        ContentView.showedQuote = true
+                                        viewModel.showMotivation = true
+                                    }
+                                }
                             }
                         })
                 }
@@ -136,6 +143,11 @@ struct MainGoalView: View {
                     FireworksView(isPresented: $viewModel.showFireworks)
                         .ignoresSafeArea()
                         .allowsHitTesting(false)
+                }
+
+                if viewModel.showMotivation {
+                    MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
+                        .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
                 }
             }
         }

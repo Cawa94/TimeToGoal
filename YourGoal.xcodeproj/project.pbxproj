@@ -10,6 +10,9 @@
 		797591DF089F6C8918D9F16D /* Pods_YourGoal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACFDA306CD4D87009DF1D52 /* Pods_YourGoal.framework */; };
 		DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0502862526166E000C4DC0 /* Date+Extensions.swift */; };
 		DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05028B25264263000C4DC0 /* Color+Extensions.swift */; };
+		DA084EDF25753DCE00CAC158 /* FamousQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA084EDE25753DCE00CAC158 /* FamousQuote.swift */; };
+		DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA084EE6257549BA00CAC158 /* ActiveSheet.swift */; };
+		DA084EFB2575547500CAC158 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA084EFA2575547500CAC158 /* LaunchScreen.storyboard */; };
 		DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861AF2531F66300C4A3DD /* UIApplication+Extensions.swift */; };
 		DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */; };
 		DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA0861D325323DEB00C4A3DD /* Localizable.strings */; };
@@ -31,6 +34,7 @@
 		DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A31253703B600446580 /* UIScren+Extensions.swift */; };
 		DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D02F12552AEE200DBFB2E /* WeekDay.swift */; };
 		DA9D02FA2552F7BF00DBFB2E /* TimeSelectorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */; };
+		DA9DA465257519320006B706 /* MotivationalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9DA464257519320006B706 /* MotivationalView.swift */; };
 		DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4CE71252B556900DAA871 /* Double+Extensions.swift */; };
 		DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC79252232130087F9C8 /* YourGoalApp.swift */; };
 		DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC7B252232130087F9C8 /* ContentView.swift */; };
@@ -73,6 +77,9 @@
 		AACFDA306CD4D87009DF1D52 /* Pods_YourGoal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourGoal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0502862526166E000C4DC0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		DA05028B25264263000C4DC0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		DA084EDE25753DCE00CAC158 /* FamousQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousQuote.swift; sourceTree = "<group>"; };
+		DA084EE6257549BA00CAC158 /* ActiveSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSheet.swift; sourceTree = "<group>"; };
+		DA084EFA2575547500CAC158 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA0861AF2531F66300C4A3DD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		DA0861D225323DEB00C4A3DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -96,6 +103,7 @@
 		DA938A31253703B600446580 /* UIScren+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScren+Extensions.swift"; sourceTree = "<group>"; };
 		DA9D02F12552AEE200DBFB2E /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorType.swift; sourceTree = "<group>"; };
+		DA9DA464257519320006B706 /* MotivationalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationalView.swift; sourceTree = "<group>"; };
 		DAB4CE71252B556900DAA871 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		DAB7DC76252232130087F9C8 /* YourGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB7DC79252232130087F9C8 /* YourGoalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourGoalApp.swift; sourceTree = "<group>"; };
@@ -187,6 +195,8 @@
 			children = (
 				DA0861D325323DEB00C4A3DD /* Localizable.strings */,
 				DAB7DC7D252232130087F9C8 /* Assets.xcassets */,
+				DA084EFA2575547500CAC158 /* LaunchScreen.storyboard */,
+				DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -240,6 +250,7 @@
 				DABE55392567C84200923919 /* ExplanationView.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
+				DA9DA464257519320006B706 /* MotivationalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -274,6 +285,7 @@
 		DA9D02EB2552AE4800DBFB2E /* Structs */ = {
 			isa = PBXGroup;
 			children = (
+				DA084EDE25753DCE00CAC158 /* FamousQuote.swift */,
 				DA9D02F12552AEE200DBFB2E /* WeekDay.swift */,
 			);
 			path = Structs;
@@ -306,7 +318,6 @@
 			children = (
 				DAB7DC87252232130087F9C8 /* Info.plist */,
 				DAB7DC84252232130087F9C8 /* YourGoal.xcdatamodeld */,
-				DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */,
 				DA352844254ADD6500FF19FB /* AppDelegate.swift */,
 				DAB7DC7B252232130087F9C8 /* ContentView.swift */,
 				DAB7DC82252232130087F9C8 /* Persistence.swift */,
@@ -352,6 +363,7 @@
 		DAF1A8B8255173E900EBEAA6 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				DA084EE6257549BA00CAC158 /* ActiveSheet.swift */,
 				DAF1A8B9255173F800EBEAA6 /* GoalType.swift */,
 				DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */,
 			);
@@ -486,6 +498,7 @@
 				DAB7DC81252232130087F9C8 /* Preview Assets.xcassets in Resources */,
 				DA352831254ADA2C00FF19FB /* GoogleService-Info.plist in Resources */,
 				DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */,
+				DA084EFB2575547500CAC158 /* LaunchScreen.storyboard in Resources */,
 				DAB7DC7E252232130087F9C8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,6 +570,7 @@
 				DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */,
 				DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */,
 				DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */,
+				DA9DA465257519320006B706 /* MotivationalView.swift in Sources */,
 				DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */,
 				DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */,
 				DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */,
@@ -587,8 +601,10 @@
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
 				DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */,
 				DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */,
+				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
 				DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */,
+				DA084EDF25753DCE00CAC158 /* FamousQuote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +779,7 @@
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
+				DISPLAY_NAME = "Test Build";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = YourGoal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -771,7 +788,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.yourgoal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.testyourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -788,6 +805,7 @@
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
+				DISPLAY_NAME = TimeToGoal;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = YourGoal/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
