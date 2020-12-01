@@ -32,6 +32,10 @@ public class Goal: NSManagedObject {
         Color(color ?? "orangeColor")
     }
 
+    var goalUIColor: UIColor {
+        UIColor(named: color ?? "orangeColor") ?? .goalColor
+    }
+
     var workOnMonday: Bool {
         self.monday > 0
     }

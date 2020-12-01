@@ -1,5 +1,5 @@
 //
-//  UserDefaults+GoalColor.swift
+//  UserDefaults+ShowTutorial.swift
 //  YourGoal
 //
 //  Created by Yuri Cavallin on 14/10/2020.

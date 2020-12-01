@@ -10,10 +10,12 @@ import SwiftUI
 struct BackgroundView<Content: View>: View {
 
     private var color: UIColor
+    private var barTintColor: UIColor
     private var content: Content
 
-    init(color: UIColor, @ViewBuilder content: @escaping () -> Content) {
+    init(color: UIColor, barTintColor: UIColor = .goalColor, @ViewBuilder content: @escaping () -> Content) {
         self.color = color
+        self.barTintColor = barTintColor
         self.content = content()
     }
 
@@ -23,7 +25,7 @@ struct BackgroundView<Content: View>: View {
             .ignoresSafeArea()
             .overlay(content.onAppear(perform: {
                 UINavigationBar.appearance().barTintColor = .white
-                UINavigationBar.appearance().tintColor = .white
+                UINavigationBar.appearance().tintColor = .black
                 UINavigationBar.appearance().backgroundColor = .white
                 UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]

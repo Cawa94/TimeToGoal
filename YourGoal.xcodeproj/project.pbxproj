@@ -29,7 +29,7 @@
 		DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */; };
 		DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BC125272180005D8423 /* CGFloat+Extensions.swift */; };
 		DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */; };
-		DA938A272536F64D00446580 /* UserDefaults+GoalColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A262536F64D00446580 /* UserDefaults+GoalColor.swift */; };
+		DA938A272536F64D00446580 /* UserDefaults+ShowTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */; };
 		DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A2B2536FD9300446580 /* FireworksView.swift */; };
 		DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A31253703B600446580 /* UIScren+Extensions.swift */; };
 		DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D02F12552AEE200DBFB2E /* WeekDay.swift */; };
@@ -49,6 +49,9 @@
 		DABE553A2567C84200923919 /* ExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE55392567C84200923919 /* ExplanationView.swift */; };
 		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
 		DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */; };
+		DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */; };
+		DAEFAA9525763DED00B06680 /* SmartExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA9425763DED00B06680 /* SmartExplanationView.swift */; };
+		DAEFAA9D2576424400B06680 /* AddNewGoalSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */; };
 		DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8B9255173F800EBEAA6 /* GoalType.swift */; };
 		DAF1A8C32551770D00EBEAA6 /* ColorSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */; };
 		DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8D925517D6900EBEAA6 /* TypeSelectorView.swift */; };
@@ -98,7 +101,7 @@
 		DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		DA794BC125272180005D8423 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHoursSelector.swift; sourceTree = "<group>"; };
-		DA938A262536F64D00446580 /* UserDefaults+GoalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+GoalColor.swift"; sourceTree = "<group>"; };
+		DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowTutorial.swift"; sourceTree = "<group>"; };
 		DA938A2B2536FD9300446580 /* FireworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworksView.swift; sourceTree = "<group>"; };
 		DA938A31253703B600446580 /* UIScren+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScren+Extensions.swift"; sourceTree = "<group>"; };
 		DA9D02F12552AEE200DBFB2E /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
@@ -124,6 +127,9 @@
 		DABE55392567C84200923919 /* ExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationView.swift; sourceTree = "<group>"; };
 		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowSmartExplanation.swift"; sourceTree = "<group>"; };
+		DAEFAA9425763DED00B06680 /* SmartExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartExplanationView.swift; sourceTree = "<group>"; };
+		DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGoalSecondView.swift; sourceTree = "<group>"; };
 		DAF1A8B9255173F800EBEAA6 /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
 		DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorView.swift; sourceTree = "<group>"; };
 		DAF1A8D925517D6900EBEAA6 /* TypeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSelectorView.swift; sourceTree = "<group>"; };
@@ -223,7 +229,9 @@
 			isa = PBXGroup;
 			children = (
 				DA582A58252518CA00A37693 /* AddNewGoalView.swift */,
+				DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */,
 				DA3A3413252761A600597C73 /* MainGoalView.swift */,
+				DAEFAA9425763DED00B06680 /* SmartExplanationView.swift */,
 				DABE55342567C70F00923919 /* TutorialView.swift */,
 			);
 			path = Controllers;
@@ -268,7 +276,8 @@
 		DA938A252536F60B00446580 /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				DA938A262536F64D00446580 /* UserDefaults+GoalColor.swift */,
+				DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */,
+				DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -566,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAEFAA9D2576424400B06680 /* AddNewGoalSecondView.swift in Sources */,
 				DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */,
 				DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */,
 				DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */,
@@ -585,11 +595,13 @@
 				DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */,
 				DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */,
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
+				DAEFAA9525763DED00B06680 /* SmartExplanationView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
 				DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */,
-				DA938A272536F64D00446580 /* UserDefaults+GoalColor.swift in Sources */,
+				DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */,
+				DA938A272536F64D00446580 /* UserDefaults+ShowTutorial.swift in Sources */,
 				DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */,
 				DAF1A8C32551770D00EBEAA6 /* ColorSelectorView.swift in Sources */,
 				DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */,
@@ -787,7 +799,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.testyourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -813,7 +825,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.yourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
