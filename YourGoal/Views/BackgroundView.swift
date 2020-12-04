@@ -35,6 +35,7 @@ struct BackgroundView<Content: View>: View {
                 UITableView.appearance().backgroundColor = self.color
                 UITableView.appearance().sectionIndexBackgroundColor = self.color
                 UITableView.appearance().sectionIndexColor = self.color
+                UITableView.appearance().separatorStyle = .none
             }))
     }
 

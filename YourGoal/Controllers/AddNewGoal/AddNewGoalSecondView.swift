@@ -270,7 +270,9 @@ struct AddNewGoalSecondView: View {
 
     func storeNewGoal() {
         if viewModel.goal.isValid {
-            viewModel.goal.createdAt = Date()
+            if viewModel.isNewGoal {
+                viewModel.goal.createdAt = Date()
+            }
             viewModel.goal.editedAt = Date()
             viewModel.goal.timesHasBeenTracked = 0
             FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)

@@ -2,6 +2,13 @@ import Foundation
 
 extension Date {
 
+    var customId: Int64 {
+        let day = Calendar.current.component(.day, from: self)
+        let month = Calendar.current.component(.month, from: self)
+        let year = Calendar.current.component(.year, from: self) - 2000
+        return Int64("\(day)\(month)\(year)") ?? 0
+    }
+
     var formattedAsDateString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MMM-yyyy"
@@ -41,6 +48,10 @@ extension Date {
         Calendar.current.component(.weekday, from: self)
     }
 
+    var monthNumber: Int {
+        Calendar.current.component(.month, from: self)
+    }
+
     var startOfWeek: Date? {
         let gregorian = Calendar(identifier: .gregorian)
         guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
@@ -59,6 +70,18 @@ extension Date {
         let differenceComponents = Calendar.current.dateComponents([.day, .hour, .minute,], from: date, to: self)
         let differenceDate = Calendar.current.date(from: differenceComponents) ?? Date()
         return differenceDate
+    }
+
+}
+
+extension Date: Strideable {
+
+    public func distance(to other: Date) -> TimeInterval {
+        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
+    }
+
+    public func advanced(by n: TimeInterval) -> Date {
+        return self + n
     }
 
 }

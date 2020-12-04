@@ -34,6 +34,7 @@ public class MainGoalViewModel: ObservableObject {
     @Published var showingTrackGoal = false
     @Published var showFireworks = false
     @Published var showingEditGoal = false
+    @Published var showingJournal = true
     @Published var showMotivation = false
 
     @Binding var activeSheet: ActiveSheet?
@@ -114,8 +115,14 @@ struct MainGoalView: View {
                                 .padding([.leading, .trailing], 15)
                             Spacer()
                                 .frame(height: 15)
-                            editGoalButton
-                                .padding([.leading, .trailing], 15)
+                            HStack {
+                                editGoalButton
+                                    .padding([.leading], 15)
+                                    .padding([.trailing], 5)
+                                journalButton
+                                    .padding([.leading], 5)
+                                    .padding([.trailing], 15)
+                            }
                         }
                     }
 
@@ -219,7 +226,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("main_edit_goal".localized())
+                    Text("Dettagli".localized())
                         .bold()
                         .foregroundColor(viewModel.goal?.goalColor)
                         .font(.title3)
@@ -241,6 +248,41 @@ struct MainGoalView: View {
                 AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
                                activeSheet: .constant(nil),
                                isPresented: $viewModel.showingEditGoal)
+            })
+        }
+    }
+
+    var journalButton: some View {
+        HStack {
+            Button(action: {
+                //FirebaseService.logEvent(.editGoalButton)
+                viewModel.showingJournal.toggle()
+            }) {
+                HStack {
+                    Spacer()
+                    Text("Diario".localized())
+                        .bold()
+                        .foregroundColor(viewModel.goal?.goalColor)
+                        .font(.title3)
+                    Spacer()
+                }
+                .padding(15.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(viewModel.goal?.goalColor)
+                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                )
+            }.accentColor(viewModel.goal?.goalColor)
+            .sheet(isPresented: $viewModel.showingJournal, onDismiss: {
+                /*if let goal = goals.first(where: { $0.id == viewModel.goal?.id }), goal.isValid {
+                    viewModel.goal = goal
+                }*/
+            }, content: {
+                if let goal = viewModel.goal {
+                    JournalView(viewModel: .init(goal: goal,
+                                                 isPresented: $viewModel.showingJournal))
+                }
             })
         }
     }

@@ -26,6 +26,7 @@
 		DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */; };
 		DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* AddNewGoalView.swift */; };
 		DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */; };
+		DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DD3D4257A445400AACE45 /* JournalView.swift */; };
 		DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */; };
 		DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BC125272180005D8423 /* CGFloat+Extensions.swift */; };
 		DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */; };
@@ -35,6 +36,8 @@
 		DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D02F12552AEE200DBFB2E /* WeekDay.swift */; };
 		DA9D02FA2552F7BF00DBFB2E /* TimeSelectorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */; };
 		DA9DA465257519320006B706 /* MotivationalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9DA464257519320006B706 /* MotivationalView.swift */; };
+		DAAA9033257A58FD00525B14 /* JournalDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA9032257A58FD00525B14 /* JournalDatesView.swift */; };
+		DAAA903B257A593400525B14 /* JournalDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA903A257A593400525B14 /* JournalDateView.swift */; };
 		DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4CE71252B556900DAA871 /* Double+Extensions.swift */; };
 		DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC79252232130087F9C8 /* YourGoalApp.swift */; };
 		DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC7B252232130087F9C8 /* ContentView.swift */; };
@@ -98,6 +101,7 @@
 		DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManualTimeView.swift; sourceTree = "<group>"; };
 		DA582A58252518CA00A37693 /* AddNewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGoalView.swift; sourceTree = "<group>"; };
 		DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA6DD3D4257A445400AACE45 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		DA794BC125272180005D8423 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHoursSelector.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 		DA9D02F12552AEE200DBFB2E /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorType.swift; sourceTree = "<group>"; };
 		DA9DA464257519320006B706 /* MotivationalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationalView.swift; sourceTree = "<group>"; };
+		DAAA9032257A58FD00525B14 /* JournalDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDatesView.swift; sourceTree = "<group>"; };
+		DAAA903A257A593400525B14 /* JournalDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDateView.swift; sourceTree = "<group>"; };
 		DAB4CE71252B556900DAA871 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		DAB7DC76252232130087F9C8 /* YourGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB7DC79252232130087F9C8 /* YourGoalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourGoalApp.swift; sourceTree = "<group>"; };
@@ -210,8 +216,8 @@
 		DA3A340A25275E2000597C73 /* CalendarView */ = {
 			isa = PBXGroup;
 			children = (
-				DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */,
 				DA3A340B25275E3400597C73 /* DayCellView.swift */,
+				DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */,
 			);
 			path = CalendarView;
 			sourceTree = "<group>";
@@ -228,8 +234,8 @@
 		DA582A5D252518DA00A37693 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DA582A58252518CA00A37693 /* AddNewGoalView.swift */,
-				DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */,
+				DA6DD3D9257A445F00AACE45 /* AddNewGoal */,
+				DA6DD3D4257A445400AACE45 /* JournalView.swift */,
 				DA3A3413252761A600597C73 /* MainGoalView.swift */,
 				DAEFAA9425763DED00B06680 /* SmartExplanationView.swift */,
 				DABE55342567C70F00923919 /* TutorialView.swift */,
@@ -247,11 +253,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		DA6DD3D9257A445F00AACE45 /* AddNewGoal */ = {
+			isa = PBXGroup;
+			children = (
+				DA582A58252518CA00A37693 /* AddNewGoalView.swift */,
+				DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */,
+			);
+			path = AddNewGoal;
+			sourceTree = "<group>";
+		};
 		DA6EE2242524BF6E0064D2CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DAF1A8DE25517F1200EBEAA6 /* TypeSelectorView */,
 				DA3A340A25275E2000597C73 /* CalendarView */,
+				DAAA9031257A58D900525B14 /* JournalDatesView */,
+				DAF1A8DE25517F1200EBEAA6 /* TypeSelectorView */,
 				DAF1A8C12551768900EBEAA6 /* TrackTimeView */,
 				DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */,
 				DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */,
@@ -298,6 +314,15 @@
 				DA9D02F12552AEE200DBFB2E /* WeekDay.swift */,
 			);
 			path = Structs;
+			sourceTree = "<group>";
+		};
+		DAAA9031257A58D900525B14 /* JournalDatesView */ = {
+			isa = PBXGroup;
+			children = (
+				DAAA903A257A593400525B14 /* JournalDateView.swift */,
+				DAAA9032257A58FD00525B14 /* JournalDatesView.swift */,
+			);
+			path = JournalDatesView;
 			sourceTree = "<group>";
 		};
 		DAB7DC6D252232130087F9C8 = {
@@ -579,10 +604,12 @@
 				DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */,
 				DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */,
 				DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */,
+				DAAA903B257A593400525B14 /* JournalDateView.swift in Sources */,
 				DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */,
 				DA9DA465257519320006B706 /* MotivationalView.swift in Sources */,
 				DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */,
 				DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */,
+				DAAA9033257A58FD00525B14 /* JournalDatesView.swift in Sources */,
 				DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */,
 				DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */,
 				DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */,
@@ -597,6 +624,7 @@
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DAEFAA9525763DED00B06680 /* SmartExplanationView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
+				DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
 				DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */,

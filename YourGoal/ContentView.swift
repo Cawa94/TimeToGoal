@@ -11,7 +11,7 @@ import CoreData
 public class ContentViewModel: ObservableObject {
 
     @Published var goals: [Goal] = []
-    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : .newGoal
+    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var goalsModels: [MainGoalViewModel] = []
 

@@ -11,6 +11,10 @@ public class HorizontalCalendarViewModel: ObservableObject {
 
     @Published var goal: Goal?
 
+    init(goal: Goal? = nil) {
+        self.goal = goal
+    }
+
     var days: [WeekDay] {
         let startOfWeek = Date().startOfWeek ?? Date()
 
