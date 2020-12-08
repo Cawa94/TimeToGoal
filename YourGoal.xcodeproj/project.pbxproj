@@ -28,8 +28,12 @@
 		DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */; };
 		DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DD3D4257A445400AACE45 /* JournalView.swift */; };
 		DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */; };
+		DA790C26257B941C00598B96 /* JournalPage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA790C24257B941C00598B96 /* JournalPage+CoreDataProperties.swift */; };
+		DA790C27257B941C00598B96 /* JournalPage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */; };
 		DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BC125272180005D8423 /* CGFloat+Extensions.swift */; };
 		DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */; };
+		DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */; };
+		DA90BB62257FC4FD00B9D4D1 /* GoalListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */; };
 		DA938A272536F64D00446580 /* UserDefaults+ShowTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */; };
 		DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A2B2536FD9300446580 /* FireworksView.swift */; };
 		DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A31253703B600446580 /* UIScren+Extensions.swift */; };
@@ -50,6 +54,8 @@
 		DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */; };
 		DABE55352567C70F00923919 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE55342567C70F00923919 /* TutorialView.swift */; };
 		DABE553A2567C84200923919 /* ExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE55392567C84200923919 /* ExplanationView.swift */; };
+		DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */; };
+		DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321FF257B9E41007DB9F0 /* JournalDate.swift */; };
 		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
 		DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */; };
 		DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */; };
@@ -103,8 +109,12 @@
 		DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA6DD3D4257A445400AACE45 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
+		DA790C24257B941C00598B96 /* JournalPage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "JournalPage+CoreDataProperties.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/JournalPage+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "JournalPage+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/JournalPage+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DA794BC125272180005D8423 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHoursSelector.swift; sourceTree = "<group>"; };
+		DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGoalsView.swift; sourceTree = "<group>"; };
+		DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListRow.swift; sourceTree = "<group>"; };
 		DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowTutorial.swift"; sourceTree = "<group>"; };
 		DA938A2B2536FD9300446580 /* FireworksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireworksView.swift; sourceTree = "<group>"; };
 		DA938A31253703B600446580 /* UIScren+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScren+Extensions.swift"; sourceTree = "<group>"; };
@@ -131,6 +141,8 @@
 		DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendarView.swift; sourceTree = "<group>"; };
 		DABE55342567C70F00923919 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		DABE55392567C84200923919 /* ExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationView.swift; sourceTree = "<group>"; };
+		DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalMood.swift; sourceTree = "<group>"; };
+		DAE321FF257B9E41007DB9F0 /* JournalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDate.swift; sourceTree = "<group>"; };
 		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowSmartExplanation.swift"; sourceTree = "<group>"; };
@@ -235,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				DA6DD3D9257A445F00AACE45 /* AddNewGoal */,
+				DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */,
 				DA6DD3D4257A445400AACE45 /* JournalView.swift */,
 				DA3A3413252761A600597C73 /* MainGoalView.swift */,
 				DAEFAA9425763DED00B06680 /* SmartExplanationView.swift */,
@@ -246,9 +259,9 @@
 		DA6566B82525E61A00923688 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DA790BF5257B918400598B96 /* CoreData */,
 				DA9D02EB2552AE4800DBFB2E /* Structs */,
 				DAF1A8B8255173E900EBEAA6 /* Enums */,
-				DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,11 +285,22 @@
 				DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */,
 				DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */,
 				DABE55392567C84200923919 /* ExplanationView.swift */,
+				DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DA790BF5257B918400598B96 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */,
+				DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */,
+				DA790C24257B941C00598B96 /* JournalPage+CoreDataProperties.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		DA794BCE252733CC005D8423 /* UIKit */ = {
@@ -311,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				DA084EDE25753DCE00CAC158 /* FamousQuote.swift */,
+				DAE321FF257B9E41007DB9F0 /* JournalDate.swift */,
 				DA9D02F12552AEE200DBFB2E /* WeekDay.swift */,
 			);
 			path = Structs;
@@ -399,6 +424,7 @@
 			children = (
 				DA084EE6257549BA00CAC158 /* ActiveSheet.swift */,
 				DAF1A8B9255173F800EBEAA6 /* GoalType.swift */,
+				DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */,
 				DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */,
 			);
 			path = Enums;
@@ -602,10 +628,13 @@
 			files = (
 				DAEFAA9D2576424400B06680 /* AddNewGoalSecondView.swift in Sources */,
 				DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */,
+				DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */,
 				DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */,
 				DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */,
 				DAAA903B257A593400525B14 /* JournalDateView.swift in Sources */,
 				DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */,
+				DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */,
+				DA90BB62257FC4FD00B9D4D1 /* GoalListRow.swift in Sources */,
 				DA9DA465257519320006B706 /* MotivationalView.swift in Sources */,
 				DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */,
 				DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */,
@@ -618,6 +647,7 @@
 				DAF1A8E025517F3300EBEAA6 /* TypeCellView.swift in Sources */,
 				DAB7DC83252232130087F9C8 /* Persistence.swift in Sources */,
 				DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */,
+				DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */,
 				DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */,
 				DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */,
 				DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */,
@@ -637,9 +667,11 @@
 				DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */,
 				DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */,
 				DABE55352567C70F00923919 /* TutorialView.swift in Sources */,
+				DA790C27257B941C00598B96 /* JournalPage+CoreDataClass.swift in Sources */,
 				DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */,
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
 				DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */,
+				DA790C26257B941C00598B96 /* JournalPage+CoreDataProperties.swift in Sources */,
 				DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */,
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,

@@ -20,6 +20,7 @@ struct WeekDay: Identifiable {
     var goalColor: Color
     var isValidGoal: Bool
     var goal: Goal?
+    var date: Date
 
     init(id: Int64, date: Date, isToday: Bool, isWorkingDay: Bool? = nil, goalColor: String? = nil, goal: Goal? = nil) {
         let numberFormatter = DateFormatter()
@@ -37,6 +38,7 @@ struct WeekDay: Identifiable {
         self.goalColor = Color(goalColor ?? "orangeGoal")
         self.isValidGoal = isWorkingDay != nil
         self.goal = goal
+        self.date = date
     }
 
 }

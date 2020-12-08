@@ -44,7 +44,7 @@ struct ContentView: View {
                     MainGoalView(viewModel: model)
                 } else {
                     MainGoalView(viewModel: .init(goal: nil,
-                                                  isFirstGoal: viewModel.goals.isEmpty,
+                                                  allGoals: viewModel.goals,
                                                   activeSheet: $viewModel.activeSheet,
                                                   refreshAllGoals: $viewModel.refreshAllGoals))
                 }
@@ -60,11 +60,10 @@ struct ContentView: View {
         })
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {
-                viewModel.goals = goals.filter { $0.isValid && !$0.isArchived }
-                viewModel.goalsModels = viewModel.goals.map {
+                viewModel.goals = goals.filter { $0.isValid }
+                viewModel.goalsModels = viewModel.goals.filter { $0.isValid && !$0.isArchived }.map {
                     let goal = $0
                     let model = MainGoalViewModel(goal: goal,
-                                                  isFirstGoal: viewModel.goals.isEmpty,
                                                   activeSheet: $viewModel.activeSheet,
                                                   refreshAllGoals: $viewModel.refreshAllGoals)
                     model.goal = goal

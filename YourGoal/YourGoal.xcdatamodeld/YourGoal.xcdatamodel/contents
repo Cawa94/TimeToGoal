@@ -26,8 +26,16 @@
         <attribute name="whatDefinition" optional="YES" attributeType="String"/>
         <attribute name="whatWillChangeDefinition" optional="YES" attributeType="String"/>
         <attribute name="whyDefinition" optional="YES" attributeType="String"/>
+        <relationship name="journal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="JournalPage" inverseName="goal" inverseEntity="JournalPage"/>
+    </entity>
+    <entity name="JournalPage" representedClassName="JournalPage" syncable="YES">
+        <attribute name="dayId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mood" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="journal" inverseEntity="Goal"/>
     </entity>
     <elements>
-        <element name="Goal" positionX="-63" positionY="-18" width="128" height="404"/>
+        <element name="Goal" positionX="-63" positionY="-18" width="128" height="419"/>
+        <element name="JournalPage" positionX="-63" positionY="144" width="128" height="89"/>
     </elements>
 </model>

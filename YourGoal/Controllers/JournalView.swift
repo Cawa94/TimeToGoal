@@ -11,8 +11,19 @@ import Combine
 public class JournalViewModel: ObservableObject {
 
     @Published var goal: Goal
-    @Published var pageContentBinding: String = "Com'è andata oggi?"
-    @Published var feelingSelected: String?
+    @Published var selectedDay = Date() {
+        didSet {
+            if let page = goal.journal?.filter({ ($0 as? JournalPage)?.dayId == selectedDay.customId }).first as? JournalPage {
+                self.notes = page.notes ?? placeholderString
+                self.mood = page.mood
+            } else {
+                self.notes = placeholderString
+                self.mood = nil
+            }
+        }
+    }
+    @Published var notes: String = "Com'è andata oggi?"
+    @Published var mood: String?
 
     let placeholderString = "Com'è andata oggi?"
 
@@ -35,21 +46,22 @@ struct JournalView: View {
             NavigationView {
                 ScrollView() {
                     VStack {
-                        JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal))
+                        JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal,
+                                                                          selectedDay: $viewModel.selectedDay))
                             .padding([.leading, .trailing, .top, .bottom], 15)
 
-                        TextEditor(text: $viewModel.pageContentBinding)
+                        TextEditor(text: $viewModel.notes)
                             .padding([.leading, .trailing], 30)
                             .font(.title2)
                             .frame(height: 330)
                             .cornerRadius(.defaultRadius)
                             .disableAutocorrection(true)
-                            .foregroundColor(viewModel.pageContentBinding == viewModel.placeholderString ? .grayGradient2 : .black)
+                            .foregroundColor(viewModel.notes == viewModel.placeholderString ? .grayGradient2 : .black)
                                 .onTapGesture {
-                                    if viewModel.pageContentBinding == viewModel.placeholderString {
-                                        viewModel.pageContentBinding = ""
-                                    } else if viewModel.pageContentBinding == "" {
-                                        viewModel.pageContentBinding = viewModel.placeholderString
+                                    if viewModel.notes == viewModel.placeholderString {
+                                        viewModel.notes = ""
+                                    } else if viewModel.notes == "" {
+                                        viewModel.notes = viewModel.placeholderString
                                     }
                                 }
 
@@ -72,12 +84,28 @@ struct JournalView: View {
         .onTapGesture {
             UIApplication.shared.endEditing()
         }
+        .onAppear(perform: {
+            viewModel.selectedDay = Date()
+        })
     }
 
     var saveAndCloseButton: some View {
         HStack {
             Button(action: {
                 withAnimation {
+                    if let page = viewModel.goal.journal?.filter({ ($0 as? JournalPage)?.dayId == viewModel.selectedDay.customId })
+                        .first as? JournalPage { // delete old page
+                        PersistenceController.shared.container.viewContext.delete(page)
+                        PersistenceController.shared.saveContext()
+                    }
+                    if (viewModel.notes != "" && viewModel.notes != viewModel.placeholderString) || viewModel.mood != nil {
+                        let newPage = JournalPage(context: PersistenceController.shared.container.viewContext)
+                        newPage.dayId = viewModel.selectedDay.customId
+                        newPage.notes = viewModel.notes
+                        newPage.mood = viewModel.mood
+                        viewModel.goal.addToJournal(newPage)
+                        PersistenceController.shared.saveContext()
+                    }
                     viewModel.isPresented.toggle()
                 }
             }) {
@@ -99,39 +127,18 @@ struct JournalView: View {
         }
     }
 
+    @ViewBuilder
     var emojiStackView: some View {
         HStack(spacing: 15) {
-            Button(action: {
-                viewModel.feelingSelected = "🤩"
-            }) {
-                Text("🤩")
-                    .font(.system(size: viewModel.feelingSelected == "🤩" ? 60 : 40))
+            ForEach(JournalMood.allValues, id: \.self) { mood in
+                Button(action: {
+                    viewModel.mood = mood.rawValue
+                }) {
+                    Text(mood.emoji)
+                        .font(.system(size: viewModel.mood == mood.rawValue ? 65 : 40))
+                }
             }
-            Button(action: {
-                viewModel.feelingSelected = "☺️"
-            }) {
-                Text("☺️")
-                    .font(.system(size: viewModel.feelingSelected == "☺️" ? 60 : 40))
-            }
-            Button(action: {
-                viewModel.feelingSelected = "😐"
-            }) {
-                Text("😐")
-                    .font(.system(size: viewModel.feelingSelected == "😐" ? 60 : 40))
-            }
-            Button(action: {
-                viewModel.feelingSelected = "☹️"
-            }) {
-                Text("☹️")
-                    .font(.system(size: viewModel.feelingSelected == "☹️" ? 60 : 40))
-            }
-            Button(action: {
-                viewModel.feelingSelected = "😫"
-            }) {
-                Text("😫")
-                    .font(.system(size: viewModel.feelingSelected == "😫" ? 60 : 40))
-            }
-        }.frame(height: 60, alignment: .center)
+        }.frame(height: 65, alignment: .center)
     }
 
 }

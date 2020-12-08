@@ -18,7 +18,6 @@ public class AddNewGoalSecondViewModel: ObservableObject {
 
     @Published var goal: Goal
     @Published var isColorsVisible = false
-    @Published var showSmartExplanation = false
 
     var isNewGoal: Bool
 

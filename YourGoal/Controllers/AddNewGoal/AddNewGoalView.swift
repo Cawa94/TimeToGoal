@@ -204,9 +204,9 @@ struct AddNewGoalView: View {
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
-        }.sheet(isPresented: $viewModel.showSmartExplanation, content: {
+        }/*.sheet(isPresented: $viewModel.showSmartExplanation, content: {
             SmartExplanationView(isPresented: $viewModel.showSmartExplanation)
-        })
+        })*/
     }
 
 }

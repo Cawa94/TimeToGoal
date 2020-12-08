@@ -10,31 +10,31 @@ import SwiftUI
 struct TutorialView: View {
 
     @Binding var activeSheet: ActiveSheet?
+    @State var currentPage: Int = 1
 
     @ViewBuilder
     var body: some View {
         BackgroundView(color: .pageBackground) {
             NavigationView {
-                TabView {
-                    ExplanationView(viewModel: .init(text: "tutorial_first_step_text".localized(),
-                                                     image: "tutorial_first_step_image".localized()),
-                                    activeSheet: $activeSheet)
-                    ExplanationView(viewModel: .init(text: "tutorial_second_step_text".localized(),
-                                                     image: "tutorial_second_step_image".localized()),
-                                    activeSheet: $activeSheet)
-                    ExplanationView(viewModel: .init(text: "tutorial_third_step_text".localized(),
-                                                     image: "tutorial_third_step_image".localized()),
-                                    activeSheet: $activeSheet)
-                    ExplanationView(viewModel: .init(text: "tutorial_fourth_step_text".localized(),
-                                                     image: "tutorial_fourth_step_image".localized(),
-                                                     isLastScreen: true),
-                                    activeSheet: $activeSheet)
+                TabView(selection: $currentPage) {
+                    ExplanationView(viewModel: .init(pageNumber: 1,
+                                                     currentPage: $currentPage,
+                                                     activeSheet: $activeSheet)).tag(1)
+                    ExplanationView(viewModel: .init(pageNumber: 2,
+                                                     currentPage: $currentPage,
+                                                     activeSheet: $activeSheet)).tag(2)
+                    ExplanationView(viewModel: .init(pageNumber: 3,
+                                                     currentPage: $currentPage,
+                                                     activeSheet: $activeSheet)).tag(3)
+                    ExplanationView(viewModel: .init(pageNumber: 4,
+                                                     currentPage: $currentPage,
+                                                     activeSheet: $activeSheet)).tag(4)
                 }
                 .id(0)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .colorScheme(.light)
-                .navigationBarTitle("tutorial_title".localized(), displayMode: .large)
+                .navigationBarTitle("Welcome!👊😎".localized(), displayMode: .large)
             }
         }
     }

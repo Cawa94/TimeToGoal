@@ -16,37 +16,38 @@ private extension Color {
 
 public class MainGoalViewModel: ObservableObject {
 
-    @Published var goal: Goal? {
-        didSet {
-            progressViewModel.goal = goal
-            calendarViewModel.goal = goal
-            showFireworks = goal?.isCompleted ?? false
-            if goal?.isCompleted ?? false {
-                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                    SKStoreReviewController.requestReview(in: scene)
-                }
-            }
-        }
-    }
-
-    @Published var progressViewModel = GoalProgressViewModel()
-    @Published var calendarViewModel = HorizontalCalendarViewModel()
+    @Published var goal: Goal?
+    @Published var allGoals: [Goal] // Used to show allGoals page
+    @Published var progressViewModel: GoalProgressViewModel
+    @Published var calendarViewModel: HorizontalCalendarViewModel
     @Published var showingTrackGoal = false
     @Published var showFireworks = false
     @Published var showingEditGoal = false
-    @Published var showingJournal = true
+    @Published var showingJournal = false
+    @Published var showingAllGoals = false
     @Published var showMotivation = false
 
     @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
 
-    var isFirstGoal: Bool
+    var isDetailsView = false
 
-    init(goal: Goal?, isFirstGoal: Bool = false, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
+    init(goal: Goal?, allGoals: [Goal]? = nil, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>, isDetailsView: Bool = false) {
         self.goal = goal
-        self.isFirstGoal = isFirstGoal
+        self.allGoals = allGoals ?? []
         self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
+        self.progressViewModel = GoalProgressViewModel(goal: goal)
+        self.calendarViewModel = HorizontalCalendarViewModel(goal: goal)
+        self.showFireworks = isDetailsView ? false : goal?.isCompleted ?? false
+        self.isDetailsView = isDetailsView
+        #if RELEASE
+            if goal?.isCompleted ?? false {
+                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                    SKStoreReviewController.requestReview(in: scene)
+                }
+            }
+        #endif
     }
 
 }
@@ -105,8 +106,20 @@ struct MainGoalView: View {
                         .frame(height: 30)
                     
                     VStack {
-                        if (viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil {
+                        if (viewModel.goal?.isCompleted ?? false) && !viewModel.isDetailsView {
+                            archiveGoalButton
+                                .padding([.leading, .trailing], 15)
+                            Spacer()
+                                .frame(height: 15)
+                        } else if viewModel.goal == nil {
                             newGoalButton
+                                .padding([.leading, .trailing], 15)
+                            Spacer()
+                                .frame(height: 15)
+                            allGoalsButton
+                                .padding([.leading, .trailing], 15)
+                        } else if viewModel.isDetailsView {
+                            journalButton
                                 .padding([.leading, .trailing], 15)
                             Spacer()
                                 .frame(height: 15)
@@ -126,8 +139,10 @@ struct MainGoalView: View {
                         }
                     }
 
-                    Spacer()
-                        .frame(height: DeviceFix.isRoundedScreen ? 100 : 65)
+                    if !viewModel.isDetailsView {
+                        Spacer()
+                            .frame(height: DeviceFix.isRoundedScreen ? 100 : 65)
+                    }
                 }
 
                 if viewModel.showingTrackGoal {
@@ -156,7 +171,8 @@ struct MainGoalView: View {
                     MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
                         .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
                 }
-            }
+            }.navigationBarTitle("\(viewModel.goal?.name ?? "Obiettivo")", displayMode: .inline)
+            .navigationBarHidden(!viewModel.isDetailsView)
         }
     }
 
@@ -191,18 +207,12 @@ struct MainGoalView: View {
     var newGoalButton: some View {
         HStack {
             Button(action: {
-                if let goal = viewModel.goal, goal.isCompleted {
-                    goal.isArchived = true
-                    PersistenceController.shared.saveContext()
-                    viewModel.refreshAllGoals = true
-                } else {
-                    FirebaseService.logEvent(.addGoalButton)
-                    viewModel.activeSheet = .newGoal
-                }
+                FirebaseService.logEvent(.addGoalButton)
+                viewModel.activeSheet = .newGoal
             }) {
                 HStack {
                     Spacer()
-                    Text(viewModel.goal?.isCompleted ?? false ? "global_archive".localized() : "global_add_goal".localized())
+                    Text("global_add_goal".localized())
                         .bold()
                         .foregroundColor(.white)
                         .font(.title2)
@@ -210,7 +220,32 @@ struct MainGoalView: View {
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal?.rectGradientColors ?? Color.rainbow),
+                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
+                                           startPoint: .topLeading, endPoint: .bottomTrailing))
+                .cornerRadius(.defaultRadius)
+                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+            }.accentColor(viewModel.goal?.goalColor)
+        }
+    }
+
+    var archiveGoalButton: some View {
+        HStack {
+            Button(action: {
+                viewModel.goal?.isArchived = true
+                PersistenceController.shared.saveContext()
+                viewModel.refreshAllGoals = true
+            }) {
+                HStack {
+                    Spacer()
+                    Text("global_archive".localized())
+                        .bold()
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+                .padding([.top, .bottom], 15)
+                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
@@ -283,6 +318,37 @@ struct MainGoalView: View {
                     JournalView(viewModel: .init(goal: goal,
                                                  isPresented: $viewModel.showingJournal))
                 }
+            })
+        }
+    }
+
+    var allGoalsButton: some View {
+        HStack {
+            Button(action: {
+                viewModel.showingAllGoals.toggle()
+            }) {
+                HStack {
+                    Spacer()
+                    Text("I miei obiettivi".localized())
+                        .bold()
+                        .foregroundColor(viewModel.goal?.goalColor)
+                        .font(.title3)
+                    Spacer()
+                }
+                .padding(15.0)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(.orangeGoal)
+                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                )
+            }.accentColor(.orangeGoal)
+            .sheet(isPresented: $viewModel.showingAllGoals, onDismiss: {
+                
+            }, content: {
+                AllGoalsView(viewModel: .init(goals: viewModel.allGoals,
+                                              refreshAllGoals: $viewModel.refreshAllGoals,
+                                              isPresented: $viewModel.showingAllGoals))
             })
         }
     }

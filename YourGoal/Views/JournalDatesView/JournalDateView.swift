@@ -9,26 +9,37 @@ import SwiftUI
 
 struct JournalDateView: View {
 
-    let weekDay: WeekDay
+    let journalDate: JournalDate
+    var isSelected : Bool
 
     @ViewBuilder
     var body: some View {
         VStack {
             Spacer()
 
-            Text(weekDay.month)
-                .foregroundColor(weekDay.isToday ? .white : Color.black.opacity(0.5))
+            Text(journalDate.month)
+                .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
                 .font(.footnote)
-                .fontWeight(weekDay.isToday ? .bold : .regular )
+                .fontWeight(isSelected ? .bold : .regular )
 
             Spacer()
                 .frame(height: 5)
 
-            Text(weekDay.number)
-                .font(weekDay.isToday ? .title : .title2)
-                .fontWeight(weekDay.isToday ? .bold : .regular )
-                .foregroundColor(weekDay.isToday ? .white : Color.black.opacity(0.5))
-            
+            if let emoji = journalDate.emoji {
+                HStack {
+                    Text(journalDate.number)
+                        .font(isSelected ? .title : .title2)
+                        .fontWeight(isSelected ? .bold : .regular )
+                        .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
+                    Text(emoji)
+                }
+            } else {
+                Text(journalDate.number)
+                    .font(isSelected ? .title : .title2)
+                    .fontWeight(isSelected ? .bold : .regular )
+                    .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
+            }
+
             Spacer()
         }
         .cornerRadius(.defaultRadius)

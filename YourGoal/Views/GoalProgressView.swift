@@ -17,6 +17,10 @@ public class GoalProgressViewModel: ObservableObject {
 
     @Published var goal: Goal?
 
+    init(goal: Goal?) {
+        self.goal = goal
+    }
+
     var isCompleted: Bool {
         return goal?.isCompleted ?? false
     }
@@ -53,7 +57,7 @@ public class GoalProgressViewModel: ObservableObject {
 
 struct GoalProgressView: View {
 
-    @ObservedObject var viewModel = GoalProgressViewModel()
+    @ObservedObject var viewModel: GoalProgressViewModel
 
     @ViewBuilder
     var body: some View {
@@ -81,7 +85,7 @@ struct GoalProgressView: View {
                         .trim(from: 0.0,
                               to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
                         .stroke(style: StrokeStyle(lineWidth: 40.0, lineCap: .round, lineJoin: .round))
-                        .animation(.easeInOut(duration: 0.75))
+                        //.animation(.easeInOut(duration: 0.75))
                         .padding(20)
                 )
                 .rotationEffect(Angle(degrees: 270))

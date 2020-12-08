@@ -159,7 +159,7 @@
 "motivational_author_44" = "Albert Camus";
 "motivational_sentence_45" = "La maggior parte delle persone è felice tanto quanto decide di esserlo";
 "motivational_author_45" = "Abraham Lincoln";
-"motivational_sentence_46" = "Fidati solo del movimento. La vita accade a livello di eventi, non di parole. Fidati di movimento";
+"motivational_sentence_46" = "Fidati solo del progresso. La vita accade a livello di fatti, non di parole.";
 "motivational_author_46" = "Alfred Adler";
 "motivational_sentence_47" = "Il successo non è la chiave della felicità. La felicità è la chiave del successo. Se ami quello che stai facendo, avrai successo";
 "motivational_author_47" = "Albert Schweitzer";
@@ -170,15 +170,21 @@
 "motivational_sentence_50" = "Il futuro appartiene a coloro che lo preparano oggi";
 "motivational_author_50" = "Malcolm X";
 
-"track_popup_title" = "Quanto ci hai lavorato oggi?";
-
-"tutorial_first_step_text" = "Crea un obiettivo completamente personalizzabile, con diverse opzioni per tracciare i tuoi progressi";
-"tutorial_first_step_image" = "first_step_italian";
-"tutorial_second_step_text" = "Imposta quanto hai intenzione di lavorarci ogni giorno e visualizza la data in cui raggiungerai l'obiettivo";
-"tutorial_second_step_image" = "second_step_italian";
-"tutorial_third_step_text" = "Traccia i tuoi sforzi giornalieri cercando di restare fedele al piano impostato inizialmente";
-"tutorial_third_step_image" = "third_step_italian";
-"tutorial_fourth_step_text" = "La data si avvicinerà o allontanerà in base a quanto saprai essere costante nel tempo!";
-"tutorial_fourth_step_image" = "fourth_step_italian";
+"tutorial_first_step_1" = "How many times did you set a goal for yourself but you weren't able to stick to it after some time?\n\n";
+"tutorial_first_step_2" = " is the first app to help you set and track ";
+"tutorial_first_step_3" = " goals, in order to achieve everything you want with your life.\n\nIt will help you design a goal in the right way and support you all over the journey until you'll reach the results you want.";
+"tutorial_second_step_1" = "What is SMART?\n\n";
+"tutorial_second_step_2" = "SPECIFIC\n";
+"tutorial_second_step_3" = "Your goal must be as much clear as possible, you must know what you want and WHY you want it, in order to focus and be truly motivated.\n\n";
+"tutorial_second_step_4" = "MEASURABLE\n";
+"tutorial_second_step_5" = "If you can't track your goal you can't know if you're making progress.";
+"tutorial_third_step_1" = "ACHIEAVABLE\n";
+"tutorial_third_step_2" = "You have to be honest to yourself, because only you know if you're really capable of reaching that goal.\n\n";
+"tutorial_third_step_3" = "RELEVANT\n";
+"tutorial_third_step_4" = "The goal must be important to reach in this moment of your life.\n\n";
+"tutorial_third_step_5" = "TIME-BOUND\n";
+"tutorial_third_step_6" = "You must now how much time it will take for you to accomplish it";
+"tutorial_fourth_step_1" = " will help you design your SMART goals and track your progress in a super easy way.\n\nYou'll be motivated every day with motivational quotes and you'll have the option to write your though in a journal.\n\nYour goals await for you.";
+"tutorial_fourth_step_2" = "Are you ready to achieve success?";
 "tutorial_close_button" = "Ok ho capito";
 "tutorial_title" = "Come funziona?";
