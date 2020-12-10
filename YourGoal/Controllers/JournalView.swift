@@ -37,48 +37,18 @@ public class JournalViewModel: ObservableObject {
 }
 
 struct JournalView: View {
-    
+
     @ObservedObject var viewModel: JournalViewModel
 
     @ViewBuilder
     var body: some View {
         BackgroundView(color: .pageBackground) {
-            NavigationView {
-                ScrollView() {
-                    VStack {
-                        JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal,
-                                                                          selectedDay: $viewModel.selectedDay))
-                            .padding([.leading, .trailing, .top, .bottom], 15)
-
-                        TextEditor(text: $viewModel.notes)
-                            .padding([.leading, .trailing], 30)
-                            .font(.title2)
-                            .frame(height: 330)
-                            .cornerRadius(.defaultRadius)
-                            .disableAutocorrection(true)
-                            .foregroundColor(viewModel.notes == viewModel.placeholderString ? .grayGradient2 : .black)
-                                .onTapGesture {
-                                    if viewModel.notes == viewModel.placeholderString {
-                                        viewModel.notes = ""
-                                    } else if viewModel.notes == "" {
-                                        viewModel.notes = viewModel.placeholderString
-                                    }
-                                }
-
-                        Spacer()
-
-                        Text("Come ti senti?")
-                            .font(.caption)
-                            .foregroundColor(.grayGradient2)
-                            .padding([.bottom], 2.5)
-
-                        emojiStackView
-                            .padding([.leading, .trailing], 15)
-
-                        saveAndCloseButton
-                            .padding([.leading, .trailing, .top, .bottom], 15)
-                    }
-                }.navigationBarTitle("Diario", displayMode: .large)
+            if !viewModel.goal.isArchived {
+                NavigationView {
+                    scrollViewContent
+                }
+            } else {
+                scrollViewContent
             }
         }
         .onTapGesture {
@@ -87,6 +57,46 @@ struct JournalView: View {
         .onAppear(perform: {
             viewModel.selectedDay = Date()
         })
+    }
+
+    var scrollViewContent: some View {
+        ScrollView() {
+            VStack {
+                JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal,
+                                                                  selectedDay: $viewModel.selectedDay))
+                    .padding([.leading, .trailing, .top, .bottom], 15)
+
+                TextEditor(text: $viewModel.notes)
+                    .padding([.leading, .trailing], 30)
+                    .font(.title2)
+                    .frame(height: viewModel.goal.isArchived ? 440 : 330)
+                    .cornerRadius(.defaultRadius)
+                    .disableAutocorrection(true)
+                    .foregroundColor(viewModel.notes == viewModel.placeholderString ? .grayGradient2 : .black)
+                        .onTapGesture {
+                            if viewModel.notes == viewModel.placeholderString {
+                                viewModel.notes = ""
+                            } else if viewModel.notes == "" {
+                                viewModel.notes = viewModel.placeholderString
+                            }
+                        }
+
+                Spacer()
+
+                Text("Come ti senti?")
+                    .font(.caption)
+                    .foregroundColor(.grayGradient2)
+                    .padding([.bottom], 2.5)
+
+                emojiStackView
+                    .padding([.leading, .trailing], 15)
+
+                if !viewModel.goal.isArchived {
+                    saveAndCloseButton
+                        .padding([.leading, .trailing, .top, .bottom], 15)
+                }
+            }
+        }.navigationBarTitle("Diario", displayMode: viewModel.goal.isArchived ? .inline : .large)
     }
 
     var saveAndCloseButton: some View {

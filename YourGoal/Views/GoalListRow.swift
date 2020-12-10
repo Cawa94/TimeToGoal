@@ -23,10 +23,8 @@ struct GoalListRow: View {
 
     var body: some View {
         if viewModel.goal.isArchived {
-            NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goal,
-                                                                      activeSheet: .constant(nil),
-                                                                      refreshAllGoals: .constant(false),
-                                                                      isDetailsView: true))) {
+            NavigationLink(destination: JournalView(viewModel: .init(goal: viewModel.goal,
+                                                                     isPresented: .constant(true)))) {
                 rowContent
             }
         } else {
@@ -35,10 +33,33 @@ struct GoalListRow: View {
     }
 
     var rowContent: some View {
-        VStack(alignment: .leading) {
-            Text(viewModel.goal.name ?? "name")
-            Text(viewModel.goal.type ?? "type")
+        HStack() {
+            viewModel.goal.goalType.icon
+                .resizable()
+                .aspectRatio(1.0, contentMode: .fit)
+                .frame(width: 40)
+                .foregroundColor(viewModel.goal.goalColor)
+                .padding([.top, .bottom], 10)
+
+            Spacer()
+                .frame(width: 15)
+
+            Text(viewModel.goal.name ?? "")
+                .font(.title3)
+                .fontWeight(.semibold)
+
+            Spacer()
+
+            if !viewModel.goal.isArchived {
+                percentageText
+            }
         }
+    }
+
+    var percentageText: some View {
+        Text("\(((viewModel.goal.timeCompleted / viewModel.goal.timeRequired) * 100), specifier: "%.2f")%")
+            .font(.body)
+            .fontWeight(.semibold)
     }
 
 }

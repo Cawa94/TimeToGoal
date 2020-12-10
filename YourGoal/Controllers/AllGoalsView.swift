@@ -68,7 +68,8 @@ struct AllGoalsView: View {
                             }
                         }
                     }
-                }.navigationBarTitle("I miei obiettivi", displayMode: .large)
+                }.listStyle(GroupedListStyle())
+                .navigationBarTitle("I miei obiettivi", displayMode: .large)
             }
         }
     }

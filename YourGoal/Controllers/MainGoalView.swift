@@ -16,7 +16,18 @@ private extension Color {
 
 public class MainGoalViewModel: ObservableObject {
 
-    @Published var goal: Goal?
+    @Published var goal: Goal? {
+        didSet {
+            showFireworks = isDetailsView ? false : goal?.isCompleted ?? false
+            #if RELEASE
+                if goal?.isCompleted ?? false {
+                    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        SKStoreReviewController.requestReview(in: scene)
+                    }
+                }
+            #endif
+        }
+    }
     @Published var allGoals: [Goal] // Used to show allGoals page
     @Published var progressViewModel: GoalProgressViewModel
     @Published var calendarViewModel: HorizontalCalendarViewModel
@@ -39,15 +50,7 @@ public class MainGoalViewModel: ObservableObject {
         self._refreshAllGoals = refreshAllGoals
         self.progressViewModel = GoalProgressViewModel(goal: goal)
         self.calendarViewModel = HorizontalCalendarViewModel(goal: goal)
-        self.showFireworks = isDetailsView ? false : goal?.isCompleted ?? false
         self.isDetailsView = isDetailsView
-        #if RELEASE
-            if goal?.isCompleted ?? false {
-                if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                    SKStoreReviewController.requestReview(in: scene)
-                }
-            }
-        #endif
     }
 
 }
