@@ -34,7 +34,7 @@ struct TutorialView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .colorScheme(.light)
-                .navigationBarTitle("Welcome!👊😎".localized(), displayMode: .large)
+                .navigationBarTitle("tutorial_title", displayMode: .large)
             }
         }
     }

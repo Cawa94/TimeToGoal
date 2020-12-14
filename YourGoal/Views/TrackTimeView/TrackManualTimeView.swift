@@ -59,7 +59,7 @@ struct TrackManualTimeView: View {
 
                     if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes || currentGoal?.goalType.timeTrackingType == .double {
                         if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
-                            Text("global_hours".localized())
+                            Text("global_hours")
                                 .font(.title3)
                                 .bold()
                         } else {
@@ -80,7 +80,7 @@ struct TrackManualTimeView: View {
                         .clipped()
 
                         if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
-                            Text("global_minutes".localized())
+                            Text("global_minutes")
                                 .font(.title3)
                                 .bold()
                         }
@@ -119,7 +119,7 @@ struct TrackManualTimeView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("global_add".localized())
+                    Text("global_add")
                         .bold()
                         .font(.title3)
                         .foregroundColor(.white)

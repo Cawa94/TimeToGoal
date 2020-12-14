@@ -22,10 +22,10 @@ public class JournalViewModel: ObservableObject {
             }
         }
     }
-    @Published var notes: String = "Com'è andata oggi?"
+    @Published var notes: String = "journal_notes_question".localized()
     @Published var mood: String?
 
-    let placeholderString = "Com'è andata oggi?"
+    let placeholderString = "journal_notes_question".localized()
 
     @Binding var isPresented: Bool
 
@@ -83,7 +83,7 @@ struct JournalView: View {
 
                 Spacer()
 
-                Text("Come ti senti?")
+                Text("journal_mood_question")
                     .font(.caption)
                     .foregroundColor(.grayGradient2)
                     .padding([.bottom], 2.5)
@@ -96,7 +96,7 @@ struct JournalView: View {
                         .padding([.leading, .trailing, .top, .bottom], 15)
                 }
             }
-        }.navigationBarTitle("Diario", displayMode: viewModel.goal.isArchived ? .inline : .large)
+        }.navigationBarTitle("global_journal", displayMode: viewModel.goal.isArchived ? .inline : .large)
     }
 
     var saveAndCloseButton: some View {
@@ -121,7 +121,7 @@ struct JournalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Salva & chiudi".localized())
+                    Text("journal_save_close")
                         .bold()
                         .foregroundColor(.white)
                         .font(.title2)

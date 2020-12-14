@@ -119,7 +119,7 @@ struct AddNewGoalSecondView: View {
         BackgroundView(color: .pageBackground, barTintColor: viewModel.goal.goalUIColor) {
             ZStack {
                 Form {
-                    Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion.localized(),
+                    Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion,
                                                 customMeasureBinding.wrappedValue))) {
                         GeometryReader { vContainer in
                             HStack {
@@ -170,38 +170,38 @@ struct AddNewGoalSecondView: View {
                     .listRowBackground(Color.pageBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion.localized(),
+                    Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
                                                 customMeasureBinding.wrappedValue))) {
                         HStack {
-                            HoursSelectorView(viewModel: .init(title: "global_monday".localized(),
+                            HoursSelectorView(viewModel: .init(title: "global_monday",
                                                                bindingString: mondayBinding,
                                                                color: viewModel.goal.goalColor,
                                                                goal: $viewModel.goal))
-                            HoursSelectorView(viewModel: .init(title: "global_tuesday".localized(),
+                            HoursSelectorView(viewModel: .init(title: "global_tuesday",
                                                                bindingString: tuesdayBinding,
                                                                color: viewModel.goal.goalColor,
                                                                goal: $viewModel.goal))
-                            HoursSelectorView(viewModel: .init(title: "global_wednesday".localized(),
+                            HoursSelectorView(viewModel: .init(title: "global_wednesday",
                                                                bindingString: wednesdayBinding,
                                                                color: viewModel.goal.goalColor,
                                                                goal: $viewModel.goal))
                         }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                         HStack {
-                            HoursSelectorView(viewModel: .init(title: "global_thursday".localized(),
+                            HoursSelectorView(viewModel: .init(title: "global_thursday",
                                                                bindingString: thursdayBinding,
                                                                color: viewModel.goal.goalColor,
                                                                goal: $viewModel.goal))
-                            HoursSelectorView(viewModel: .init(title: "global_friday".localized(),
+                            HoursSelectorView(viewModel: .init(title: "global_friday",
                                                                bindingString: fridayBinding,
                                                                color: viewModel.goal.goalColor,
                                                                goal: $viewModel.goal))
                         }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                         HStack {
-                            HoursSelectorView(viewModel: .init(title: "global_saturday".localized(),
+                            HoursSelectorView(viewModel: .init(title: "global_saturday",
                                                                bindingString: saturdayBinding,
                                                                color: viewModel.goal.goalColor,
                                                                goal: $viewModel.goal))
-                            HoursSelectorView(viewModel: .init(title: "global_sunday".localized(),
+                            HoursSelectorView(viewModel: .init(title: "global_sunday",
                                                                bindingString: sundayBinding,
                                                                color: viewModel.goal.goalColor,
                                                                goal: $viewModel.goal))
@@ -210,7 +210,7 @@ struct AddNewGoalSecondView: View {
                     .listRowBackground(Color.pageBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text("add_goal_extimated_date_title".localized())) {
+                    Section(header: Text("add_goal_extimated_date_title")) {
                         VStack {
                             Text(completionDate.formattedAsDateString)
                                 .font(.largeTitle)
@@ -236,7 +236,7 @@ struct AddNewGoalSecondView: View {
                         }) {
                             HStack {
                                 Spacer()
-                                Text(viewModel.isNewGoal ? "global_add".localized() : "global_update".localized())
+                                Text(viewModel.isNewGoal ? "global_add" : "global_update")
                                     .bold()
                                     .foregroundColor(.white)
                                     .font(.title2)
@@ -260,7 +260,7 @@ struct AddNewGoalSecondView: View {
                                       isPresented: $viewModel.isColorsVisible)
                 }
             }
-            .navigationBarTitle("Tempo richiesto", displayMode: .inline)
+            .navigationBarTitle("global_time_required", displayMode: .inline)
         }
         .onTapGesture {
             UIApplication.shared.endEditing()

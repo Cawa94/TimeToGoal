@@ -104,7 +104,7 @@ struct GoalProgressView: View {
                         .padding(.bottom, 10)
                 } else {
                     Text(String(format: "main_time_required".localized(),
-                                viewModel.goal?.goalType.measureUnit.localized() ?? "\("global_hours".localized())"))
+                                viewModel.goal?.goalType.measureUnit ?? "\("global_hours".localized())"))
                         .font(.title)
                         .bold()
                         .foregroundColor(.textForegroundColor)
@@ -113,22 +113,22 @@ struct GoalProgressView: View {
                 Spacer()
                     .frame(height: 5)
                 if viewModel.goal == nil {
-                    Text("main_add_new_goal".localized())
+                    Text("main_add_new_goal")
                         .font(.title2)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
                 } else if viewModel.isCompleted {
-                    Text("main_weel_done".localized())
+                    Text("main_weel_done")
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(.textForegroundColor)
-                    Text("main_goal_completed".localized())
+                    Text("main_goal_completed")
                         .font(.title2)
                         .bold()
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
                 } else {
-                    Text("main_will_reach_goal".localized())
+                    Text("main_will_reach_goal")
                         .font(.title2)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)

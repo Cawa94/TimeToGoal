@@ -12,53 +12,90 @@
 "add_goal_hours_required_title" = "How many hours will it take?";
 "add_goal_type_title" = "What kind of goal do you want to reach?";
 
+"all_goals_archived" = "Archived";
+"all_goals_doing" = "In progress";
+"all_goals_title" = "My goals";
+
 "global_add" = "Add";
 "global_add_goal" = "Add Goal";
 "global_archive" = "Archive";
 "global_color" = "Color";
+"global_details" = "Details";
 "global_estimated" = "Date estimated";
 "global_friday" = "Friday";
 "global_hours" = "Hours";
+"global_journal" = "Journal";
 "global_minutes" = "Minutes";
 "global_monday" = "Monday";
 "global_new_goal" = "New Goal";
+"global_next" = "Next";
 "global_saturday" = "Saturday";
 "global_sunday" = "Sunday";
 "global_thursday" = "Thursday";
+"global_time_required" = "Time required";
 "global_tuesday" = "Tuesday";
 "global_update" = "Update";
 "global_wednesday" = "Wednesday";
+
+"goal_name_question" = "Goal name (max 50 characters)";
 
 "goal_book_main_question" = "Which book will you read?";
 "goal_run_main_question" = "What will you train for?";
 "goal_training_main_question" = "What will you train for?";
 "goal_project_main_question" = "What project do you want to carry out?";
-"goal_custom_main_question" = "Name of the goal";
+"goal_custom_main_question" = "What goal do you want to accomplish?";
+
+"goal_book_why_question" = "What makes important for you to read it?";
+"goal_run_why_question" = "What makes important for you to run?";
+"goal_training_why_question" = "What makes important for you to train?";
+"goal_project_why_question" = "What makes important for you to accomplish it?";
+"goal_custom_why_question" = "What makes important for you to achieve it?";
+
+"goal_book_what_change_question" = "What will change when you'll have finished it?";
+"goal_run_what_change_question" = "What will change for you when you'll have reached this goal?";
+"goal_training_what_change_question" = "What will change for you when you'll have reached this goal?";
+"goal_project_what_change_question" = "What will change for you when you'll have completed it?";
+"goal_custom_what_change_question" = "What will change for you when you'll have accomplish it?";
+
+"goal_book_support_question" = "What could support you in being consistent?";
+"goal_run_support_question" = "Who or what could support you in achieveing it?";
+"goal_training_support_question" = "Who or what could support you in achieveing it?";
+"goal_project_support_question" = "Who or what could support you in achieveing it?";
+"goal_custom_support_question" = "What could support you in your journey?";
+
 "goal_book_title" = "Book";
 "goal_run_title" = "Run";
 "goal_training_title" = "Training";
 "goal_project_title" = "Project";
 "goal_custom_title" = "Custom";
+
 "goal_book_measure_unit" = "pages";
 "goal_run_measure_unit" = "km";
 "goal_training_measure_unit" = "sessions";
 "goal_project_measure_unit" = "hours";
 "goal_custom_measure_unit" = "steps";
+
 "goal_book_time_required" = "How many pages are there in total?";
 "goal_run_time_required" = "How many km will you run in total?";
 "goal_training_time_required" = "How many sessions will you do?";
 "goal_project_time_required" = "How many hours will it take?";
 "goal_custom_time_required" = "%@ required to reach it";
+
 "goal_book_time_for_day" = "How many pages will you read per day?";
 "goal_run_time_for_day" = "How many km will you run each day?";
 "goal_training_time_for_day" = "How many sessions will you do each day?";
 "goal_project_time_for_day" = "How many hours will you work on it each day?";
 "goal_custom_time_for_day" = "%@ per day";
+
 "goal_book_time_spent" = "How many pages have you read?";
 "goal_run_time_spent" = "How many km did you run?";
 "goal_training_time_spent" = "How many training sessions have you done?";
 "goal_project_time_spent" = "How many hours did you work on it?";
 "goal_custom_time_spent" = "How many progress have you made?";
+
+"journal_mood_question" = "How do you feel?";
+"journal_notes_question" = "How was today?";
+"journal_save_close" = "Save & close";
 
 "main_weel_done" = "Well done!";
 "main_edit_goal" = "Edit goal";
@@ -170,13 +207,21 @@
 "motivational_sentence_50" = "The future belongs to those who prepare for it today";
 "motivational_author_50" = "Malcolm X";
 
-"tutorial_first_step_text" = "Create a fully customizable goal, with several options to track your progress";
-"tutorial_first_step_image" = "first_step_english";
-"tutorial_second_step_text" = "Set how much you'll work on it every day and visualize the extimated date you will accomplish it";
-"tutorial_second_step_image" = "second_step_english";
-"tutorial_third_step_text" = "Track your daily efforts, trying to stick to the original plan";
-"tutorial_third_step_image" = "third_step_english";
-"tutorial_fourth_step_text" = "The date will move closer or further depending on how constant you'll be over time!";
-"tutorial_fourth_step_image" = "fourth_step_english";
-"tutorial_close_button" = "Ok I got it";
-"tutorial_title" = "How does it works?";
+"tutorial_first_step_1" = "How many times did you set a goal for yourself but you weren't able to stick to it after some time?\n\n";
+"tutorial_first_step_2" = " is the first app to help you set and track ";
+"tutorial_first_step_3" = " goals, in order to achieve everything you want with your life.\n\nIt will help you design a goal in the right way and support you all over the journey until you'll reach the results you want.";
+"tutorial_second_step_1" = "What is SMART?\n\n";
+"tutorial_second_step_2" = "SPECIFIC\n";
+"tutorial_second_step_3" = "Your goal must be as much clear as possible, you must know what you want and WHY you want it, in order to focus and be truly motivated.\n\n";
+"tutorial_second_step_4" = "MEASURABLE\n";
+"tutorial_second_step_5" = "If you can't track your goal you can't know if you're making progress.";
+"tutorial_third_step_1" = "ACHIEAVABLE\n";
+"tutorial_third_step_2" = "You have to be honest to yourself, because only you know if you're really capable of reaching that goal.\n\n";
+"tutorial_third_step_3" = "RELEVANT\n";
+"tutorial_third_step_4" = "The goal must be important to reach in this moment of your life.\n\n";
+"tutorial_third_step_5" = "TIME-BOUND\n";
+"tutorial_third_step_6" = "You must now how much time it will take for you to accomplish it";
+"tutorial_fourth_step_1" = " will help you design your SMART goals and track your progress in a super easy way.\n\nYou'll be motivated every day with motivational quotes and you'll have the option to write your though in a journal.\n\nYour goals await for you.";
+"tutorial_fourth_step_2" = "Are you ready to achieve success?";
+"tutorial_close_button" = "Let's start!";
+"tutorial_title" = "Welcome!👊😎";

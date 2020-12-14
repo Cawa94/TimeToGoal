@@ -92,14 +92,14 @@ struct AddNewGoalView: View {
             NavigationView {
                 ZStack {
                     Form {
-                        Section(header: Text("add_goal_type_title".localized())) {
+                        Section(header: Text("add_goal_type_title")) {
                             TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
                         }
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("Nome dell'obiettivo (max 50 caratteri)")) {
+                        Section(header: Text("goal_name_question")) {
                             TextField("", text: nameBinding)
                                 .padding()
                                 .foregroundColor(.fieldsTextForegroundColor)
@@ -110,7 +110,7 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text(viewModel.goal.goalType.mainQuestion.localized())) {
+                        Section(header: Text(viewModel.goal.goalType.mainQuestion)) {
                             ZStack {
                                 TextEditor(text: whatBinding)
                                     .padding()
@@ -124,7 +124,7 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("Perchè è importante realizzare questo progetto?")) {
+                        Section(header: Text(viewModel.goal.goalType.whyQuestion)) {
                             ZStack {
                                 TextEditor(text: whyBinding)
                                     .padding()
@@ -138,7 +138,7 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("Cosa cambierà nella tua vita se lo realizzerai?")) {
+                        Section(header: Text(viewModel.goal.goalType.whatWillChangeQuestion)) {
                             ZStack {
                                 TextEditor(text: whatChangeBinding)
                                     .padding()
@@ -152,7 +152,7 @@ struct AddNewGoalView: View {
                         .listRowBackground(Color.pageBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("Chi o cosa potrebbero esserti d'aiuto nel realizzarlo?")) {
+                        Section(header: Text(viewModel.goal.goalType.supportQuestion)) {
                             ZStack {
                                 TextEditor(text: supportBinding)
                                     .padding()
@@ -179,7 +179,7 @@ struct AddNewGoalView: View {
                                 }) {
                                     HStack {
                                         Spacer()
-                                        Text("Avanti")
+                                        Text("global_next")
                                             .bold()
                                             .foregroundColor(.white)
                                             .font(.title2)
@@ -193,13 +193,13 @@ struct AddNewGoalView: View {
                                     .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 }.buttonStyle(PlainButtonStyle())
                                 .accentColor(viewModel.goal.goalColor)
-                            }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title.localized(), displayMode: .large)
+                            }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
                         }
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageBackground)
                     }
-                }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title.localized(), displayMode: .large)
+                }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
             }
         }
         .onTapGesture {

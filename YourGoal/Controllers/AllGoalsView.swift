@@ -20,10 +20,10 @@ public class AllGoalsViewModel: ObservableObject {
     @Published var goals: [Goal] {
         didSet {
             self.listSections = [ListSection(id: 0,
-                                             title: "In corso",
+                                             title: "all_goals_doing".localized(),
                                              goals: goals.filter { !$0.isArchived }),
                                  ListSection(id: 1,
-                                             title: "Archiviati",
+                                             title: "all_goals_archived".localized(),
                                              goals: goals.filter { $0.isArchived })]
         }
     }
@@ -38,10 +38,10 @@ public class AllGoalsViewModel: ObservableObject {
         self._refreshAllGoals = refreshAllGoals
         self._isPresented = isPresented
         self.listSections = [ListSection(id: 0,
-                                         title: "In corso",
+                                         title: "all_goals_doing".localized(),
                                          goals: goals.filter { !$0.isArchived }),
                              ListSection(id: 1,
-                                         title: "Archiviati",
+                                         title: "all_goals_archived".localized(),
                                          goals: goals.filter { $0.isArchived })]
     }
 
@@ -69,7 +69,7 @@ struct AllGoalsView: View {
                         }
                     }
                 }.listStyle(GroupedListStyle())
-                .navigationBarTitle("I miei obiettivi", displayMode: .large)
+                .navigationBarTitle("all_goals_title", displayMode: .large)
             }
         }
     }

@@ -68,7 +68,7 @@ struct ExplanationView: View {
                 }) {
                     HStack {
                         Spacer()
-                        Text(viewModel.pageNumber == 4 ? "Iniziamo!".localized() : "Avanti")
+                        Text(viewModel.pageNumber == 4 ? "tutorial_close_button" : "global_next")
                             .bold()
                             .foregroundColor(.white)
                             .font(.title2)

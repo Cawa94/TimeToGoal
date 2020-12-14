@@ -174,7 +174,7 @@ struct MainGoalView: View {
                     MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
                         .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
                 }
-            }.navigationBarTitle("\(viewModel.goal?.name ?? "Obiettivo")", displayMode: .inline)
+            }.navigationBarTitle("\(viewModel.goal?.name ?? "")", displayMode: .inline)
             .navigationBarHidden(!viewModel.isDetailsView)
         }
     }
@@ -191,7 +191,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("main_track_progress".localized())
+                    Text("main_track_progress")
                         .bold()
                         .foregroundColor(.white)
                         .font(.title2)
@@ -215,7 +215,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("global_add_goal".localized())
+                    Text("global_add_goal")
                         .bold()
                         .foregroundColor(.white)
                         .font(.title2)
@@ -240,7 +240,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("global_archive".localized())
+                    Text("global_archive")
                         .bold()
                         .foregroundColor(.white)
                         .font(.title2)
@@ -264,7 +264,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Dettagli".localized())
+                    Text("global_details")
                         .bold()
                         .foregroundColor(viewModel.goal?.goalColor)
                         .font(.title3)
@@ -298,7 +298,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Diario".localized())
+                    Text("global_journal")
                         .bold()
                         .foregroundColor(viewModel.goal?.goalColor)
                         .font(.title3)
@@ -332,7 +332,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("I miei obiettivi".localized())
+                    Text("all_goals_title")
                         .bold()
                         .foregroundColor(viewModel.goal?.goalColor)
                         .font(.title3)

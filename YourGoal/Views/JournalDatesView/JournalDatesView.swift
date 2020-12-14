@@ -23,8 +23,8 @@ public class JournalDatesViewModel: ObservableObject {
         
         var journalDates: [JournalDate] = []
         let dayDurationInSeconds: TimeInterval = 60*60*24
-        let creationDate = (goal.createdAt ?? Date()).adding(days: -5) // to start 2 days early than creation
-        let finalDate = goal.isArchived ? goal.completedAt ?? Date().adding(days: 5) : Date().adding(days: 5)
+        let creationDate = (goal.createdAt ?? Date()).adding(days: -3) // to start 2 days early than creation
+        let finalDate = goal.isArchived ? goal.completedAt?.adding(days: 3) ?? Date().adding(days: 3) : Date().adding(days: 3)
         for date in stride(from: creationDate, to: finalDate, by: dayDurationInSeconds) {
             journalDates.append(JournalDate(id: date.customId, date: date, goal: goal))
         }

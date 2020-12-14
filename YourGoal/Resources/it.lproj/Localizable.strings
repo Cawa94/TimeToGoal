@@ -12,53 +12,90 @@
 "add_goal_hours_required_title" = "Quante ore ci vogliono?";
 "add_goal_type_title" = "Che tipo di obiettivo vuoi raggiungere?";
 
+"all_goals_archived" = "Archiviati";
+"all_goals_doing" = "In corso";
+"all_goals_title" = "I miei obiettivi";
+
 "global_add" = "Aggiungi";
 "global_add_goal" = "Aggiungi Obiettivo";
 "global_archive" = "Archivia";
 "global_color" = "Colore";
+"global_details" = "Dettagli";
 "global_estimated" = "Data stimata";
 "global_friday" = "Venerdì";
 "global_hours" = "Ore";
+"global_journal" = "Diario";
 "global_minutes" = "Minuti";
 "global_monday" = "Lunedì";
 "global_new_goal" = "Nuovo Obiettivo";
+"global_next" = "Avanti";
 "global_saturday" = "Sabato";
 "global_sunday" = "Domenica";
 "global_thursday" = "Giovedì";
+"global_time_required" = "Tempo richiesto";
 "global_tuesday" = "Martedì";
 "global_update" = "Aggiorna";
 "global_wednesday" = "Mercoledì";
+
+"goal_name_question" = "Nome dell'obiettivo (max 50 caratteri)";
 
 "goal_book_main_question" = "Che libro leggerai?";
 "goal_run_main_question" = "Per quale motivo ti allenerai?";
 "goal_training_main_question" = "Per quale motivo ti allenerai?";
 "goal_project_main_question" = "Che progetto vuoi realizzare?";
-"goal_custom_main_question" = "Nome dell'obiettivo";
+"goal_custom_main_question" = "Descrizione dell'obiettivo";
+
+"goal_book_why_question" = "Which book will you read?";
+"goal_run_why_question" = "What will you train for?";
+"goal_training_why_question" = "What will you train for?";
+"goal_project_why_question" = "What project do you want to carry out?";
+"goal_custom_why_question" = "Goal's description";
+
+"goal_book_what_change_question" = "Which book will you read?";
+"goal_run_what_change_question" = "What will you train for?";
+"goal_training_what_change_question" = "What will you train for?";
+"goal_project_what_change_question" = "What project do you want to carry out?";
+"goal_custom_what_change_question" = "Goal's description";
+
+"goal_book_support_question" = "Which book will you read?";
+"goal_run_support_question" = "What will you train for?";
+"goal_training_support_question" = "What will you train for?";
+"goal_project_support_question" = "What project do you want to carry out?";
+"goal_custom_support_question" = "Goal's description";
+
 "goal_book_title" = "Libro";
 "goal_run_title" = "Corsa";
 "goal_training_title" = "Allenamento";
 "goal_project_title" = "Progetto";
 "goal_custom_title" = "Personalizzato";
+
 "goal_book_measure_unit" = "pagine";
 "goal_run_measure_unit" = "km";
 "goal_training_measure_unit" = "sessioni";
 "goal_project_measure_unit" = "ore";
 "goal_custom_measure_unit" = "steps";
+
 "goal_book_time_required" = "Quante pagine sono in tutto?";
 "goal_run_time_required" = "Quanti km correrai in totale?";
 "goal_training_time_required" = "Quante sessioni farai in totale?";
 "goal_project_time_required" = "Quante ore di tempo richiederà?";
 "goal_custom_time_required" = "%@ per completarlo";
+
 "goal_book_time_for_day" = "Quante pagine leggerai al giorno?";
 "goal_run_time_for_day" = "Quanti km correrai ogni giorno?";
 "goal_training_time_for_day" = "Quante sessioni farai ogni giorni?";
 "goal_project_time_for_day" = "Quante ore ci lavorerai ogni giorno?";
 "goal_custom_time_for_day" = "%@ al giorno";
+
 "goal_book_time_spent" = "Quante pagine hai letto?";
 "goal_run_time_spent" = "Quanti km hai corso?";
 "goal_training_time_spent" = "Quante sessioni di allenamento hai fatto?";
 "goal_project_time_spent" = "Quante ore ci hai lavorato?";
 "goal_custom_time_spent" = "Quanti progressi hai fatto?";
+
+"journal_mood_question" = "Come ti senti?";
+"journal_notes_question" = "Com'è andata oggi?";
+"journal_save_close" = "Salva & chiudi";
 
 "main_weel_done" = "Ben fatto!";
 "main_edit_goal" = "Modifica obiettivo";
@@ -186,5 +223,5 @@
 "tutorial_third_step_6" = "You must now how much time it will take for you to accomplish it";
 "tutorial_fourth_step_1" = " will help you design your SMART goals and track your progress in a super easy way.\n\nYou'll be motivated every day with motivational quotes and you'll have the option to write your though in a journal.\n\nYour goals await for you.";
 "tutorial_fourth_step_2" = "Are you ready to achieve success?";
-"tutorial_close_button" = "Ok ho capito";
-"tutorial_title" = "Come funziona?";
+"tutorial_close_button" = "Ok iniziamo!";
+"tutorial_title" = "Benvenuto!👊😎";
