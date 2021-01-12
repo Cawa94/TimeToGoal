@@ -37,31 +37,31 @@
 "global_update" = "Aggiorna";
 "global_wednesday" = "Mercoledì";
 
-"goal_name_question" = "Nome dell'obiettivo (max 50 caratteri)";
+"goal_name_question" = "Titolo dell'obiettivo (max 50 caratteri)";
 
 "goal_book_main_question" = "Che libro leggerai?";
-"goal_run_main_question" = "Per quale motivo ti allenerai?";
-"goal_training_main_question" = "Per quale motivo ti allenerai?";
+"goal_run_main_question" = "Per cosa ti allenerai?";
+"goal_training_main_question" = "Per cosa ti allenerai?";
 "goal_project_main_question" = "Che progetto vuoi realizzare?";
-"goal_custom_main_question" = "Descrizione dell'obiettivo";
+"goal_custom_main_question" = "Che obiettivo vuoi raggiungere?";
 
-"goal_book_why_question" = "Which book will you read?";
-"goal_run_why_question" = "What will you train for?";
-"goal_training_why_question" = "What will you train for?";
-"goal_project_why_question" = "What project do you want to carry out?";
-"goal_custom_why_question" = "Goal's description";
+"goal_book_why_question" = "Perchè è importante leggere questo libro?";
+"goal_run_why_question" = "Perchè è importante raggiungere questo obiettivo?";
+"goal_training_why_question" = "Perchè è importante raggiungere questo obiettivo?";
+"goal_project_why_question" = "Perchè è importante realizzare questo progetto?";
+"goal_custom_why_question" = "Perchè è importante raggiungere questo obiettivo?";
 
-"goal_book_what_change_question" = "Which book will you read?";
-"goal_run_what_change_question" = "What will you train for?";
-"goal_training_what_change_question" = "What will you train for?";
-"goal_project_what_change_question" = "What project do you want to carry out?";
-"goal_custom_what_change_question" = "Goal's description";
+"goal_book_what_change_question" = "Cosa cambierà per te quando l'avrai letto?";
+"goal_run_what_change_question" = "Cosa cambierà per te quando l'avrai raggiunto?";
+"goal_training_what_change_question" = "Cosa cambierà per te quando l'avrai raggiunto?";
+"goal_project_what_change_question" = "Cosa cambierà per te quando l'avrai completato?";
+"goal_custom_what_change_question" = "Cosa cambierà per te quando l'avrai raggiunto?";
 
-"goal_book_support_question" = "Which book will you read?";
-"goal_run_support_question" = "What will you train for?";
-"goal_training_support_question" = "What will you train for?";
-"goal_project_support_question" = "What project do you want to carry out?";
-"goal_custom_support_question" = "Goal's description";
+"goal_book_support_question" = "Chi o cosa potrebbe supportarti nel leggerlo?";
+"goal_run_support_question" = "Chi o cosa potrebbe supportarti nel raggiungerlo?";
+"goal_training_support_question" = "Chi o cosa potrebbe supportarti nel raggiungerlo?";
+"goal_project_support_question" = "Chi o cosa potrebbe supportarti nel completarlo?";
+"goal_custom_support_question" = "Chi o cosa potrebbe supportarti nel raggiungerlo?";
 
 "goal_book_title" = "Libro";
 "goal_run_title" = "Corsa";
@@ -150,10 +150,10 @@
 "motivational_author_21" = "A. P. J. Abdul Kalam";
 "motivational_sentence_22" = "La vita è il 10% di ciò che ti accade e il 90% di come reagisci";
 "motivational_author_22" = "Chuck Swindoll";
-"motivational_sentence_23" = "Non conosco età, né stanchezza né sconfitta";
-"motivational_author_23" = "Rose Kennedy";
-"motivational_sentence_24" = "Non conosco età, né stanchezza né sconfitta";
-"motivational_author_24" = "Rose Kennedy";
+"motivational_sentence_23" = "Le difficoltà aumentano man mano che ci avviciniamo all'obiettivo";
+"motivational_author_23" = "Johann Wolfgang von Goethe";
+"motivational_sentence_24" = "La qualità non è un'azione, è un'abitudine";
+"motivational_author_24" = "Aristotele";
 "motivational_sentence_25" = "La qualità non è un'azione, è un'abitudine";
 "motivational_author_25" = "Aristotele";
 "motivational_sentence_26" = "L'ottimismo è la fede che porta al successo. Niente può essere fatto senza speranza e fiducia";
@@ -207,21 +207,21 @@
 "motivational_sentence_50" = "Il futuro appartiene a coloro che lo preparano oggi";
 "motivational_author_50" = "Malcolm X";
 
-"tutorial_first_step_1" = "How many times did you set a goal for yourself but you weren't able to stick to it after some time?\n\n";
-"tutorial_first_step_2" = " is the first app to help you set and track ";
-"tutorial_first_step_3" = " goals, in order to achieve everything you want with your life.\n\nIt will help you design a goal in the right way and support you all over the journey until you'll reach the results you want.";
-"tutorial_second_step_1" = "What is SMART?\n\n";
-"tutorial_second_step_2" = "SPECIFIC\n";
-"tutorial_second_step_3" = "Your goal must be as much clear as possible, you must know what you want and WHY you want it, in order to focus and be truly motivated.\n\n";
-"tutorial_second_step_4" = "MEASURABLE\n";
-"tutorial_second_step_5" = "If you can't track your goal you can't know if you're making progress.";
-"tutorial_third_step_1" = "ACHIEAVABLE\n";
-"tutorial_third_step_2" = "You have to be honest to yourself, because only you know if you're really capable of reaching that goal.\n\n";
-"tutorial_third_step_3" = "RELEVANT\n";
-"tutorial_third_step_4" = "The goal must be important to reach in this moment of your life.\n\n";
-"tutorial_third_step_5" = "TIME-BOUND\n";
-"tutorial_third_step_6" = "You must now how much time it will take for you to accomplish it";
-"tutorial_fourth_step_1" = " will help you design your SMART goals and track your progress in a super easy way.\n\nYou'll be motivated every day with motivational quotes and you'll have the option to write your though in a journal.\n\nYour goals await for you.";
-"tutorial_fourth_step_2" = "Are you ready to achieve success?";
-"tutorial_close_button" = "Ok iniziamo!";
+"tutorial_first_step_1" = "Qaunte volte ti è capitato di fissare un obiettivo per te stesso ma non riuscire a portarlo a termine?\n\n";
+"tutorial_first_step_2" = " è la prima app in grado di aiutarti a creare e tracciare i tuoi obiettivi ";
+"tutorial_first_step_3" = ", per ottenere qualsiasi cosa tu voglia dalla tua vita.\n\nPotrai fissare i tuoi obiettivi in maniera corretta e ricevere supporto fino alla loro riuscita.";
+"tutorial_second_step_1" = "Cosa significa SMART?\n\n";
+"tutorial_second_step_2" = "SPECIFICO\n";
+"tutorial_second_step_3" = "Il tuo obiettivo deve essere il più chiaro possibile, devi sapere con esattezza cosa vuoi e PERCHÈ lo vuoi.\n\n";
+"tutorial_second_step_4" = "MISURABILE\n";
+"tutorial_second_step_5" = "Se non puoi tracciare un obiettivo non puoi sapere se stai facendo progressi.";
+"tutorial_third_step_1" = "ACCESSIBILE\n";
+"tutorial_third_step_2" = "Devi essere sincero con te stesso. Solo tu sai se sei realmente in grado di raggiungere quell'obiettivo.\n\n";
+"tutorial_third_step_3" = "RILEVANTE\n";
+"tutorial_third_step_4" = "L'obiettivo deve essere importante in questo momento della tua vita.\n\n";
+"tutorial_third_step_5" = "TEMPORALE\n";
+"tutorial_third_step_6" = "Devi poter sapere quanto tempo ti ci vorrà per raggiungerlo.";
+"tutorial_fourth_step_1" = " ti aiuterà a creare obiettivi SMART e tracciare i tuoi progressi in maniera semplice e intuitiva.\n\nResterai motivato ogni giorno con frasi motivazionali e potrai scrivere i tuoi pensieri nel tuo diario personale.";
+"tutorial_fourth_step_2" = "Sei pronto a raggiungere il successo?";
+"tutorial_close_button" = "Iniziamo!";
 "tutorial_title" = "Benvenuto!👊😎";

@@ -19,6 +19,7 @@ public class AddNewGoalViewModel: ObservableObject {
     @Published var goal: Goal
     @Published var showSmartExplanation = false
     @Published var showSecondView = false
+    @Published var isColorsVisible = false
 
     var isNewGoal: Bool
 
@@ -204,9 +205,7 @@ struct AddNewGoalView: View {
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
-        }/*.sheet(isPresented: $viewModel.showSmartExplanation, content: {
-            SmartExplanationView(isPresented: $viewModel.showSmartExplanation)
-        })*/
+        }
     }
 
 }

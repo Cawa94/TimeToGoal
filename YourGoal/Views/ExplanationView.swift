@@ -31,7 +31,7 @@ struct ExplanationView: View {
         GeometryReader { container in
             VStack {
                 Spacer()
-                    .frame(height: DeviceFix.isSmallScreen ? 20 : 45)
+                    .frame(height: DeviceFix.isSmallScreen ? 10 : 45)
 
                 switch viewModel.pageNumber {
                 case 1:

@@ -69,7 +69,7 @@ struct JournalView: View {
                 TextEditor(text: $viewModel.notes)
                     .padding([.leading, .trailing], 30)
                     .font(.title2)
-                    .frame(height: viewModel.goal.isArchived ? 440 : 330)
+                    .frame(height: editorHeight)
                     .cornerRadius(.defaultRadius)
                     .disableAutocorrection(true)
                     .foregroundColor(viewModel.notes == viewModel.placeholderString ? .grayGradient2 : .black)
@@ -97,6 +97,18 @@ struct JournalView: View {
                 }
             }
         }.navigationBarTitle("global_journal", displayMode: viewModel.goal.isArchived ? .inline : .large)
+    }
+
+    var editorHeight: CGFloat {
+        if DeviceFix.isSmallScreen {
+            return viewModel.goal.isArchived ? 330 : 200
+        } else if DeviceFix.is65Screen {
+            return viewModel.goal.isArchived ? 500 : 400
+        } else if DeviceFix.isRoundedScreen {
+            return viewModel.goal.isArchived ? 440 : 330
+        } else {
+            return viewModel.goal.isArchived ? 390 : 280
+        }
     }
 
     var saveAndCloseButton: some View {
