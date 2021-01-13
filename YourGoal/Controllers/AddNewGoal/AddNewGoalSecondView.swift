@@ -39,7 +39,7 @@ struct AddNewGoalSecondView: View {
 
     @ObservedObject var viewModel: AddNewGoalSecondViewModel
     @Binding var activeSheet: ActiveSheet?
-    //@Binding var isPresented: Bool
+    @Binding var isPresented: Bool
     @Binding var isAllFormPresented: Bool
 
     @State var completionDate = Date()
@@ -261,6 +261,13 @@ struct AddNewGoalSecondView: View {
                 }
             }
             .navigationBarTitle("global_time_required", displayMode: .inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading:
+                Button(action: {
+                    self.isPresented.toggle()
+                }) {
+                    Image(systemName: "chevron.left")
+            })
         }
         .onTapGesture {
             UIApplication.shared.endEditing()

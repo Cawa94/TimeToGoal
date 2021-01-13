@@ -92,6 +92,15 @@ struct AddNewGoalView: View {
         BackgroundView(color: .pageBackground) {
             NavigationView {
                 ZStack {
+                    NavigationLink(destination: AddNewGoalSecondView(viewModel: .init(goal: viewModel.goal,
+                                                                                      isNew: viewModel.isNewGoal),
+                                                                     activeSheet: $activeSheet,
+                                                                     isPresented: $viewModel.showSecondView,
+                                                                     isAllFormPresented: $isPresented),
+                                   isActive: $viewModel.showSecondView) {
+                        EmptyView()
+                    }
+
                     Form {
                         Section(header: Text("add_goal_type_title")) {
                             TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
@@ -168,34 +177,27 @@ struct AddNewGoalView: View {
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section {
-                            NavigationLink(destination: AddNewGoalSecondView(viewModel: .init(goal: viewModel.goal,
-                                                                                              isNew: viewModel.isNewGoal),
-                                                                             activeSheet: $activeSheet,
-                                                                             //isPresented: $viewModel.showSecondView,
-                                                                             isAllFormPresented: $isPresented),
-                                           isActive: $viewModel.showSecondView) {
-                                Button(action: {
-                                    viewModel.goal = viewModel.goal
-                                    viewModel.showSecondView.toggle()
-                                }) {
-                                    HStack {
-                                        Spacer()
-                                        Text("global_next")
-                                            .bold()
-                                            .foregroundColor(.white)
-                                            .font(.title2)
-                                            .multilineTextAlignment(.center)
-                                        Spacer()
-                                    }
-                                    .padding([.top, .bottom], 15)
-                                    .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
-                                                               startPoint: .topLeading, endPoint: .bottomTrailing))
-                                    .cornerRadius(.defaultRadius)
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-                                }.buttonStyle(PlainButtonStyle())
-                                .accentColor(viewModel.goal.goalColor)
-                            }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
-                        }
+                            Button(action: {
+                                viewModel.goal = viewModel.goal
+                                viewModel.showSecondView.toggle()
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    Text("global_next")
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .font(.title2)
+                                        .multilineTextAlignment(.center)
+                                    Spacer()
+                                }
+                                .padding([.top, .bottom], 15)
+                                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                                           startPoint: .topLeading, endPoint: .bottomTrailing))
+                                .cornerRadius(.defaultRadius)
+                                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                            }.buttonStyle(PlainButtonStyle())
+                            .accentColor(viewModel.goal.goalColor)
+                        }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageBackground)
