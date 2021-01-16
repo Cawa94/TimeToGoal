@@ -31,7 +31,11 @@ struct JournalDateView: View {
                         .font(isSelected ? .title : .title2)
                         .fontWeight(isSelected ? .bold : .regular )
                         .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
-                    Text(emoji)
+
+                    Image(emoji)
+                        .resizable()
+                        .aspectRatio(1.0, contentMode: .fit)
+                        .frame(width: 20)
                 }
             } else {
                 Text(journalDate.number)

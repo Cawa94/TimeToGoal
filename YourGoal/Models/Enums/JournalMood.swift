@@ -24,15 +24,15 @@ extension JournalMood {
     var emoji: String {
         switch self {
         case .veryHappy:
-            return "🤩"
+            return "cool"
         case .happy:
-            return "☺️"
+            return "happy"
         case .normal:
-            return "😐"
+            return "neutral"
         case .sad:
-            return "☹️"
+            return "sad"
         case .verySad:
-            return "😫"
+            return "disappointed"
         }
     }
 

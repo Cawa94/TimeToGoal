@@ -116,7 +116,7 @@ struct AddNewGoalSecondView: View {
             updateCompletionDate()
         })
             
-        BackgroundView(color: .pageBackground, barTintColor: viewModel.goal.goalUIColor) {
+        BackgroundView(color: .pageLightBackground, barTintColor: viewModel.goal.goalUIColor) {
             ZStack {
                 Form {
                     Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion,
@@ -167,7 +167,7 @@ struct AddNewGoalSecondView: View {
                         }.frame(height: 55)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .listRowBackground(Color.pageBackground)
+                    .listRowBackground(Color.pageLightBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
                     Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
@@ -207,7 +207,7 @@ struct AddNewGoalSecondView: View {
                                                                goal: $viewModel.goal))
                         }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                     }
-                    .listRowBackground(Color.pageBackground)
+                    .listRowBackground(Color.pageLightBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
                     Section(header: Text("add_goal_extimated_date_title")) {
@@ -226,7 +226,7 @@ struct AddNewGoalSecondView: View {
                                 .foregroundColor(viewModel.goal.goalColor)
                         }
                     }
-                    .listRowBackground(Color.pageBackground)
+                    .listRowBackground(Color.pageLightBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
                     
                     Section {
@@ -252,7 +252,7 @@ struct AddNewGoalSecondView: View {
                     }
                     .padding([.bottom], 5)
                     .buttonStyle(PlainButtonStyle())
-                    .listRowBackground(Color.pageBackground)
+                    .listRowBackground(Color.pageLightBackground)
                 }
 
                 if viewModel.isColorsVisible {

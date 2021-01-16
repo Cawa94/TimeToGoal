@@ -89,7 +89,7 @@ struct AddNewGoalView: View {
             viewModel.goal = viewModel.goal
         })
 
-        BackgroundView(color: .pageBackground) {
+        BackgroundView(color: .pageLightBackground) {
             NavigationView {
                 ZStack {
                     NavigationLink(destination: AddNewGoalSecondView(viewModel: .init(goal: viewModel.goal,
@@ -106,7 +106,7 @@ struct AddNewGoalView: View {
                             TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .listRowBackground(Color.pageBackground)
+                        .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text("goal_name_question")) {
@@ -117,7 +117,7 @@ struct AddNewGoalView: View {
                                 .cornerRadius(.defaultRadius)
                                 .disableAutocorrection(true)
                         }
-                        .listRowBackground(Color.pageBackground)
+                        .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.mainQuestion)) {
@@ -131,7 +131,7 @@ struct AddNewGoalView: View {
                                 Text(whatBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
-                        .listRowBackground(Color.pageBackground)
+                        .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.whyQuestion)) {
@@ -145,7 +145,7 @@ struct AddNewGoalView: View {
                                 Text(whyBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
-                        .listRowBackground(Color.pageBackground)
+                        .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.whatWillChangeQuestion)) {
@@ -159,7 +159,7 @@ struct AddNewGoalView: View {
                                 Text(whatChangeBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
-                        .listRowBackground(Color.pageBackground)
+                        .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.supportQuestion)) {
@@ -173,7 +173,7 @@ struct AddNewGoalView: View {
                                 Text(supportBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
-                        .listRowBackground(Color.pageBackground)
+                        .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section {
@@ -200,7 +200,7 @@ struct AddNewGoalView: View {
                         }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
-                        .listRowBackground(Color.pageBackground)
+                        .listRowBackground(Color.pageLightBackground)
                     }
                 }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
             }

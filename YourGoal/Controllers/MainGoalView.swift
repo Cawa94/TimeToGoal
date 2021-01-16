@@ -107,7 +107,7 @@ struct MainGoalView: View {
 
                     Spacer()
                         .frame(height: 30)
-                    
+
                     VStack {
                         if (viewModel.goal?.isCompleted ?? false) && !viewModel.isDetailsView {
                             archiveGoalButton
@@ -119,8 +119,10 @@ struct MainGoalView: View {
                                 .padding([.leading, .trailing], 15)
                             Spacer()
                                 .frame(height: 15)
-                            allGoalsButton
-                                .padding([.leading, .trailing], 15)
+                            if !viewModel.allGoals.isEmpty {
+                                allGoalsButton
+                                    .padding([.leading, .trailing], 15)
+                            }
                         } else if viewModel.isDetailsView {
                             journalButton
                                 .padding([.leading, .trailing], 15)

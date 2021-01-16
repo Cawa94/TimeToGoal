@@ -40,9 +40,15 @@ struct JournalView: View {
 
     @ObservedObject var viewModel: JournalViewModel
 
+    init(viewModel: JournalViewModel) {
+        self.viewModel = viewModel
+
+        UITextView.appearance().backgroundColor = .clear
+    }
+
     @ViewBuilder
     var body: some View {
-        BackgroundView(color: .pageBackground) {
+        BackgroundView(color: .pageLightBackground) {
             if !viewModel.goal.isArchived {
                 NavigationView {
                     scrollViewContent
@@ -60,40 +66,43 @@ struct JournalView: View {
     }
 
     var scrollViewContent: some View {
+        BackgroundView(color: .pageLightBackground) {
         ScrollView() {
-            VStack {
-                JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal,
-                                                                  selectedDay: $viewModel.selectedDay))
-                    .padding([.leading, .trailing, .top, .bottom], 15)
-
-                TextEditor(text: $viewModel.notes)
-                    .padding([.leading, .trailing], 30)
-                    .font(.title2)
-                    .frame(height: editorHeight)
-                    .cornerRadius(.defaultRadius)
-                    .disableAutocorrection(true)
-                    .foregroundColor(viewModel.notes == viewModel.placeholderString ? .grayGradient2 : .black)
-                        .onTapGesture {
-                            if viewModel.notes == viewModel.placeholderString {
-                                viewModel.notes = ""
-                            } else if viewModel.notes == "" {
-                                viewModel.notes = viewModel.placeholderString
-                            }
-                        }
-
-                Spacer()
-
-                Text("journal_mood_question")
-                    .font(.caption)
-                    .foregroundColor(.grayGradient2)
-                    .padding([.bottom], 2.5)
-
-                emojiStackView
-                    .padding([.leading, .trailing], 15)
-
-                if !viewModel.goal.isArchived {
-                    saveAndCloseButton
+                VStack {
+                    JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal,
+                                                                      selectedDay: $viewModel.selectedDay))
                         .padding([.leading, .trailing, .top, .bottom], 15)
+
+                    TextEditor(text: $viewModel.notes)
+                        .background(Color.pageLightBackground)
+                        .padding([.leading, .trailing], 30)
+                        .font(.title2)
+                        .frame(height: editorHeight)
+                        .cornerRadius(.defaultRadius)
+                        .disableAutocorrection(true)
+                        .foregroundColor(viewModel.notes == viewModel.placeholderString ? .grayGradient2 : .black)
+                            .onTapGesture {
+                                if viewModel.notes == viewModel.placeholderString {
+                                    viewModel.notes = ""
+                                } else if viewModel.notes == "" {
+                                    viewModel.notes = viewModel.placeholderString
+                                }
+                            }
+
+                    Spacer()
+
+                    Text("journal_mood_question")
+                        .font(.caption)
+                        .foregroundColor(.grayGradient2)
+                        .padding([.bottom], 2.5)
+
+                    emojiStackView
+                        .padding([.leading, .trailing], 15)
+
+                    if !viewModel.goal.isArchived {
+                        saveAndCloseButton
+                            .padding([.leading, .trailing, .top, .bottom], 15)
+                    }
                 }
             }
         }.navigationBarTitle("global_journal", displayMode: viewModel.goal.isArchived ? .inline : .large)
@@ -156,8 +165,10 @@ struct JournalView: View {
                 Button(action: {
                     viewModel.mood = mood.rawValue
                 }) {
-                    Text(mood.emoji)
-                        .font(.system(size: viewModel.mood == mood.rawValue ? 65 : 40))
+                    Image(mood.emoji)
+                        .resizable()
+                        .aspectRatio(1.0, contentMode: .fit)
+                        .frame(height: viewModel.mood == mood.rawValue ? 65 : 40)
                 }
             }
         }.frame(height: 65, alignment: .center)

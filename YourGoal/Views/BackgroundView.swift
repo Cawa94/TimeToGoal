@@ -24,9 +24,9 @@ struct BackgroundView<Content: View>: View {
         Color(self.color)
             .ignoresSafeArea()
             .overlay(content.onAppear(perform: {
-                UINavigationBar.appearance().barTintColor = .white
+                UINavigationBar.appearance().barTintColor = self.color
                 UINavigationBar.appearance().tintColor = .black
-                UINavigationBar.appearance().backgroundColor = .white
+                UINavigationBar.appearance().backgroundColor = self.color
                 UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
                 UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
                 UINavigationBar.appearance().isTranslucent = false

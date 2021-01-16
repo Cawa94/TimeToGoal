@@ -18,6 +18,7 @@
 		DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA0861D325323DEB00C4A3DD /* Localizable.strings */; };
 		DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861D925323E5200C4A3DD /* String+Extensions.swift */; };
 		DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */; };
+		DA1F801725B31045002598C4 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F801625B31045002598C4 /* PagerView.swift */; };
 		DA352831254ADA2C00FF19FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */; };
 		DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA352844254ADD6500FF19FB /* AppDelegate.swift */; };
 		DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A340B25275E3400597C73 /* DayCellView.swift */; };
@@ -98,6 +99,7 @@
 		DA0861D825323DF000C4A3DD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0861D925323E5200C4A3DD /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHoursSpentView.swift; sourceTree = "<group>"; };
+		DA1F801625B31045002598C4 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA352844254ADD6500FF19FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A340B25275E3400597C73 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
+				DA1F801625B31045002598C4 /* PagerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
 				DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */,
+				DA1F801725B31045002598C4 /* PagerView.swift in Sources */,
 				DA084EDF25753DCE00CAC158 /* FamousQuote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -844,7 +848,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
 				DISPLAY_NAME = "Test Build";
@@ -855,7 +859,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.testyourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -870,7 +874,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
 				DISPLAY_NAME = TimeToGoal;
@@ -881,9 +885,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.yourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
