@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>688658407681-m4e2ksc07l1d1efncn4qqba8s6aic6n2.apps.googleusercontent.com</string>
+	<string>218017064330-eje1g91eb1ev5ki8tmtopecan742hoq6.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.688658407681-m4e2ksc07l1d1efncn4qqba8s6aic6n2</string>
+	<string>com.googleusercontent.apps.218017064330-eje1g91eb1ev5ki8tmtopecan742hoq6</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCNWemyNcYxGaYR7Bw5NhyuyQq6aBwLstQ</string>
+	<string>AIzaSyDUv5u1RqXliU9ZFr7720jFBvqu_C3oTW0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>688658407681</string>
+	<string>218017064330</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.yuricavallin.yourgoal</string>
 	<key>PROJECT_ID</key>
-	<string>timetogoal-82704</string>
+	<string>timetogoal-63c32</string>
 	<key>STORAGE_BUCKET</key>
-	<string>timetogoal-82704.appspot.com</string>
+	<string>timetogoal-63c32.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:688658407681:ios:5a9cb1e8490907bdc03b00</string>
-	<key>DATABASE_URL</key>
-	<string>https://timetogoal-82704.firebaseio.com</string>
+	<string>1:218017064330:ios:5f3af04a5e15a1a75f1473</string>
 </dict>
 </plist>

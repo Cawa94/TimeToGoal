@@ -26,9 +26,9 @@ class PickerRowView: UIView {
     func updateLabelFont(isSelected: Bool, text: String) {
         var font: UIFont
         if isSelected {
-            font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            font = .regularFontOf(size: 17)
         } else {
-            font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            font = .regularFontOf(size: 17)
         }
 
         let attributes: [NSAttributedString.Key: Any] = [

@@ -45,8 +45,8 @@ struct GoalListRow: View {
                 .frame(width: 15)
 
             Text(viewModel.goal.name ?? "")
-                .font(.title3)
                 .fontWeight(.semibold)
+                .applyFont(.title3)
 
             Spacer()
 
@@ -58,8 +58,8 @@ struct GoalListRow: View {
 
     var percentageText: some View {
         Text("\(((viewModel.goal.timeCompleted / viewModel.goal.timeRequired) * 100), specifier: "%.2f")%")
-            .font(.body)
             .fontWeight(.semibold)
+            .applyFont(.title3)
     }
 
 }

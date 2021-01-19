@@ -25,13 +25,13 @@ struct DayCellView: View {
                         .stroke(lineWidth: 2.0)
                         .foregroundColor(weekDay.goalColor)
                     Text(DeviceFix.isRoundedScreen ? weekDay.number : weekDay.name)
-                        .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
+                        .fontWeight(weekDay.isWorkingDay ? .semibold : .regular )
                         .padding([.bottom, .top], 5)
                         .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)
                 }
             } else {
                 Text(DeviceFix.isRoundedScreen ? weekDay.number : weekDay.name)
-                    .fontWeight(weekDay.isWorkingDay ? .bold : .regular )
+                    .fontWeight(weekDay.isWorkingDay ? .semibold : .regular )
                     .padding([.top, .bottom], 5)
                     .foregroundColor(weekDay.isWorkingDay ? weekDay.goalColor : .black)
             }

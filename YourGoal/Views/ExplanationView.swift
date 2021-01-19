@@ -48,10 +48,10 @@ struct ExplanationView: View {
 
                 if viewModel.pageNumber == 4 {
                     Text("tutorial_fourth_step_2")
-                        .font(.title2)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
                         .padding([.leading, .trailing], 25)
+                        .applyFont(.title2)
 
                     Spacer()
                         .frame(height: 40)
@@ -69,10 +69,10 @@ struct ExplanationView: View {
                     HStack {
                         Spacer()
                         Text(viewModel.pageNumber == 4 ? "tutorial_close_button" : "global_next")
-                            .bold()
+                            .fontWeight(.semibold)
                             .foregroundColor(.white)
-                            .font(.title2)
                             .multilineTextAlignment(.center)
+                            .applyFont(.button)
                         Spacer()
                     }
                     .padding([.top, .bottom], 15)
@@ -92,59 +92,62 @@ struct ExplanationView: View {
         Group {
             Text("tutorial_first_step_1") +
             Text("TimeToGoal")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_first_step_2") +
             Text("SMART")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_first_step_3")
-        }.font(.title2)
+        }
         .multilineTextAlignment(.center)
         .foregroundColor(.black)
         .padding([.leading, .trailing], 25)
+        .applyFont(.title2)
     }
 
     var secondPageText: some View {
         Group {
-            Text("tutorial_second_step_1")
-                .font(.title2) +
+            Text("tutorial_second_step_1") +
             Text("tutorial_second_step_2")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_second_step_3") +
             Text("tutorial_second_step_4")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_second_step_5")
-        }.font(.title2)
+        }
         .multilineTextAlignment(.center)
         .foregroundColor(.black)
         .padding([.leading, .trailing], 25)
+        .applyFont(.title2)
     }
 
     var thirdPageText: some View {
         Group {
             Text("tutorial_third_step_1")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_third_step_2") +
             Text("tutorial_third_step_3")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_third_step_4") +
             Text("tutorial_third_step_5")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_third_step_6")
-        }.font(.title2)
+        }
         .multilineTextAlignment(.center)
         .foregroundColor(.black)
         .padding([.leading, .trailing], 25)
+        .applyFont(.title2)
     }
 
     var fourthPageText: some View {
         Group {
             Text("TimeToGoal")
-                .bold() +
+                .fontWeight(.semibold) +
             Text("tutorial_fourth_step_1")
-        }.font(.title2)
+        }
         .multilineTextAlignment(.center)
         .foregroundColor(.black)
         .padding([.leading, .trailing], 25)
+        .applyFont(.title2)
     }
 
 }

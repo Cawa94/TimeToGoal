@@ -18,8 +18,15 @@
 		DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA0861D325323DEB00C4A3DD /* Localizable.strings */; };
 		DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861D925323E5200C4A3DD /* String+Extensions.swift */; };
 		DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */; };
+		DA1DD67825B72E1700981105 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD67725B72E1700981105 /* GoogleService-Info.plist */; };
+		DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1DD67C25B73C9500981105 /* AppFonts.swift */; };
+		DA1DD69825B746BF00981105 /* Caveat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD69425B746BF00981105 /* Caveat.ttf */; };
+		DA1DD69925B746BF00981105 /* IndieFlower.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD69525B746BF00981105 /* IndieFlower.ttf */; };
 		DA1F801725B31045002598C4 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F801625B31045002598C4 /* PagerView.swift */; };
-		DA352831254ADA2C00FF19FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */; };
+		DA32B6CB25B7530600CAA773 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */; };
+		DA32B6CC25B7530600CAA773 /* Rubik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6CA25B7530600CAA773 /* Rubik.ttf */; };
+		DA32B6D525B7558700CAA773 /* Vollkorn-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */; };
+		DA32B6D625B7558700CAA773 /* Vollkorn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6D425B7558700CAA773 /* Vollkorn.ttf */; };
 		DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA352844254ADD6500FF19FB /* AppDelegate.swift */; };
 		DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A340B25275E3400597C73 /* DayCellView.swift */; };
 		DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A3413252761A600597C73 /* MainGoalView.swift */; };
@@ -99,8 +106,15 @@
 		DA0861D825323DF000C4A3DD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0861D925323E5200C4A3DD /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHoursSpentView.swift; sourceTree = "<group>"; };
+		DA1DD67725B72E1700981105 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA1DD67C25B73C9500981105 /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		DA1DD69425B746BF00981105 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
+		DA1DD69525B746BF00981105 /* IndieFlower.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IndieFlower.ttf; sourceTree = "<group>"; };
 		DA1F801625B31045002598C4 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
-		DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
+		DA32B6CA25B7530600CAA773 /* Rubik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rubik.ttf; sourceTree = "<group>"; };
+		DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vollkorn-Italic.ttf"; sourceTree = "<group>"; };
+		DA32B6D425B7558700CAA773 /* Vollkorn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vollkorn.ttf; sourceTree = "<group>"; };
 		DA352844254ADD6500FF19FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A340B25275E3400597C73 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
 		DA3A3413252761A600597C73 /* MainGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGoalView.swift; sourceTree = "<group>"; };
@@ -217,12 +231,26 @@
 		DA0861D02532300400C4A3DD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA1DD68125B741CC00981105 /* Fonts */,
 				DA0861D325323DEB00C4A3DD /* Localizable.strings */,
 				DAB7DC7D252232130087F9C8 /* Assets.xcassets */,
 				DA084EFA2575547500CAC158 /* LaunchScreen.storyboard */,
-				DA352830254ADA2C00FF19FB /* GoogleService-Info.plist */,
+				DA1DD67725B72E1700981105 /* GoogleService-Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		DA1DD68125B741CC00981105 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */,
+				DA32B6D425B7558700CAA773 /* Vollkorn.ttf */,
+				DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */,
+				DA32B6CA25B7530600CAA773 /* Rubik.ttf */,
+				DA1DD69425B746BF00981105 /* Caveat.ttf */,
+				DA1DD69525B746BF00981105 /* IndieFlower.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		DA3A340A25275E2000597C73 /* CalendarView */ = {
@@ -237,6 +265,7 @@
 		DA47599625470DB200A1ADA6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DA1DD67C25B73C9500981105 /* AppFonts.swift */,
 				DA47599A25470DE800A1ADA6 /* DeviceFix.swift */,
 				DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */,
 			);
@@ -555,9 +584,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA32B6CC25B7530600CAA773 /* Rubik.ttf in Resources */,
 				DAB7DC81252232130087F9C8 /* Preview Assets.xcassets in Resources */,
-				DA352831254ADA2C00FF19FB /* GoogleService-Info.plist in Resources */,
 				DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */,
+				DA32B6D625B7558700CAA773 /* Vollkorn.ttf in Resources */,
+				DA1DD69925B746BF00981105 /* IndieFlower.ttf in Resources */,
+				DA1DD67825B72E1700981105 /* GoogleService-Info.plist in Resources */,
+				DA32B6CB25B7530600CAA773 /* Rubik-Italic.ttf in Resources */,
+				DA1DD69825B746BF00981105 /* Caveat.ttf in Resources */,
+				DA32B6D525B7558700CAA773 /* Vollkorn-Italic.ttf in Resources */,
 				DA084EFB2575547500CAC158 /* LaunchScreen.storyboard in Resources */,
 				DAB7DC7E252232130087F9C8 /* Assets.xcassets in Resources */,
 			);
@@ -653,6 +688,7 @@
 				DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */,
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
+				DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */,
 				DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,

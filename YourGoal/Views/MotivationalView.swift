@@ -42,21 +42,21 @@ struct MotivationalView: View {
                     .frame(height: 60)
 
                 Text(viewModel.quote.sentence)
-                    .font(.title)
                     .italic()
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding([.leading, .trailing], 20)
+                    .applyFont(.quote)
 
                 Spacer()
                     .frame(height: 20)
 
                 Text(viewModel.quote.author)
-                    .font(.title2)
                     .italic()
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding([.leading, .trailing], 20)
+                    .applyFont(.quoteAuthor)
 
                 Spacer()
                 Spacer()

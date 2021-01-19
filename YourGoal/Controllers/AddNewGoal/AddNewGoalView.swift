@@ -102,14 +102,15 @@ struct AddNewGoalView: View {
                     }
 
                     Form {
-                        Section(header: Text("add_goal_type_title")) {
+                        Section(header: Text("add_goal_type_title").applyFont(.fieldQuestion)) {
                             TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
                         }
+                        .textCase(nil)
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text("goal_name_question")) {
+                        Section(header: Text("goal_name_question").applyFont(.fieldQuestion)) {
                             TextField("", text: nameBinding)
                                 .padding()
                                 .foregroundColor(.fieldsTextForegroundColor)
@@ -117,10 +118,11 @@ struct AddNewGoalView: View {
                                 .cornerRadius(.defaultRadius)
                                 .disableAutocorrection(true)
                         }
+                        .textCase(nil)
                         .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text(viewModel.goal.goalType.mainQuestion)) {
+                        Section(header: Text(viewModel.goal.goalType.mainQuestion).applyFont(.fieldQuestion)) {
                             ZStack {
                                 TextEditor(text: whatBinding)
                                     .padding()
@@ -128,13 +130,15 @@ struct AddNewGoalView: View {
                                     .background(Color.grayFields)
                                     .cornerRadius(.defaultRadius)
                                     .disableAutocorrection(true)
+                                    .applyFont(.body)
                                 Text(whatBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
+                        .textCase(nil)
                         .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text(viewModel.goal.goalType.whyQuestion)) {
+                        Section(header: Text(viewModel.goal.goalType.whyQuestion).applyFont(.fieldQuestion)) {
                             ZStack {
                                 TextEditor(text: whyBinding)
                                     .padding()
@@ -142,13 +146,15 @@ struct AddNewGoalView: View {
                                     .background(Color.grayFields)
                                     .cornerRadius(.defaultRadius)
                                     .disableAutocorrection(true)
+                                    .applyFont(.body)
                                 Text(whyBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
+                        .textCase(nil)
                         .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text(viewModel.goal.goalType.whatWillChangeQuestion)) {
+                        Section(header: Text(viewModel.goal.goalType.whatWillChangeQuestion).applyFont(.fieldQuestion)) {
                             ZStack {
                                 TextEditor(text: whatChangeBinding)
                                     .padding()
@@ -156,13 +162,15 @@ struct AddNewGoalView: View {
                                     .background(Color.grayFields)
                                     .cornerRadius(.defaultRadius)
                                     .disableAutocorrection(true)
+                                    .applyFont(.body)
                                 Text(whatChangeBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
+                        .textCase(nil)
                         .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
-                        Section(header: Text(viewModel.goal.goalType.supportQuestion)) {
+                        Section(header: Text(viewModel.goal.goalType.supportQuestion).applyFont(.fieldQuestion)) {
                             ZStack {
                                 TextEditor(text: supportBinding)
                                     .padding()
@@ -170,9 +178,11 @@ struct AddNewGoalView: View {
                                     .background(Color.grayFields)
                                     .cornerRadius(.defaultRadius)
                                     .disableAutocorrection(true)
+                                    .applyFont(.body)
                                 Text(supportBinding.wrappedValue).opacity(0).padding(.all, 8)
                             }
                         }
+                        .textCase(nil)
                         .listRowBackground(Color.pageLightBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
@@ -184,9 +194,9 @@ struct AddNewGoalView: View {
                                 HStack {
                                     Spacer()
                                     Text("global_next")
-                                        .bold()
+                                        .fontWeight(.semibold)
                                         .foregroundColor(.white)
-                                        .font(.title2)
+                                        .applyFont(.button)
                                         .multilineTextAlignment(.center)
                                     Spacer()
                                 }

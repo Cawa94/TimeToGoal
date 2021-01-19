@@ -120,7 +120,7 @@ struct AddNewGoalSecondView: View {
             ZStack {
                 Form {
                     Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion,
-                                                customMeasureBinding.wrappedValue))) {
+                                                customMeasureBinding.wrappedValue)).applyFont(.fieldQuestion)) {
                         GeometryReader { vContainer in
                             HStack {
                                 if viewModel.goal.goalType == .custom {
@@ -166,12 +166,14 @@ struct AddNewGoalSecondView: View {
                             }
                         }.frame(height: 55)
                     }
+                    .applyFont(.body)
+                    .textCase(nil)
                     .buttonStyle(PlainButtonStyle())
                     .listRowBackground(Color.pageLightBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
                     Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
-                                                customMeasureBinding.wrappedValue))) {
+                                                customMeasureBinding.wrappedValue)).applyFont(.fieldQuestion)) {
                         HStack {
                             HoursSelectorView(viewModel: .init(title: "global_monday",
                                                                bindingString: mondayBinding,
@@ -207,25 +209,29 @@ struct AddNewGoalSecondView: View {
                                                                goal: $viewModel.goal))
                         }.frame(width: .infinity, height: .hoursFieldsHeight, alignment: .center)
                     }
+                    .applyFont(.body)
+                    .textCase(nil)
                     .listRowBackground(Color.pageLightBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text("add_goal_extimated_date_title")) {
+                    Section(header: Text("add_goal_extimated_date_title").applyFont(.fieldQuestion)) {
                         VStack {
                             Text(completionDate.formattedAsDateString)
-                                .font(.largeTitle)
-                                .bold()
+                                .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .background(Color.clear)
                                 .foregroundColor(viewModel.goal.goalColor)
+                                .applyFont(.largeTitle)
                             Text(String(format: "add_goal_days_required".localized(),
                                         "\(viewModel.goal.daysRequired)"))
-                                .bold()
+                                .fontWeight(.semibold)
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .background(Color.clear)
                                 .foregroundColor(viewModel.goal.goalColor)
                         }
                     }
+                    .applyFont(.body)
+                    .textCase(nil)
                     .listRowBackground(Color.pageLightBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
                     
@@ -237,9 +243,9 @@ struct AddNewGoalSecondView: View {
                             HStack {
                                 Spacer()
                                 Text(viewModel.isNewGoal ? "global_add" : "global_update")
-                                    .bold()
+                                    .fontWeight(.semibold)
                                     .foregroundColor(.white)
-                                    .font(.title2)
+                                    .applyFont(.button)
                                     .multilineTextAlignment(.center)
                                 Spacer()
                             }
@@ -250,6 +256,7 @@ struct AddNewGoalSecondView: View {
                             .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                         }.accentColor(viewModel.goal.goalColor)
                     }
+                    .textCase(nil)
                     .padding([.bottom], 5)
                     .buttonStyle(PlainButtonStyle())
                     .listRowBackground(Color.pageLightBackground)

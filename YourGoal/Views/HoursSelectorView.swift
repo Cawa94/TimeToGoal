@@ -29,7 +29,10 @@ struct HoursSelectorView: View {
     var body: some View {
         GeometryReader { vContainer in
             VStack {
-                Text(viewModel.title.localized()).foregroundColor(viewModel.color).bold()
+                Text(viewModel.title.localized())
+                    .foregroundColor(viewModel.color)
+                    .fontWeight(.semibold)
+                    .applyFont(.fieldQuestion2)
                 ZStack {
                     TextField("", text: viewModel.bindingString)
                         .padding()

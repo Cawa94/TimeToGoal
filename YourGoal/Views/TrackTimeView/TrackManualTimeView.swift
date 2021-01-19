@@ -50,8 +50,8 @@ struct TrackManualTimeView: View {
                         ForEach(self.timeOptions, id: \.self) { double in
                             Text("\(double)")
                                 .foregroundColor(.black)
-                                .font(.title3)
-                                .bold()
+                                .fontWeight(.semibold)
+                                .applyFont(.title3)
                         }
                     }
                     .frame(maxWidth: geometry.size.width / 3.5)
@@ -60,20 +60,20 @@ struct TrackManualTimeView: View {
                     if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes || currentGoal?.goalType.timeTrackingType == .double {
                         if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
                             Text("global_hours")
-                                .font(.title3)
-                                .bold()
+                                .fontWeight(.semibold)
+                                .applyFont(.title3)
                         } else {
                             Text(".")
-                                .font(.title3)
-                                .bold()
+                                .fontWeight(.semibold)
+                                .applyFont(.title3)
                         }
 
                         Picker(selection: self.$decimalSpent, label: Text("")) {
                             ForEach(self.decimalOptions, id: \.self) { double in
                                 Text(double.stringWithoutDecimals)
                                     .foregroundColor(.black)
-                                    .font(.title3)
-                                    .bold()
+                                    .fontWeight(.semibold)
+                                    .applyFont(.title3)
                             }
                         }
                         .frame(maxWidth: geometry.size.width / 3.5)
@@ -81,18 +81,18 @@ struct TrackManualTimeView: View {
 
                         if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
                             Text("global_minutes")
-                                .font(.title3)
-                                .bold()
+                                .fontWeight(.semibold)
+                                .applyFont(.title3)
                         }
                     }
                     if currentGoal?.goalType.timeTrackingType != .hoursWithMinutes && currentGoal?.goalType != .custom {
                         Text("\(currentGoal?.goalType.measureUnit.localized() ?? "")".capitalized)
-                            .font(.title2)
-                            .bold()
+                            .fontWeight(.semibold)
+                            .applyFont(.title2)
                     } else if currentGoal?.goalType == .custom {
                         Text("\(currentGoal?.customTimeMeasure ?? "")".capitalized)
-                            .font(.title2)
-                            .bold()
+                            .fontWeight(.semibold)
+                            .applyFont(.title2)
                     }
 
                     Spacer()
@@ -120,12 +120,12 @@ struct TrackManualTimeView: View {
                 HStack {
                     Spacer()
                     Text("global_add")
-                        .bold()
-                        .font(.title3)
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding([.top], 15)
                         .padding([.bottom], 15)
+                        .applyFont(.button)
                     Spacer()
                 }
                 .background(LinearGradient(gradient: Gradient(colors: currentGoal?.rectGradientColors ?? Color.rainbow),

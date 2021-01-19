@@ -92,56 +92,51 @@ struct GoalProgressView: View {
                 .padding(-20)
 
             VStack {
-                Text(viewModel.timeRemaining)
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.textForegroundColor)
-                if let goal = viewModel.goal, goal.goalType == .custom {
-                    Text(String(format: "main_time_required".localized(), goal.customTimeMeasure ?? ""))
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(.textForegroundColor)
-                        .padding(.bottom, 10)
-                } else {
-                    Text(String(format: "main_time_required".localized(),
-                                viewModel.goal?.goalType.measureUnit ?? "\("global_hours".localized())"))
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(.textForegroundColor)
-                        .padding(.bottom, 10)
-                }
-                Spacer()
-                    .frame(height: 5)
                 if viewModel.goal == nil {
                     Text("main_add_new_goal")
-                        .font(.title2)
+                        .applyFont(.title2)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
                 } else if viewModel.isCompleted {
                     Text("main_weel_done")
-                        .font(.largeTitle)
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(.textForegroundColor)
+                        .applyFont(.largeTitle)
                     Text("main_goal_completed")
-                        .font(.title2)
-                        .bold()
+                        .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
+                        .applyFont(.title2)
                 } else {
+                    viewModel.goal?.goalType.icon
+                        .resizable()
+                        .aspectRatio(1.0, contentMode: .fit)
+                        .frame(width: 50)
                     Text("main_will_reach_goal")
-                        .font(.title2)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
+                        .applyFont(.title2)
                     Text(viewModel.completionDate)
-                        .font(.title)
-                        .bold()
-                        .foregroundColor(.textForegroundColor)//viewModel.isLateThanOriginal ? .red : .textForegroundColor)
-                    Text(String(format: "add_goal_days_required".localized(), "\(viewModel.goal?.daysRequired ?? 0)"))
-                        .font(.title3)
-                        .bold()
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.textForegroundColor)
-                        .padding(.bottom, 20)
+                        .fontWeight(.bold)
+                        .foregroundColor(viewModel.goal?.goalColor)
+                        .applyFont(.title)
+
+                    Spacer()
+                        .frame(height: 3)
+
+                    if let goal = viewModel.goal, goal.goalType == .custom {
+                        Text(String(format: "main_time_required".localized(),
+                                    viewModel.timeRemaining, goal.customTimeMeasure ?? ""))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.textForegroundColor)
+                            .applyFont(.title3)
+                    } else {
+                        Text(String(format: "main_time_required".localized(),
+                                    viewModel.timeRemaining,
+                                    viewModel.goal?.goalType.measureUnit ?? "\("global_hours".localized())"))
+                            .applyFont(.title3)
+                            .foregroundColor(.textForegroundColor)
+                    }
                 }
             }
         }

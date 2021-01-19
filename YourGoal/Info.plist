@@ -24,6 +24,15 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Rubik.ttf</string>
+		<string>Rubik-Italic.ttf</string>
+		<string>Vollkorn.ttf</string>
+		<string>Vollkorn-Italic.ttf</string>
+		<string>Caveat.ttf</string>
+		<string>IndieFlower.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

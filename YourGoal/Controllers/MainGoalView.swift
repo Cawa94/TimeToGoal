@@ -53,6 +53,26 @@ public class MainGoalViewModel: ObservableObject {
         self.isDetailsView = isDetailsView
     }
 
+    var timeRemaining: String {
+        if goal?.goalType.timeTrackingType == .hoursWithMinutes {
+            let dateRemaining = Double(goal?.timeRequired ?? 0).asHoursAndMinutes
+                .remove(Double(goal?.timeCompleted ?? 0).asHoursAndMinutes)
+            if dateRemaining > Date().zeroHours {
+                return dateRemaining.formattedAsHoursString
+            } else {
+                return "0"
+            }
+        } else {
+            let timeRemaining = Double(goal?.timeRequired ?? 0) - Double(goal?.timeCompleted ?? 0)
+            if timeRemaining > 0 {
+                return goal?.goalType.timeTrackingType == .double
+                    ? "\(timeRemaining.stringWithTwoDecimals)" : "\(timeRemaining.stringWithoutDecimals)"
+            } else {
+                return "0"
+            }
+        }
+    }
+
 }
 
 struct MainGoalView: View {
@@ -69,44 +89,32 @@ struct MainGoalView: View {
                     Spacer()
                         .frame(height: 15)
 
-                    HorizontalCalendarView(viewModel: viewModel.calendarViewModel)
-                        .padding([.leading, .trailing])
-
-                    Spacer()
-                        .frame(height: DeviceFix.isRoundedScreen ? 30 : 15)
-
                     Text(viewModel.goal?.name ?? "global_new_goal".localized())
-                        .font(.title)
-                        .bold()
+                        .fontWeight(.bold)
                         .foregroundColor(.textForegroundColor)
                         .multilineTextAlignment(.center)
                         .padding([.leading, .trailing], 10)
-                    if !((viewModel.goal?.isCompleted ?? false) || viewModel.goal == nil) {
-                        Spacer()
-                            .frame(height: 5)
-                        HStack {
-                            Spacer()
-                            Text("\("global_estimated".localized()):")
-                                .font(.title3)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.textForegroundColor)
-                            Text("\(viewModel.goal?.completionDateExtimated?.formattedAsDateString ?? "")")
-                                .font(.title3)
-                                .bold()
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.textForegroundColor)
-                            Spacer()
-                        }
-                    }
+                        .lineLimit(2)
+                        .applyFont(.largeTitle)
 
                     Spacer()
-                        .frame(height: 30)
+                        .frame(height: 15)
+
+                    Text("\"\(viewModel.goal?.whyDefinition ?? "")\"")
+                        .italic()
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.textForegroundColor)
+                        .padding([.leading, .trailing], 10)
+                        .lineLimit(3)
+                        .applyFont(.smallQuote)
+
+                    Spacer()
 
                     GoalProgressView(viewModel: viewModel.progressViewModel)
                         .padding([.leading, .trailing], 30)
 
                     Spacer()
-                        .frame(height: 30)
+                        .frame(height: 15)
 
                     VStack {
                         if (viewModel.goal?.isCompleted ?? false) && !viewModel.isDetailsView {
@@ -194,9 +202,9 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("main_track_progress")
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .font(.title2)
+                        .applyFont(.button)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
@@ -218,9 +226,9 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("global_add_goal")
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .font(.title2)
+                        .applyFont(.button)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
@@ -243,9 +251,9 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("global_archive")
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .font(.title2)
+                        .applyFont(.button)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
@@ -267,9 +275,9 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("global_details")
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(viewModel.goal?.goalColor)
-                        .font(.title3)
+                        .applyFont(.button)
                     Spacer()
                 }
                 .padding(15.0)
@@ -301,9 +309,9 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("global_journal")
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(viewModel.goal?.goalColor)
-                        .font(.title3)
+                        .applyFont(.button)
                     Spacer()
                 }
                 .padding(15.0)
@@ -335,9 +343,9 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("all_goals_title")
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(viewModel.goal?.goalColor)
-                        .font(.title3)
+                        .applyFont(.button)
                     Spacer()
                 }
                 .padding(15.0)

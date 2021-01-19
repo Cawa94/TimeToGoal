@@ -19,8 +19,8 @@ struct JournalDateView: View {
 
             Text(journalDate.month)
                 .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
-                .font(.footnote)
-                .fontWeight(isSelected ? .bold : .regular )
+                .fontWeight(isSelected ? .semibold : .regular )
+                .applyFont(.small)
 
             Spacer()
                 .frame(height: 5)
@@ -28,9 +28,9 @@ struct JournalDateView: View {
             if let emoji = journalDate.emoji {
                 HStack {
                     Text(journalDate.number)
-                        .font(isSelected ? .title : .title2)
-                        .fontWeight(isSelected ? .bold : .regular )
+                        .fontWeight(isSelected ? .semibold : .regular )
                         .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
+                        .applyFont(isSelected ? .title : .title2)
 
                     Image(emoji)
                         .resizable()
@@ -39,9 +39,9 @@ struct JournalDateView: View {
                 }
             } else {
                 Text(journalDate.number)
-                    .font(isSelected ? .title : .title2)
-                    .fontWeight(isSelected ? .bold : .regular )
+                    .fontWeight(isSelected ? .semibold : .regular )
                     .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
+                    .applyFont(isSelected ? .title : .title2)
             }
 
             Spacer()

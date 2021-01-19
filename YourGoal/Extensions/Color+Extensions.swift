@@ -28,7 +28,6 @@ extension Color {
     static let grayFields           = Color("grayFields")
     static let grayBackground       = Color("grayBackground")
     static let grayLightBackground  = Color("grayLightBackground")
-    static let grayDateBackground   = Color("grayDateBackground")
     static let grayGoal             = Color("grayGoal")
     static let grayGradient1        = Color("grayGradient1")
     static let grayGradient2        = Color("grayGradient2")

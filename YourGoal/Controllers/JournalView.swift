@@ -76,7 +76,6 @@ struct JournalView: View {
                     TextEditor(text: $viewModel.notes)
                         .background(Color.pageLightBackground)
                         .padding([.leading, .trailing], 30)
-                        .font(.title2)
                         .frame(height: editorHeight)
                         .cornerRadius(.defaultRadius)
                         .disableAutocorrection(true)
@@ -88,11 +87,12 @@ struct JournalView: View {
                                     viewModel.notes = viewModel.placeholderString
                                 }
                             }
+                        .applyFont(.journal)
 
                     Spacer()
 
                     Text("journal_mood_question")
-                        .font(.caption)
+                        .applyFont(.small)
                         .foregroundColor(.grayGradient2)
                         .padding([.bottom], 2.5)
 
@@ -143,9 +143,9 @@ struct JournalView: View {
                 HStack {
                     Spacer()
                     Text("journal_save_close")
-                        .bold()
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
-                        .font(.title2)
+                        .applyFont(.button)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }

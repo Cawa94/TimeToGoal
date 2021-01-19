@@ -35,11 +35,11 @@ struct TrackHoursSpentView: View {
                         Spacer()
                             .frame(height: 30)
                         Text("\(currentGoal?.goalType.timeSpentQuestion ?? "")")
-                            .font(.title)
-                            .bold()
+                            .fontWeight(.semibold)
                             .multilineTextAlignment(.center)
                             .foregroundColor(currentGoal?.goalColor)
                             .padding([.leading, .trailing], 10)
+                            .applyFont(.title)
                         /*Spacer()
                             .frame(height: 20)
                         Picker(selection: $trackMode, label: Text("")) {

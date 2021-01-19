@@ -21,7 +21,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         #if RELEASE
             FirebaseApp.configure()
-            //Analytics.setUserID()
         #else
             //FirebaseApp.configure()
         #endif
