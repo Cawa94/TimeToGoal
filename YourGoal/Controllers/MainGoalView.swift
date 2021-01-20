@@ -78,12 +78,17 @@ struct MainGoalView: View {
                         .lineLimit(2)
                         .applyFont(.title)
 
+                    if DeviceFix.is65Screen {
+                        Spacer()
+                            .frame(height: 15)
+                    }
+
                     Text("\"\(viewModel.goal?.whyDefinition ?? "placeholder_why_definition".localized())\"")
                         .italic()
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
                         .padding([.leading, .trailing], 10)
-                        .lineLimit(3)
+                        .lineLimit(smallQuotesLines)
                         .applyFont(.title3)
 
                     Spacer()
@@ -331,6 +336,18 @@ struct MainGoalView: View {
                                               refreshAllGoals: $viewModel.refreshAllGoals,
                                               isPresented: $viewModel.showingAllGoals))
             })
+        }
+    }
+
+    var smallQuotesLines: Int {
+        if DeviceFix.isSmallScreen {
+            return 2
+        } else if DeviceFix.is65Screen {
+            return 4
+        } else if DeviceFix.isRoundedScreen {
+            return 3
+        } else {
+            return 2
         }
     }
 

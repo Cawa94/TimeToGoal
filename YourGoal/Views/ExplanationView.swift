@@ -31,7 +31,7 @@ struct ExplanationView: View {
         GeometryReader { container in
             VStack {
                 Spacer()
-                    .frame(height: DeviceFix.isSmallScreen ? 10 : 20)
+                    .frame(height: topSpace)
 
                 switch viewModel.pageNumber {
                 case 1:
@@ -148,6 +148,18 @@ struct ExplanationView: View {
         .foregroundColor(.black)
         .padding([.leading, .trailing], 25)
         .applyFont(.title2)
+    }
+
+    var topSpace: CGFloat {
+        if DeviceFix.isSmallScreen {
+            return 10
+        } else if DeviceFix.is65Screen {
+            return 40
+        } else if DeviceFix.isRoundedScreen {
+            return 20
+        } else {
+            return 10
+        }
     }
 
 }

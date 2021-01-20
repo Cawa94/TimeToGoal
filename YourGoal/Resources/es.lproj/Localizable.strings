@@ -36,7 +36,7 @@
 "global_update" = "Actualizar";
 "global_wednesday" = "Miércoles";
 
-"goal_name_question" = "Nome dell'obiettivo (max 50 caratteri)";
+"goal_name_question" = "Nombre del objetivo (máx 50 caracteres)";
 
 "goal_book_main_question" = "¿Qué libro leerás?";
 "goal_run_main_question" = "¿Para qué entrenarás?";
