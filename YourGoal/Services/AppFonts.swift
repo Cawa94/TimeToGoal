@@ -15,7 +15,6 @@ struct AppFonts: ViewModifier {
         case journal
         case quote
         case quoteAuthor
-        case smallQuote
         case fieldQuestion
         case fieldQuestion2
     }
@@ -29,21 +28,21 @@ struct AppFonts: ViewModifier {
 
     private var fontName: String {
         switch textStyle {
-        case .title2, .title3, .button, .journal, .fieldQuestion:
-            return "IndieFlower"
-        case .quote, .quoteAuthor, .smallQuote:
+        case .body, .fieldQuestion2 :
+            return "Rubik"
+        case .quote, .quoteAuthor:
             return "Caveat"
         default:
-            return "Rubik"
+            return "IndieFlower"
         }
     }
 
     private var size: CGFloat {
         switch textStyle {
         case .largeTitle:
-            return 26
+            return 28
         case .title:
-            return 24
+            return 25
         case .title2:
             return 22
         case .title3:
@@ -53,15 +52,13 @@ struct AppFonts: ViewModifier {
         case .body:
             return 17
         case .small:
-            return 14
+            return 17
         case .journal:
             return 25
         case .quote:
             return 40
         case .quoteAuthor:
             return 35
-        case .smallQuote:
-            return 22
         case .fieldQuestion:
             return 20
         case .fieldQuestion2:
@@ -82,7 +79,7 @@ extension View {
 extension UIFont {
 
     static func regularFontOf(size: CGFloat) -> UIFont {
-        return UIFont(name:"Rubik", size: size)!
+        return UIFont(name:"IndieFlower", size: size)!
     }
 
 }

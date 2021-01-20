@@ -58,7 +58,7 @@ struct AllGoalsView: View {
                 List {
                     ForEach(viewModel.listSections) { section in
                         if let goals = section.goals, !goals.isEmpty {
-                            Section(header: Text(section.title)) {
+                            Section(header: Text(section.title).applyFont(.title3)) {
                                 ForEach(goals) { goal in
                                     GoalListRow(viewModel: .init(goal: goal))
                                 }

@@ -27,7 +27,6 @@
 "global_journal" = "Diario";
 "global_minutes" = "Minutos";
 "global_monday" = "Lunes";
-"global_new_goal" = "Nuevo objetivo";
 "global_next" = "Siguiente";
 "global_saturday" = "Sábado";
 "global_sunday" = "Domingo";
@@ -206,6 +205,9 @@
 "motivational_author_49" = "Alan Watts";
 "motivational_sentence_50" = "El futuro pertenece a quienes se preparan hoy para él";
 "motivational_author_50" = "Malcolm X";
+
+"placeholder_first_goal" = "Mi primero objetivo";
+"placeholder_why_definition" = "Es importante para mi conseguir este objetivo porque...";
 
 "tutorial_first_step_1" = "¿Cuántas veces te propusiste una meta pero no pudiste cumplirla después de un tiempo? \n\n";
 "tutorial_first_step_2" = " es la primera aplicación que te ayudará a configurar y realizar el seguimiento de tus ";

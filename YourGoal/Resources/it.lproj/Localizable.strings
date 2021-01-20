@@ -27,7 +27,6 @@
 "global_journal" = "Diario";
 "global_minutes" = "Minuti";
 "global_monday" = "Lunedì";
-"global_new_goal" = "Nuovo Obiettivo";
 "global_next" = "Avanti";
 "global_saturday" = "Sabato";
 "global_sunday" = "Domenica";
@@ -206,6 +205,9 @@
 "motivational_author_49" = "Alan Watts";
 "motivational_sentence_50" = "Il futuro appartiene a coloro che lo preparano oggi";
 "motivational_author_50" = "Malcolm X";
+
+"placeholder_first_goal" = "Il mio primo Obiettivo";
+"placeholder_why_definition" = "È importante per me raggiungere questo obiettivo perchè...";
 
 "tutorial_first_step_1" = "Quante volte ti è capitato di fissare un obiettivo per te stesso ma non riuscire a portarlo a termine?\n\n";
 "tutorial_first_step_2" = " è la prima app in grado di aiutarti a creare e tracciare i tuoi obiettivi ";

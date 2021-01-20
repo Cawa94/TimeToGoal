@@ -27,8 +27,10 @@ struct BackgroundView<Content: View>: View {
                 UINavigationBar.appearance().barTintColor = self.color
                 UINavigationBar.appearance().tintColor = .black
                 UINavigationBar.appearance().backgroundColor = self.color
-                UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+                UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black,
+                                                                    .font: UIFont.regularFontOf(size: 25)]
+                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black,
+                                                                         .font: UIFont.regularFontOf(size: 36)]
                 UINavigationBar.appearance().isTranslucent = false
                 UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
 

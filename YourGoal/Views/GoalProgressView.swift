@@ -85,7 +85,7 @@ struct GoalProgressView: View {
                         .trim(from: 0.0,
                               to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
                         .stroke(style: StrokeStyle(lineWidth: 40.0, lineCap: .round, lineJoin: .round))
-                        //.animation(.easeInOut(duration: 0.75))
+                        .animation(.easeInOut(duration: 0.75))
                         .padding(20)
                 )
                 .rotationEffect(Angle(degrees: 270))
@@ -94,7 +94,7 @@ struct GoalProgressView: View {
             VStack {
                 if viewModel.goal == nil {
                     Text("main_add_new_goal")
-                        .applyFont(.title2)
+                        .applyFont(.title)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
                 } else if viewModel.isCompleted {
@@ -111,7 +111,7 @@ struct GoalProgressView: View {
                     viewModel.goal?.goalType.icon
                         .resizable()
                         .aspectRatio(1.0, contentMode: .fit)
-                        .frame(width: 50)
+                        .frame(width: 58)
                     Text("main_will_reach_goal")
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
@@ -119,7 +119,7 @@ struct GoalProgressView: View {
                     Text(viewModel.completionDate)
                         .fontWeight(.bold)
                         .foregroundColor(viewModel.goal?.goalColor)
-                        .applyFont(.title)
+                        .applyFont(.largeTitle)
 
                     Spacer()
                         .frame(height: 3)

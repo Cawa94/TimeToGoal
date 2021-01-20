@@ -149,6 +149,7 @@ struct AddNewGoalSecondView: View {
                                     Spacer()
                                     Spacer()
                                     Text("\("global_color".localized()):")
+                                        .applyFont(.fieldQuestion2)
                                 }
                                 Button(action: {
                                     viewModel.isColorsVisible.toggle()
@@ -222,12 +223,6 @@ struct AddNewGoalSecondView: View {
                                 .background(Color.clear)
                                 .foregroundColor(viewModel.goal.goalColor)
                                 .applyFont(.largeTitle)
-                            Text(String(format: "add_goal_days_required".localized(),
-                                        "\(viewModel.goal.daysRequired)"))
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .background(Color.clear)
-                                .foregroundColor(viewModel.goal.goalColor)
                         }
                     }
                     .applyFont(.body)

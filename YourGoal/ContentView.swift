@@ -57,19 +57,6 @@ struct ContentView: View {
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         .colorScheme(.light)
-        /*PagerView(pageCount: 3, currentIndex: $viewModel.currentPage) {
-            ForEach(0...(viewModel.goalsModels.count), id: \.self) { index in
-                if index < viewModel.goalsModels.count {
-                    let model = viewModel.goalsModels[index]
-                    MainGoalView(viewModel: model)
-                } else {
-                    MainGoalView(viewModel: .init(goal: nil,
-                                                  allGoals: viewModel.goals,
-                                                  activeSheet: $viewModel.activeSheet,
-                                                  refreshAllGoals: $viewModel.refreshAllGoals))
-                }
-            }
-        }*/
         .onAppear(perform: {
             viewModel.refreshAllGoals = true
         })

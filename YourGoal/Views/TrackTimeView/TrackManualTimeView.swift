@@ -23,6 +23,7 @@ struct TrackManualTimeView: View {
             return Array(0...23)
         }
     }
+
     var decimalOptions: [Double] {
         switch currentGoal?.goalType.timeTrackingType {
         case .hoursWithMinutes:
@@ -51,7 +52,7 @@ struct TrackManualTimeView: View {
                             Text("\(double)")
                                 .foregroundColor(.black)
                                 .fontWeight(.semibold)
-                                .applyFont(.title3)
+                                .applyFont(.title)
                         }
                     }
                     .frame(maxWidth: geometry.size.width / 3.5)
@@ -61,11 +62,11 @@ struct TrackManualTimeView: View {
                         if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
                             Text("global_hours")
                                 .fontWeight(.semibold)
-                                .applyFont(.title3)
+                                .applyFont(.title2)
                         } else {
                             Text(".")
                                 .fontWeight(.semibold)
-                                .applyFont(.title3)
+                                .applyFont(.title2)
                         }
 
                         Picker(selection: self.$decimalSpent, label: Text("")) {
@@ -73,7 +74,7 @@ struct TrackManualTimeView: View {
                                 Text(double.stringWithoutDecimals)
                                     .foregroundColor(.black)
                                     .fontWeight(.semibold)
-                                    .applyFont(.title3)
+                                    .applyFont(.title)
                             }
                         }
                         .frame(maxWidth: geometry.size.width / 3.5)
@@ -82,7 +83,7 @@ struct TrackManualTimeView: View {
                         if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
                             Text("global_minutes")
                                 .fontWeight(.semibold)
-                                .applyFont(.title3)
+                                .applyFont(.title2)
                         }
                     }
                     if currentGoal?.goalType.timeTrackingType != .hoursWithMinutes && currentGoal?.goalType != .custom {

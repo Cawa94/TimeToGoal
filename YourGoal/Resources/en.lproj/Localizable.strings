@@ -27,7 +27,6 @@
 "global_journal" = "Journal";
 "global_minutes" = "Minutes";
 "global_monday" = "Monday";
-"global_new_goal" = "New Goal";
 "global_next" = "Next";
 "global_saturday" = "Saturday";
 "global_sunday" = "Sunday";
@@ -206,6 +205,9 @@
 "motivational_author_49" = "Alan Watts";
 "motivational_sentence_50" = "The future belongs to those who prepare for it today";
 "motivational_author_50" = "Malcolm X";
+
+"placeholder_first_goal" = "My first Goal";
+"placeholder_why_definition" = "It's important for me to reach this goal because...";
 
 "tutorial_first_step_1" = "How many times did you set a goal for yourself but you weren't able to stick to it after some time?\n\n";
 "tutorial_first_step_2" = " is the first app to help you set and track ";

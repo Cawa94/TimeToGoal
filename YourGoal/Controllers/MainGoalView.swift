@@ -18,6 +18,8 @@ public class MainGoalViewModel: ObservableObject {
 
     @Published var goal: Goal? {
         didSet {
+            progressViewModel.goal = goal
+            calendarViewModel.goal = goal
             showFireworks = isDetailsView ? false : goal?.isCompleted ?? false
             #if RELEASE
                 if goal?.isCompleted ?? false {
@@ -53,26 +55,6 @@ public class MainGoalViewModel: ObservableObject {
         self.isDetailsView = isDetailsView
     }
 
-    var timeRemaining: String {
-        if goal?.goalType.timeTrackingType == .hoursWithMinutes {
-            let dateRemaining = Double(goal?.timeRequired ?? 0).asHoursAndMinutes
-                .remove(Double(goal?.timeCompleted ?? 0).asHoursAndMinutes)
-            if dateRemaining > Date().zeroHours {
-                return dateRemaining.formattedAsHoursString
-            } else {
-                return "0"
-            }
-        } else {
-            let timeRemaining = Double(goal?.timeRequired ?? 0) - Double(goal?.timeCompleted ?? 0)
-            if timeRemaining > 0 {
-                return goal?.goalType.timeTrackingType == .double
-                    ? "\(timeRemaining.stringWithTwoDecimals)" : "\(timeRemaining.stringWithoutDecimals)"
-            } else {
-                return "0"
-            }
-        }
-    }
-
 }
 
 struct MainGoalView: View {
@@ -87,26 +69,22 @@ struct MainGoalView: View {
 
                 VStack {
                     Spacer()
-                        .frame(height: 15)
+                        .frame(height: 10)
 
-                    Text(viewModel.goal?.name ?? "global_new_goal".localized())
-                        .fontWeight(.bold)
+                    Text(viewModel.goal?.name ?? "placeholder_first_goal".localized())
                         .foregroundColor(.textForegroundColor)
                         .multilineTextAlignment(.center)
                         .padding([.leading, .trailing], 10)
                         .lineLimit(2)
-                        .applyFont(.largeTitle)
+                        .applyFont(.title)
 
-                    Spacer()
-                        .frame(height: 15)
-
-                    Text("\"\(viewModel.goal?.whyDefinition ?? "")\"")
+                    Text("\"\(viewModel.goal?.whyDefinition ?? "placeholder_why_definition".localized())\"")
                         .italic()
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
                         .padding([.leading, .trailing], 10)
                         .lineLimit(3)
-                        .applyFont(.smallQuote)
+                        .applyFont(.title3)
 
                     Spacer()
 

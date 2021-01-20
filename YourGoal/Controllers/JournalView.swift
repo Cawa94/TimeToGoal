@@ -110,13 +110,13 @@ struct JournalView: View {
 
     var editorHeight: CGFloat {
         if DeviceFix.isSmallScreen {
-            return viewModel.goal.isArchived ? 330 : 200
+            return viewModel.goal.isArchived ? 330 : 180
         } else if DeviceFix.is65Screen {
-            return viewModel.goal.isArchived ? 500 : 400
+            return viewModel.goal.isArchived ? 500 : 380
         } else if DeviceFix.isRoundedScreen {
-            return viewModel.goal.isArchived ? 440 : 330
+            return viewModel.goal.isArchived ? 440 : 310
         } else {
-            return viewModel.goal.isArchived ? 390 : 280
+            return viewModel.goal.isArchived ? 390 : 260
         }
     }
 

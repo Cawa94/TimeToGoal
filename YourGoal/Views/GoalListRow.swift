@@ -26,7 +26,7 @@ struct GoalListRow: View {
             NavigationLink(destination: JournalView(viewModel: .init(goal: viewModel.goal,
                                                                      isPresented: .constant(true)))) {
                 rowContent
-            }
+            }.listRowBackground(Color.grayBackground)
         } else {
             rowContent
         }
@@ -46,20 +46,20 @@ struct GoalListRow: View {
 
             Text(viewModel.goal.name ?? "")
                 .fontWeight(.semibold)
-                .applyFont(.title3)
+                .applyFont(.title2)
 
             Spacer()
 
             if !viewModel.goal.isArchived {
                 percentageText
             }
-        }
+        }.listRowBackground(Color.grayBackground)
     }
 
     var percentageText: some View {
-        Text("\(((viewModel.goal.timeCompleted / viewModel.goal.timeRequired) * 100), specifier: "%.2f")%")
+        Text("\(((viewModel.goal.timeCompleted / viewModel.goal.timeRequired) * 100), specifier: "%.0f")%")
             .fontWeight(.semibold)
-            .applyFont(.title3)
+            .applyFont(.title2)
     }
 
 }
