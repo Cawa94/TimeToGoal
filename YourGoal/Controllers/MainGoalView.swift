@@ -266,11 +266,7 @@ struct MainGoalView: View {
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
             }.accentColor(viewModel.goal?.goalColor)
-            .sheet(isPresented: $viewModel.showingEditGoal, onDismiss: {
-                /*if let goal = goals.first(where: { $0.id == viewModel.goal?.id }), goal.isValid {
-                    viewModel.goal = goal
-                }*/
-            }, content: {
+            .fullScreenCover(isPresented: $viewModel.showingEditGoal, content: {
                 AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
                                activeSheet: .constant(nil),
                                isPresented: $viewModel.showingEditGoal)
@@ -300,11 +296,7 @@ struct MainGoalView: View {
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
             }.accentColor(viewModel.goal?.goalColor)
-            .sheet(isPresented: $viewModel.showingJournal, onDismiss: {
-                /*if let goal = goals.first(where: { $0.id == viewModel.goal?.id }), goal.isValid {
-                    viewModel.goal = goal
-                }*/
-            }, content: {
+            .fullScreenCover(isPresented: $viewModel.showingJournal, content: {
                 if let goal = viewModel.goal {
                     JournalView(viewModel: .init(goal: goal,
                                                  isPresented: $viewModel.showingJournal))
@@ -334,9 +326,7 @@ struct MainGoalView: View {
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
             }.accentColor(.orangeGoal)
-            .sheet(isPresented: $viewModel.showingAllGoals, onDismiss: {
-                
-            }, content: {
+            .fullScreenCover(isPresented: $viewModel.showingAllGoals, content: {
                 AllGoalsView(viewModel: .init(goals: viewModel.allGoals,
                                               refreshAllGoals: $viewModel.refreshAllGoals,
                                               isPresented: $viewModel.showingAllGoals))

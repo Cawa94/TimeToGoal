@@ -208,6 +208,7 @@ struct AddNewGoalView: View {
                             }.buttonStyle(PlainButtonStyle())
                             .accentColor(viewModel.goal.goalColor)
                         }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
+                        .navigationBarItems(trailing: closeButton)
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.pageLightBackground)
@@ -217,6 +218,19 @@ struct AddNewGoalView: View {
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
+        }
+    }
+
+    var closeButton: some View {
+        Button(action: {
+            self.activeSheet = nil
+        }) {
+            if viewModel.isNewGoal {
+                Image("close")
+                    .resizable()
+                    .aspectRatio(1.0, contentMode: .fit)
+                    .frame(width: 15)
+            }
         }
     }
 

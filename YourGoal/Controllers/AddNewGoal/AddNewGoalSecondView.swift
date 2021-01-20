@@ -269,7 +269,7 @@ struct AddNewGoalSecondView: View {
                     self.isPresented.toggle()
                 }) {
                     Image(systemName: "chevron.left")
-            })
+            }, trailing: closeButton)
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
@@ -295,6 +295,19 @@ struct AddNewGoalSecondView: View {
             FirebaseService.logEvent(.updateCompletionDate)
             completionDate = viewModel.goal.updatedCompletionDate
             viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
+        }
+    }
+
+    var closeButton: some View {
+        Button(action: {
+            self.activeSheet = nil
+        }) {
+            if viewModel.isNewGoal {
+                Image("close")
+                    .resizable()
+                    .aspectRatio(1.0, contentMode: .fit)
+                    .frame(width: 15)
+            }
         }
     }
 

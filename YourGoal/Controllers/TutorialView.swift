@@ -31,6 +31,7 @@ struct TutorialView: View {
                                                      activeSheet: $activeSheet)).tag(4)
                 }
                 .id(0)
+                .edgesIgnoringSafeArea(.all)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .colorScheme(.light)

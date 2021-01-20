@@ -209,9 +209,9 @@
 "placeholder_first_goal" = "Mi primero objetivo";
 "placeholder_why_definition" = "Es importante para mi conseguir este objetivo porque...";
 
-"tutorial_first_step_1" = "¿Cuántas veces te propusiste una meta pero no pudiste cumplirla después de un tiempo? \n\n";
-"tutorial_first_step_2" = " es la primera aplicación que te ayudará a configurar y realizar el seguimiento de tus ";
-"tutorial_first_step_3" = " goals, para lograr todo lo que deseas con tu vida.\n\nTe ayudará a diseñar una meta de la manera correcta y te apoyará durante todo el viaje hasta que alcances los resultados que deseas.";
+"tutorial_first_step_1" = "¿Cuántas veces te propusiste una meta pero no pudiste cumplirla?\n\n";
+"tutorial_first_step_2" = " es la primera aplicación que te ayudará a crear no solo objetivos estándar, sino objetivos ";
+"tutorial_first_step_3" = ", para lograr todo lo que deseas con tu vida.\n\nTe ayudará a diseñar una meta de la manera correcta y te apoyará durante todo el viaje hasta que alcances los resultados que deseas.";
 "tutorial_second_step_1" = "¿Qué es SMART? \n\n";
 "tutorial_second_step_2" = "ESPECÍFICO\n";
 "tutorial_second_step_3" = "Tu objetivo debe ser lo más claro posible, debes saber lo que quieres y POR QUÉ lo quieres, para poder concentrarte y estar realmente motivado. \n\n";

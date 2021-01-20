@@ -11,7 +11,7 @@ import CoreData
 public class ContentViewModel: ObservableObject {
 
     @Published var goals: [Goal] = []
-    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
+    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : .tutorial
     @Published var refreshAllGoals = false
     @Published var goalsModels: [MainGoalViewModel] = []
     @Published var currentPage = 0
@@ -74,7 +74,7 @@ struct ContentView: View {
                 viewModel.refreshAllGoals = false
             }
         })
-        .sheet(item: $viewModel.activeSheet, onDismiss: {
+        .fullScreenCover(item: $viewModel.activeSheet, onDismiss: {
             UserDefaults.standard.showTutorial = false
             for invalidGoal in goals.filter({ !$0.isValid }) {
                 PersistenceController.shared.container.viewContext.delete(invalidGoal)
