@@ -25,11 +25,11 @@ struct BackgroundView<Content: View>: View {
             .ignoresSafeArea()
             .overlay(content.onAppear(perform: {
                 UINavigationBar.appearance().barTintColor = self.color
-                UINavigationBar.appearance().tintColor = .black
+                UINavigationBar.appearance().tintColor = .grayText
                 UINavigationBar.appearance().backgroundColor = self.color
-                UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black,
+                UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.grayText,
                                                                     .font: UIFont.regularFontOf(size: 25)]
-                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black,
+                UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.grayText,
                                                                          .font: UIFont.regularFontOf(size: 36)]
                 UINavigationBar.appearance().isTranslucent = false
                 UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)

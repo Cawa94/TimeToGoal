@@ -53,7 +53,7 @@ struct AllGoalsView: View {
 
     @ViewBuilder
     var body: some View {
-        BackgroundView(color: .pageBackground) {
+        BackgroundView(color: .defaultBackground) {
             NavigationView {
                 List {
                     ForEach(viewModel.listSections) { section in

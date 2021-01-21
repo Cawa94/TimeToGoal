@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-private extension Color {
-
-    static let fieldsTitleForegroundColor: Color = .black
-    static let fieldsTextForegroundColor: Color = .white
-
-}
-
 public class AddNewGoalViewModel: ObservableObject {
 
     @Published var goal: Goal
@@ -89,7 +82,7 @@ struct AddNewGoalView: View {
             viewModel.goal = viewModel.goal
         })
 
-        BackgroundView(color: .pageLightBackground) {
+        BackgroundView(color: .defaultBackground) {
             NavigationView {
                 ZStack {
                     NavigationLink(destination: AddNewGoalSecondView(viewModel: .init(goal: viewModel.goal,
@@ -107,83 +100,108 @@ struct AddNewGoalView: View {
                         }
                         .textCase(nil)
                         .buttonStyle(PlainButtonStyle())
-                        .listRowBackground(Color.pageLightBackground)
+                        .listRowBackground(Color.defaultBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text("goal_name_question").applyFont(.fieldQuestion)) {
-                            TextField("", text: nameBinding)
-                                .padding()
-                                .foregroundColor(.fieldsTextForegroundColor)
-                                .background(Color.grayFields)
-                                .cornerRadius(.defaultRadius)
-                                .disableAutocorrection(true)
+                            VStack {
+                                TextField("", text: nameBinding)
+                                    .padding()
+                                    .foregroundColor(.fieldsTextForegroundColor)
+                                    .background(Color.fieldsBackground)
+                                    .cornerRadius(.defaultRadius)
+                                    .disableAutocorrection(true)
+                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                                Spacer()
+                                    .frame(height: 7)
+                            }
                         }
                         .textCase(nil)
-                        .listRowBackground(Color.pageLightBackground)
+                        .listRowBackground(Color.defaultBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.mainQuestion).applyFont(.fieldQuestion)) {
-                            ZStack {
-                                TextEditor(text: whatBinding)
-                                    .padding()
-                                    .foregroundColor(.fieldsTextForegroundColor)
-                                    .background(Color.grayFields)
-                                    .cornerRadius(.defaultRadius)
-                                    .disableAutocorrection(true)
-                                    .applyFont(.body)
-                                Text(whatBinding.wrappedValue).opacity(0).padding(.all, 8)
+                            VStack {
+                                ZStack {
+                                    TextEditor(text: whatBinding)
+                                        .padding()
+                                        .foregroundColor(.fieldsTextForegroundColor)
+                                        .background(Color.fieldsBackground)
+                                        .cornerRadius(.defaultRadius)
+                                        .disableAutocorrection(true)
+                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                                        .applyFont(.body)
+                                    Text(whatBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
+                                }
+                                Spacer()
+                                    .frame(height: 7)
                             }
                         }
                         .textCase(nil)
-                        .listRowBackground(Color.pageLightBackground)
+                        .listRowBackground(Color.defaultBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.whyQuestion).applyFont(.fieldQuestion)) {
-                            ZStack {
-                                TextEditor(text: whyBinding)
-                                    .padding()
-                                    .foregroundColor(.fieldsTextForegroundColor)
-                                    .background(Color.grayFields)
-                                    .cornerRadius(.defaultRadius)
-                                    .disableAutocorrection(true)
-                                    .applyFont(.body)
-                                Text(whyBinding.wrappedValue).opacity(0).padding(.all, 8)
+                            VStack {
+                                ZStack {
+                                    TextEditor(text: whyBinding)
+                                        .padding()
+                                        .foregroundColor(.fieldsTextForegroundColor)
+                                        .background(Color.fieldsBackground)
+                                        .cornerRadius(.defaultRadius)
+                                        .disableAutocorrection(true)
+                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                                        .applyFont(.body)
+                                    Text(whyBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
+                                }
+                                Spacer()
+                                    .frame(height: 7)
                             }
                         }
                         .textCase(nil)
-                        .listRowBackground(Color.pageLightBackground)
+                        .listRowBackground(Color.defaultBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.whatWillChangeQuestion).applyFont(.fieldQuestion)) {
-                            ZStack {
-                                TextEditor(text: whatChangeBinding)
-                                    .padding()
-                                    .foregroundColor(.fieldsTextForegroundColor)
-                                    .background(Color.grayFields)
-                                    .cornerRadius(.defaultRadius)
-                                    .disableAutocorrection(true)
-                                    .applyFont(.body)
-                                Text(whatChangeBinding.wrappedValue).opacity(0).padding(.all, 8)
+                            VStack {
+                                ZStack {
+                                    TextEditor(text: whatChangeBinding)
+                                        .padding()
+                                        .foregroundColor(.fieldsTextForegroundColor)
+                                        .background(Color.fieldsBackground)
+                                        .cornerRadius(.defaultRadius)
+                                        .disableAutocorrection(true)
+                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                                        .applyFont(.body)
+                                    Text(whatChangeBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
+                                }
+                                Spacer()
+                                    .frame(height: 7)
                             }
                         }
                         .textCase(nil)
-                        .listRowBackground(Color.pageLightBackground)
+                        .listRowBackground(Color.defaultBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section(header: Text(viewModel.goal.goalType.supportQuestion).applyFont(.fieldQuestion)) {
-                            ZStack {
-                                TextEditor(text: supportBinding)
-                                    .padding()
-                                    .foregroundColor(.fieldsTextForegroundColor)
-                                    .background(Color.grayFields)
-                                    .cornerRadius(.defaultRadius)
-                                    .disableAutocorrection(true)
-                                    .applyFont(.body)
-                                Text(supportBinding.wrappedValue).opacity(0).padding(.all, 8)
+                            VStack {
+                                ZStack {
+                                    TextEditor(text: supportBinding)
+                                        .padding()
+                                        .foregroundColor(.fieldsTextForegroundColor)
+                                        .background(Color.fieldsBackground)
+                                        .cornerRadius(.defaultRadius)
+                                        .disableAutocorrection(true)
+                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                                        .applyFont(.body)
+                                    Text(supportBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
+                                }
+                                Spacer()
+                                    .frame(height: 7)
                             }
                         }
                         .textCase(nil)
-                        .listRowBackground(Color.pageLightBackground)
+                        .listRowBackground(Color.defaultBackground)
                         .foregroundColor(.fieldsTitleForegroundColor)
 
                         Section {
@@ -211,7 +229,7 @@ struct AddNewGoalView: View {
                         .navigationBarItems(trailing: closeButton)
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
-                        .listRowBackground(Color.pageLightBackground)
+                        .listRowBackground(Color.defaultBackground)
                     }
                 }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
             }

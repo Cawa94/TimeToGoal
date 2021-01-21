@@ -48,7 +48,7 @@ struct JournalView: View {
 
     @ViewBuilder
     var body: some View {
-        BackgroundView(color: .pageLightBackground) {
+        BackgroundView(color: .defaultBackground) {
             if !viewModel.goal.isArchived {
                 NavigationView {
                     scrollViewContent
@@ -66,7 +66,7 @@ struct JournalView: View {
     }
 
     var scrollViewContent: some View {
-        BackgroundView(color: .pageLightBackground) {
+        BackgroundView(color: .defaultBackground) {
         ScrollView() {
                 VStack {
                     JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal,
@@ -74,7 +74,7 @@ struct JournalView: View {
                         .padding([.leading, .trailing, .top, .bottom], 15)
 
                     TextEditor(text: $viewModel.notes)
-                        .background(Color.pageLightBackground)
+                        .background(Color.defaultBackground)
                         .padding([.leading, .trailing], 30)
                         .frame(height: editorHeight)
                         .cornerRadius(.defaultRadius)

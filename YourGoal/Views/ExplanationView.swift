@@ -85,7 +85,7 @@ struct ExplanationView: View {
                 Spacer()
                     .frame(height: DeviceFix.isSmallScreen ? 50 : 75)
             }.frame(width: container.size.width, height: container.size.height)
-        }.background(Color.grayBackground)
+        }.background(Color.defaultBackground)
     }
 
     var firstPageText: some View {

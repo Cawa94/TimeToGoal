@@ -62,7 +62,7 @@ struct GoalProgressView: View {
     @ViewBuilder
     var body: some View {
         ZStack {
-            Color.pageBackground
+            Color.defaultBackground
 
             Circle().strokeBorder(AngularGradient(
                                     gradient: Gradient(colors: viewModel.goal?.circleGradientColors ?? Color.rainbowClosed),

@@ -63,9 +63,9 @@ struct MainGoalView: View {
 
     @ViewBuilder
     var body: some View {
-        BackgroundView(color: .pageBackground) {
+        BackgroundView(color: .defaultBackground) {
             ZStack {
-                Color.pageBackground
+                Color.defaultBackground
 
                 VStack {
                     Spacer()

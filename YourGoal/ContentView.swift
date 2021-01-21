@@ -51,7 +51,7 @@ struct ContentView: View {
                 }
             }
         }
-        .background(Color.pageBackground)
+        .background(Color.defaultBackground)
         .id(viewModel.goals.count)
         .edgesIgnoringSafeArea(.all)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))

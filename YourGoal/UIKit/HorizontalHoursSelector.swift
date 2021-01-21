@@ -15,7 +15,7 @@ class PickerRowView: UIView {
         label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: control.size.width, height: control.size.height)
         label.textAlignment = .center
-        label.textColor = .white
+        label.textColor = .grayText
 
         super.init(frame: frame)
 
