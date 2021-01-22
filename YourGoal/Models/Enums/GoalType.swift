@@ -22,8 +22,8 @@ enum GoalType: String {
 
 extension GoalType {
 
-    var icon: Image {
-        return Image(self.rawValue)
+    var defaultIcon: String {
+        return "\(self.rawValue)_0"
     }
 
     var timeTrackingType: TimeTrackingType {

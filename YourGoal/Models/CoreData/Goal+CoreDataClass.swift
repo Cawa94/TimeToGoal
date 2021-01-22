@@ -36,6 +36,10 @@ public class Goal: NSManagedObject {
         UIColor(named: color ?? "orangeColor") ?? .goalColor
     }
 
+    var goalIcon: String {
+        icon ?? goalType.defaultIcon
+    }
+
     var workOnMonday: Bool {
         self.monday > 0
     }

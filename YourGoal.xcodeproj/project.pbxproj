@@ -31,6 +31,7 @@
 		DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A340B25275E3400597C73 /* DayCellView.swift */; };
 		DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A3413252761A600597C73 /* MainGoalView.swift */; };
 		DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA47599A25470DE800A1ADA6 /* DeviceFix.swift */; };
+		DA50012625BB129700853B50 /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50012525BB129700853B50 /* IconSelectorView.swift */; };
 		DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */; };
 		DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* AddNewGoalView.swift */; };
 		DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */; };
@@ -119,6 +120,7 @@
 		DA3A340B25275E3400597C73 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
 		DA3A3413252761A600597C73 /* MainGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGoalView.swift; sourceTree = "<group>"; };
 		DA47599A25470DE800A1ADA6 /* DeviceFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFix.swift; sourceTree = "<group>"; };
+		DA50012525BB129700853B50 /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManualTimeView.swift; sourceTree = "<group>"; };
 		DA582A58252518CA00A37693 /* AddNewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGoalView.swift; sourceTree = "<group>"; };
 		DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
+				DA50012525BB129700853B50 /* IconSelectorView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
 				DA1F801625B31045002598C4 /* PagerView.swift */,
 			);
@@ -671,6 +674,7 @@
 				DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */,
 				DA90BB62257FC4FD00B9D4D1 /* GoalListRow.swift in Sources */,
 				DA9DA465257519320006B706 /* MotivationalView.swift in Sources */,
+				DA50012625BB129700853B50 /* IconSelectorView.swift in Sources */,
 				DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */,
 				DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */,
 				DAAA9033257A58FD00525B14 /* JournalDatesView.swift in Sources */,

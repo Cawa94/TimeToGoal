@@ -108,7 +108,7 @@ struct GoalProgressView: View {
                         .foregroundColor(.textForegroundColor)
                         .applyFont(.title2)
                 } else {
-                    viewModel.goal?.goalType.icon
+                    Image(viewModel.goal?.goalIcon ?? "")
                         .resizable()
                         .aspectRatio(1.0, contentMode: .fit)
                         .frame(width: 58)

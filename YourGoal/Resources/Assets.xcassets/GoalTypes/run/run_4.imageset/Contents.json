@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "treadmill.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

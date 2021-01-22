@@ -11,6 +11,7 @@ public class AddNewGoalSecondViewModel: ObservableObject {
 
     @Published var goal: Goal
     @Published var isColorsVisible = false
+    @Published var isIconsVisible = false
 
     var isNewGoal: Bool
 
@@ -35,6 +36,20 @@ struct AddNewGoalSecondView: View {
     @Binding var isAllFormPresented: Bool
 
     @State var completionDate = Date()
+
+    init(viewModel: AddNewGoalSecondViewModel,
+         activeSheet: Binding<ActiveSheet?>,
+         isPresented: Binding<Bool>,
+         isAllFormPresented: Binding<Bool>) {
+        self.viewModel = viewModel
+        self._activeSheet = activeSheet
+        self._isPresented = isPresented
+        self._isAllFormPresented = isAllFormPresented
+
+        updateCompletionDate()
+        debugPrint("IS NEW: \(viewModel.isNewGoal)")
+        debugPrint("COMPLETION DATE: \(completionDate)")
+    }
 
     @ViewBuilder
     var body: some View {
@@ -111,6 +126,57 @@ struct AddNewGoalSecondView: View {
         BackgroundView(color: .defaultBackground, barTintColor: viewModel.goal.goalUIColor) {
             ZStack {
                 Form {
+                    Section(header: Text("Personalizza il tuo obiettivo").applyFont(.fieldQuestion)) {
+                        VStack {
+                            HStack(spacing: 15) {
+                                Text("\("global_color".localized()):")
+                                    .applyFont(.small)
+                                Button(action: {
+                                    viewModel.isColorsVisible.toggle()
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .fill(Color.fieldsBackground)
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                        Circle()
+                                            .fill(viewModel.goal.goalColor)
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                            .padding(12.5)
+                                    }
+                                    .clipped()
+                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                                }.accentColor(viewModel.goal.goalColor)
+
+                                Spacer()
+
+                                Text("Icona:")
+                                    .applyFont(.small)
+                                Button(action: {
+                                    viewModel.isIconsVisible.toggle()
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .fill(Color.fieldsBackground)
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                        Image(viewModel.goal.goalIcon)
+                                            .resizable()
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                            .frame(width: 35)
+                                    }
+                                    .clipped()
+                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                                }.accentColor(viewModel.goal.goalColor)
+                            }.frame(height: 55)
+                            Spacer()
+                                .frame(height: 7)
+                        }
+                    }
+                    .applyFont(.body)
+                    .textCase(nil)
+                    .buttonStyle(PlainButtonStyle())
+                    .listRowBackground(Color.defaultBackground)
+                    .foregroundColor(.fieldsTitleForegroundColor)
+
                     Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion,
                                                 customMeasureBinding.wrappedValue)).applyFont(.fieldQuestion)) {
                         VStack {
@@ -143,25 +209,7 @@ struct AddNewGoalSecondView: View {
                                             .cornerRadius(.defaultRadius)
                                             .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         Spacer()
-                                        Spacer()
-                                        Text("\("global_color".localized()):")
-                                            .applyFont(.small)
                                     }
-                                    Button(action: {
-                                        viewModel.isColorsVisible.toggle()
-                                    }) {
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: .defaultRadius)
-                                                .fill(Color.fieldsBackground)
-                                                .aspectRatio(1.0, contentMode: .fit)
-                                            Circle()
-                                                .fill(viewModel.goal.goalColor)
-                                                .aspectRatio(1.0, contentMode: .fit)
-                                                .padding(12.5)
-                                        }
-                                        .clipped()
-                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-                                    }.accentColor(viewModel.goal.goalColor)
                                 }
                             }.frame(height: 55)
                             Spacer()
@@ -181,7 +229,6 @@ struct AddNewGoalSecondView: View {
                             VStack {
                                 HoursSelectorView(viewModel: .init(bindingString: mondayBinding,
                                                                    goal: $viewModel.goal))
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 Text("global_monday".localized())
                                     .foregroundColor(.grayText)
                                     .applyFont(.small)
@@ -189,7 +236,6 @@ struct AddNewGoalSecondView: View {
                             VStack {
                                 HoursSelectorView(viewModel: .init(bindingString: tuesdayBinding,
                                                                    goal: $viewModel.goal))
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 Text("global_tuesday".localized())
                                     .foregroundColor(.grayText)
                                     .applyFont(.small)
@@ -200,7 +246,6 @@ struct AddNewGoalSecondView: View {
                             VStack {
                                 HoursSelectorView(viewModel: .init(bindingString: wednesdayBinding,
                                                                    goal: $viewModel.goal))
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 Text("global_wednesday".localized())
                                     .foregroundColor(.grayText)
                                     .applyFont(.small)
@@ -208,7 +253,6 @@ struct AddNewGoalSecondView: View {
                             VStack {
                                 HoursSelectorView(viewModel: .init(bindingString: thursdayBinding,
                                                                    goal: $viewModel.goal))
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 Text("global_thursday".localized())
                                     .foregroundColor(.grayText)
                                     .applyFont(.small)
@@ -219,7 +263,6 @@ struct AddNewGoalSecondView: View {
                             VStack {
                                 HoursSelectorView(viewModel: .init(bindingString: fridayBinding,
                                                                    goal: $viewModel.goal))
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 Text("global_friday".localized())
                                     .foregroundColor(.grayText)
                                     .applyFont(.small)
@@ -227,7 +270,6 @@ struct AddNewGoalSecondView: View {
                             VStack {
                                 HoursSelectorView(viewModel: .init(bindingString: saturdayBinding,
                                                                    goal: $viewModel.goal))
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 Text("global_saturday".localized())
                                     .foregroundColor(.grayText)
                                     .applyFont(.small)
@@ -240,7 +282,6 @@ struct AddNewGoalSecondView: View {
                                 VStack {
                                     HoursSelectorView(viewModel: .init(bindingString: sundayBinding,
                                                                        goal: $viewModel.goal))
-                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                     Text("global_sunday".localized())
                                         .foregroundColor(.grayText)
                                         .applyFont(.small)
@@ -301,6 +342,11 @@ struct AddNewGoalSecondView: View {
                     ColorSelectorView(viewModel: .init(goal: $viewModel.goal),
                                       isPresented: $viewModel.isColorsVisible)
                 }
+
+                if viewModel.isIconsVisible {
+                    IconSelectorView(viewModel: .init(goal: $viewModel.goal),
+                                     isPresented: $viewModel.isIconsVisible)
+                }
             }
             .navigationBarTitle("global_time_required", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
@@ -314,16 +360,20 @@ struct AddNewGoalSecondView: View {
         .onTapGesture {
             UIApplication.shared.endEditing()
         }
+        .onAppear {
+            updateCompletionDate()
+        }
     }
 
     func storeNewGoal() {
         if viewModel.goal.isValid {
-            if viewModel.isNewGoal {
-                viewModel.goal.createdAt = Date()
-            }
             viewModel.goal.editedAt = Date()
-            viewModel.goal.timesHasBeenTracked = 0
-            FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
+            if viewModel.isNewGoal {
+                viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
+                viewModel.goal.timesHasBeenTracked = 0
+                viewModel.goal.createdAt = Date()
+                FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
+            }
             PersistenceController.shared.saveContext()
             self.activeSheet = nil
             self.isAllFormPresented = false
@@ -332,9 +382,7 @@ struct AddNewGoalSecondView: View {
 
     func updateCompletionDate() {
         if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
-            FirebaseService.logEvent(.updateCompletionDate)
             completionDate = viewModel.goal.updatedCompletionDate
-            viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
         }
     }
 

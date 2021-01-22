@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-private extension CGFloat {
-
-    static var iconRadius: CGFloat = 10
-
-}
-
 struct TypeCellViewModel: Identifiable {
 
     let id: Int
@@ -29,7 +23,7 @@ struct TypeCellView: View {
     @ViewBuilder
     var body: some View {
         if viewModel.isSelected {
-            viewModel.type.icon
+            Image(viewModel.type.defaultIcon)
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
                 .overlay(
@@ -38,7 +32,7 @@ struct TypeCellView: View {
                         .padding(-4)
                 )
         } else {
-            viewModel.type.icon
+            Image(viewModel.type.defaultIcon)
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
         }

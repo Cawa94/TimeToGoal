@@ -76,7 +76,7 @@ struct MainGoalView: View {
                         .multilineTextAlignment(.center)
                         .padding([.leading, .trailing], 10)
                         .lineLimit(2)
-                        .applyFont(.title)
+                        .applyFont(.largeTitle)
 
                     if DeviceFix.is65Screen {
                         Spacer()

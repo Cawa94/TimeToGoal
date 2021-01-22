@@ -11,5 +11,6 @@ import SwiftUI
 extension CGFloat {
 
     static let defaultRadius: CGFloat = 17.5
+    static var iconRadius: CGFloat = 10
 
 }

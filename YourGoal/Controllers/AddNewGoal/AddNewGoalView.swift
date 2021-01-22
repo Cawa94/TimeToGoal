@@ -230,7 +230,7 @@ struct AddNewGoalView: View {
                         .padding([.bottom], 5)
                         .buttonStyle(PlainButtonStyle())
                         .listRowBackground(Color.defaultBackground)
-                    }
+                    }.listStyle(SidebarListStyle())
                 }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
             }
         }
