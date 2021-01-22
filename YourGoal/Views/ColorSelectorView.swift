@@ -11,7 +11,7 @@ public class ColorSelectorViewModel: ObservableObject {
 
     @Binding var currentGoal: Goal
 
-    var colors = ["orangeGoal", "yellowGoal", "greenGoal",
+    var colors = ["orangeGoal", "redGoal", "greenGoal",
                   "blueGoal", "purpleGoal", "grayGoal"]
 
     init(goal: Binding<Goal>) {

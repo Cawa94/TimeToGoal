@@ -11,6 +11,10 @@
 "add_goal_hours_for_day_title" = "How many hours you'll work each day?";
 "add_goal_hours_required_title" = "How many hours will it take?";
 "add_goal_type_title" = "What kind of goal do you want to reach?";
+"add_goal_customize_title" = "Customize your goal";
+"add_goal_missing_name" = "First give a name to your goal";
+"add_goal_missing_total_time" = "Set the total number of %@";
+"add_goal_missing_work_time" = "Set at least 1 work day";
 
 "all_goals_archived" = "Archived";
 "all_goals_doing" = "In progress";
@@ -23,7 +27,9 @@
 "global_details" = "Details";
 "global_estimated" = "Date estimated";
 "global_friday" = "Friday";
+"global_got_it" = "OK";
 "global_hours" = "Hours";
+"global_icon" = "Icon";
 "global_journal" = "Journal";
 "global_minutes" = "Minutes";
 "global_monday" = "Monday";
@@ -34,6 +40,7 @@
 "global_time_required" = "Time required";
 "global_tuesday" = "Tuesday";
 "global_update" = "Update";
+"global_wait" = "Wait!";
 "global_wednesday" = "Wednesday";
 
 "goal_name_question" = "Goal title (max 50 characters)";

@@ -9,7 +9,7 @@ import SwiftUI
 
 private extension Color {
 
-    static let textForegroundColor: Color = .black
+    static let textForegroundColor: Color = .grayText
 
 }
 

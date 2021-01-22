@@ -144,8 +144,8 @@ public class Goal: NSManagedObject {
                 return [.greenGoal, .greenGradient1, .greenGradient2, .greenGradient2, .greenGradient1, .greenGoal]
             case "purpleGoal":
                 return [.purpleGoal, .purpleGradient1, .purpleGradient2, .purpleGradient2, .purpleGradient1, .purpleGoal]
-            case "yellowGoal":
-                return [.yellowGoal, .yellowGradient1, .yellowGradient2, .yellowGradient2, .yellowGradient1, .yellowGoal]
+            case "redGoal":
+                return [.redGoal, .redGradient1, .redGradient2, .redGradient2, .redGradient1, .redGoal]
             case "grayGoal":
                 return [.grayGoal, .grayGradient1, .grayGradient2, .grayGradient2, .grayGradient1, .grayGoal]
             default:
@@ -166,8 +166,8 @@ public class Goal: NSManagedObject {
             return [.greenGoal, .greenGradient1, .greenGradient2]
         case "purpleGoal":
             return [.purpleGoal, .purpleGradient1, .purpleGradient2]
-        case "yellowGoal":
-            return [.yellowGoal, .yellowGradient1, .yellowGradient2]
+        case "redGoal":
+            return [.redGoal, .redGradient1, .redGradient2]
         case "grayGoal":
             return [.grayGoal, .grayGradient1, .grayGradient2]
         default:

@@ -11,6 +11,10 @@
 "add_goal_hours_for_day_title" = "¿Cuántas horas al día trabajaras en ello?";
 "add_goal_hours_required_title" = "¿Cuántas horas se necesitan?";
 "add_goal_type_title" = "¿Qué tipo de objetivo quieres alcanzar?";
+"add_goal_customize_title" = "Personaliza tu objetivo";
+"add_goal_missing_name" = "Nombra tu objetivo primero";
+"add_goal_missing_total_time" = "Estableces el número total de% @";
+"add_goal_missing_work_time" = "Estableces al menos 1 día laboral";
 
 "all_goals_archived" = "Archivado";
 "all_goals_doing" = "En curso";
@@ -23,7 +27,9 @@
 "global_details" = "Detalles";
 "global_estimated" = "Fecha estimada";
 "global_friday" = "Viernes";
+"global_got_it" = "OK";
 "global_hours" = "Horas";
+"global_icon" = "Icono";
 "global_journal" = "Diario";
 "global_minutes" = "Minutos";
 "global_monday" = "Lunes";
@@ -34,6 +40,7 @@
 "global_time_required" = "Tiempo requerido";
 "global_tuesday" = "Martes";
 "global_update" = "Actualizar";
+"global_wait" = "Esperate!";
 "global_wednesday" = "Miércoles";
 
 "goal_name_question" = "Nombre del objetivo (máx 50 caracteres)";

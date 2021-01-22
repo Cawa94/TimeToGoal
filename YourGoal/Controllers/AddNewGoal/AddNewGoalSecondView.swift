@@ -12,6 +12,7 @@ public class AddNewGoalSecondViewModel: ObservableObject {
     @Published var goal: Goal
     @Published var isColorsVisible = false
     @Published var isIconsVisible = false
+    @Published var showErrorAlert = false
 
     var isNewGoal: Bool
 
@@ -47,8 +48,6 @@ struct AddNewGoalSecondView: View {
         self._isAllFormPresented = isAllFormPresented
 
         updateCompletionDate()
-        debugPrint("IS NEW: \(viewModel.isNewGoal)")
-        debugPrint("COMPLETION DATE: \(completionDate)")
     }
 
     @ViewBuilder
@@ -126,7 +125,7 @@ struct AddNewGoalSecondView: View {
         BackgroundView(color: .defaultBackground, barTintColor: viewModel.goal.goalUIColor) {
             ZStack {
                 Form {
-                    Section(header: Text("Personalizza il tuo obiettivo").applyFont(.fieldQuestion)) {
+                    Section(header: Text("add_goal_customize_title").applyFont(.fieldQuestion)) {
                         VStack {
                             HStack(spacing: 15) {
                                 Text("\("global_color".localized()):")
@@ -144,12 +143,11 @@ struct AddNewGoalSecondView: View {
                                             .padding(12.5)
                                     }
                                     .clipped()
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 }.accentColor(viewModel.goal.goalColor)
 
                                 Spacer()
 
-                                Text("Icona:")
+                                Text("\("global_icon".localized()):")
                                     .applyFont(.small)
                                 Button(action: {
                                     viewModel.isIconsVisible.toggle()
@@ -164,7 +162,6 @@ struct AddNewGoalSecondView: View {
                                             .frame(width: 35)
                                     }
                                     .clipped()
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 }.accentColor(viewModel.goal.goalColor)
                             }.frame(height: 55)
                             Spacer()
@@ -190,14 +187,12 @@ struct AddNewGoalSecondView: View {
                                             .foregroundColor(.fieldsTextForegroundColor)
                                             .background(Color.fieldsBackground)
                                             .cornerRadius(.defaultRadius)
-                                            .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         TextField("", text: customMeasureBinding)
                                             .padding()
                                             .foregroundColor(.fieldsTextForegroundColor)
                                             .background(Color.fieldsBackground)
                                             .cornerRadius(.defaultRadius)
                                             .disableAutocorrection(true)
-                                            .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         Spacer()
                                     } else {
                                         TextField("", text: timeRequiredBinding)
@@ -207,7 +202,6 @@ struct AddNewGoalSecondView: View {
                                             .foregroundColor(.fieldsTextForegroundColor)
                                             .background(Color.fieldsBackground)
                                             .cornerRadius(.defaultRadius)
-                                            .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         Spacer()
                                     }
                                 }
@@ -313,8 +307,12 @@ struct AddNewGoalSecondView: View {
                     
                     Section {
                         Button(action: {
-                            viewModel.goal.customTimeMeasure = customMeasureBinding.wrappedValue
-                            storeNewGoal()
+                            if viewModel.goal.isValid {
+                                viewModel.goal.customTimeMeasure = customMeasureBinding.wrappedValue
+                                storeNewGoal()
+                            } else {
+                                viewModel.showErrorAlert.toggle()
+                            }
                         }) {
                             HStack {
                                 Spacer()
@@ -331,6 +329,16 @@ struct AddNewGoalSecondView: View {
                             .cornerRadius(.defaultRadius)
                             .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                         }.accentColor(viewModel.goal.goalColor)
+                        .alert(isPresented: $viewModel.showErrorAlert) {
+                            let measureUnit = viewModel.goal.goalType == .custom
+                                ? customMeasureBinding.wrappedValue : viewModel.goal.goalType.measureUnit
+                            return Alert(title: Text("global_wait"),
+                                         message: viewModel.goal.timeRequired != 0
+                                            ? Text("add_goal_missing_work_time")
+                                            : Text(String(format: "add_goal_missing_total_time".localized(),
+                                                          measureUnit)),
+                                         dismissButton: .default(Text("global_got_it")))
+                        }
                     }
                     .textCase(nil)
                     .padding([.bottom], 5)

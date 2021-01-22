@@ -12,7 +12,7 @@ public class AddNewGoalViewModel: ObservableObject {
     @Published var goal: Goal
     @Published var showSmartExplanation = false
     @Published var showSecondView = false
-    @Published var isColorsVisible = false
+    @Published var showErrorAlert = false
 
     var isNewGoal: Bool
 
@@ -111,7 +111,6 @@ struct AddNewGoalView: View {
                                     .background(Color.fieldsBackground)
                                     .cornerRadius(.defaultRadius)
                                     .disableAutocorrection(true)
-                                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                 Spacer()
                                     .frame(height: 7)
                             }
@@ -129,7 +128,6 @@ struct AddNewGoalView: View {
                                         .background(Color.fieldsBackground)
                                         .cornerRadius(.defaultRadius)
                                         .disableAutocorrection(true)
-                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         .applyFont(.body)
                                     Text(whatBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
                                 }
@@ -150,7 +148,6 @@ struct AddNewGoalView: View {
                                         .background(Color.fieldsBackground)
                                         .cornerRadius(.defaultRadius)
                                         .disableAutocorrection(true)
-                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         .applyFont(.body)
                                     Text(whyBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
                                 }
@@ -171,7 +168,6 @@ struct AddNewGoalView: View {
                                         .background(Color.fieldsBackground)
                                         .cornerRadius(.defaultRadius)
                                         .disableAutocorrection(true)
-                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         .applyFont(.body)
                                     Text(whatChangeBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
                                 }
@@ -192,7 +188,6 @@ struct AddNewGoalView: View {
                                         .background(Color.fieldsBackground)
                                         .cornerRadius(.defaultRadius)
                                         .disableAutocorrection(true)
-                                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                                         .applyFont(.body)
                                     Text(supportBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
                                 }
@@ -206,8 +201,12 @@ struct AddNewGoalView: View {
 
                         Section {
                             Button(action: {
-                                viewModel.goal = viewModel.goal
-                                viewModel.showSecondView.toggle()
+                                if !(viewModel.goal.name?.isEmpty ?? true) {
+                                    viewModel.goal = viewModel.goal
+                                    viewModel.showSecondView.toggle()
+                                } else {
+                                    viewModel.showErrorAlert.toggle()
+                                }
                             }) {
                                 HStack {
                                     Spacer()
@@ -225,6 +224,11 @@ struct AddNewGoalView: View {
                                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                             }.buttonStyle(PlainButtonStyle())
                             .accentColor(viewModel.goal.goalColor)
+                            .alert(isPresented: $viewModel.showErrorAlert) {
+                                Alert(title: Text("global_wait"),
+                                      message: Text("add_goal_missing_name"),
+                                      dismissButton: .default(Text("global_got_it")))
+                            }
                         }.navigationBarTitle(viewModel.showSecondView ? "" : viewModel.goal.goalType.title, displayMode: .large)
                         .navigationBarItems(trailing: closeButton)
                         .padding([.bottom], 5)

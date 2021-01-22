@@ -33,8 +33,6 @@ struct HoursSelectorView: View {
                     .background(Color.fieldsLightBackground)
                     .cornerRadius(.defaultRadius)
                     .disabled(true)
-                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius).stroke(Color.grayBorder, lineWidth: 1))
-                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 HorizontalPickerView(selectedValue: viewModel.bindingString,
                                      goal: viewModel.goal,
                                      size: .init(width: vContainer.size.width, height: .pickerViewWidth))

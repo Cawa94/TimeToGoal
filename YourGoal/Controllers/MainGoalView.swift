@@ -93,7 +93,7 @@ struct MainGoalView: View {
 
                     Spacer()
 
-                    GoalProgressView(viewModel: viewModel.progressViewModel)
+                    GoalProgressView(viewModel: GoalProgressViewModel(goal: viewModel.goal))
                         .padding([.leading, .trailing], 30)
 
                     Spacer()

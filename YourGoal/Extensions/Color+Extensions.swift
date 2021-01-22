@@ -11,7 +11,7 @@ import SwiftUI
 extension Color {
 
     static let fieldsTitleForegroundColor = Color.grayText
-    static let fieldsTextForegroundColor = Color.grayText
+    static let fieldsTextForegroundColor = Color.white
     static var goalColor = Color("orangeGoal")
     static var rainbow: [Color] = [.orangeGoal, .yellowGoal, .greenGoal, .blueGoal]
     static var rainbowClosed: [Color] = rainbow + [.orangeGoal]
@@ -50,6 +50,11 @@ extension Color {
     static let orangeGoal            = Color("orangeGoal")
     static let orangeGradient1       = Color("orangeGradient1")
     static let orangeGradient2       = Color("orangeGradient2")
+
+    // Red
+    static let redGoal               = Color("redGoal")
+    static let redGradient1          = Color("redGradient1")
+    static let redGradient2          = Color("redGradient2")
 
     // Purple
     static let purpleGoal            = Color("purpleGoal")
