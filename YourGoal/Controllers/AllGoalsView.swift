@@ -29,14 +29,12 @@ public class AllGoalsViewModel: ObservableObject {
     }
 
     @Binding var refreshAllGoals: Bool
-    @Binding var isPresented: Bool
 
     var listSections: [ListSection]
 
-    init(goals: [Goal], refreshAllGoals: Binding<Bool>, isPresented: Binding<Bool>) {
+    init(goals: [Goal], refreshAllGoals: Binding<Bool>) {
         self.goals = goals
         self._refreshAllGoals = refreshAllGoals
-        self._isPresented = isPresented
         self.listSections = [ListSection(id: 0,
                                          title: "all_goals_doing".localized(),
                                          goals: goals.filter { !$0.isArchived }),
@@ -70,7 +68,6 @@ struct AllGoalsView: View {
                     }
                 }.listStyle(GroupedListStyle())
                 .navigationBarTitle("all_goals_title", displayMode: .large)
-                .navigationBarItems(trailing: closeButton)
             }
         }
     }
@@ -84,17 +81,6 @@ struct AllGoalsView: View {
                 PersistenceController.shared.saveContext()
                 viewModel.refreshAllGoals = true
             }
-        }
-    }
-
-    var closeButton: some View {
-        Button(action: {
-            self.viewModel.isPresented.toggle()
-        }) {
-            Image("close")
-                .resizable()
-                .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: 15)
         }
     }
 

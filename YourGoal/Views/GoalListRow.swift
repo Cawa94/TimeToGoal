@@ -22,14 +22,11 @@ struct GoalListRow: View {
     @ObservedObject var viewModel: GoalListRowModel
 
     var body: some View {
-        if viewModel.goal.isArchived {
-            NavigationLink(destination: JournalView(viewModel: .init(goal: viewModel.goal,
-                                                                     isPresented: .constant(true)))) {
-                rowContent
-            }.listRowBackground(Color.defaultBackground)
-        } else {
+        NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goal,
+                                                                  activeSheet: .constant(nil),
+                                                                  refreshAllGoals: .constant(true)))) {
             rowContent
-        }
+        }.listRowBackground(Color.defaultBackground)
     }
 
     var rowContent: some View {

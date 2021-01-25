@@ -39,7 +39,7 @@ struct ContentView: View {
     @ViewBuilder
     var body: some View {
         TabView {
-            ForEach(0...(viewModel.goalsModels.count), id: \.self) { index in
+            /*ForEach(0...(viewModel.goalsModels.count), id: \.self) { index in
                 if index < viewModel.goalsModels.count {
                     let model = viewModel.goalsModels[index]
                     MainGoalView(viewModel: model)
@@ -49,14 +49,31 @@ struct ContentView: View {
                                                   activeSheet: $viewModel.activeSheet,
                                                   refreshAllGoals: $viewModel.refreshAllGoals))
                 }
-            }
+            }*/
+            Text("Homepage")
+                .tabItem {
+                    Image(systemName: "tv.fill")
+                }
+            JournalView(viewModel: .init(journal: []))
+                .tabItem {
+                    Image(systemName: "tv.fill")
+                }
+            AllGoalsView(viewModel: .init(goals: viewModel.goals,
+                                          refreshAllGoals: $viewModel.refreshAllGoals))
+                .tabItem {
+                    Image(systemName: "tv.fill")
+                }
+            Text("Statystics")
+                .tabItem {
+                    Image(systemName: "tv.fill")
+                }
+            Text("Profile")
+                .tabItem {
+                    Image(systemName: "tv.fill")
+                }
         }
         .background(Color.defaultBackground)
-        .id(viewModel.goals.count)
         .edgesIgnoringSafeArea(.all)
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .colorScheme(.light)
         .onAppear(perform: {
             viewModel.refreshAllGoals = true
         })

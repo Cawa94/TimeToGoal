@@ -10,10 +10,10 @@ import Combine
 
 public class JournalViewModel: ObservableObject {
 
-    @Published var goal: Goal
+    @Published var journal: [JournalPage]
     @Published var selectedDay = Date() {
         didSet {
-            if let page = goal.journal?.filter({ ($0 as? JournalPage)?.dayId == selectedDay.customId }).first as? JournalPage {
+            if let page = journal.filter({ $0.dayId == selectedDay.customId }).first {
                 self.notes = page.notes ?? placeholderString
                 self.mood = page.mood
             } else {
@@ -27,11 +27,8 @@ public class JournalViewModel: ObservableObject {
 
     let placeholderString = "journal_notes_question".localized()
 
-    @Binding var isPresented: Bool
-
-    init(goal: Goal, isPresented: Binding<Bool>) {
-        self.goal = goal
-        self._isPresented = isPresented
+    init(journal: [JournalPage]) {
+        self.journal = journal
     }
 
 }
@@ -49,11 +46,7 @@ struct JournalView: View {
     @ViewBuilder
     var body: some View {
         BackgroundView(color: .defaultBackground) {
-            if !viewModel.goal.isArchived {
-                NavigationView {
-                    scrollViewContent
-                }
-            } else {
+            NavigationView {
                 scrollViewContent
             }
         }
@@ -67,9 +60,9 @@ struct JournalView: View {
 
     var scrollViewContent: some View {
         BackgroundView(color: .defaultBackground) {
-        ScrollView() {
+            ScrollView() {
                 VStack {
-                    JournalDatesView(viewModel: JournalDatesViewModel(goal: viewModel.goal,
+                    JournalDatesView(viewModel: JournalDatesViewModel(journal: viewModel.journal,
                                                                       selectedDay: $viewModel.selectedDay))
                         .padding([.leading, .trailing, .top, .bottom], 15)
 
@@ -99,24 +92,22 @@ struct JournalView: View {
                     emojiStackView
                         .padding([.leading, .trailing], 15)
 
-                    if !viewModel.goal.isArchived {
-                        saveAndCloseButton
-                            .padding([.leading, .trailing, .top, .bottom], 15)
-                    }
+                    saveAndCloseButton
+                        .padding([.leading, .trailing, .top, .bottom], 15)
                 }
             }
-        }.navigationBarTitle("global_journal", displayMode: viewModel.goal.isArchived ? .inline : .large)
+        }.navigationBarTitle("global_journal", displayMode: .large)
     }
 
     var editorHeight: CGFloat {
         if DeviceFix.isSmallScreen {
-            return viewModel.goal.isArchived ? 330 : 180
+            return 180
         } else if DeviceFix.is65Screen {
-            return viewModel.goal.isArchived ? 500 : 380
+            return 380
         } else if DeviceFix.isRoundedScreen {
-            return viewModel.goal.isArchived ? 440 : 310
+            return 310
         } else {
-            return viewModel.goal.isArchived ? 390 : 260
+            return 260
         }
     }
 
@@ -124,7 +115,7 @@ struct JournalView: View {
         HStack {
             Button(action: {
                 withAnimation {
-                    if let page = viewModel.goal.journal?.filter({ ($0 as? JournalPage)?.dayId == viewModel.selectedDay.customId })
+                    if let page = viewModel.journal.filter({ $0.dayId == viewModel.selectedDay.customId })
                         .first as? JournalPage { // delete old page
                         PersistenceController.shared.container.viewContext.delete(page)
                         PersistenceController.shared.saveContext()
@@ -134,10 +125,8 @@ struct JournalView: View {
                         newPage.dayId = viewModel.selectedDay.customId
                         newPage.notes = viewModel.notes
                         newPage.mood = viewModel.mood
-                        viewModel.goal.addToJournal(newPage)
                         PersistenceController.shared.saveContext()
                     }
-                    viewModel.isPresented.toggle()
                 }
             }) {
                 HStack {
@@ -150,11 +139,11 @@ struct JournalView: View {
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal.goalColor)
+            }.accentColor(Color.goalColor)
         }
     }
 

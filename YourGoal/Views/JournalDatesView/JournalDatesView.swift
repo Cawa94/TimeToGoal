@@ -7,26 +7,31 @@
 
 import SwiftUI
 
-import SwiftUI
-
 public class JournalDatesViewModel: ObservableObject {
 
-    @Published var goal: Goal
+    @Published var journal: [JournalPage]
 
     @Binding var selectedDay: Date
 
     var dates: [JournalDate] = []
 
-    init(goal: Goal, selectedDay: Binding<Date>) {
-        self.goal = goal
+    init(journal: [JournalPage], selectedDay: Binding<Date>) {
+        self.journal = journal
         self._selectedDay = selectedDay
         
         var journalDates: [JournalDate] = []
         let dayDurationInSeconds: TimeInterval = 60*60*24
-        let creationDate = (goal.createdAt ?? Date()).adding(days: -3) // to start 2 days early than creation
-        let finalDate = goal.isArchived ? goal.completedAt?.adding(days: 3) ?? Date().adding(days: 3) : Date().adding(days: 3)
+        let creationDate = (journal.sorted(by: { ($0.date ?? Date()).compare($1.date ?? Date()) == .orderedDescending }).first?.date ?? Date()).adding(days: -3) // to start 2 days early than first page
+        let finalDate = Date().adding(days: 3)
         for date in stride(from: creationDate, to: finalDate, by: dayDurationInSeconds) {
-            journalDates.append(JournalDate(id: date.customId, date: date, goal: goal))
+            var emoji: String?
+            if let page = journal.filter({ $0.dayId == date.customId }).first, let mood = page.mood {
+                emoji = JournalMood(rawValue: mood)?.emoji
+            }
+            journalDates.append(JournalDate(id: date.customId,
+                                            date: date,
+                                            hasNotes: journal.contains(where: { $0.dayId == date.customId }) ,
+                                            emoji: emoji))
         }
         self.dates = journalDates
     }
@@ -46,7 +51,7 @@ struct JournalDatesView: View {
                             .frame(width: journalDate.id == viewModel.selectedDay.customId ? 75 : 60,
                                    height: journalDate.id == viewModel.selectedDay.customId ? 75 : 60)
                             .background(journalDate.id == viewModel.selectedDay.customId
-                                            ? LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                            ? LinearGradient(gradient: Gradient(colors: Color.rainbow),
                                                              startPoint: .topLeading, endPoint: .bottomTrailing)
                                             : LinearGradient(gradient: .init(colors: [.white]),
                                                              startPoint: .topLeading, endPoint: .bottomTrailing))

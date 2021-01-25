@@ -11,13 +11,15 @@ import SwiftUI
 struct JournalDate: Identifiable {
 
     var id: Int64
-    var goal: Goal
     var date: Date
+    var hasNotes: Bool
+    var emoji: String?
 
-    init(id: Int64, date: Date, goal: Goal) {
+    init(id: Int64, date: Date, hasNotes: Bool, emoji: String?) {
         self.id = id
-        self.goal = goal
         self.date = date
+        self.hasNotes = hasNotes
+        self.emoji = emoji
     }
 
 }
@@ -34,18 +36,6 @@ extension JournalDate {
         var calendar = Calendar.current
         calendar.locale = Locale(identifier: Locale.current.languageCode ?? "en")
         return calendar.shortMonthSymbols[date.monthNumber - 1]
-    }
-
-    var hasNotes: Bool {
-        return goal.journal?.contains(where: { ($0 as? JournalPage)?.dayId == self.id }) ?? false
-    }
-
-    var emoji: String? {
-        if let page = goal.journal?.filter({ ($0 as? JournalPage)?.dayId == self.id }).first as? JournalPage,
-           let mood = page.mood {
-            return JournalMood(rawValue: mood)?.emoji
-        }
-        return nil
     }
 
 }

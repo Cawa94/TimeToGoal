@@ -302,10 +302,7 @@ struct MainGoalView: View {
                 )
             }.accentColor(viewModel.goal?.goalColor)
             .fullScreenCover(isPresented: $viewModel.showingJournal, content: {
-                if let goal = viewModel.goal {
-                    JournalView(viewModel: .init(goal: goal,
-                                                 isPresented: $viewModel.showingJournal))
-                }
+                JournalView(viewModel: .init(journal: []))
             })
         }
     }
@@ -333,8 +330,7 @@ struct MainGoalView: View {
             }.accentColor(.orangeGoal)
             .fullScreenCover(isPresented: $viewModel.showingAllGoals, content: {
                 AllGoalsView(viewModel: .init(goals: viewModel.allGoals,
-                                              refreshAllGoals: $viewModel.refreshAllGoals,
-                                              isPresented: $viewModel.showingAllGoals))
+                                              refreshAllGoals: $viewModel.refreshAllGoals))
             })
         }
     }
