@@ -85,7 +85,7 @@ struct GoalProgressView: View {
                         .trim(from: 0.0,
                               to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
                         .stroke(style: StrokeStyle(lineWidth: 40.0, lineCap: .round, lineJoin: .round))
-                        .animation(.easeInOut(duration: 0.75))
+                        //.animation(.easeInOut(duration: 0.75))
                         .padding(20)
                 )
                 .rotationEffect(Angle(degrees: 270))

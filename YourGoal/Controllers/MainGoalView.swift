@@ -20,7 +20,7 @@ public class MainGoalViewModel: ObservableObject {
         didSet {
             progressViewModel.goal = goal
             calendarViewModel.goal = goal
-            showFireworks = isDetailsView ? false : goal?.isCompleted ?? false
+            showFireworks = goal?.isCompleted ?? false
             #if RELEASE
                 if goal?.isCompleted ?? false {
                     if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
@@ -43,16 +43,13 @@ public class MainGoalViewModel: ObservableObject {
     @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
 
-    var isDetailsView = false
-
-    init(goal: Goal?, allGoals: [Goal]? = nil, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>, isDetailsView: Bool = false) {
+    init(goal: Goal?, allGoals: [Goal]? = nil, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
         self.goal = goal
         self.allGoals = allGoals ?? []
         self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
         self.progressViewModel = GoalProgressViewModel(goal: goal)
         self.calendarViewModel = HorizontalCalendarViewModel(goal: goal)
-        self.isDetailsView = isDetailsView
     }
 
 }
@@ -100,45 +97,17 @@ struct MainGoalView: View {
                         .frame(height: 15)
 
                     VStack {
-                        if (viewModel.goal?.isCompleted ?? false) && !viewModel.isDetailsView {
+                        if (viewModel.goal?.isCompleted ?? false) && !(viewModel.goal?.isArchived ?? false) {
                             archiveGoalButton
                                 .padding([.leading, .trailing], 15)
-                            Spacer()
-                                .frame(height: 15)
-                        } else if viewModel.goal == nil {
-                            newGoalButton
-                                .padding([.leading, .trailing], 15)
-                            Spacer()
-                                .frame(height: 15)
-                            if !viewModel.allGoals.isEmpty {
-                                allGoalsButton
-                                    .padding([.leading, .trailing], 15)
-                            }
-                        } else if viewModel.isDetailsView {
-                            journalButton
-                                .padding([.leading, .trailing], 15)
-                            Spacer()
-                                .frame(height: 15)
-                        } else {
+                        } else if !(viewModel.goal?.isCompleted ?? false) {
                             trackTimeButton
                                 .padding([.leading, .trailing], 15)
-                            Spacer()
-                                .frame(height: 15)
-                            HStack {
-                                editGoalButton
-                                    .padding([.leading], 15)
-                                    .padding([.trailing], 5)
-                                journalButton
-                                    .padding([.leading], 5)
-                                    .padding([.trailing], 15)
-                            }
                         }
                     }
 
-                    if !viewModel.isDetailsView {
-                        Spacer()
-                            .frame(height: DeviceFix.isRoundedScreen ? 100 : 65)
-                    }
+                    Spacer()
+                        .frame(height: 35)
                 }
 
                 if viewModel.showingTrackGoal {
@@ -167,8 +136,8 @@ struct MainGoalView: View {
                     MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
                         .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
                 }
-            }.navigationBarTitle("\(viewModel.goal?.name ?? "")", displayMode: .inline)
-            .navigationBarHidden(!viewModel.isDetailsView)
+            }.navigationBarTitle("", displayMode: .inline)
+            .navigationBarHidden(true)
         }
     }
 
@@ -179,6 +148,7 @@ struct MainGoalView: View {
                     if !(viewModel.goal?.isCompleted ?? true) {
                         FirebaseService.logEvent(.trackTimeButton)
                         viewModel.showingTrackGoal.toggle()
+                        viewModel.refreshAllGoals = true
                     }
                 }
             }) {
@@ -193,30 +163,6 @@ struct MainGoalView: View {
                 }
                 .padding([.top, .bottom], 15)
                 .background(LinearGradient(gradient: Gradient(colors: viewModel.goal?.rectGradientColors ?? Color.rainbow),
-                                           startPoint: .topLeading, endPoint: .bottomTrailing))
-                .cornerRadius(.defaultRadius)
-                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal?.goalColor)
-        }
-    }
-
-    var newGoalButton: some View {
-        HStack {
-            Button(action: {
-                FirebaseService.logEvent(.addGoalButton)
-                viewModel.activeSheet = .newGoal
-            }) {
-                HStack {
-                    Spacer()
-                    Text("global_add_goal")
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .applyFont(.button)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
@@ -275,62 +221,6 @@ struct MainGoalView: View {
                 AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
                                activeSheet: .constant(nil),
                                isPresented: $viewModel.showingEditGoal)
-            })
-        }
-    }
-
-    var journalButton: some View {
-        HStack {
-            Button(action: {
-                //FirebaseService.logEvent(.editGoalButton)
-                viewModel.showingJournal.toggle()
-            }) {
-                HStack {
-                    Spacer()
-                    Text("global_journal")
-                        .fontWeight(.semibold)
-                        .foregroundColor(viewModel.goal?.goalColor)
-                        .applyFont(.button)
-                    Spacer()
-                }
-                .padding(15.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: .defaultRadius)
-                        .stroke(lineWidth: 2.0)
-                        .foregroundColor(viewModel.goal?.goalColor)
-                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-                )
-            }.accentColor(viewModel.goal?.goalColor)
-            .fullScreenCover(isPresented: $viewModel.showingJournal, content: {
-                JournalView(viewModel: .init(journal: []))
-            })
-        }
-    }
-
-    var allGoalsButton: some View {
-        HStack {
-            Button(action: {
-                viewModel.showingAllGoals.toggle()
-            }) {
-                HStack {
-                    Spacer()
-                    Text("all_goals_title")
-                        .fontWeight(.semibold)
-                        .foregroundColor(viewModel.goal?.goalColor)
-                        .applyFont(.button)
-                    Spacer()
-                }
-                .padding(15.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: .defaultRadius)
-                        .stroke(lineWidth: 2.0)
-                        .foregroundColor(.orangeGoal)
-                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-                )
-            }.accentColor(.orangeGoal)
-            .fullScreenCover(isPresented: $viewModel.showingAllGoals, content: {
-                AllGoalsView(viewModel: .init(goals: viewModel.allGoals,
-                                              refreshAllGoals: $viewModel.refreshAllGoals))
             })
         }
     }

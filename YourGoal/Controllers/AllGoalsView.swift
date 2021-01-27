@@ -29,12 +29,15 @@ public class AllGoalsViewModel: ObservableObject {
     }
 
     @Binding var refreshAllGoals: Bool
+    @Binding var activeSheet: ActiveSheet?
 
     var listSections: [ListSection]
 
-    init(goals: [Goal], refreshAllGoals: Binding<Bool>) {
+    init(goals: [Goal], refreshAllGoals: Binding<Bool>, activeSheet: Binding<ActiveSheet?>) {
         self.goals = goals
         self._refreshAllGoals = refreshAllGoals
+        self._activeSheet = activeSheet
+
         self.listSections = [ListSection(id: 0,
                                          title: "all_goals_doing".localized(),
                                          goals: goals.filter { !$0.isArchived }),
@@ -51,24 +54,55 @@ struct AllGoalsView: View {
 
     @ViewBuilder
     var body: some View {
-        BackgroundView(color: .defaultBackground) {
-            NavigationView {
-                List {
-                    ForEach(viewModel.listSections) { section in
-                        if let goals = section.goals, !goals.isEmpty {
-                            Section(header: Text(section.title).applyFont(.title3)) {
-                                ForEach(goals) { goal in
-                                    GoalListRow(viewModel: .init(goal: goal))
+        NavigationView {
+            BackgroundView(color: .defaultBackground) {
+                VStack {
+                    Spacer()
+                        .frame(height: 15)
+
+                    HStack {
+                        Text("all_goals_title")
+                            .foregroundColor(.grayText)
+                            .multilineTextAlignment(.leading)
+                            .padding([.leading], 15)
+                            .applyFont(.navigationLargeTitle)
+
+                        Spacer()
+
+                        addNewButton
+                            .padding(.trailing, 15)
+                    }
+
+                    Spacer()
+                    
+                    List {
+                        ForEach(viewModel.listSections) { section in
+                            if let goals = section.goals, !goals.isEmpty {
+                                Section(header: Text(section.title).applyFont(.title3)) {
+                                    ForEach(goals) { goal in
+                                        GoalListRow(viewModel: .init(goal: goal))
+                                    }
+                                    .onDelete(perform: { offsets in
+                                        self.removeItems(at: offsets, from: section)
+                                    })
                                 }
-                                .onDelete(perform: { offsets in
-                                    self.removeItems(at: offsets, from: section)
-                                })
                             }
                         }
-                    }
-                }.listStyle(GroupedListStyle())
-                .navigationBarTitle("all_goals_title", displayMode: .large)
+                    }.listStyle(GroupedListStyle())
+                    
+                }.navigationBarHidden(true)
+                .navigationBarTitle("")
             }
+        }
+    }
+
+    var addNewButton: some View {
+        Button(action: {
+            viewModel.activeSheet = .newGoal
+        }) {
+            Text("global_add")
+                .foregroundColor(.grayText)
+                .applyFont(.title3)
         }
     }
 
@@ -79,7 +113,6 @@ struct AllGoalsView: View {
                 viewModel.goals = viewModel.goals
                 PersistenceController.shared.container.viewContext.delete(goal)
                 PersistenceController.shared.saveContext()
-                viewModel.refreshAllGoals = true
             }
         }
     }

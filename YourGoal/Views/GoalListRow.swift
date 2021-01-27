@@ -22,11 +22,17 @@ struct GoalListRow: View {
     @ObservedObject var viewModel: GoalListRowModel
 
     var body: some View {
-        NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goal,
-                                                                  activeSheet: .constant(nil),
-                                                                  refreshAllGoals: .constant(true)))) {
+        if !viewModel.goal.isArchived {
+            NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goal,
+                                                                      activeSheet: .constant(nil),
+                                                                      refreshAllGoals: .constant(true)))) {
+                rowContent
+            }
+            .listRowBackground(Color.defaultBackground)
+        } else {
             rowContent
-        }.listRowBackground(Color.defaultBackground)
+                .listRowBackground(Color.defaultBackground)
+        }
     }
 
     var rowContent: some View {

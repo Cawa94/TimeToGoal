@@ -8,24 +8,39 @@
 import SwiftUI
 import CoreData
 
+enum Page {
+    case home
+    case journal
+    case goals
+    case statistics
+    case profile
+}
+
 public class ContentViewModel: ObservableObject {
 
     @Published var goals: [Goal] = []
+    @Published var journal: [JournalPage] = []
     @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
-    @Published var goalsModels: [MainGoalViewModel] = []
-    @Published var currentPage = 0
+    @Published var refreshJournal = false
+    @Published var currentPage: Page = .home
+    @Published var goalsButtonPressed = false // to animate button on tap
+    @Published var lastEditedGoal: Goal?
 
 }
 
 struct ContentView: View {
 
     @ObservedObject var viewModel = ContentViewModel()
+    @StateObject var viewRouter = ViewRouter()
 
     static var showedQuote = false
 
     var goalsRequest: FetchRequest<Goal>
     var goals: FetchedResults<Goal> { goalsRequest.wrappedValue }
+
+    var journalRequest: FetchRequest<JournalPage>
+    var journal: FetchedResults<JournalPage> { journalRequest.wrappedValue }
 
     init() {
         self.goalsRequest = FetchRequest(
@@ -34,61 +49,91 @@ struct ContentView: View {
                 NSSortDescriptor(keyPath: \Goal.editedAt, ascending: false)
             ]
         )
+
+        self.journalRequest = FetchRequest(
+            entity: JournalPage.entity(),
+            sortDescriptors: [
+                NSSortDescriptor(keyPath: \JournalPage.date, ascending: false)
+            ]
+        )
     }
 
     @ViewBuilder
     var body: some View {
-        TabView {
-            /*ForEach(0...(viewModel.goalsModels.count), id: \.self) { index in
-                if index < viewModel.goalsModels.count {
-                    let model = viewModel.goalsModels[index]
-                    MainGoalView(viewModel: model)
-                } else {
-                    MainGoalView(viewModel: .init(goal: nil,
-                                                  allGoals: viewModel.goals,
-                                                  activeSheet: $viewModel.activeSheet,
+        BackgroundView(color: .defaultBackground) {
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    switch viewRouter.currentPage {
+                    case .home:
+                        HomeView(viewModel: .init(lastGoal: viewModel.lastEditedGoal,
                                                   refreshAllGoals: $viewModel.refreshAllGoals))
+                    case .journal:
+                        JournalView(viewModel: .init(journal: viewModel.journal,
+                                                     refreshJournal: $viewModel.refreshJournal))
+                            .onDisappear(perform: {
+                                viewModel.refreshJournal = true
+                            })
+                    case .goals:
+                        AllGoalsView(viewModel: .init(goals: viewModel.goals,
+                                                      refreshAllGoals: $viewModel.refreshAllGoals,
+                                                      activeSheet: $viewModel.activeSheet))
+                    case .statistics:
+                        StatisticsView(viewModel: .init())
+                    case .profile:
+                        ProfileView(viewModel: .init())
+                    }
+                    HStack(spacing: 35) {
+                        TabBarIcon(viewRouter: viewRouter, assignedPage: .home,
+                                   width: geometry.size.width/5, height: geometry.size.height/28,
+                                   iconName: "home")
+                        TabBarIcon(viewRouter: viewRouter, assignedPage: .journal,
+                                   width: geometry.size.width/5, height: geometry.size.height/28,
+                                   iconName: "journal")
+                        ZStack {
+                            Circle()
+                                .foregroundColor(.defaultBackground)
+                                .frame(width: geometry.size.width/6, height: geometry.size.width/6)
+                                .shadow(radius: 2)
+                            Image(viewRouter.currentPage == .goals ? "goals" : "goals_off")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: geometry.size.width/6-20 , height: geometry.size.width/6-20)
+                        }.offset(y: -geometry.size.height/6/4)
+                        .scaleEffect(viewModel.goalsButtonPressed ? 0.8 : 1.0)
+                        .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                viewModel.goalsButtonPressed = pressing
+                            }
+                            viewRouter.currentPage = .goals
+                        }, perform: {})
+                        TabBarIcon(viewRouter: viewRouter, assignedPage: .statistics,
+                                   width: geometry.size.width/5, height: geometry.size.height/28,
+                                   iconName: "statistics")
+                        TabBarIcon(viewRouter: viewRouter, assignedPage: .profile,
+                                   width: geometry.size.width/5, height: geometry.size.height/28,
+                                   iconName: "profile")
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height/8)
+                    .background(Color.defaultBackground.shadow(radius: 1))
                 }
-            }*/
-            Text("Homepage")
-                .tabItem {
-                    Image(systemName: "tv.fill")
-                }
-            JournalView(viewModel: .init(journal: []))
-                .tabItem {
-                    Image(systemName: "tv.fill")
-                }
-            AllGoalsView(viewModel: .init(goals: viewModel.goals,
-                                          refreshAllGoals: $viewModel.refreshAllGoals))
-                .tabItem {
-                    Image(systemName: "tv.fill")
-                }
-            Text("Statystics")
-                .tabItem {
-                    Image(systemName: "tv.fill")
-                }
-            Text("Profile")
-                .tabItem {
-                    Image(systemName: "tv.fill")
-                }
+             }
         }
-        .background(Color.defaultBackground)
         .edgesIgnoringSafeArea(.all)
         .onAppear(perform: {
             viewModel.refreshAllGoals = true
+            viewModel.refreshJournal = true
         })
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {
                 viewModel.goals = goals.filter { $0.isValid }
-                viewModel.goalsModels = viewModel.goals.filter { $0.isValid && !$0.isArchived }.map {
-                    let goal = $0
-                    let model = MainGoalViewModel(goal: goal,
-                                                  activeSheet: $viewModel.activeSheet,
-                                                  refreshAllGoals: $viewModel.refreshAllGoals)
-                    model.goal = goal
-                    return model
-                }
+                viewModel.lastEditedGoal = goals.first
                 viewModel.refreshAllGoals = false
+            }
+        })
+        .onReceive(viewModel.$refreshJournal, perform: {
+            if $0 {
+                viewModel.journal = journal.map { $0 }
+                viewModel.refreshJournal = false
             }
         })
         .fullScreenCover(item: $viewModel.activeSheet, onDismiss: {

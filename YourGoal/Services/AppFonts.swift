@@ -5,6 +5,7 @@ struct AppFonts: ViewModifier {
     @Environment(\.sizeCategory) var sizeCategory
 
     public enum TextStyle {
+        case navigationLargeTitle
         case largeTitle
         case title
         case title2
@@ -39,6 +40,8 @@ struct AppFonts: ViewModifier {
 
     private var size: CGFloat {
         switch textStyle {
+        case .navigationLargeTitle:
+            return 36
         case .largeTitle:
             return 28
         case .title:

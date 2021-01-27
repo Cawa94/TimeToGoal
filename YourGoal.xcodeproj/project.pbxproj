@@ -17,6 +17,9 @@
 		DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */; };
 		DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA0861D325323DEB00C4A3DD /* Localizable.strings */; };
 		DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861D925323E5200C4A3DD /* String+Extensions.swift */; };
+		DA125FC925C1B8F900DA577E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FC825C1B8F900DA577E /* HomeView.swift */; };
+		DA125FD125C1CAE800DA577E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FD025C1CAE800DA577E /* ProfileView.swift */; };
+		DA125FD625C1CAF200DA577E /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FD525C1CAF200DA577E /* StatisticsView.swift */; };
 		DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */; };
 		DA1DD67825B72E1700981105 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD67725B72E1700981105 /* GoogleService-Info.plist */; };
 		DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1DD67C25B73C9500981105 /* AppFonts.swift */; };
@@ -48,6 +51,7 @@
 		DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D02F12552AEE200DBFB2E /* WeekDay.swift */; };
 		DA9D02FA2552F7BF00DBFB2E /* TimeSelectorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */; };
 		DA9DA465257519320006B706 /* MotivationalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9DA464257519320006B706 /* MotivationalView.swift */; };
+		DAA2024F25C16D3E00501E00 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */; };
 		DAAA9033257A58FD00525B14 /* JournalDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA9032257A58FD00525B14 /* JournalDatesView.swift */; };
 		DAAA903B257A593400525B14 /* JournalDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA903A257A593400525B14 /* JournalDateView.swift */; };
 		DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4CE71252B556900DAA871 /* Double+Extensions.swift */; };
@@ -105,6 +109,9 @@
 		DA0861D725323DEF00C4A3DD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0861D825323DF000C4A3DD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0861D925323E5200C4A3DD /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		DA125FC825C1B8F900DA577E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		DA125FD025C1CAE800DA577E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DA125FD525C1CAF200DA577E /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHoursSpentView.swift; sourceTree = "<group>"; };
 		DA1DD67725B72E1700981105 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA1DD67C25B73C9500981105 /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
@@ -136,6 +143,7 @@
 		DA9D02F12552AEE200DBFB2E /* WeekDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDay.swift; sourceTree = "<group>"; };
 		DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorType.swift; sourceTree = "<group>"; };
 		DA9DA464257519320006B706 /* MotivationalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationalView.swift; sourceTree = "<group>"; };
+		DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcon.swift; sourceTree = "<group>"; };
 		DAAA9032257A58FD00525B14 /* JournalDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDatesView.swift; sourceTree = "<group>"; };
 		DAAA903A257A593400525B14 /* JournalDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDateView.swift; sourceTree = "<group>"; };
 		DAB4CE71252B556900DAA871 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
@@ -277,8 +285,11 @@
 			children = (
 				DA6DD3D9257A445F00AACE45 /* AddNewGoal */,
 				DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */,
+				DA125FC825C1B8F900DA577E /* HomeView.swift */,
 				DA6DD3D4257A445400AACE45 /* JournalView.swift */,
 				DA3A3413252761A600597C73 /* MainGoalView.swift */,
+				DA125FD025C1CAE800DA577E /* ProfileView.swift */,
+				DA125FD525C1CAF200DA577E /* StatisticsView.swift */,
 				DABE55342567C70F00923919 /* TutorialView.swift */,
 			);
 			path = Controllers;
@@ -365,6 +376,7 @@
 			children = (
 				DA084EDE25753DCE00CAC158 /* FamousQuote.swift */,
 				DAE321FF257B9E41007DB9F0 /* JournalDate.swift */,
+				DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */,
 				DA9D02F12552AEE200DBFB2E /* WeekDay.swift */,
 			);
 			path = Structs;
@@ -666,6 +678,7 @@
 				DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */,
 				DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */,
 				DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */,
+				DAA2024F25C16D3E00501E00 /* TabBarIcon.swift in Sources */,
 				DAAA903B257A593400525B14 /* JournalDateView.swift in Sources */,
 				DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */,
 				DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */,
@@ -687,6 +700,7 @@
 				DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */,
 				DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */,
 				DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */,
+				DA125FC925C1B8F900DA577E /* HomeView.swift in Sources */,
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */,
@@ -701,8 +715,10 @@
 				DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */,
 				DABE553A2567C84200923919 /* ExplanationView.swift in Sources */,
 				DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */,
+				DA125FD125C1CAE800DA577E /* ProfileView.swift in Sources */,
 				DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */,
 				DABE55352567C70F00923919 /* TutorialView.swift in Sources */,
+				DA125FD625C1CAF200DA577E /* StatisticsView.swift in Sources */,
 				DA790C27257B941C00598B96 /* JournalPage+CoreDataClass.swift in Sources */,
 				DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */,
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
