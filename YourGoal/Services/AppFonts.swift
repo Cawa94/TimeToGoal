@@ -11,11 +11,14 @@ struct AppFonts: ViewModifier {
         case title2
         case title3
         case button
+        case smallButton
         case body
         case small
         case journal
         case quote
         case quoteAuthor
+        case smallQuote
+        case smallQuoteAuthor
         case fieldQuestion
         case fieldQuestion2
     }
@@ -31,7 +34,7 @@ struct AppFonts: ViewModifier {
         switch textStyle {
         case .body, .fieldQuestion2 :
             return "Rubik"
-        case .quote, .quoteAuthor:
+        case .quote, .quoteAuthor, .smallQuote, .smallQuoteAuthor:
             return "Caveat"
         default:
             return "IndieFlower"
@@ -52,6 +55,8 @@ struct AppFonts: ViewModifier {
             return 18
         case .button:
             return 25
+        case .smallButton:
+            return 18
         case .body:
             return 17
         case .small:
@@ -62,6 +67,10 @@ struct AppFonts: ViewModifier {
             return 40
         case .quoteAuthor:
             return 35
+        case .smallQuote:
+            return 25
+        case .smallQuoteAuthor:
+            return 20
         case .fieldQuestion:
             return 20
         case .fieldQuestion2:

@@ -108,6 +108,8 @@ struct TrackManualTimeView: View {
                     let timeTracked = Double(timeSpent) + (Double("0.\(decimalSpent.stringWithoutDecimals)") ?? 0.00)
                     FirebaseService.logEvent(.timeTracked)
                     currentGoal?.timeCompleted += timeTracked
+                    let progress = createGoalProgress(time: timeTracked)
+                    currentGoal?.addToProgress(progress)
                     currentGoal?.editedAt = Date()
                     if currentGoal?.isCompleted ?? false {
                         currentGoal?.completedAt = Date()
@@ -143,6 +145,15 @@ struct TrackManualTimeView: View {
         }.foregroundColor(.black)
         .buttonStyle(PlainButtonStyle())
     }
+
+    func createGoalProgress(time: Double) -> Progress {
+        let progress = Progress(context: PersistenceController.shared.container.viewContext)
+        progress.date = Date()
+        progress.hoursOfWork = time
+        progress.dayId = Date().customId
+        return progress
+    }
+
 }
 
 struct TrackManualTimeView_Previews: PreviewProvider {

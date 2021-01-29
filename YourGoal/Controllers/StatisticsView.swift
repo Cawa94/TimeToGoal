@@ -21,7 +21,7 @@ struct StatisticsView: View {
                     .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
 
                 HStack {
-                    Text("I miei progressi")
+                    Text("Progressi")
                         .foregroundColor(.grayText)
                         .multilineTextAlignment(.leading)
                         .padding([.leading], 15)

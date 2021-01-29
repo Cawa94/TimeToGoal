@@ -21,9 +21,9 @@ public class JournalDatesViewModel: ObservableObject {
         
         var journalDates: [JournalDate] = []
         let dayDurationInSeconds: TimeInterval = 60*60*24
-        let creationDate = (journal.sorted(by: { ($0.date ?? Date()).compare($1.date ?? Date()) == .orderedDescending }).first?.date ?? Date()).adding(days: -3) // to start 2 days early than first page
-        let finalDate = Date().adding(days: 3)
-        for date in stride(from: creationDate, to: finalDate, by: dayDurationInSeconds) {
+        let firstDate = (journal.first?.date ?? Date()).adding(days: -6) // to start 5 days early than first page
+        let finalDate = Date().adding(days: 6)
+        for date in stride(from: firstDate, to: finalDate, by: dayDurationInSeconds) {
             var emoji: String?
             if let page = journal.filter({ $0.dayId == date.customId }).first, let mood = page.mood {
                 emoji = JournalMood(rawValue: mood)?.emoji

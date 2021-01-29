@@ -35,6 +35,7 @@ extension Color {
     static let grayGoal              = Color("grayGoal")
     static let grayGradient1         = Color("grayGradient1")
     static let grayGradient2         = Color("grayGradient2")
+    static let grayLight             = Color("grayLight")
 
     // Blue
     static let blueGoal              = Color("blueGoal")

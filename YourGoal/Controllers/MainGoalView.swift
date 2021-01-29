@@ -103,6 +103,8 @@ struct MainGoalView: View {
                         } else if !(viewModel.goal?.isCompleted ?? false) {
                             trackTimeButton
                                 .padding([.leading, .trailing], 15)
+                            editGoalButton
+                                .padding([.leading, .trailing], 15)
                         }
                     }
 

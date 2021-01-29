@@ -25,7 +25,6 @@
 		DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1DD67C25B73C9500981105 /* AppFonts.swift */; };
 		DA1DD69825B746BF00981105 /* Caveat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD69425B746BF00981105 /* Caveat.ttf */; };
 		DA1DD69925B746BF00981105 /* IndieFlower.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD69525B746BF00981105 /* IndieFlower.ttf */; };
-		DA1F801725B31045002598C4 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1F801625B31045002598C4 /* PagerView.swift */; };
 		DA32B6CB25B7530600CAA773 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */; };
 		DA32B6CC25B7530600CAA773 /* Rubik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6CA25B7530600CAA773 /* Rubik.ttf */; };
 		DA32B6D525B7558700CAA773 /* Vollkorn-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */; };
@@ -43,6 +42,7 @@
 		DA790C27257B941C00598B96 /* JournalPage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */; };
 		DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BC125272180005D8423 /* CGFloat+Extensions.swift */; };
 		DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */; };
+		DA8A53AA25C46A5300D030A9 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8A53A925C46A5300D030A9 /* View+Extensions.swift */; };
 		DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */; };
 		DA90BB62257FC4FD00B9D4D1 /* GoalListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */; };
 		DA938A272536F64D00446580 /* UserDefaults+ShowTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */; };
@@ -66,6 +66,10 @@
 		DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */; };
 		DABE55352567C70F00923919 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE55342567C70F00923919 /* TutorialView.swift */; };
 		DABE553A2567C84200923919 /* ExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE55392567C84200923919 /* ExplanationView.swift */; };
+		DAC0854D25C413CD00FE4DBC /* GoalSmallProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */; };
+		DAC0855525C4220300FE4DBC /* StatisticsSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */; };
+		DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */; };
+		DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */; };
 		DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */; };
 		DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321FF257B9E41007DB9F0 /* JournalDate.swift */; };
 		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
@@ -117,7 +121,6 @@
 		DA1DD67C25B73C9500981105 /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		DA1DD69425B746BF00981105 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
 		DA1DD69525B746BF00981105 /* IndieFlower.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IndieFlower.ttf; sourceTree = "<group>"; };
-		DA1F801625B31045002598C4 /* PagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		DA32B6CA25B7530600CAA773 /* Rubik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rubik.ttf; sourceTree = "<group>"; };
 		DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vollkorn-Italic.ttf"; sourceTree = "<group>"; };
@@ -135,6 +138,7 @@
 		DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "JournalPage+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/JournalPage+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DA794BC125272180005D8423 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHoursSelector.swift; sourceTree = "<group>"; };
+		DA8A53A925C46A5300D030A9 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGoalsView.swift; sourceTree = "<group>"; };
 		DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListRow.swift; sourceTree = "<group>"; };
 		DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowTutorial.swift"; sourceTree = "<group>"; };
@@ -164,6 +168,10 @@
 		DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendarView.swift; sourceTree = "<group>"; };
 		DABE55342567C70F00923919 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		DABE55392567C84200923919 /* ExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationView.swift; sourceTree = "<group>"; };
+		DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSmallProgressView.swift; sourceTree = "<group>"; };
+		DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSmallView.swift; sourceTree = "<group>"; };
+		DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goals+Extension.swift"; sourceTree = "<group>"; };
+		DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Progress+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Progress+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalMood.swift; sourceTree = "<group>"; };
 		DAE321FF257B9E41007DB9F0 /* JournalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDate.swift; sourceTree = "<group>"; };
 		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
@@ -231,7 +239,9 @@
 				DA0502862526166E000C4DC0 /* Date+Extensions.swift */,
 				DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */,
 				DAB4CE71252B556900DAA871 /* Double+Extensions.swift */,
+				DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */,
 				DA0861D925323E5200C4A3DD /* String+Extensions.swift */,
+				DA8A53A925C46A5300D030A9 /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,10 +336,11 @@
 				DABE55392567C84200923919 /* ExplanationView.swift */,
 				DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
+				DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
 				DA50012525BB129700853B50 /* IconSelectorView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
-				DA1F801625B31045002598C4 /* PagerView.swift */,
+				DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -339,6 +350,7 @@
 			children = (
 				DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */,
 				DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */,
+				DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -699,13 +711,16 @@
 				DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */,
 				DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */,
 				DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */,
+				DAC0854D25C413CD00FE4DBC /* GoalSmallProgressView.swift in Sources */,
 				DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */,
 				DA125FC925C1B8F900DA577E /* HomeView.swift in Sources */,
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
+				DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */,
 				DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
+				DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
 				DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */,
 				DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */,
@@ -726,8 +741,9 @@
 				DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */,
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
+				DAC0855525C4220300FE4DBC /* StatisticsSmallView.swift in Sources */,
 				DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */,
-				DA1F801725B31045002598C4 /* PagerView.swift in Sources */,
+				DA8A53AA25C46A5300D030A9 /* View+Extensions.swift in Sources */,
 				DA084EDF25753DCE00CAC158 /* FamousQuote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

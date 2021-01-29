@@ -18,7 +18,7 @@
 
 "all_goals_archived" = "Archiviati";
 "all_goals_doing" = "In corso";
-"all_goals_title" = "I miei obiettivi";
+"all_goals_title" = "Obiettivi";
 
 "global_add" = "Aggiungi";
 "global_add_goal" = "Aggiungi Obiettivo";
@@ -30,7 +30,7 @@
 "global_got_it" = "OK";
 "global_hours" = "Ore";
 "global_icon" = "Icona";
-"global_journal" = "Il mio diario";
+"global_journal" = "Diario";
 "global_minutes" = "Minuti";
 "global_monday" = "Lunedì";
 "global_next" = "Avanti";
@@ -105,7 +105,7 @@
 
 "main_weel_done" = "Ben fatto!";
 "main_edit_goal" = "Modifica obiettivo";
-"main_goal_completed" = "Hai raggiunto il\ntuo obiettivo";
+"main_goal_completed" = "Hai raggiunto il\ntuo obiettivo!";
 "main_add_new_goal" = "Aggiungi un obiettivo\nper cominciare!";
 "main_time_required" = "%@ %@ mancanti";
 "main_my_goal" = "Il mio obiettivo";

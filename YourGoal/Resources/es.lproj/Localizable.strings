@@ -105,7 +105,7 @@
 
 "main_weel_done" = "Bien Echo!";
 "main_edit_goal" = "Editar objetivo";
-"main_goal_completed" = "Has alcanzado tu objetivo";
+"main_goal_completed" = "Has alcanzado tu objetivo!";
 "main_add_new_goal" = "Agrega un nuevo objetivo\npara comenzar!";
 "main_time_required" = "%@ %@ requeridas";
 "main_my_goal" = "Mi objetivo";

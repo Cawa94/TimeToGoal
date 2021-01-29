@@ -21,7 +21,7 @@ struct ProfileView: View {
                     .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
 
                 HStack {
-                    Text("Il mio profilo")
+                    Text("Profilo")
                         .foregroundColor(.grayText)
                         .multilineTextAlignment(.leading)
                         .padding([.leading], 15)

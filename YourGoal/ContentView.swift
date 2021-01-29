@@ -9,9 +9,9 @@ import SwiftUI
 import CoreData
 
 enum Page {
-    case home
-    case journal
     case goals
+    case journal
+    case home
     case statistics
     case profile
 }
@@ -25,7 +25,6 @@ public class ContentViewModel: ObservableObject {
     @Published var refreshJournal = false
     @Published var currentPage: Page = .home
     @Published var goalsButtonPressed = false // to animate button on tap
-    @Published var lastEditedGoal: Goal?
 
 }
 
@@ -64,26 +63,27 @@ struct ContentView: View {
             GeometryReader { geometry in
                 VStack(spacing: 0) {
                     switch viewRouter.currentPage {
-                    case .home:
-                        HomeView(viewModel: .init(lastGoal: viewModel.lastEditedGoal,
-                                                  refreshAllGoals: $viewModel.refreshAllGoals))
+                    case .goals:
+                        AllGoalsView(viewModel: .init(goals: viewModel.goals,
+                                                      refreshAllGoals: $viewModel.refreshAllGoals,
+                                                      activeSheet: $viewModel.activeSheet))
                     case .journal:
                         JournalView(viewModel: .init(journal: viewModel.journal,
                                                      refreshJournal: $viewModel.refreshJournal))
                             .onDisappear(perform: {
                                 viewModel.refreshJournal = true
                             })
-                    case .goals:
-                        AllGoalsView(viewModel: .init(goals: viewModel.goals,
-                                                      refreshAllGoals: $viewModel.refreshAllGoals,
-                                                      activeSheet: $viewModel.activeSheet))
+                    case .home:
+                        HomeView(viewModel: .init(goals: viewModel.goals,
+                                                  refreshAllGoals: $viewModel.refreshAllGoals))
+                        
                     case .statistics:
                         StatisticsView(viewModel: .init())
                     case .profile:
                         ProfileView(viewModel: .init())
                     }
                     HStack(spacing: 35) {
-                        TabBarIcon(viewRouter: viewRouter, assignedPage: .home,
+                        TabBarIcon(viewRouter: viewRouter, assignedPage: .goals,
                                    width: geometry.size.width/5, height: geometry.size.height/28,
                                    iconName: "home")
                         TabBarIcon(viewRouter: viewRouter, assignedPage: .journal,
@@ -94,7 +94,7 @@ struct ContentView: View {
                                 .foregroundColor(.defaultBackground)
                                 .frame(width: geometry.size.width/6, height: geometry.size.width/6)
                                 .shadow(radius: 2)
-                            Image(viewRouter.currentPage == .goals ? "goals" : "goals_off")
+                            Image(viewRouter.currentPage == .home ? "goals" : "goals_off")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width/6-20 , height: geometry.size.width/6-20)
@@ -104,7 +104,7 @@ struct ContentView: View {
                             withAnimation(.easeInOut(duration: 0.2)) {
                                 viewModel.goalsButtonPressed = pressing
                             }
-                            viewRouter.currentPage = .goals
+                            viewRouter.currentPage = .home
                         }, perform: {})
                         TabBarIcon(viewRouter: viewRouter, assignedPage: .statistics,
                                    width: geometry.size.width/5, height: geometry.size.height/28,
@@ -126,7 +126,6 @@ struct ContentView: View {
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {
                 viewModel.goals = goals.filter { $0.isValid }
-                viewModel.lastEditedGoal = goals.first
                 viewModel.refreshAllGoals = false
             }
         })

@@ -175,4 +175,74 @@ public class Goal: NSManagedObject {
         }
     }
 
+    var smallRectGradientColors: [Color] {
+        switch self.color {
+        case "orangeGoal":
+            return [.orangeGradient1, .orangeGoal, .orangeGradient1]
+        case "blueGoal":
+            return [.blueGradient1, .blueGoal, .blueGradient1]
+        case "greenGoal":
+            return [.greenGradient1, .greenGoal, .greenGradient1]
+        case "purpleGoal":
+            return [.purpleGradient1, .purpleGoal, .purpleGradient1]
+        case "redGoal":
+            return [.redGradient1, .redGoal, .redGradient1]
+        case "grayGoal":
+            return [.grayGradient1, .grayGoal, .grayGradient1]
+        default:
+            return [.orangeGradient1, .orangeGoal, .orangeGradient1]
+        }
+    }
+
+    func dayPercentageAt(date: Date) -> CGFloat {
+        let toWork: Double
+        switch date.dayNumber {
+        case 1:
+            toWork = max(sunday, 1)
+        case 2:
+            toWork = max(monday, 1)
+        case 3:
+            toWork = max(tuesday, 1)
+        case 4:
+            toWork = max(wednesday, 1)
+        case 5:
+            toWork = max(thursday, 1)
+        case 6:
+            toWork = max(friday, 1)
+        case 7:
+            toWork = max(saturday, 1)
+        default:
+            toWork = max(monday, 1)
+        }
+
+        var worked: Double = 0
+        for progress in self.progress?.compactMap { $0 as? Progress }.filter({ $0.date?.formattedAsDateString == date.formattedAsDateString }) ?? [] {
+            worked += progress.hoursOfWork
+        }
+
+        debugPrint("DATE: \(date.formattedAsDateString) WORKED:\(worked) TODO:\(toWork) PERCENT:\(CGFloat(worked/toWork * 100))")
+        return CGFloat(worked/toWork * 100)
+    }
+
+    func workOn(date: Date) -> Bool {
+        switch date.dayNumber {
+        case 1:
+            return workOnSunday
+        case 2:
+            return workOnMonday
+        case 3:
+            return workOnTuesday
+        case 4:
+            return workOnWednesday
+        case 5:
+            return workOnThursday
+        case 6:
+            return workOnFriday
+        case 7:
+            return workOnSaturday
+        default:
+            return false
+        }
+    }
+
 }

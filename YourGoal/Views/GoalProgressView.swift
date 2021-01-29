@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-private extension Color {
+private extension CGFloat {
 
-    static let textForegroundColor: Color = .grayText
+    static let circleWidth: CGFloat = 40
 
 }
 
@@ -69,10 +69,10 @@ struct GoalProgressView: View {
                                     center: .center,
                                     startAngle: .degrees(0),
                                     endAngle: .degrees(360)),
-                                  lineWidth: 40)
+                                  lineWidth: .circleWidth)
                 .shadow(color: .black, radius: 5, x: 5, y: 5)
                 .opacity(0.3)
-                .padding(-20)
+                .padding(-(CGFloat.circleWidth/2))
 
             Circle()
                 .strokeBorder(AngularGradient(
@@ -80,32 +80,31 @@ struct GoalProgressView: View {
                                 center: .center,
                                 startAngle: .degrees(0),
                                 endAngle: .degrees(360)),
-                              lineWidth: 40)
+                              lineWidth: .circleWidth)
                 .mask(Circle()
                         .trim(from: 0.0,
                               to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
-                        .stroke(style: StrokeStyle(lineWidth: 40.0, lineCap: .round, lineJoin: .round))
-                        //.animation(.easeInOut(duration: 0.75))
-                        .padding(20)
+                        .stroke(style: StrokeStyle(lineWidth: .circleWidth, lineCap: .round, lineJoin: .round))
+                        .padding(CGFloat.circleWidth/2)
                 )
                 .rotationEffect(Angle(degrees: 270))
-                .padding(-20)
+                .padding(-(CGFloat.circleWidth/2))
 
             VStack {
                 if viewModel.goal == nil {
                     Text("main_add_new_goal")
                         .applyFont(.title)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.textForegroundColor)
+                        .foregroundColor(.grayText)
                 } else if viewModel.isCompleted {
                     Text("main_weel_done")
                         .fontWeight(.semibold)
-                        .foregroundColor(.textForegroundColor)
+                        .foregroundColor(.grayText)
                         .applyFont(.largeTitle)
                     Text("main_goal_completed")
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.textForegroundColor)
+                        .foregroundColor(.grayText)
                         .applyFont(.title2)
                 } else {
                     Image(viewModel.goal?.goalIcon ?? "")
@@ -114,7 +113,7 @@ struct GoalProgressView: View {
                         .frame(width: 58)
                     Text("main_will_reach_goal")
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.textForegroundColor)
+                        .foregroundColor(.grayText)
                         .applyFont(.title2)
                     Text(viewModel.completionDate)
                         .fontWeight(.bold)
@@ -128,14 +127,14 @@ struct GoalProgressView: View {
                         Text(String(format: "main_time_required".localized(),
                                     viewModel.timeRemaining, goal.customTimeMeasure ?? ""))
                             .fontWeight(.semibold)
-                            .foregroundColor(.textForegroundColor)
+                            .foregroundColor(.grayText)
                             .applyFont(.title3)
                     } else {
                         Text(String(format: "main_time_required".localized(),
                                     viewModel.timeRemaining,
                                     viewModel.goal?.goalType.measureUnit ?? "\("global_hours".localized())"))
                             .applyFont(.title3)
-                            .foregroundColor(.textForegroundColor)
+                            .foregroundColor(.grayText)
                     }
                 }
             }

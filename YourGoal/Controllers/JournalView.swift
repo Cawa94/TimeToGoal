@@ -145,6 +145,7 @@ struct JournalView: View {
             newPage.dayId = viewModel.selectedDay.customId
             newPage.notes = viewModel.notes
             newPage.mood = viewModel.mood
+            newPage.date = viewModel.selectedDay
             self.viewModel.journal.append(newPage)
         }
         PersistenceController.shared.saveContext()
