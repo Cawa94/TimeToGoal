@@ -10,8 +10,8 @@ import SwiftUI
 struct TrackManualTimeView: View {
 
     @Binding var isPresented: Bool
-    @Binding var currentGoal: Goal?
 
+    @State var currentGoal: Goal?
     @State var timeSpent: Int = 0
     @State var decimalSpent: Double = 00
 
@@ -155,10 +155,11 @@ struct TrackManualTimeView: View {
     }
 
 }
-
+/*
 struct TrackManualTimeView_Previews: PreviewProvider {
     static var previews: some View {
         TrackManualTimeView(isPresented: .constant(true), currentGoal: .constant(Goal()))
             .previewLayout(.fixed(width: 375, height: 250))
     }
 }
+*/

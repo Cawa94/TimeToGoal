@@ -15,12 +15,19 @@ private extension CGFloat {
 
 public class GoalSmallProgressViewModel: ObservableObject {
 
-    @Binding var goal: Goal?
-    @Binding var showingTrackGoal: Bool
+    @Published var goal: Goal?
 
-    init(goal: Binding<Goal?>, showingTrackGoal: Binding<Bool>) {
-        self._goal = goal
+    @Binding var showingTrackGoal: Bool
+    @Binding var indexSelectedGoal: Int
+
+    var goalIndex: Int?
+
+    init(goal: Goal?, showingTrackGoal: Binding<Bool>,
+         indexSelectedGoal: Binding<Int>, goalIndex: Int?) {
+        self.goal = goal
         self._showingTrackGoal = showingTrackGoal
+        self._indexSelectedGoal = indexSelectedGoal
+        self.goalIndex = goalIndex
     }
 
     var isCompleted: Bool {
@@ -144,6 +151,7 @@ struct GoalSmallProgressView: View {
                 withAnimation {
                     if !(viewModel.goal?.isCompleted ?? true) {
                         FirebaseService.logEvent(.trackTimeButton)
+                        viewModel.indexSelectedGoal = viewModel.goalIndex ?? 0
                         viewModel.showingTrackGoal.toggle()
                     }
                 }

@@ -220,7 +220,6 @@ public class Goal: NSManagedObject {
             worked += progress.hoursOfWork
         }
 
-        debugPrint("DATE: \(date.formattedAsDateString) WORKED:\(worked) TODO:\(toWork) PERCENT:\(CGFloat(worked/toWork * 100))")
         return CGFloat(worked/toWork * 100)
     }
 

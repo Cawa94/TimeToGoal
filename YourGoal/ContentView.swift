@@ -20,6 +20,7 @@ public class ContentViewModel: ObservableObject {
 
     @Published var goals: [Goal] = []
     @Published var journal: [JournalPage] = []
+    @Published var profile: Profile?
     @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
@@ -41,6 +42,9 @@ struct ContentView: View {
     var journalRequest: FetchRequest<JournalPage>
     var journal: FetchedResults<JournalPage> { journalRequest.wrappedValue }
 
+    var profileRequest: FetchRequest<Profile>
+    var profile: FetchedResults<Profile> { profileRequest.wrappedValue }
+
     init() {
         self.goalsRequest = FetchRequest(
             entity: Goal.entity(),
@@ -54,6 +58,11 @@ struct ContentView: View {
             sortDescriptors: [
                 NSSortDescriptor(keyPath: \JournalPage.date, ascending: false)
             ]
+        )
+
+        self.profileRequest = FetchRequest(
+            entity: Profile.entity(),
+            sortDescriptors: []
         )
     }
 
@@ -75,12 +84,14 @@ struct ContentView: View {
                             })
                     case .home:
                         HomeView(viewModel: .init(goals: viewModel.goals,
+                                                  journal: viewModel.journal,
+                                                  profile: viewModel.profile,
                                                   refreshAllGoals: $viewModel.refreshAllGoals))
                         
                     case .statistics:
                         StatisticsView(viewModel: .init())
                     case .profile:
-                        ProfileView(viewModel: .init())
+                        ProfileView(viewModel: .init(profile: viewModel.profile))
                     }
                     HStack(spacing: 35) {
                         TabBarIcon(viewRouter: viewRouter, assignedPage: .goals,
@@ -122,6 +133,7 @@ struct ContentView: View {
         .onAppear(perform: {
             viewModel.refreshAllGoals = true
             viewModel.refreshJournal = true
+            viewModel.profile = profile.map { $0 }.first
         })
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {

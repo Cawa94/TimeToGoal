@@ -36,6 +36,8 @@
 		DA50012625BB129700853B50 /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50012525BB129700853B50 /* IconSelectorView.swift */; };
 		DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */; };
 		DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* AddNewGoalView.swift */; };
+		DA59593225C5A3F90074CE85 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */; };
+		DA59593725C5A9A60074CE85 /* ProfileImageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */; };
 		DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */; };
 		DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DD3D4257A445400AACE45 /* JournalView.swift */; };
 		DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */; };
@@ -132,6 +134,8 @@
 		DA50012525BB129700853B50 /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManualTimeView.swift; sourceTree = "<group>"; };
 		DA582A58252518CA00A37693 /* AddNewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGoalView.swift; sourceTree = "<group>"; };
+		DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Profile+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectorView.swift; sourceTree = "<group>"; };
 		DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA6DD3D4257A445400AACE45 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
 				DA50012525BB129700853B50 /* IconSelectorView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
+				DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */,
 				DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */,
 			);
 			path = Views;
@@ -350,6 +355,7 @@
 			children = (
 				DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */,
 				DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */,
+				DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */,
 				DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */,
 			);
 			path = CoreData;
@@ -716,6 +722,7 @@
 				DA125FC925C1B8F900DA577E /* HomeView.swift in Sources */,
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */,
+				DA59593725C5A9A60074CE85 /* ProfileImageSelectorView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */,
 				DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */,
@@ -735,6 +742,7 @@
 				DABE55352567C70F00923919 /* TutorialView.swift in Sources */,
 				DA125FD625C1CAF200DA577E /* StatisticsView.swift in Sources */,
 				DA790C27257B941C00598B96 /* JournalPage+CoreDataClass.swift in Sources */,
+				DA59593225C5A3F90074CE85 /* Profile+CoreDataClass.swift in Sources */,
 				DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */,
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
 				DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */,

@@ -113,7 +113,7 @@ struct MainGoalView: View {
                 }
 
                 if viewModel.showingTrackGoal {
-                    TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal, currentGoal: $viewModel.goal)
+                    TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal, currentGoal: viewModel.goal)
                         .transition(.move(edge: .bottom))
                         .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
                             if !isShowing {

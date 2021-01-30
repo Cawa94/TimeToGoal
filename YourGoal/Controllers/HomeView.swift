@@ -10,18 +10,28 @@ import SwiftUI
 public class HomeViewModel: ObservableObject {
 
     @Published var goals: [Goal]
-    @Published var lastGoal: Goal?
+    @Published var journal: [JournalPage]
+    @Published var profile: Profile?
+    @Published var indexSelectedGoal: Int = 0
     @Published var showingTrackGoal = false
     @Published var showMotivation = false
 
     @Binding var refreshAllGoals: Bool
     
     let quote = FamousQuote.getOneRandom()
+    let headerText: String
 
-    init(goals: [Goal], refreshAllGoals: Binding<Bool>) {
+    init(goals: [Goal], journal: [JournalPage], profile: Profile?, refreshAllGoals: Binding<Bool>) {
         self.goals = goals.filter { !$0.isArchived }
-        self.lastGoal = goals.first
+        self.journal = journal
+        self.profile = profile
         self._refreshAllGoals = refreshAllGoals
+        
+        if let name = profile?.name {
+            headerText = "Ciao \(name)"
+        } else {
+            headerText = goals.isEmpty ? "Benvenuto" : "Bentornato"
+        }
     }
 
 }
@@ -42,7 +52,7 @@ struct HomeView: View {
                             .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
 
                         HStack {
-                            Text("Buongiorno Yuri")
+                            Text(viewModel.headerText)
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.leading)
                                 .padding([.leading], 15)
@@ -55,7 +65,7 @@ struct HomeView: View {
                                     .foregroundColor(.defaultBackground)
                                     .frame(width: 55, height: 55)
                                     .shadow(radius: 2)
-                                Image("man_0")
+                                Image(viewModel.profile?.image ?? "man_0")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 40, height: 40)
@@ -70,13 +80,35 @@ struct HomeView: View {
                         Spacer()
                             .frame(height: 0)
 
-                        GoalSmallProgressView(viewModel: .init(goal: $viewModel.lastGoal,
-                                                               showingTrackGoal: $viewModel.showingTrackGoal))
-                            .padding([.leading, .trailing], 5)
-                            .frame(height: container.size.height/4)
+                        if !viewModel.goals.isEmpty {
+                            TabView {
+                                ForEach(0..<viewModel.goals.count) { index in
+                                    VStack {
+                                        GoalSmallProgressView(viewModel: .init(goal: viewModel.goals[index],
+                                                                               showingTrackGoal: $viewModel.showingTrackGoal,
+                                                                               indexSelectedGoal: $viewModel.indexSelectedGoal,
+                                                                               goalIndex: index))
+                                            .frame(height: container.size.height/4)
+                                        Spacer()
+                                    }
+                                }
+                                .padding([.leading, .trailing], 5)
+                            }
+                            .frame(width: UIScreen.main.bounds.width, height: container.size.height/4 + 35)
+                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+                            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                            .colorScheme(.light)
+                        } else {
+                            GoalSmallProgressView(viewModel: .init(goal: nil,
+                                                                   showingTrackGoal: $viewModel.showingTrackGoal,
+                                                                   indexSelectedGoal: $viewModel.indexSelectedGoal,
+                                                                   goalIndex: nil))
+                                .padding([.leading, .trailing], 5)
+                                .frame(width: UIScreen.main.bounds.width, height: container.size.height/4)
+                        }
 
                         Spacer()
-                            .frame(height: 30)
+                            .frame(height: 15)
 
                         Text("La tua settimana")
                             .foregroundColor(.grayLight)
@@ -86,7 +118,8 @@ struct HomeView: View {
                         Spacer()
                             .frame(height: 20)
 
-                        StatisticsSmallView(viewModel: .init(goals: $viewModel.goals))
+                        StatisticsSmallView(viewModel: .init(goals: viewModel.goals,
+                                                             journal: viewModel.journal))
                             .padding([.leading, .trailing], 25)
                             .frame(height: container.size.height/3)
 
@@ -94,11 +127,11 @@ struct HomeView: View {
                     }
 
                     if viewModel.showingTrackGoal {
-                        TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal, currentGoal: $viewModel.lastGoal)
+                        TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal,
+                                            currentGoal: viewModel.goals[viewModel.indexSelectedGoal])
                             .transition(.move(edge: .bottom))
                             .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
                                 if !isShowing {
-                                    viewModel.lastGoal = viewModel.lastGoal
                                     if !ContentView.showedQuote {
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                             ContentView.showedQuote = true

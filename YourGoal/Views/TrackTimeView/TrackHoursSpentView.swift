@@ -10,8 +10,8 @@ import SwiftUI
 struct TrackHoursSpentView: View {
 
     @Binding var isPresented: Bool
-    @Binding var currentGoal: Goal?
 
+    @State var currentGoal: Goal?
     @State private var trackMode = 0
 
     @ViewBuilder
@@ -50,7 +50,7 @@ struct TrackHoursSpentView: View {
                         .padding([.leading, .trailing])*/
                         Spacer()
                         //if trackMode == 0 {
-                            TrackManualTimeView(isPresented: $isPresented, currentGoal: $currentGoal)
+                            TrackManualTimeView(isPresented: $isPresented, currentGoal: currentGoal)
                         /*} else {
                             
                         }*/
@@ -65,9 +65,10 @@ struct TrackHoursSpentView: View {
         }
     }
 }
-
+/*
 struct TrackHoursSpentView_Previews: PreviewProvider {
     static var previews: some View {
         TrackHoursSpentView(isPresented: .constant(true), currentGoal: .constant(Goal()))
     }
 }
+*/

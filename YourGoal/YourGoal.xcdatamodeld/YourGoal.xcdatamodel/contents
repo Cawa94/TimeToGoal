@@ -35,6 +35,11 @@
         <attribute name="mood" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Profile" representedClassName="Profile" syncable="YES" codeGenerationType="category">
+        <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Progress" representedClassName="Progress" syncable="YES" codeGenerationType="category">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dayId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -45,5 +50,6 @@
         <element name="Goal" positionX="-63" positionY="-18" width="128" height="434"/>
         <element name="JournalPage" positionX="-63" positionY="144" width="128" height="89"/>
         <element name="Progress" positionX="-63" positionY="144" width="128" height="89"/>
+        <element name="Profile" positionX="-54" positionY="144" width="128" height="74"/>
     </elements>
 </model>

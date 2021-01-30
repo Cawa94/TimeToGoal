@@ -9,12 +9,12 @@ import SwiftUI
 
 public class StatisticsSmallViewModel: ObservableObject {
 
-    @Binding var goals: [Goal]
-    let lastGoal: Goal?
+    @Published var goals: [Goal]
+    @Published var journal: [JournalPage]
 
-    init(goals: Binding<[Goal]>) {
-        self._goals = goals
-        lastGoal = goals.wrappedValue.first
+    init(goals: [Goal], journal: [JournalPage]) {
+        self.goals = goals
+        self.journal = journal
     }
 
     var weekDates: [Date] {
@@ -59,7 +59,7 @@ struct StatisticsSmallView: View {
 
             HStack(spacing: 20) {
                 ForEach(viewModel.weekDates, id: \.self) { date in
-                    VStack {
+                    VStack(spacing: 5) {
                         GeometryReader { container in
                             ZStack {
                                 let goalsOnDate = viewModel.goals.goalsWorkOn(date: date)
