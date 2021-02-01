@@ -220,9 +220,9 @@ struct MainGoalView: View {
                 )
             }.accentColor(viewModel.goal?.goalColor)
             .fullScreenCover(isPresented: $viewModel.showingEditGoal, content: {
-                AddNewGoalView(viewModel: .init(existingGoal: viewModel.goal),
-                               activeSheet: .constant(nil),
-                               isPresented: $viewModel.showingEditGoal)
+                NewGoalQuestionsView(viewModel: .init(existingGoal: viewModel.goal),
+                                        activeSheet: .constant(nil),
+                                        isPresented: $viewModel.showingEditGoal)
             })
         }
     }

@@ -27,7 +27,7 @@ public class HomeViewModel: ObservableObject {
         self.profile = profile
         self._refreshAllGoals = refreshAllGoals
         
-        if let name = profile?.name {
+        if let name = profile?.name, !name.isEmpty {
             headerText = "Ciao \(name)"
         } else {
             headerText = goals.isEmpty ? "Benvenuto" : "Bentornato"

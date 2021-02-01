@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public class AddNewGoalSecondViewModel: ObservableObject {
+public class NewGoalTimeViewModel: ObservableObject {
 
     @Published var goal: Goal
     @Published var isColorsVisible = false
@@ -29,16 +29,16 @@ private extension CGFloat {
 
 }
 
-struct AddNewGoalSecondView: View {
+struct NewGoalTimeView: View {
 
-    @ObservedObject var viewModel: AddNewGoalSecondViewModel
+    @ObservedObject var viewModel: NewGoalTimeViewModel
     @Binding var activeSheet: ActiveSheet?
     @Binding var isPresented: Bool
     @Binding var isAllFormPresented: Bool
 
     @State var completionDate = Date()
 
-    init(viewModel: AddNewGoalSecondViewModel,
+    init(viewModel: NewGoalTimeViewModel,
          activeSheet: Binding<ActiveSheet?>,
          isPresented: Binding<Bool>,
          isAllFormPresented: Binding<Bool>) {

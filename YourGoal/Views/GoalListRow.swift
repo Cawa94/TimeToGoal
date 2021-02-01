@@ -18,7 +18,7 @@ public class GoalListRowModel: ObservableObject {
 }
 
 struct GoalListRow: View {
-    
+
     @ObservedObject var viewModel: GoalListRowModel
 
     var body: some View {

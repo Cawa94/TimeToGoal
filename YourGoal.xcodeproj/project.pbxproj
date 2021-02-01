@@ -10,6 +10,8 @@
 		797591DF089F6C8918D9F16D /* Pods_YourGoal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACFDA306CD4D87009DF1D52 /* Pods_YourGoal.framework */; };
 		DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0502862526166E000C4DC0 /* Date+Extensions.swift */; };
 		DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05028B25264263000C4DC0 /* Color+Extensions.swift */; };
+		DA06DF7025C8B35E00BACD0C /* NewGoalHabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA06DF6F25C8B35E00BACD0C /* NewGoalHabitsView.swift */; };
+		DA06DF7825C8B49500BACD0C /* HabitTypeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA06DF7725C8B49500BACD0C /* HabitTypeRow.swift */; };
 		DA084EDF25753DCE00CAC158 /* FamousQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA084EDE25753DCE00CAC158 /* FamousQuote.swift */; };
 		DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA084EE6257549BA00CAC158 /* ActiveSheet.swift */; };
 		DA084EFB2575547500CAC158 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA084EFA2575547500CAC158 /* LaunchScreen.storyboard */; };
@@ -35,7 +37,7 @@
 		DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA47599A25470DE800A1ADA6 /* DeviceFix.swift */; };
 		DA50012625BB129700853B50 /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50012525BB129700853B50 /* IconSelectorView.swift */; };
 		DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */; };
-		DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* AddNewGoalView.swift */; };
+		DA582A59252518CA00A37693 /* NewGoalQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */; };
 		DA59593225C5A3F90074CE85 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */; };
 		DA59593725C5A9A60074CE85 /* ProfileImageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */; };
 		DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */; };
@@ -44,6 +46,11 @@
 		DA790C27257B941C00598B96 /* JournalPage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */; };
 		DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BC125272180005D8423 /* CGFloat+Extensions.swift */; };
 		DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */; };
+		DA86E08525C87B4F000C44F7 /* NewGoalFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E08425C87B4F000C44F7 /* NewGoalFirstView.swift */; };
+		DA86E09025C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E08F25C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift */; };
+		DA86E09825C8ABDE000C44F7 /* HabitCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E09725C8ABDE000C44F7 /* HabitCategory.swift */; };
+		DA86E09D25C8AC99000C44F7 /* HabitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E09C25C8AC99000C44F7 /* HabitType.swift */; };
+		DA86E0A525C8AD62000C44F7 /* HabitCategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E0A425C8AD62000C44F7 /* HabitCategoryRow.swift */; };
 		DA8A53AA25C46A5300D030A9 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8A53A925C46A5300D030A9 /* View+Extensions.swift */; };
 		DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */; };
 		DA90BB62257FC4FD00B9D4D1 /* GoalListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */; };
@@ -77,7 +84,7 @@
 		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
 		DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */; };
 		DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */; };
-		DAEFAA9D2576424400B06680 /* AddNewGoalSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */; };
+		DAEFAA9D2576424400B06680 /* NewGoalTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA9C2576424400B06680 /* NewGoalTimeView.swift */; };
 		DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8B9255173F800EBEAA6 /* GoalType.swift */; };
 		DAF1A8C32551770D00EBEAA6 /* ColorSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */; };
 		DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8D925517D6900EBEAA6 /* TypeSelectorView.swift */; };
@@ -106,6 +113,8 @@
 		AACFDA306CD4D87009DF1D52 /* Pods_YourGoal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourGoal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA0502862526166E000C4DC0 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		DA05028B25264263000C4DC0 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		DA06DF6F25C8B35E00BACD0C /* NewGoalHabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalHabitsView.swift; sourceTree = "<group>"; };
+		DA06DF7725C8B49500BACD0C /* HabitTypeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTypeRow.swift; sourceTree = "<group>"; };
 		DA084EDE25753DCE00CAC158 /* FamousQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousQuote.swift; sourceTree = "<group>"; };
 		DA084EE6257549BA00CAC158 /* ActiveSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSheet.swift; sourceTree = "<group>"; };
 		DA084EFA2575547500CAC158 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -133,7 +142,7 @@
 		DA47599A25470DE800A1ADA6 /* DeviceFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFix.swift; sourceTree = "<group>"; };
 		DA50012525BB129700853B50 /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManualTimeView.swift; sourceTree = "<group>"; };
-		DA582A58252518CA00A37693 /* AddNewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGoalView.swift; sourceTree = "<group>"; };
+		DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalQuestionsView.swift; sourceTree = "<group>"; };
 		DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Profile+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectorView.swift; sourceTree = "<group>"; };
 		DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -142,6 +151,11 @@
 		DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "JournalPage+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/JournalPage+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DA794BC125272180005D8423 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHoursSelector.swift; sourceTree = "<group>"; };
+		DA86E08425C87B4F000C44F7 /* NewGoalFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalFirstView.swift; sourceTree = "<group>"; };
+		DA86E08F25C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalHabitsCategoriesView.swift; sourceTree = "<group>"; };
+		DA86E09725C8ABDE000C44F7 /* HabitCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCategory.swift; sourceTree = "<group>"; };
+		DA86E09C25C8AC99000C44F7 /* HabitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitType.swift; sourceTree = "<group>"; };
+		DA86E0A425C8AD62000C44F7 /* HabitCategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCategoryRow.swift; sourceTree = "<group>"; };
 		DA8A53A925C46A5300D030A9 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGoalsView.swift; sourceTree = "<group>"; };
 		DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalListRow.swift; sourceTree = "<group>"; };
@@ -181,7 +195,7 @@
 		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowSmartExplanation.swift"; sourceTree = "<group>"; };
-		DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewGoalSecondView.swift; sourceTree = "<group>"; };
+		DAEFAA9C2576424400B06680 /* NewGoalTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalTimeView.swift; sourceTree = "<group>"; };
 		DAF1A8B9255173F800EBEAA6 /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
 		DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorView.swift; sourceTree = "<group>"; };
 		DAF1A8D925517D6900EBEAA6 /* TypeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSelectorView.swift; sourceTree = "<group>"; };
@@ -322,8 +336,11 @@
 		DA6DD3D9257A445F00AACE45 /* AddNewGoal */ = {
 			isa = PBXGroup;
 			children = (
-				DA582A58252518CA00A37693 /* AddNewGoalView.swift */,
-				DAEFAA9C2576424400B06680 /* AddNewGoalSecondView.swift */,
+				DA86E08425C87B4F000C44F7 /* NewGoalFirstView.swift */,
+				DA86E08F25C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift */,
+				DA06DF6F25C8B35E00BACD0C /* NewGoalHabitsView.swift */,
+				DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */,
+				DAEFAA9C2576424400B06680 /* NewGoalTimeView.swift */,
 			);
 			path = AddNewGoal;
 			sourceTree = "<group>";
@@ -341,7 +358,9 @@
 				DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
 				DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */,
+				DA86E0A425C8AD62000C44F7 /* HabitCategoryRow.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
+				DA06DF7725C8B49500BACD0C /* HabitTypeRow.swift */,
 				DA50012525BB129700853B50 /* IconSelectorView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
 				DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */,
@@ -393,6 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				DA084EDE25753DCE00CAC158 /* FamousQuote.swift */,
+				DA86E09725C8ABDE000C44F7 /* HabitCategory.swift */,
+				DA86E09C25C8AC99000C44F7 /* HabitType.swift */,
 				DAE321FF257B9E41007DB9F0 /* JournalDate.swift */,
 				DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */,
 				DA9D02F12552AEE200DBFB2E /* WeekDay.swift */,
@@ -691,7 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DAEFAA9D2576424400B06680 /* AddNewGoalSecondView.swift in Sources */,
+				DAEFAA9D2576424400B06680 /* NewGoalTimeView.swift in Sources */,
 				DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */,
 				DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */,
 				DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */,
@@ -702,15 +723,19 @@
 				DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */,
 				DA90BB62257FC4FD00B9D4D1 /* GoalListRow.swift in Sources */,
 				DA9DA465257519320006B706 /* MotivationalView.swift in Sources */,
+				DA86E0A525C8AD62000C44F7 /* HabitCategoryRow.swift in Sources */,
+				DA86E09825C8ABDE000C44F7 /* HabitCategory.swift in Sources */,
+				DA06DF7025C8B35E00BACD0C /* NewGoalHabitsView.swift in Sources */,
 				DA50012625BB129700853B50 /* IconSelectorView.swift in Sources */,
 				DA0861B02531F66300C4A3DD /* UIApplication+Extensions.swift in Sources */,
 				DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */,
 				DAAA9033257A58FD00525B14 /* JournalDatesView.swift in Sources */,
+				DA86E08525C87B4F000C44F7 /* NewGoalFirstView.swift in Sources */,
 				DA6EE2262524BF9F0064D2CE /* GoalProgressView.swift in Sources */,
 				DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */,
 				DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */,
 				DA9D02FA2552F7BF00DBFB2E /* TimeSelectorType.swift in Sources */,
-				DA582A59252518CA00A37693 /* AddNewGoalView.swift in Sources */,
+				DA582A59252518CA00A37693 /* NewGoalQuestionsView.swift in Sources */,
 				DAF1A8E025517F3300EBEAA6 /* TypeCellView.swift in Sources */,
 				DAB7DC83252232130087F9C8 /* Persistence.swift in Sources */,
 				DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */,
@@ -723,11 +748,13 @@
 				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */,
 				DA59593725C5A9A60074CE85 /* ProfileImageSelectorView.swift in Sources */,
+				DA86E09025C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */,
 				DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
 				DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */,
+				DA86E09D25C8AC99000C44F7 /* HabitType.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
 				DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */,
 				DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */,
@@ -747,6 +774,7 @@
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
 				DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */,
 				DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */,
+				DA06DF7825C8B49500BACD0C /* HabitTypeRow.swift in Sources */,
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
 				DAC0855525C4220300FE4DBC /* StatisticsSmallView.swift in Sources */,

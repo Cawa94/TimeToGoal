@@ -1,0 +1,61 @@
+//
+//  HabitCategoryRow.swift
+//  YourGoal
+//
+//  Created by Yuri Cavallin on 1/2/21.
+//
+
+import SwiftUI
+
+public class HabitCategoryRowModel: ObservableObject {
+
+    @Published var category: HabitCategory
+
+    init(category: HabitCategory) {
+        self.category = category
+    }
+
+}
+
+struct HabitCategoryRow: View {
+
+    @ObservedObject var viewModel: HabitCategoryRowModel
+
+    var body: some View {
+        HStack() {
+            VStack(alignment: .leading) {
+                Text(viewModel.category.name)
+                    .fontWeight(.semibold)
+                    .applyFont(.largeTitle)
+
+                Text(viewModel.category.subtitle)
+                    .fontWeight(.semibold)
+                    .applyFont(.title2)
+            }
+
+            Spacer()
+
+            viewModel.category.image
+                .resizable()
+                .aspectRatio(1.0, contentMode: .fit)
+                .frame(width: 40)
+                .padding([.top, .bottom], 10)
+
+        }
+        .padding(20)
+        .background(Color.defaultBackground
+                        .cornerRadius(.defaultRadius)
+                        .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
+        )
+        .listRowBackground(Color.defaultBackground)
+    }
+
+}
+
+/*
+struct HabitCategoryRow_Previews: PreviewProvider {
+    static var previews: some View {
+        HabitCategoryRow()
+    }
+}
+*/

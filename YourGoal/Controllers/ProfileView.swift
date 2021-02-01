@@ -31,6 +31,13 @@ struct ProfileView: View {
 
     @ViewBuilder
     var body: some View {
+        let nameBinding = Binding<String>(get: {
+            (viewModel.profile.name ?? "Nome")
+        }, set: {
+            viewModel.profile.name = $0
+            PersistenceController.shared.saveContext()
+        })
+
         BackgroundView(color: .defaultBackground) {
             ZStack {
                 VStack {
@@ -47,25 +54,66 @@ struct ProfileView: View {
                         Spacer()
                     }
 
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.defaultBackground)
-                            .frame(width: 150, height: 150)
-                            .shadow(radius: 2)
-                        Image(viewModel.profile.image ?? "man_0")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 110, height: 110)
-                    }.onTapGesture {
-                        viewModel.isProfileImagesVisible.toggle()
-                    }
-
                     Spacer()
+                        .frame(height: 10)
+
+                    ScrollView(.vertical, showsIndicators: false) {
+                        Spacer()
+                            .frame(height: 10)
+
+                        ZStack {
+                            Circle()
+                                .foregroundColor(.defaultBackground)
+                                .frame(width: 250, height: 150)
+                                .shadow(radius: 2)
+                            Image(viewModel.profile.image ?? "man_0")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 110, height: 110)
+                        }.onTapGesture {
+                            viewModel.isProfileImagesVisible.toggle()
+                        }
+
+                        Spacer()
+                            .frame(height: 20)
+
+                        TextField("Nome", text: nameBinding)
+                            .frame(width: 200)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(nameBinding.wrappedValue == "Nome" ? .grayGradient2 : .grayText)
+                            .background(Color.defaultBackground)
+                            .cornerRadius(.defaultRadius)
+                            .disableAutocorrection(true)
+                            .applyFont(.body)
+                        Divider()
+                            .frame(width: 200)
+
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        challengesView
+                            .padding([.leading, .trailing], 15)
+                    }
                 }
 
                 if viewModel.isProfileImagesVisible {
                     ProfileImageSelectorView(viewModel: .init(profile: viewModel.profile),
                                              isPresented: $viewModel.isProfileImagesVisible)
+                }
+            }
+        }
+    }
+
+    var challengesView: some View {
+        VStack() {
+            ForEach(0..<8) { _ in
+                HStack {
+                    ForEach(0..<2) { _ in
+                        Image("badge")
+                            .resizable()
+                            .scaledToFit()
+                            .padding()
+                    }
                 }
             }
         }
