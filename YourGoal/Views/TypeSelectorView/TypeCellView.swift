@@ -23,7 +23,7 @@ struct TypeCellView: View {
     @ViewBuilder
     var body: some View {
         if viewModel.isSelected {
-            Image(viewModel.type.defaultIcon)
+            Image(viewModel.type.image)
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
                 .overlay(
@@ -32,7 +32,7 @@ struct TypeCellView: View {
                         .padding(-4)
                 )
         } else {
-            Image(viewModel.type.defaultIcon)
+            Image(viewModel.type.image)
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
         }

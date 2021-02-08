@@ -10,8 +10,6 @@ import SwiftUI
 public class NewGoalTimeViewModel: ObservableObject {
 
     @Published var goal: Goal
-    @Published var isColorsVisible = false
-    @Published var isIconsVisible = false
     @Published var showErrorAlert = false
 
     var isNewGoal: Bool
@@ -32,20 +30,19 @@ private extension CGFloat {
 struct NewGoalTimeView: View {
 
     @ObservedObject var viewModel: NewGoalTimeViewModel
+    
+    @State var showQuestionsView = false
+    @State var completionDate = Date()
+
     @Binding var activeSheet: ActiveSheet?
     @Binding var isPresented: Bool
-    @Binding var isAllFormPresented: Bool
-
-    @State var completionDate = Date()
 
     init(viewModel: NewGoalTimeViewModel,
          activeSheet: Binding<ActiveSheet?>,
-         isPresented: Binding<Bool>,
-         isAllFormPresented: Binding<Bool>) {
+         isPresented: Binding<Bool>) {
         self.viewModel = viewModel
         self._activeSheet = activeSheet
         self._isPresented = isPresented
-        self._isAllFormPresented = isAllFormPresented
 
         updateCompletionDate()
     }
@@ -53,21 +50,16 @@ struct NewGoalTimeView: View {
     @ViewBuilder
     var body: some View {
         let timeRequiredBinding = Binding<String>(get: {
-            return viewModel.goal.timeRequired.stringWithoutDecimals == "0"
-                ? "" : viewModel.goal.timeRequired.stringWithoutDecimals
+            return viewModel.goal.timeRequired.stringWithoutDecimals
         }, set: {
             viewModel.goal.timeRequired = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let customMeasureBinding = Binding<String>(get: {
-            if viewModel.goal.goalType == .custom {
-                let customMeasure = viewModel.goal.customTimeMeasure != nil
-                    ? viewModel.goal.customTimeMeasure : "goal_custom_measure_unit".localized()
-                return customMeasure ?? ""
-            } else {
-                return "\(viewModel.goal.customTimeMeasure ?? "")"
-            }
+            let customMeasure = viewModel.goal.customTimeMeasure != nil
+                ? viewModel.goal.customTimeMeasure : viewModel.goal.goalType.measureUnits.first?.namePlural
+            return customMeasure ?? ""
         }, set: {
             viewModel.goal.customTimeMeasure = $0
             viewModel.goal = viewModel.goal
@@ -124,90 +116,52 @@ struct NewGoalTimeView: View {
             
         BackgroundView(color: .defaultBackground, barTintColor: viewModel.goal.goalUIColor) {
             ZStack {
+                NavigationLink(destination: NewGoalQuestionsView(viewModel: .init(goal: viewModel.goal,
+                                                                                  isNewGoal: viewModel.isNewGoal),
+                                                                 activeSheet: $activeSheet,
+                                                                 isPresented: $showQuestionsView),
+                               isActive: $showQuestionsView) {
+                    EmptyView()
+                }
+
                 Form {
-                    Section(header: Text("add_goal_customize_title").applyFont(.fieldQuestion)) {
-                        VStack {
-                            HStack(spacing: 15) {
-                                Text("\("global_color".localized()):")
-                                    .applyFont(.small)
-                                Button(action: {
-                                    viewModel.isColorsVisible.toggle()
-                                }) {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: .defaultRadius)
-                                            .fill(Color.fieldsBackground)
-                                            .aspectRatio(1.0, contentMode: .fit)
-                                        Circle()
-                                            .fill(viewModel.goal.goalColor)
-                                            .aspectRatio(1.0, contentMode: .fit)
-                                            .padding(12.5)
-                                    }
-                                    .clipped()
-                                }.accentColor(viewModel.goal.goalColor)
-
-                                Spacer()
-
-                                Text("\("global_icon".localized()):")
-                                    .applyFont(.small)
-                                Button(action: {
-                                    viewModel.isIconsVisible.toggle()
-                                }) {
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: .defaultRadius)
-                                            .fill(Color.fieldsBackground)
-                                            .aspectRatio(1.0, contentMode: .fit)
-                                        Image(viewModel.goal.goalIcon)
-                                            .resizable()
-                                            .aspectRatio(1.0, contentMode: .fit)
-                                            .frame(width: 35)
-                                    }
-                                    .clipped()
-                                }.accentColor(viewModel.goal.goalColor)
-                            }.frame(height: 55)
-                            Spacer()
-                                .frame(height: 7)
-                        }
-                    }
-                    .applyFont(.body)
-                    .textCase(nil)
-                    .buttonStyle(PlainButtonStyle())
-                    .listRowBackground(Color.defaultBackground)
-                    .foregroundColor(.fieldsTitleForegroundColor)
-
-                    Section(header: Text(String(format: viewModel.goal.goalType.timeRequiredQuestion,
-                                                customMeasureBinding.wrappedValue)).applyFont(.fieldQuestion)) {
+                    Section(header: HStack {
+                        Spacer()
+                        Text("Imposta il 1º traguardo").applyFont(.largeTitle).multilineTextAlignment(.center)
+                        Spacer()
+                    }) {
                         VStack {
                             GeometryReader { vContainer in
                                 HStack {
-                                    if viewModel.goal.goalType == .custom {
-                                        TextField("", text: timeRequiredBinding)
-                                            .frame(width: vContainer.size.width / 6)
-                                            .padding()
-                                            .keyboardType(.numberPad)
-                                            .foregroundColor(.fieldsTextForegroundColor)
-                                            .background(Color.fieldsBackground)
-                                            .cornerRadius(.defaultRadius)
-                                        TextField("", text: customMeasureBinding)
-                                            .padding()
-                                            .foregroundColor(.fieldsTextForegroundColor)
-                                            .background(Color.fieldsBackground)
-                                            .cornerRadius(.defaultRadius)
-                                            .disableAutocorrection(true)
-                                        Spacer()
-                                    } else {
-                                        TextField("", text: timeRequiredBinding)
-                                            .frame(width: vContainer.size.width / 3)
-                                            .padding()
-                                            .keyboardType(.numberPad)
-                                            .foregroundColor(.fieldsTextForegroundColor)
-                                            .background(Color.fieldsBackground)
-                                            .cornerRadius(.defaultRadius)
-                                        Spacer()
-                                    }
+                                    Spacer()
+                                    TextField("", text: timeRequiredBinding)
+                                        .frame(width: vContainer.size.width / 3, height: 75)
+                                        .multilineTextAlignment(.center)
+                                        .keyboardType(.numberPad)
+                                        .foregroundColor(.grayText)
+                                        .applyFont(.fieldLarge)
+                                        .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                                    .stroke(Color.grayBorder, lineWidth: 1))
+                                    Spacer()
+                                }
+                            }.frame(height: 75)
+                            Spacer()
+                                .frame(height: 30)
+                            GeometryReader { vContainer in
+                                HStack {
+                                    TextField("", text: customMeasureBinding)
+                                        .frame(width: vContainer.size.width / 2, height: 55)
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(.grayText)
+                                        .applyFont(.field)
+                                        .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                                    .stroke(Color.grayBorder, lineWidth: 1))
+                                    Text("di camminata")
+                                        .foregroundColor(.grayText)
+                                        .applyFont(.title2)
+                                    Spacer()
                                 }
                             }.frame(height: 55)
-                            Spacer()
-                                .frame(height: 7)
                         }
                     }
                     .applyFont(.body)
@@ -307,16 +261,17 @@ struct NewGoalTimeView: View {
                     
                     Section {
                         Button(action: {
-                            if viewModel.goal.isValid {
+                            if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
                                 viewModel.goal.customTimeMeasure = customMeasureBinding.wrappedValue
-                                storeNewGoal()
+                                viewModel.goal = viewModel.goal
+                                showQuestionsView = true
                             } else {
-                                viewModel.showErrorAlert.toggle()
+                                viewModel.showErrorAlert = true
                             }
                         }) {
                             HStack {
                                 Spacer()
-                                Text(viewModel.isNewGoal ? "global_add" : "global_update")
+                                Text("global_next")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                                     .applyFont(.button)
@@ -330,8 +285,7 @@ struct NewGoalTimeView: View {
                             .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                         }.accentColor(viewModel.goal.goalColor)
                         .alert(isPresented: $viewModel.showErrorAlert) {
-                            let measureUnit = viewModel.goal.goalType == .custom
-                                ? customMeasureBinding.wrappedValue : viewModel.goal.goalType.measureUnit
+                            let measureUnit = customMeasureBinding.wrappedValue
                             return Alert(title: Text("global_wait"),
                                          message: viewModel.goal.timeRequired != 0
                                             ? Text("add_goal_missing_work_time")
@@ -345,22 +299,12 @@ struct NewGoalTimeView: View {
                     .buttonStyle(PlainButtonStyle())
                     .listRowBackground(Color.defaultBackground)
                 }
-
-                if viewModel.isColorsVisible {
-                    ColorSelectorView(viewModel: .init(goal: $viewModel.goal),
-                                      isPresented: $viewModel.isColorsVisible)
-                }
-
-                if viewModel.isIconsVisible {
-                    IconSelectorView(viewModel: .init(goal: $viewModel.goal),
-                                     isPresented: $viewModel.isIconsVisible)
-                }
             }
             .navigationBarTitle("global_time_required", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
                 Button(action: {
-                    self.isPresented.toggle()
+                    self.isPresented = false
                 }) {
                     Image(systemName: "chevron.left")
             }, trailing: closeButton)
@@ -370,21 +314,6 @@ struct NewGoalTimeView: View {
         }
         .onAppear {
             updateCompletionDate()
-        }
-    }
-
-    func storeNewGoal() {
-        if viewModel.goal.isValid {
-            viewModel.goal.editedAt = Date()
-            if viewModel.isNewGoal {
-                viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
-                viewModel.goal.timesHasBeenTracked = 0
-                viewModel.goal.createdAt = Date()
-                FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
-            }
-            PersistenceController.shared.saveContext()
-            self.activeSheet = nil
-            self.isAllFormPresented = false
         }
     }
 

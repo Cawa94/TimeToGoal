@@ -31,13 +31,12 @@ struct BackgroundView<Content: View>: View {
                                                                     .font: UIFont.regularFontOf(size: 25)]
                 UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.grayText,
                                                                          .font: UIFont.regularFontOf(size: 36)]
-                //UINavigationBar.appearance().isTranslucent = false
-                //UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
 
                 UITableView.appearance().backgroundColor = self.color
                 UITableView.appearance().sectionIndexBackgroundColor = self.color
                 UITableView.appearance().sectionIndexColor = self.color
                 UITableView.appearance().separatorStyle = .none
+                UITableView.appearance().tableFooterView = UIView()
             }))
     }
 

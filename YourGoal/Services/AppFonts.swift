@@ -20,7 +20,8 @@ struct AppFonts: ViewModifier {
         case smallQuote
         case smallQuoteAuthor
         case fieldQuestion
-        case fieldQuestion2
+        case field
+        case fieldLarge
     }
 
     var textStyle: TextStyle
@@ -32,7 +33,7 @@ struct AppFonts: ViewModifier {
 
     private var fontName: String {
         switch textStyle {
-        case .body, .fieldQuestion2 :
+        case .body :
             return "Rubik"
         case .quote, .quoteAuthor, .smallQuote, .smallQuoteAuthor:
             return "Caveat"
@@ -73,8 +74,10 @@ struct AppFonts: ViewModifier {
             return 20
         case .fieldQuestion:
             return 20
-        case .fieldQuestion2:
-            return 16
+        case .field:
+            return 25
+        case .fieldLarge:
+            return 40
         }
     }
 

@@ -13,19 +13,15 @@ struct HabitCategory: Identifiable {
     var name: String
     var subtitle: String
     var image: Image
-    var habits: [HabitType]
+    var habits: [GoalType]
 
     static var allValues: [HabitCategory] = [
         .init(id: 0, name: "Body", subtitle: "Run, train, yoga",
-              image: Image("star"), habits: [
-                .init(id: 0, name: "Corsa", image: Image("run_0"), categoryId: 0),
-                .init(id: 1, name: "Camminata", image: Image("run_1"), categoryId: 0),
-                .init(id: 2, name: "Yoga", image: Image("run_2"), categoryId: 0)
-              ]),
+              image: Image("star"), habits: GoalType.allValues.filter { $0.categoryId == 0 }),
         .init(id: 1, name: "Mind", subtitle: "Reading, meditation, study",
-              image: Image("book_2"), habits: []),
+              image: Image("book_2"), habits: GoalType.allValues.filter { $0.categoryId == 1 }),
         .init(id: 2, name: "Spirit", subtitle: "Something else, even more, and more",
-              image: Image("training_2"), habits: [])
+              image: Image("training_2"), habits: GoalType.allValues.filter { $0.categoryId == 2 })
     ]
 
 }

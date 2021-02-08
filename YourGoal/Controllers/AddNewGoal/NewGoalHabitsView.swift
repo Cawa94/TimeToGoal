@@ -9,11 +9,17 @@ import SwiftUI
 
 public class NewGoalHabitsViewModel: ObservableObject {
 
-    @Published var showNextView = false
-    @Published var habits: [HabitType]
+    @Published var habits: [GoalType]
+    @Published var newGoal: Goal
+    @Published var pressedRow: [Bool] = []
 
-    init(habits: [HabitType]) {
+    init(habits: [GoalType], goal: Goal) {
         self.habits = habits
+        self.newGoal = goal
+        
+        for _ in habits {
+            pressedRow.append(false)
+        }
     }
 
 }
@@ -21,6 +27,10 @@ public class NewGoalHabitsViewModel: ObservableObject {
 struct NewGoalHabitsView: View {
 
     @ObservedObject var viewModel: NewGoalHabitsViewModel
+
+    @State var showTimeView = false
+    @State var selectedIndex: Int?
+
     @Binding var activeSheet: ActiveSheet?
     @Binding var isPresented: Bool
 
@@ -28,10 +38,6 @@ struct NewGoalHabitsView: View {
         self.viewModel = viewModel
         self._activeSheet = activeSheet
         self._isPresented = isPresented
-
-        UITableView.appearance().separatorStyle = .none
-        UITableViewCell.appearance().backgroundColor = .defaultBackground
-        UITableView.appearance().backgroundColor = .defaultBackground
     }
 
     var body: some View {
@@ -44,21 +50,42 @@ struct NewGoalHabitsView: View {
                         Spacer()
                             .frame(height: 10)
 
-                        List {
-                            Text("Scegli un'abitudine")
-                                .foregroundColor(.grayText)
-                                .multilineTextAlignment(.center)
-                                .padding([.leading, .trailing], 10)
-                                .lineLimit(2)
-                                .applyFont(.largeTitle)
+                        ScrollView {
+                            LazyVStack {
+                                Text("Scegli un'abitudine")
+                                    .foregroundColor(.grayText)
+                                    .multilineTextAlignment(.center)
+                                    .padding([.leading, .trailing], 10)
+                                    .lineLimit(2)
+                                    .applyFont(.largeTitle)
+                                    .listRowBackground(Color.defaultBackground)
 
-                            ForEach(viewModel.habits) { habit in
-                                ZStack {
-                                    HabitTypeRow(viewModel: .init(habit: habit))
-                                    NavigationLink(destination: Text("")) {
-                                        EmptyView()
-                                    }.buttonStyle(PlainButtonStyle())
-                                    .hidden()
+                                VStack {
+                                    if selectedIndex != nil {
+                                        NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.newGoal, isNew: true),
+                                                                                    activeSheet: $activeSheet,
+                                                                                    isPresented: $showTimeView),
+                                                       isActive: $showTimeView) {
+                                            EmptyView()
+                                        }
+                                    }
+                                }.hidden()
+
+                                ForEach(0..<viewModel.habits.count, id: \.self) { index in
+                                    ZStack {
+                                        HabitTypeRow(viewModel: .init(habit: viewModel.habits[index]))
+                                            .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
+                                            .onTapGesture {
+                                                viewModel.newGoal.goalType = viewModel.habits[index]
+                                                selectedIndex = index
+                                                showTimeView = true
+                                            }
+                                            .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                                                withAnimation(.easeInOut(duration: 0.2)) {
+                                                    viewModel.pressedRow[index] = pressing
+                                                }
+                                            }, perform: {})
+                                    }.padding([.top, .leading, .trailing], 20)
                                 }
                             }
                         }
@@ -69,7 +96,7 @@ struct NewGoalHabitsView: View {
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading:
                     Button(action: {
-                        self.isPresented.toggle()
+                        self.isPresented = false
                     }) {
                         Image(systemName: "chevron.left")
                 }, trailing: closeButton)

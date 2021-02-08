@@ -49,7 +49,6 @@
 		DA86E08525C87B4F000C44F7 /* NewGoalFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E08425C87B4F000C44F7 /* NewGoalFirstView.swift */; };
 		DA86E09025C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E08F25C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift */; };
 		DA86E09825C8ABDE000C44F7 /* HabitCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E09725C8ABDE000C44F7 /* HabitCategory.swift */; };
-		DA86E09D25C8AC99000C44F7 /* HabitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E09C25C8AC99000C44F7 /* HabitType.swift */; };
 		DA86E0A525C8AD62000C44F7 /* HabitCategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86E0A425C8AD62000C44F7 /* HabitCategoryRow.swift */; };
 		DA8A53AA25C46A5300D030A9 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8A53A925C46A5300D030A9 /* View+Extensions.swift */; };
 		DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */; };
@@ -79,6 +78,7 @@
 		DAC0855525C4220300FE4DBC /* StatisticsSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */; };
 		DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */; };
 		DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */; };
+		DAC2CCED25CEA52800E363F5 /* MeasureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */; };
 		DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */; };
 		DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321FF257B9E41007DB9F0 /* JournalDate.swift */; };
 		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
@@ -154,7 +154,6 @@
 		DA86E08425C87B4F000C44F7 /* NewGoalFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalFirstView.swift; sourceTree = "<group>"; };
 		DA86E08F25C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalHabitsCategoriesView.swift; sourceTree = "<group>"; };
 		DA86E09725C8ABDE000C44F7 /* HabitCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCategory.swift; sourceTree = "<group>"; };
-		DA86E09C25C8AC99000C44F7 /* HabitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitType.swift; sourceTree = "<group>"; };
 		DA86E0A425C8AD62000C44F7 /* HabitCategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCategoryRow.swift; sourceTree = "<group>"; };
 		DA8A53A925C46A5300D030A9 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		DA90BB4F257FC38600B9D4D1 /* AllGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllGoalsView.swift; sourceTree = "<group>"; };
@@ -190,6 +189,7 @@
 		DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSmallView.swift; sourceTree = "<group>"; };
 		DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goals+Extension.swift"; sourceTree = "<group>"; };
 		DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Progress+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Progress+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnit.swift; sourceTree = "<group>"; };
 		DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalMood.swift; sourceTree = "<group>"; };
 		DAE321FF257B9E41007DB9F0 /* JournalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDate.swift; sourceTree = "<group>"; };
 		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
@@ -412,8 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				DA084EDE25753DCE00CAC158 /* FamousQuote.swift */,
+				DAF1A8B9255173F800EBEAA6 /* GoalType.swift */,
 				DA86E09725C8ABDE000C44F7 /* HabitCategory.swift */,
-				DA86E09C25C8AC99000C44F7 /* HabitType.swift */,
 				DAE321FF257B9E41007DB9F0 /* JournalDate.swift */,
 				DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */,
 				DA9D02F12552AEE200DBFB2E /* WeekDay.swift */,
@@ -503,8 +503,8 @@
 			isa = PBXGroup;
 			children = (
 				DA084EE6257549BA00CAC158 /* ActiveSheet.swift */,
-				DAF1A8B9255173F800EBEAA6 /* GoalType.swift */,
 				DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */,
+				DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */,
 				DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */,
 			);
 			path = Enums;
@@ -754,7 +754,6 @@
 				DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
 				DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */,
-				DA86E09D25C8AC99000C44F7 /* HabitType.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
 				DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */,
 				DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */,
@@ -772,6 +771,7 @@
 				DA59593225C5A3F90074CE85 /* Profile+CoreDataClass.swift in Sources */,
 				DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */,
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
+				DAC2CCED25CEA52800E363F5 /* MeasureUnit.swift in Sources */,
 				DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */,
 				DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */,
 				DA06DF7825C8B49500BACD0C /* HabitTypeRow.swift in Sources */,

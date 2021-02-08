@@ -9,9 +9,9 @@ import SwiftUI
 
 public class HabitTypeRowModel: ObservableObject {
 
-    @Published var habit: HabitType
+    @Published var habit: GoalType
 
-    init(habit: HabitType) {
+    init(habit: GoalType) {
         self.habit = habit
     }
 
@@ -26,10 +26,11 @@ struct HabitTypeRow: View {
             Text(viewModel.habit.name)
                 .fontWeight(.semibold)
                 .applyFont(.largeTitle)
+                .foregroundColor(.grayText)
 
             Spacer()
 
-            viewModel.habit.image
+            Image(viewModel.habit.image)
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
                 .frame(width: 40)
@@ -41,7 +42,6 @@ struct HabitTypeRow: View {
                         .cornerRadius(.defaultRadius)
                         .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
         )
-        .listRowBackground(Color.defaultBackground)
     }
 
 }

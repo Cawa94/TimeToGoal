@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="category">
         <attribute name="active" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="color" optional="YES" attributeType="String"/>
@@ -49,7 +49,7 @@
     <elements>
         <element name="Goal" positionX="-63" positionY="-18" width="128" height="434"/>
         <element name="JournalPage" positionX="-63" positionY="144" width="128" height="89"/>
-        <element name="Progress" positionX="-63" positionY="144" width="128" height="89"/>
         <element name="Profile" positionX="-54" positionY="144" width="128" height="74"/>
+        <element name="Progress" positionX="-63" positionY="144" width="128" height="89"/>
     </elements>
 </model>

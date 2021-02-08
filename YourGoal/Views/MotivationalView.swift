@@ -31,7 +31,7 @@ struct MotivationalView: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     withAnimation {
-                        viewModel.isPresented.toggle()
+                        viewModel.isPresented = false
                     }
                 }
 

@@ -45,7 +45,7 @@ struct ProfileImageSelectorView: View {
             Color.black.opacity(0.75)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    isPresented.toggle()
+                    isPresented = false
                 }
             GeometryReader { container in
                 VStack() {
@@ -69,7 +69,7 @@ struct ProfileImageSelectorView: View {
                                             Button(action: {
                                                 viewModel.profile.image = image
                                                 PersistenceController.shared.saveContext()
-                                                isPresented.toggle()
+                                                isPresented = false
                                             }) {
                                                 if viewModel.profile.image == image {
                                                     Image(image)

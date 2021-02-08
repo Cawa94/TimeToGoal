@@ -21,7 +21,7 @@ struct TrackHoursSpentView: View {
                 .ignoresSafeArea()
                 .onTapGesture {
                     withAnimation {
-                        isPresented.toggle()
+                        isPresented = false
                     }
                 }
             VStack {

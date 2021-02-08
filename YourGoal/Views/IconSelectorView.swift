@@ -19,27 +19,14 @@ public class IconSelectorViewModel: ObservableObject {
 
     var goalIcons: [String] {
         var iconsNames: [String] = []
-        let iconPrefix: String
-        switch currentGoal.goalType {
-        case .project:
-            iconPrefix = "project_"
-        case .book:
-            iconPrefix = "book_"
-        case .run:
-            iconPrefix = "run_"
-        case .training:
-            iconPrefix = "training_"
-        case .custom:
-            iconPrefix = "custom_"
-        }
         let maxIcons: Int
-        if currentGoal.goalType == .custom {
+        /*if currentGoal.goalType == .custom {
             maxIcons = 12
-        } else {
+        } else {*/
             maxIcons = 6
-        }
+        //}
         for i in 0...(maxIcons - 1) {
-            iconsNames.append("\(iconPrefix)\(i)")
+            iconsNames.append("\(currentGoal.goalType.image)\(i)")
         }
         return iconsNames
     }
@@ -66,7 +53,7 @@ struct IconSelectorView: View {
             Color.black.opacity(0.75)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    isPresented.toggle()
+                    isPresented = false
                 }
             GeometryReader { container in
                 VStack() {
@@ -89,7 +76,7 @@ struct IconSelectorView: View {
                                             let icon = viewModel.icons[index]
                                             Button(action: {
                                                 viewModel.currentGoal.icon = icon
-                                                isPresented.toggle()
+                                                isPresented = false
                                             }) {
                                                 if viewModel.currentGoal.goalIcon == icon {
                                                     Image(icon)

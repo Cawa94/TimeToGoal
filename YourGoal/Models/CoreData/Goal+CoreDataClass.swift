@@ -16,11 +16,11 @@ public class Goal: NSManagedObject {
     var goalType: GoalType {
         get {
             guard let type = self.type
-                else { return .project }
-            return GoalType(rawValue: type) ?? .project
+                else { return .dumbValue }
+            return GoalType.getWithLabel(type)
         }
         set {
-            self.type = newValue.rawValue
+            self.type = newValue.label
         }
     }
 
@@ -37,7 +37,7 @@ public class Goal: NSManagedObject {
     }
 
     var goalIcon: String {
-        icon ?? goalType.defaultIcon
+        icon ?? goalType.image
     }
 
     var workOnMonday: Bool {
@@ -69,7 +69,7 @@ public class Goal: NSManagedObject {
     }
 
     var updatedCompletionDate: Date {
-        if goalType == .project {
+        if goalType.timeTrackingType == .hoursWithMinutes {
             let dayHours = [sunday.asHoursAndMinutes, monday.asHoursAndMinutes, tuesday.asHoursAndMinutes,
                             wednesday.asHoursAndMinutes, thursday.asHoursAndMinutes, friday.asHoursAndMinutes,
                             saturday.asHoursAndMinutes]

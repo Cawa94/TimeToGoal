@@ -14,8 +14,8 @@ struct TutorialView: View {
 
     @ViewBuilder
     var body: some View {
-        BackgroundView(color: .defaultBackground) {
-            NavigationView {
+        NavigationView {
+            BackgroundView(color: .defaultBackground) {
                 TabView(selection: $currentPage) {
                     ExplanationView(viewModel: .init(pageNumber: 1,
                                                      currentPage: $currentPage,

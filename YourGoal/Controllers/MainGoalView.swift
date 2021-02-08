@@ -16,11 +16,11 @@ private extension Color {
 
 public class MainGoalViewModel: ObservableObject {
 
-    @Published var goal: Goal? {
+    @Published var goal: Goal {
         didSet {
             progressViewModel.goal = goal
             calendarViewModel.goal = goal
-            showFireworks = goal?.isCompleted ?? false
+            showFireworks = goal.isCompleted
             #if RELEASE
                 if goal?.isCompleted ?? false {
                     if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
@@ -43,7 +43,7 @@ public class MainGoalViewModel: ObservableObject {
     @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
 
-    init(goal: Goal?, allGoals: [Goal]? = nil, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
+    init(goal: Goal, allGoals: [Goal]? = nil, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
         self.goal = goal
         self.allGoals = allGoals ?? []
         self._activeSheet = activeSheet
@@ -68,7 +68,7 @@ struct MainGoalView: View {
                     Spacer()
                         .frame(height: 10)
 
-                    Text(viewModel.goal?.name ?? "placeholder_first_goal".localized())
+                    Text(viewModel.goal.name ?? "placeholder_first_goal".localized())
                         .foregroundColor(.textForegroundColor)
                         .multilineTextAlignment(.center)
                         .padding([.leading, .trailing], 10)
@@ -80,7 +80,7 @@ struct MainGoalView: View {
                             .frame(height: 15)
                     }
 
-                    Text("\"\(viewModel.goal?.whyDefinition ?? "placeholder_why_definition".localized())\"")
+                    Text("\"\(viewModel.goal.whyDefinition ?? "placeholder_why_definition".localized())\"")
                         .italic()
                         .multilineTextAlignment(.center)
                         .foregroundColor(.textForegroundColor)
@@ -97,10 +97,10 @@ struct MainGoalView: View {
                         .frame(height: 15)
 
                     VStack {
-                        if (viewModel.goal?.isCompleted ?? false) && !(viewModel.goal?.isArchived ?? false) {
+                        if (viewModel.goal.isCompleted) && !(viewModel.goal.isArchived) {
                             archiveGoalButton
                                 .padding([.leading, .trailing], 15)
-                        } else if !(viewModel.goal?.isCompleted ?? false) {
+                        } else if !(viewModel.goal.isCompleted) {
                             trackTimeButton
                                 .padding([.leading, .trailing], 15)
                             editGoalButton
@@ -147,9 +147,9 @@ struct MainGoalView: View {
         HStack {
             Button(action: {
                 withAnimation {
-                    if !(viewModel.goal?.isCompleted ?? true) {
+                    if !(viewModel.goal.isCompleted) {
                         FirebaseService.logEvent(.trackTimeButton)
-                        viewModel.showingTrackGoal.toggle()
+                        viewModel.showingTrackGoal = true
                         viewModel.refreshAllGoals = true
                     }
                 }
@@ -164,18 +164,18 @@ struct MainGoalView: View {
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal?.rectGradientColors ?? Color.rainbow),
+                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal?.goalColor)
+            }.accentColor(viewModel.goal.goalColor)
         }
     }
 
     var archiveGoalButton: some View {
         HStack {
             Button(action: {
-                viewModel.goal?.isArchived = true
+                viewModel.goal.isArchived = true
                 PersistenceController.shared.saveContext()
                 viewModel.refreshAllGoals = true
             }) {
@@ -193,7 +193,7 @@ struct MainGoalView: View {
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal?.goalColor)
+            }.accentColor(viewModel.goal.goalColor)
         }
     }
 
@@ -201,13 +201,13 @@ struct MainGoalView: View {
         HStack {
             Button(action: {
                 FirebaseService.logEvent(.editGoalButton)
-                viewModel.showingEditGoal.toggle()
+                viewModel.showingEditGoal = true
             }) {
                 HStack {
                     Spacer()
                     Text("global_details")
                         .fontWeight(.semibold)
-                        .foregroundColor(viewModel.goal?.goalColor)
+                        .foregroundColor(viewModel.goal.goalColor)
                         .applyFont(.button)
                     Spacer()
                 }
@@ -215,14 +215,14 @@ struct MainGoalView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: .defaultRadius)
                         .stroke(lineWidth: 2.0)
-                        .foregroundColor(viewModel.goal?.goalColor)
+                        .foregroundColor(viewModel.goal.goalColor)
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
-            }.accentColor(viewModel.goal?.goalColor)
+            }.accentColor(viewModel.goal.goalColor)
             .fullScreenCover(isPresented: $viewModel.showingEditGoal, content: {
-                NewGoalQuestionsView(viewModel: .init(existingGoal: viewModel.goal),
-                                        activeSheet: .constant(nil),
-                                        isPresented: $viewModel.showingEditGoal)
+                NewGoalTimeView(viewModel: .init(goal: viewModel.goal, isNew: false),
+                                activeSheet: .constant(nil),
+                                isPresented: $viewModel.showingEditGoal)
             })
         }
     }

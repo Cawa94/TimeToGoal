@@ -71,7 +71,7 @@ struct ProfileView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 110, height: 110)
                         }.onTapGesture {
-                            viewModel.isProfileImagesVisible.toggle()
+                            viewModel.isProfileImagesVisible = true
                         }
 
                         Spacer()

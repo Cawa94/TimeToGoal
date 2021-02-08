@@ -30,7 +30,7 @@ struct ColorSelectorView: View {
             Color.black.opacity(0.75)
                 .ignoresSafeArea()
                 .onTapGesture {
-                    isPresented.toggle()
+                    isPresented = false
                 }
             GeometryReader { container in
                 VStack() {
@@ -47,7 +47,7 @@ struct ColorSelectorView: View {
                                     ForEach(viewModel.colors.prefix(3), id: \.self) { color in
                                         Button(action: {
                                             viewModel.currentGoal.color = color
-                                            isPresented.toggle()
+                                            isPresented = false
                                         }) {
                                             Circle()
                                                 .fill(Color(color))
@@ -61,7 +61,7 @@ struct ColorSelectorView: View {
                                     ForEach(viewModel.colors.suffix(3), id: \.self) { color in
                                         Button(action: {
                                             viewModel.currentGoal.color = color
-                                            isPresented.toggle()
+                                            isPresented = false
                                         }) {
                                             Circle()
                                                 .fill(Color(color))

@@ -9,13 +9,26 @@ import SwiftUI
 
 public class NewGoalHabitsCategoriesViewModel: ObservableObject {
 
-    @Published var showNextView = false
+    @Published var newGoal: Goal
+    @Published var pressedRow: [Bool] = []
+
+    init(goal: Goal) {
+        newGoal = goal
+
+        for _ in HabitCategory.allValues {
+            pressedRow.append(false)
+        }
+    }
 
 }
 
 struct NewGoalHabitsCategoriesView: View {
 
     @ObservedObject var viewModel: NewGoalHabitsCategoriesViewModel
+
+    @State var showHabitsView = false
+    @State var selectedIndex: Int?
+
     @Binding var activeSheet: ActiveSheet?
     @Binding var isPresented: Bool
 
@@ -23,12 +36,9 @@ struct NewGoalHabitsCategoriesView: View {
         self.viewModel = viewModel
         self._activeSheet = activeSheet
         self._isPresented = isPresented
-
-        UITableView.appearance().separatorStyle = .none
-        UITableViewCell.appearance().backgroundColor = .defaultBackground
-        UITableView.appearance().backgroundColor = .defaultBackground
     }
 
+    @ViewBuilder
     var body: some View {
         BackgroundView(color: .defaultBackground) {
             GeometryReader { container in
@@ -39,23 +49,42 @@ struct NewGoalHabitsCategoriesView: View {
                         Spacer()
                             .frame(height: 10)
 
-                        List {
-                            Text("Scegli un'abitudine")
-                                .foregroundColor(.grayText)
-                                .multilineTextAlignment(.center)
-                                .padding([.leading, .trailing], 10)
-                                .lineLimit(2)
-                                .applyFont(.largeTitle)
+                        ScrollView {
+                            LazyVStack {
+                                Text("Scegli un'abitudine")
+                                    .foregroundColor(.grayText)
+                                    .multilineTextAlignment(.center)
+                                    .padding([.leading, .trailing], 10)
+                                    .lineLimit(2)
+                                    .applyFont(.largeTitle)
+                                    .listRowBackground(Color.defaultBackground)
 
-                            ForEach(HabitCategory.allValues) { category in
-                                ZStack {
-                                    HabitCategoryRow(viewModel: .init(category: category))
-                                    NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: category.habits),
-                                                                                  activeSheet: $activeSheet,
-                                                                                  isPresented: $viewModel.showNextView)) {
-                                        EmptyView()
-                                    }.buttonStyle(PlainButtonStyle())
-                                    .hidden()
+                                VStack {
+                                    if let index = selectedIndex {
+                                        NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: HabitCategory.allValues[index].habits,
+                                                                                                       goal: viewModel.newGoal),
+                                                                                      activeSheet: $activeSheet,
+                                                                                      isPresented: $showHabitsView),
+                                                       isActive: $showHabitsView) {
+                                            EmptyView()
+                                        }
+                                    }
+                                }.hidden()
+
+                                ForEach(0..<HabitCategory.allValues.count) { index in
+                                    ZStack {
+                                        HabitCategoryRow(viewModel: .init(category: HabitCategory.allValues[index]))
+                                            .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
+                                            .onTapGesture {
+                                                selectedIndex = index
+                                                showHabitsView = true
+                                            }
+                                            .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                                                withAnimation(.easeInOut(duration: 0.2)) {
+                                                    viewModel.pressedRow[index] = pressing
+                                                }
+                                            }, perform: {})
+                                    }.padding([.top, .leading, .trailing], 20)
                                 }
                             }
                         }
@@ -85,7 +114,7 @@ struct NewGoalHabitsCategoriesView: View {
         }
     }
 }
-
+/*
 struct AddNewGoalHabitsView_Previews: PreviewProvider {
     static var previews: some View {
         NewGoalHabitsCategoriesView(viewModel: .init(),
@@ -93,3 +122,4 @@ struct AddNewGoalHabitsView_Previews: PreviewProvider {
                                        isPresented: .constant(true))
     }
 }
+*/

@@ -159,8 +159,7 @@ struct ContentView: View {
             case .tutorial:
                 TutorialView(activeSheet: $viewModel.activeSheet)
             case .newGoal:
-                NewGoalFirstView(viewModel: .init(),
-                                    activeSheet: $viewModel.activeSheet)
+                NewGoalFirstView(viewModel: .init(), activeSheet: $viewModel.activeSheet)
             }
         })
     }

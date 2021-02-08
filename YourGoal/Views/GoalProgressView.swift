@@ -123,19 +123,11 @@ struct GoalProgressView: View {
                     Spacer()
                         .frame(height: 3)
 
-                    if let goal = viewModel.goal, goal.goalType == .custom {
-                        Text(String(format: "main_time_required".localized(),
-                                    viewModel.timeRemaining, goal.customTimeMeasure ?? ""))
-                            .fontWeight(.semibold)
-                            .foregroundColor(.grayText)
-                            .applyFont(.title3)
-                    } else {
-                        Text(String(format: "main_time_required".localized(),
-                                    viewModel.timeRemaining,
-                                    viewModel.goal?.goalType.measureUnit ?? "\("global_hours".localized())"))
-                            .applyFont(.title3)
-                            .foregroundColor(.grayText)
-                    }
+                    Text(String(format: "main_time_required".localized(),
+                                viewModel.timeRemaining, viewModel.goal?.customTimeMeasure ?? ""))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.grayText)
+                        .applyFont(.title3)
                 }
             }
         }

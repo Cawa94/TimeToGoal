@@ -152,7 +152,7 @@ struct GoalSmallProgressView: View {
                     if !(viewModel.goal?.isCompleted ?? true) {
                         FirebaseService.logEvent(.trackTimeButton)
                         viewModel.indexSelectedGoal = viewModel.goalIndex ?? 0
-                        viewModel.showingTrackGoal.toggle()
+                        viewModel.showingTrackGoal = true
                     }
                 }
             }) {

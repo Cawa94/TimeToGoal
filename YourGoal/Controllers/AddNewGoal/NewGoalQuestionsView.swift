@@ -10,22 +10,16 @@ import SwiftUI
 public class NewGoalQuestionsViewModel: ObservableObject {
 
     @Published var goal: Goal
+    @Published var isColorsVisible = false
+    @Published var isIconsVisible = false
     @Published var showSmartExplanation = false
-    @Published var showSecondView = false
     @Published var showErrorAlert = false
 
     var isNewGoal: Bool
 
-    init(existingGoal: Goal? = nil) {
-        self.isNewGoal = existingGoal == nil
-
-        if let existingGoal = existingGoal {
-            goal = existingGoal
-        } else {
-            let newGoal = Goal(context: PersistenceController.shared.container.viewContext)
-            goal = newGoal
-            goal.color = "orangeGoal"
-        }
+    init(goal: Goal, isNewGoal: Bool) {
+        self.goal = goal
+        self.isNewGoal = isNewGoal
     }
 
 }
@@ -84,23 +78,16 @@ struct NewGoalQuestionsView: View {
 
         BackgroundView(color: .defaultBackground) {
             ZStack {
-                NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.goal,
-                                                                                  isNew: viewModel.isNewGoal),
-                                                               activeSheet: $activeSheet,
-                                                               isPresented: $viewModel.showSecondView,
-                                                               isAllFormPresented: $isPresented),
-                               isActive: $viewModel.showSecondView) {
-                    EmptyView()
-                }
-
                 Form {
-                    Section(header: Text("add_goal_type_title").applyFont(.fieldQuestion)) {
-                        TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
+                    if !viewModel.goal.goalType.isHabit {
+                        Section(header: Text("add_goal_type_title").applyFont(.fieldQuestion)) {
+                            TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
+                        }
+                        .textCase(nil)
+                        .buttonStyle(PlainButtonStyle())
+                        .listRowBackground(Color.defaultBackground)
+                        .foregroundColor(.fieldsTitleForegroundColor)
                     }
-                    .textCase(nil)
-                    .buttonStyle(PlainButtonStyle())
-                    .listRowBackground(Color.defaultBackground)
-                    .foregroundColor(.fieldsTitleForegroundColor)
 
                     Section(header: Text("goal_name_question").applyFont(.fieldQuestion)) {
                         VStack {
@@ -198,18 +185,67 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
+                    Section(header: Text("add_goal_customize_title").applyFont(.fieldQuestion)) {
+                        VStack {
+                            HStack(spacing: 15) {
+                                Text("\("global_color".localized()):")
+                                    .applyFont(.small)
+                                Button(action: {
+                                    viewModel.isColorsVisible = true
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .fill(Color.fieldsBackground)
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                        Circle()
+                                            .fill(viewModel.goal.goalColor)
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                            .padding(12.5)
+                                    }
+                                    .clipped()
+                                }.accentColor(viewModel.goal.goalColor)
+
+                                Spacer()
+
+                                Text("\("global_icon".localized()):")
+                                    .applyFont(.small)
+                                Button(action: {
+                                    viewModel.isIconsVisible = true
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .fill(Color.fieldsBackground)
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                        Image(viewModel.goal.goalIcon)
+                                            .resizable()
+                                            .aspectRatio(1.0, contentMode: .fit)
+                                            .frame(width: 35)
+                                    }
+                                    .clipped()
+                                }.accentColor(viewModel.goal.goalColor)
+                            }.frame(height: 55)
+                            Spacer()
+                                .frame(height: 7)
+                        }
+                    }
+                    .applyFont(.body)
+                    .textCase(nil)
+                    .buttonStyle(PlainButtonStyle())
+                    .listRowBackground(Color.defaultBackground)
+                    .foregroundColor(.fieldsTitleForegroundColor)
+
                     Section {
                         Button(action: {
                             if !(viewModel.goal.name?.isEmpty ?? true) {
                                 viewModel.goal = viewModel.goal
-                                viewModel.showSecondView.toggle()
+                                storeNewGoal()
                             } else {
-                                viewModel.showErrorAlert.toggle()
+                                viewModel.showErrorAlert = true
                             }
                         }) {
                             HStack {
                                 Spacer()
-                                Text("global_next")
+                                Text(viewModel.isNewGoal ? "global_add" : "global_update")
                                     .fontWeight(.semibold)
                                     .foregroundColor(.white)
                                     .applyFont(.button)
@@ -229,19 +265,29 @@ struct NewGoalQuestionsView: View {
                                   dismissButton: .default(Text("global_got_it")))
                         }
                     }
-                    .navigationBarTitle("SMART Goal", displayMode: .inline)
-                    .navigationBarBackButtonHidden(true)
-                    .navigationBarItems(leading:
-                        Button(action: {
-                            self.isPresented.toggle()
-                        }) {
-                            Image(systemName: "chevron.left")
-                    }, trailing: closeButton)
                     .padding([.bottom], 5)
                     .buttonStyle(PlainButtonStyle())
                     .listRowBackground(Color.defaultBackground)
                 }.listStyle(SidebarListStyle())
+
+                if viewModel.isColorsVisible {
+                    ColorSelectorView(viewModel: .init(goal: $viewModel.goal),
+                                      isPresented: $viewModel.isColorsVisible)
+                }
+
+                if viewModel.isIconsVisible {
+                    IconSelectorView(viewModel: .init(goal: $viewModel.goal),
+                                     isPresented: $viewModel.isIconsVisible)
+                }
             }
+            .navigationBarTitle("SMART Goal", displayMode: .inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading:
+                Button(action: {
+                    self.isPresented = false
+                }) {
+                    Image(systemName: "chevron.left")
+            }, trailing: closeButton)
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
@@ -258,6 +304,20 @@ struct NewGoalQuestionsView: View {
                     .aspectRatio(1.0, contentMode: .fit)
                     .frame(width: 15)
             }
+        }
+    }
+
+    func storeNewGoal() {
+        if viewModel.goal.isValid {
+            viewModel.goal.editedAt = Date()
+            if viewModel.isNewGoal {
+                viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
+                viewModel.goal.timesHasBeenTracked = 0
+                viewModel.goal.createdAt = Date()
+                FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
+            }
+            PersistenceController.shared.saveContext()
+            self.activeSheet = nil
         }
     }
 

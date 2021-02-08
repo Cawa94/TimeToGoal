@@ -13,32 +13,40 @@ public class NewGoalFirstViewModel: ObservableObject {
     @Published var showHabitsPage = false
     @Published var goalButtonPressed = false
     @Published var habitButtonPressed = false
+    @Published var newGoal: Goal
+
+    init() {
+        newGoal = Goal(context: PersistenceController.shared.container.viewContext)
+        newGoal.color = "orangeGoal"
+    }
 
 }
 
 struct NewGoalFirstView: View {
 
     @ObservedObject var viewModel: NewGoalFirstViewModel
+
     @Binding var activeSheet: ActiveSheet?
 
+    @ViewBuilder
     var body: some View {
-        BackgroundView(color: .defaultBackground) {
-            NavigationView {
+        NavigationView {
+            BackgroundView(color: .defaultBackground) {
                 GeometryReader { container in
                     ZStack {
-                        NavigationLink(destination: NewGoalQuestionsView(viewModel: .init(),
-                                                                            activeSheet: $activeSheet,
-                                                                            isPresented: $viewModel.showQuestionsPage),
+                        NavigationLink(destination: NewGoalQuestionsView(viewModel: .init(goal: viewModel.newGoal, isNewGoal: true),
+                                                                         activeSheet: $activeSheet,
+                                                                         isPresented: $viewModel.showQuestionsPage),
                                        isActive: $viewModel.showQuestionsPage) {
                             EmptyView()
-                        }
+                        }.hidden()
 
-                        NavigationLink(destination: NewGoalHabitsCategoriesView(viewModel: .init(),
-                                                                                   activeSheet: $activeSheet,
-                                                                                   isPresented: $viewModel.showHabitsPage),
+                        NavigationLink(destination: NewGoalHabitsCategoriesView(viewModel: .init(goal: viewModel.newGoal),
+                                                                                activeSheet: $activeSheet,
+                                                                                isPresented: $viewModel.showHabitsPage),
                                        isActive: $viewModel.showHabitsPage) {
                             EmptyView()
-                        }
+                        }.hidden()
 
                         Color.defaultBackground
 
@@ -152,4 +160,18 @@ struct NewGoalFirstView_Previews: PreviewProvider {
     static var previews: some View {
         NewGoalFirstView(viewModel: .init(), activeSheet: .constant(nil))
     }
+}
+
+struct DeferView<Content: View>: View {
+
+    let content: () -> Content
+
+    init(@ViewBuilder _ content: @escaping () -> Content) {
+        self.content = content
+    }
+
+    var body: some View {
+        content()
+    }
+
 }

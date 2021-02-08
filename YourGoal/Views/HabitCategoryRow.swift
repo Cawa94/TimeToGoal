@@ -20,6 +20,7 @@ public class HabitCategoryRowModel: ObservableObject {
 struct HabitCategoryRow: View {
 
     @ObservedObject var viewModel: HabitCategoryRowModel
+    @State var showHabitsView = false
 
     var body: some View {
         HStack() {
@@ -27,10 +28,12 @@ struct HabitCategoryRow: View {
                 Text(viewModel.category.name)
                     .fontWeight(.semibold)
                     .applyFont(.largeTitle)
+                    .foregroundColor(.grayText)
 
                 Text(viewModel.category.subtitle)
                     .fontWeight(.semibold)
                     .applyFont(.title2)
+                    .foregroundColor(.grayText)
             }
 
             Spacer()
@@ -46,8 +49,8 @@ struct HabitCategoryRow: View {
         .background(Color.defaultBackground
                         .cornerRadius(.defaultRadius)
                         .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
+                        .listRowBackground(Color.defaultBackground)
         )
-        .listRowBackground(Color.defaultBackground)
     }
 
 }
