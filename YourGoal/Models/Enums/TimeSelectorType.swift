@@ -12,6 +12,7 @@ enum TimeTrackingType: String {
     case hoursWithMinutes
     case double
     case infinite
+    case boolean
 
     var values: [Double] {
         switch self {
@@ -29,6 +30,8 @@ enum TimeTrackingType: String {
                 hoursArray.append(Double(hour))
             }
             return hoursArray
+        case .boolean:
+            return []
         }
     }
 

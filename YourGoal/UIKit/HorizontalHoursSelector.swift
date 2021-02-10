@@ -15,24 +15,17 @@ class PickerRowView: UIView {
         label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: control.size.width, height: control.size.height)
         label.textAlignment = .center
-        label.textColor = .white
+        label.textColor = control.selectedValue != "0.0" ? .white : .grayText
 
         super.init(frame: frame)
 
-        updateLabelFont(isSelected: isSelected, text: control.goal.trackingType.values[row].stringWithTwoDecimals)
+        updateLabelFont(isSelected: isSelected, text: control.goal.timeTrackingType.values[row].stringWithTwoDecimals)
         self.addSubview(label)
     }
 
     func updateLabelFont(isSelected: Bool, text: String) {
-        var font: UIFont
-        if isSelected {
-            font = UIFont(name:"Rubik", size: 17)!
-        } else {
-            font = UIFont(name:"Rubik", size: 17)!
-        }
-
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: font
+            .font: UIFont(name:"IndieFlower", size: 28)!
         ]
 
         label.attributedText = NSAttributedString(string: text, attributes: attributes)
@@ -46,8 +39,10 @@ class PickerRowView: UIView {
 
 struct HorizontalPickerView: UIViewRepresentable {
 
+    @State var goal: Goal
+
     @Binding var selectedValue: String
-    @Binding var goal: Goal
+
     let size: CGSize
     let pickerView = UIPickerView()
 
@@ -56,7 +51,7 @@ struct HorizontalPickerView: UIViewRepresentable {
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.transform = CGAffineTransform(rotationAngle: -90 * (.pi / 180))
         if selectedValue != "0", let valueAsDouble = Double(selectedValue),
-           let index = goal.trackingType.values.firstIndex(of: valueAsDouble) {
+           let index = goal.timeTrackingType.values.firstIndex(of: valueAsDouble) {
             pickerView.selectRow(index, inComponent: 0, animated: false)
         }
         return pickerView
@@ -65,6 +60,7 @@ struct HorizontalPickerView: UIViewRepresentable {
     func updateUIView(_ uiView: UIPickerView,
                       context: UIViewRepresentableContext<HorizontalPickerView>) {
         // Perform any update tasks if necessary
+        pickerView.subviews.forEach { $0.backgroundColor = .clear }
         pickerView.reloadAllComponents()
         context.coordinator.control.pickerView.reloadAllComponents()
     }
@@ -86,7 +82,7 @@ struct HorizontalPickerView: UIViewRepresentable {
         }
 
         func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return control.goal.trackingType.values.count
+            return control.goal.timeTrackingType.values.count
         }
 
         func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -108,11 +104,11 @@ struct HorizontalPickerView: UIViewRepresentable {
         }
 
         func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            control.selectedValue = control.goal.trackingType.values[row].stringWithTwoDecimals
+            control.selectedValue = control.goal.timeTrackingType.values[row].stringWithTwoDecimals
 
             if let rowView = pickerView.view(forRow: row, forComponent: component) as? PickerRowView {
                 rowView.updateLabelFont(isSelected: pickerView.selectedRow(inComponent: component) == row,
-                                        text: control.goal.trackingType.values[row].stringWithTwoDecimals)
+                                        text: control.goal.timeTrackingType.values[row].stringWithTwoDecimals)
             }
         }
 

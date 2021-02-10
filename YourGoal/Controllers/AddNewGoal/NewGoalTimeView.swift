@@ -17,6 +17,9 @@ public class NewGoalTimeViewModel: ObservableObject {
     init(goal: Goal, isNew: Bool) {
         self.isNewGoal = isNew
         self.goal = goal
+        if self.goal.customTimeMeasure == nil {
+            self.goal.customTimeMeasure = goal.goalType.measureUnits.first?.namePlural
+        }
     }
 
 }
@@ -24,6 +27,7 @@ public class NewGoalTimeViewModel: ObservableObject {
 private extension CGFloat {
 
     static let hoursFieldsHeight: CGFloat = 85
+    static let togglerFieldsHeight: CGFloat = 90
 
 }
 
@@ -33,6 +37,7 @@ struct NewGoalTimeView: View {
     
     @State var showQuestionsView = false
     @State var completionDate = Date()
+    @State var measureUnitSelectedIndex = 0
 
     @Binding var activeSheet: ActiveSheet?
     @Binding var isPresented: Bool
@@ -50,23 +55,21 @@ struct NewGoalTimeView: View {
     @ViewBuilder
     var body: some View {
         let timeRequiredBinding = Binding<String>(get: {
-            return viewModel.goal.timeRequired.stringWithoutDecimals
+            viewModel.goal.timeRequired.stringWithoutDecimals
         }, set: {
             viewModel.goal.timeRequired = Double($0) ?? 0
             updateCompletionDate()
         })
 
         let customMeasureBinding = Binding<String>(get: {
-            let customMeasure = viewModel.goal.customTimeMeasure != nil
-                ? viewModel.goal.customTimeMeasure : viewModel.goal.goalType.measureUnits.first?.namePlural
-            return customMeasure ?? ""
+            viewModel.goal.customTimeMeasure ?? ""
         }, set: {
             viewModel.goal.customTimeMeasure = $0
             viewModel.goal = viewModel.goal
         })
 
         let mondayBinding = Binding<String>(get: {
-            return "\(viewModel.goal.monday)"
+            "\(viewModel.goal.monday)"
         }, set: {
             viewModel.goal.monday = Double($0) ?? 0
             updateCompletionDate()
@@ -127,41 +130,25 @@ struct NewGoalTimeView: View {
                 Form {
                     Section(header: HStack {
                         Spacer()
-                        Text("Imposta il 1º traguardo").applyFont(.largeTitle).multilineTextAlignment(.center)
+                        Text("Il tuo 1º traguardo").applyFont(.largeTitle).multilineTextAlignment(.center)
                         Spacer()
                     }) {
                         VStack {
-                            GeometryReader { vContainer in
-                                HStack {
-                                    Spacer()
-                                    TextField("", text: timeRequiredBinding)
-                                        .frame(width: vContainer.size.width / 3, height: 75)
-                                        .multilineTextAlignment(.center)
-                                        .keyboardType(.numberPad)
-                                        .foregroundColor(.grayText)
-                                        .applyFont(.fieldLarge)
-                                        .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
-                                                    .stroke(Color.grayBorder, lineWidth: 1))
-                                    Spacer()
-                                }
-                            }.frame(height: 75)
-                            Spacer()
-                                .frame(height: 30)
-                            GeometryReader { vContainer in
-                                HStack {
-                                    TextField("", text: customMeasureBinding)
-                                        .frame(width: vContainer.size.width / 2, height: 55)
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.grayText)
-                                        .applyFont(.field)
-                                        .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
-                                                    .stroke(Color.grayBorder, lineWidth: 1))
-                                    Text("di camminata")
-                                        .foregroundColor(.grayText)
-                                        .applyFont(.title2)
-                                    Spacer()
-                                }
-                            }.frame(height: 55)
+                            if MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .singleTime
+                                || MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .time {
+                                Text(viewModel.goal.goalType.timeSentence ?? "")
+                                    .foregroundColor(.grayText)
+                                    .multilineTextAlignment(.center)
+                                    .applyFont(.title2)
+                                Spacer()
+                                    .frame(height: 10)
+                                timeRequiredView(timeRequiredBinding: timeRequiredBinding, customMeasureBinding: customMeasureBinding)
+                            } else {
+                                timeRequiredView(timeRequiredBinding: timeRequiredBinding, customMeasureBinding: customMeasureBinding)
+                                Text(viewModel.goal.goalType.ofGoalSentence ?? "")
+                                    .foregroundColor(.grayText)
+                                    .applyFont(.title2)
+                            }
                         }
                     }
                     .applyFont(.body)
@@ -170,79 +157,17 @@ struct NewGoalTimeView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
-                                                customMeasureBinding.wrappedValue)).applyFont(.fieldQuestion)) {
-
-                        HStack(spacing: 15) {
-                            VStack {
-                                HoursSelectorView(viewModel: .init(bindingString: mondayBinding,
-                                                                   goal: $viewModel.goal))
-                                Text("global_monday".localized())
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.small)
-                            }
-                            VStack {
-                                HoursSelectorView(viewModel: .init(bindingString: tuesdayBinding,
-                                                                   goal: $viewModel.goal))
-                                Text("global_tuesday".localized())
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.small)
-                            }
-                        }.frame(width: .infinity, height: .hoursFieldsHeight)
-
-                        HStack(spacing: 15) {
-                            VStack {
-                                HoursSelectorView(viewModel: .init(bindingString: wednesdayBinding,
-                                                                   goal: $viewModel.goal))
-                                Text("global_wednesday".localized())
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.small)
-                            }
-                            VStack {
-                                HoursSelectorView(viewModel: .init(bindingString: thursdayBinding,
-                                                                   goal: $viewModel.goal))
-                                Text("global_thursday".localized())
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.small)
-                            }
-                        }.frame(width: .infinity, height: .hoursFieldsHeight)
-
-                        HStack(spacing: 15) {
-                            VStack {
-                                HoursSelectorView(viewModel: .init(bindingString: fridayBinding,
-                                                                   goal: $viewModel.goal))
-                                Text("global_friday".localized())
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.small)
-                            }
-                            VStack {
-                                HoursSelectorView(viewModel: .init(bindingString: saturdayBinding,
-                                                                   goal: $viewModel.goal))
-                                Text("global_saturday".localized())
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.small)
-                            }
-                        }.frame(width: .infinity, height: .hoursFieldsHeight)
-
-                        GeometryReader { vContainer in
-                            HStack(spacing: 15) {
-                                Spacer()
-                                VStack {
-                                    HoursSelectorView(viewModel: .init(bindingString: sundayBinding,
-                                                                       goal: $viewModel.goal))
-                                    Text("global_sunday".localized())
-                                        .foregroundColor(.grayText)
-                                        .applyFont(.small)
-                                }.frame(width: vContainer.size.width/2, height: .hoursFieldsHeight)
-                                Spacer()
-                            }
-                        }.frame(width: .infinity, height: .hoursFieldsHeight)
-                        
+                    if MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .singleTime {
+                        dayTogglersSection(customMeasureBinding: customMeasureBinding, mondayBinding: mondayBinding,
+                                           tuesdayBinding: tuesdayBinding, wednesdayBinding: wednesdayBinding,
+                                           thursdayBinding: thursdayBinding, fridayBinding: fridayBinding,
+                                           saturdayBinding: saturdayBinding, sundayBinding: sundayBinding)
+                    } else {
+                        daySelectorsSection(customMeasureBinding: customMeasureBinding, mondayBinding: mondayBinding,
+                                            tuesdayBinding: tuesdayBinding, wednesdayBinding: wednesdayBinding,
+                                            thursdayBinding: thursdayBinding, fridayBinding: fridayBinding,
+                                            saturdayBinding: saturdayBinding, sundayBinding: sundayBinding)
                     }
-                    .applyFont(.body)
-                    .textCase(nil)
-                    .listRowBackground(Color.defaultBackground)
-                    .foregroundColor(.fieldsTitleForegroundColor)
 
                     Section(header: Text("add_goal_extimated_date_title").applyFont(.fieldQuestion)) {
                         VStack {
@@ -262,7 +187,6 @@ struct NewGoalTimeView: View {
                     Section {
                         Button(action: {
                             if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
-                                viewModel.goal.customTimeMeasure = customMeasureBinding.wrappedValue
                                 viewModel.goal = viewModel.goal
                                 showQuestionsView = true
                             } else {
@@ -304,6 +228,7 @@ struct NewGoalTimeView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
                 Button(action: {
+                    self.viewModel.goal.resetAllInfo()
                     self.isPresented = false
                 }) {
                     Image(systemName: "chevron.left")
@@ -317,10 +242,188 @@ struct NewGoalTimeView: View {
         }
     }
 
-    func updateCompletionDate() {
-        if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
-            completionDate = viewModel.goal.updatedCompletionDate
+    func timeRequiredView(timeRequiredBinding: Binding<String>, customMeasureBinding: Binding<String>) -> some View {
+        GeometryReader { vContainer in
+            HStack {
+                Spacer()
+                TextField("", text: timeRequiredBinding)
+                    .frame(width: vContainer.size.width / 3, height: 55)
+                    .multilineTextAlignment(.center)
+                    .keyboardType(.numberPad)
+                    .foregroundColor(timeRequiredBinding.wrappedValue != "0" && timeRequiredBinding.wrappedValue != ""
+                                        ? .white : .grayText)
+                    .applyFont(.fieldLarge)
+                    .background(timeRequiredBinding.wrappedValue != "0" && timeRequiredBinding.wrappedValue != ""
+                                    ? LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                                     startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    : nil)
+                    .cornerRadius(.defaultRadius)
+                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                .stroke(Color.grayBorder, lineWidth: 1))
+                    .onTapGesture {
+                        if timeRequiredBinding.wrappedValue == "0" {
+                            timeRequiredBinding.wrappedValue = " "
+                        }
+                    }
+                TextFieldWithPickerAsInputView(data: viewModel.goal.goalType.measureUnits.map { $0.namePlural },
+                                               placeholder: "Unità di misura",
+                                               selectionIndex: $measureUnitSelectedIndex,
+                                               text: customMeasureBinding)
+                    .frame(width: vContainer.size.width / 2, height: 55)
+                    .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                               startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .cornerRadius(.defaultRadius)
+                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                .stroke(Color.grayBorder, lineWidth: 1))
+                Spacer()
+            }
+        }.frame(height: 55)
+    }
+
+    func daySelectorsSection(customMeasureBinding: Binding<String>, mondayBinding: Binding<String>,
+                             tuesdayBinding: Binding<String>, wednesdayBinding: Binding<String>,
+                             thursdayBinding: Binding<String>, fridayBinding: Binding<String>,
+                             saturdayBinding: Binding<String>, sundayBinding: Binding<String>) -> some View {
+        Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
+                                    customMeasureBinding.wrappedValue)).applyFont(.fieldQuestion)) {
+            VStack {
+                HStack(spacing: 15) {
+                    VStack {
+                        HoursSelectorView(goal: viewModel.goal, bindingString: mondayBinding)
+                        Text("global_monday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack {
+                        HoursSelectorView(goal: viewModel.goal, bindingString: tuesdayBinding)
+                        Text("global_tuesday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                }.frame(width: .infinity, height: .hoursFieldsHeight)
+
+                HStack(spacing: 15) {
+                    VStack {
+                        HoursSelectorView(goal: viewModel.goal, bindingString: wednesdayBinding)
+                        Text("global_wednesday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack {
+                        HoursSelectorView(goal: viewModel.goal, bindingString: thursdayBinding)
+                        Text("global_thursday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                }.frame(width: .infinity, height: .hoursFieldsHeight)
+
+                HStack(spacing: 15) {
+                    VStack {
+                        HoursSelectorView(goal: viewModel.goal, bindingString: fridayBinding)
+                        Text("global_friday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack {
+                        HoursSelectorView(goal: viewModel.goal, bindingString: saturdayBinding)
+                        Text("global_saturday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                }.frame(width: .infinity, height: .hoursFieldsHeight)
+
+                GeometryReader { vContainer in
+                    HStack(spacing: 15) {
+                        Spacer()
+                        VStack {
+                            HoursSelectorView(goal: viewModel.goal, bindingString: sundayBinding)
+                            Text("global_sunday".localized())
+                                .foregroundColor(.grayText)
+                                .applyFont(.small)
+                        }.frame(width: vContainer.size.width/2, height: .hoursFieldsHeight)
+                        Spacer()
+                    }
+                }.frame(width: .infinity, height: .hoursFieldsHeight)
+            }
         }
+        .applyFont(.body)
+        .textCase(nil)
+        .listRowBackground(Color.defaultBackground)
+        .foregroundColor(.fieldsTitleForegroundColor)
+    }
+
+    func dayTogglersSection(customMeasureBinding: Binding<String>, mondayBinding: Binding<String>,
+                            tuesdayBinding: Binding<String>, wednesdayBinding: Binding<String>,
+                            thursdayBinding: Binding<String>, fridayBinding: Binding<String>,
+                            saturdayBinding: Binding<String>, sundayBinding: Binding<String>) -> some View {
+        Section(header: Text(String(format: "Che giorni lo farai?")).applyFont(.fieldQuestion)) {
+            VStack {
+                HStack(spacing: 15) {
+                    VStack(spacing: 5) {
+                        DayTogglerView(bindingString: mondayBinding,
+                                       goal: $viewModel.goal)
+                        Text("global_monday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack(spacing: 5) {
+                        DayTogglerView(bindingString: tuesdayBinding,
+                                       goal: $viewModel.goal)
+                        Text("global_tuesday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack(spacing: 5) {
+                        DayTogglerView(bindingString: wednesdayBinding,
+                                       goal: $viewModel.goal)
+                        Text("global_wednesday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack(spacing: 5) {
+                        DayTogglerView(bindingString: thursdayBinding,
+                                       goal: $viewModel.goal)
+                        Text("global_thursday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                }.frame(width: .infinity, height: .togglerFieldsHeight)
+
+                HStack(spacing: 15) {
+                    Spacer()
+                    VStack(spacing: 5) {
+                        DayTogglerView(bindingString: fridayBinding,
+                                       goal: $viewModel.goal)
+                        Text("global_friday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack(spacing: 5) {
+                        DayTogglerView(bindingString: saturdayBinding,
+                                       goal: $viewModel.goal)
+                        Text("global_saturday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    VStack(spacing: 5) {
+                        DayTogglerView(bindingString: sundayBinding,
+                                       goal: $viewModel.goal)
+                        Text("global_sunday".localized())
+                            .foregroundColor(.grayText)
+                            .applyFont(.small)
+                    }
+                    Spacer()
+                }.frame(width: .infinity, height: .togglerFieldsHeight)
+            }
+        }
+        .applyFont(.body)
+        .textCase(nil)
+        .listRowBackground(Color.defaultBackground)
+        .foregroundColor(.fieldsTitleForegroundColor)
+    }
+
+    func updateCompletionDate() {
+        completionDate = viewModel.goal.updatedCompletionDate
     }
 
     var closeButton: some View {

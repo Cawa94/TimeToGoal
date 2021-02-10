@@ -45,51 +45,47 @@ struct NewGoalHabitsCategoriesView: View {
                 ZStack {
                     Color.defaultBackground
 
-                    VStack {
-                        Spacer()
-                            .frame(height: 10)
+                    ScrollView {
+                        VStack {
+                            Spacer()
+                                .frame(height: 10)
 
-                        ScrollView {
-                            LazyVStack {
-                                Text("Scegli un'abitudine")
-                                    .foregroundColor(.grayText)
-                                    .multilineTextAlignment(.center)
-                                    .padding([.leading, .trailing], 10)
-                                    .lineLimit(2)
-                                    .applyFont(.largeTitle)
-                                    .listRowBackground(Color.defaultBackground)
+                            Text("Scegli un'abitudine")
+                                .foregroundColor(.grayText)
+                                .multilineTextAlignment(.center)
+                                .padding([.leading, .trailing], 10)
+                                .lineLimit(2)
+                                .applyFont(.largeTitle)
+                                .listRowBackground(Color.defaultBackground)
 
-                                VStack {
-                                    if let index = selectedIndex {
-                                        NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: HabitCategory.allValues[index].habits,
-                                                                                                       goal: viewModel.newGoal),
-                                                                                      activeSheet: $activeSheet,
-                                                                                      isPresented: $showHabitsView),
-                                                       isActive: $showHabitsView) {
-                                            EmptyView()
-                                        }
-                                    }
-                                }.hidden()
-
-                                ForEach(0..<HabitCategory.allValues.count) { index in
-                                    ZStack {
-                                        HabitCategoryRow(viewModel: .init(category: HabitCategory.allValues[index]))
-                                            .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
-                                            .onTapGesture {
-                                                selectedIndex = index
-                                                showHabitsView = true
-                                            }
-                                            .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
-                                                withAnimation(.easeInOut(duration: 0.2)) {
-                                                    viewModel.pressedRow[index] = pressing
-                                                }
-                                            }, perform: {})
-                                    }.padding([.top, .leading, .trailing], 20)
+                            if let index = selectedIndex {
+                                NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: HabitCategory.allValues[index].habits,
+                                                                                               goal: viewModel.newGoal),
+                                                                              activeSheet: $activeSheet,
+                                                                              isPresented: $showHabitsView),
+                                               isActive: $showHabitsView) {
+                                    EmptyView()
                                 }
                             }
-                        }
 
-                        Spacer()
+                            ForEach(0..<HabitCategory.allValues.count) { index in
+                                ZStack {
+                                    HabitCategoryRow(viewModel: .init(category: HabitCategory.allValues[index]))
+                                        .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
+                                        .onTapGesture {
+                                            selectedIndex = index
+                                            showHabitsView = true
+                                        }
+                                        .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                                            withAnimation(.easeInOut(duration: 0.2)) {
+                                                viewModel.pressedRow[index] = pressing
+                                            }
+                                        }, perform: {})
+                                }.padding([.top, .leading, .trailing], 20)
+                            }
+
+                            Spacer()
+                        }
                     }
                 }.navigationBarTitle("SMART Habit", displayMode: .inline)
                 .navigationBarBackButtonHidden(true)

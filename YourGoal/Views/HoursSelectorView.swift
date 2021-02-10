@@ -7,37 +7,49 @@
 
 import SwiftUI
 
-private extension CGFloat {
-
-    static let pickerViewWidth: CGFloat = 50 // because it's rotated 90º
-
-}
-
-struct HoursSelectorViewModel {
-
-    var bindingString: Binding<String>
-    var goal: Binding<Goal>
-
-}
-
 struct HoursSelectorView: View {
 
-    var viewModel: HoursSelectorViewModel
+    @State var goal: Goal
+
+    @Binding var bindingString: String
 
     var body: some View {
         GeometryReader { vContainer in
             ZStack {
-                TextField("", text: viewModel.bindingString)
-                    .padding()
-                    .foregroundColor(.fieldsLightBackground)
-                    .background(Color.fieldsLightBackground)
-                    .cornerRadius(.defaultRadius)
-                    .disabled(true)
-                HorizontalPickerView(selectedValue: viewModel.bindingString,
-                                     goal: viewModel.goal,
-                                     size: .init(width: vContainer.size.width, height: .pickerViewWidth))
-                    .frame(width: vContainer.size.width, height: 35, alignment: .center)
-                    .clipped()
+                if bindingString == "0.0" || bindingString == "" {
+                    TextField("", text: $bindingString)
+                        .padding()
+                        .foregroundColor(.clear)
+                        .background(Color.defaultBackground)
+                        .cornerRadius(.defaultRadius)
+                        .disabled(true)
+                        .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                    .stroke(Color.grayBorder, lineWidth: 1))
+                } else {
+                    TextField("", text: $bindingString)
+                        .padding()
+                        .foregroundColor(.clear)
+                        .background(LinearGradient(gradient: Gradient(colors: goal.rectGradientColors),
+                                                   startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .cornerRadius(.defaultRadius)
+                        .disabled(true)
+                        .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                    .stroke(Color.grayBorder, lineWidth: 1))
+                }
+
+                if goal.timeTrackingType == .hoursWithMinutes {
+                    HorizontalPickerView(goal: goal,
+                                         selectedValue: $bindingString,
+                                         size: .init(width: vContainer.size.width, height: 50))
+                        .frame(width: vContainer.size.width, height: vContainer.size.height + 5, alignment: .center)
+                        .clipped()
+                } else {
+                    HorizontalPickerView(goal: goal,
+                                         selectedValue: $bindingString,
+                                         size: .init(width: vContainer.size.width, height: 35))
+                        .frame(width: vContainer.size.width, height: vContainer.size.height + 5, alignment: .center)
+                        .clipped()
+                }
             }
         }
     }

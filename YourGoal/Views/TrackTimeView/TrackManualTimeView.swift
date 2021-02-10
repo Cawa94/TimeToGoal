@@ -16,7 +16,7 @@ struct TrackManualTimeView: View {
     @State var decimalSpent: Double = 00
 
     var timeOptions: [Int] {
-        switch currentGoal?.goalType.timeTrackingType {
+        switch currentGoal?.timeTrackingType {
         case .infinite, .double:
             return Array(0...100)
         default:
@@ -25,7 +25,7 @@ struct TrackManualTimeView: View {
     }
 
     var decimalOptions: [Double] {
-        switch currentGoal?.goalType.timeTrackingType {
+        switch currentGoal?.timeTrackingType {
         case .hoursWithMinutes:
             return [00, 15, 30, 45]
         case .double:
@@ -58,8 +58,8 @@ struct TrackManualTimeView: View {
                     .frame(maxWidth: geometry.size.width / 3.5)
                     .clipped()
 
-                    if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes || currentGoal?.goalType.timeTrackingType == .double {
-                        if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
+                    if currentGoal?.timeTrackingType == .hoursWithMinutes || currentGoal?.timeTrackingType == .double {
+                        if currentGoal?.timeTrackingType == .hoursWithMinutes {
                             Text("global_hours")
                                 .fontWeight(.semibold)
                                 .applyFont(.title2)
@@ -80,7 +80,7 @@ struct TrackManualTimeView: View {
                         .frame(maxWidth: geometry.size.width / 3.5)
                         .clipped()
 
-                        if currentGoal?.goalType.timeTrackingType == .hoursWithMinutes {
+                        if currentGoal?.timeTrackingType == .hoursWithMinutes {
                             Text("global_minutes")
                                 .fontWeight(.semibold)
                                 .applyFont(.title2)

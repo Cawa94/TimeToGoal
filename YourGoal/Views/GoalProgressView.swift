@@ -26,7 +26,7 @@ public class GoalProgressViewModel: ObservableObject {
     }
 
     var timeRemaining: String {
-        if goal?.goalType.timeTrackingType == .hoursWithMinutes {
+        if goal?.timeTrackingType == .hoursWithMinutes {
             let dateRemaining = Double(goal?.timeRequired ?? 0).asHoursAndMinutes
                 .remove(Double(goal?.timeCompleted ?? 0).asHoursAndMinutes)
             if dateRemaining > Date().zeroHours {
@@ -37,7 +37,7 @@ public class GoalProgressViewModel: ObservableObject {
         } else {
             let timeRemaining = Double(goal?.timeRequired ?? 0) - Double(goal?.timeCompleted ?? 0)
             if timeRemaining > 0 {
-                return goal?.goalType.timeTrackingType == .double
+                return goal?.timeTrackingType == .double
                     ? "\(timeRemaining.stringWithTwoDecimals)" : "\(timeRemaining.stringWithoutDecimals)"
             } else {
                 return "0"

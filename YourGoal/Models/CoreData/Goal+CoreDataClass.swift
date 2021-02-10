@@ -24,8 +24,8 @@ public class Goal: NSManagedObject {
         }
     }
 
-    var trackingType: TimeTrackingType {
-        return goalType.timeTrackingType
+    var timeTrackingType: TimeTrackingType {
+        return MeasureUnit.getFrom(customTimeMeasure ?? "").timeTrackingType
     }
 
     var goalColor: Color {
@@ -69,51 +69,55 @@ public class Goal: NSManagedObject {
     }
 
     var updatedCompletionDate: Date {
-        if goalType.timeTrackingType == .hoursWithMinutes {
-            let dayHours = [sunday.asHoursAndMinutes, monday.asHoursAndMinutes, tuesday.asHoursAndMinutes,
-                            wednesday.asHoursAndMinutes, thursday.asHoursAndMinutes, friday.asHoursAndMinutes,
-                            saturday.asHoursAndMinutes]
+        if timeRequired != 0, atLeastOneDayWorking {
+            if timeTrackingType == .hoursWithMinutes {
+                let dayHours = [sunday.asHoursAndMinutes, monday.asHoursAndMinutes, tuesday.asHoursAndMinutes,
+                                wednesday.asHoursAndMinutes, thursday.asHoursAndMinutes, friday.asHoursAndMinutes,
+                                saturday.asHoursAndMinutes]
 
-            var daysRequired = -1
-            var decreasingTotal = self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes)
-            var dayNumber = Date().dayNumber
+                var daysRequired = -1
+                var decreasingTotal = self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes)
+                var dayNumber = Date().dayNumber
 
-            while decreasingTotal > Date().zeroHours {
-                daysRequired += 1
-                decreasingTotal = decreasingTotal.remove(dayHours[dayNumber - 1])
-                dayNumber += 1
-                if dayNumber == 8 {
-                    dayNumber = 1
+                while decreasingTotal > Date().zeroHours {
+                    daysRequired += 1
+                    decreasingTotal = decreasingTotal.remove(dayHours[dayNumber - 1])
+                    dayNumber += 1
+                    if dayNumber == 8 {
+                        dayNumber = 1
+                    }
                 }
+
+                self.daysRequired = Int16(daysRequired)
+
+                return Date().adding(days: daysRequired)
+            } else {
+                let dayTimes = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+
+                var daysRequired = -1
+                var decreasingTotal = self.timeRequired - self.timeCompleted
+                var dayNumber = Date().dayNumber
+
+                while decreasingTotal > 0 {
+                    daysRequired += 1
+                    decreasingTotal = decreasingTotal - dayTimes[dayNumber - 1]
+                    dayNumber += 1
+                    if dayNumber == 8 {
+                        dayNumber = 1
+                    }
+                }
+
+                self.daysRequired = Int16(daysRequired)
+
+                return Date().adding(days: daysRequired)
             }
-
-            self.daysRequired = Int16(daysRequired)
-
-            return Date().adding(days: daysRequired)
         } else {
-            let dayTimes = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
-
-            var daysRequired = -1
-            var decreasingTotal = self.timeRequired - self.timeCompleted
-            var dayNumber = Date().dayNumber
-
-            while decreasingTotal > 0 {
-                daysRequired += 1
-                decreasingTotal = decreasingTotal - dayTimes[dayNumber - 1]
-                dayNumber += 1
-                if dayNumber == 8 {
-                    dayNumber = 1
-                }
-            }
-
-            self.daysRequired = Int16(daysRequired)
-
-            return Date().adding(days: daysRequired)
+            return Date()
         }
     }
 
     var isCompleted: Bool {
-        switch trackingType {
+        switch timeTrackingType {
         case .hoursWithMinutes:
             return !(self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes) > Date().zeroHours)
         default:
@@ -242,6 +246,22 @@ public class Goal: NSManagedObject {
         default:
             return false
         }
+    }
+
+    func resetAllInfo() {
+        self.monday = 0.0
+        self.tuesday = 0.0
+        self.wednesday = 0.0
+        self.thursday = 0.0
+        self.friday = 0.0
+        self.saturday = 0.0
+        self.sunday = 0.0
+        self.name = ""
+        self.supportDefinition = ""
+        self.timeRequired = 0.0
+        self.whatDefinition = ""
+        self.whatWillChangeDefinition = ""
+        self.whyDefinition = ""
     }
 
 }

@@ -12,13 +12,20 @@ enum MeasureUnit: String {
     case session
     case km
     case page
+    case hour
+    case time
+    case singleTime
 
     var timeTrackingType: TimeTrackingType {
         switch self {
-        case .session, .page:
+        case .session, .page, .time:
             return .infinite
         case .km:
             return .double
+        case .hour:
+            return .hoursWithMinutes
+        case .singleTime:
+            return .boolean
         }
     }
 
@@ -29,29 +36,34 @@ enum MeasureUnit: String {
         case .page:
             return "pagine"
         case .km:
-            return "Km"
+            return "km"
+        case .hour:
+            return "ore"
+        case .time:
+            return "volte"
+        case .singleTime:
+            return "volte " // <- it's important to leave empty space in the end here
         }
     }
 
-    var nameSingle: String {
-        switch self {
-        case .session:
-            return "sessioni"
-        case .page:
-            return "pagine"
-        case .km:
-            return "Km"
-        }
-    }
+    // !!!!!! remember to replace both namePlural values and getFrom() with same identical localized values
 
-    var timeRequiredQuestion: String {
-        switch self {
-        case .session:
-            return "Quante sessioni farai al giorno?"
-        case .page:
-            return "Quante pagine leggerai al giorno?"
-        case .km:
-            return "Quanti km correrai al giorno?"
+    static func getFrom(_ rawValue: String) -> MeasureUnit {
+        switch rawValue {
+        case "sessioni":
+            return .session
+        case "pagine":
+            return .km
+        case "km":
+            return .page
+        case "ore":
+            return .hour
+        case "volte":
+            return .time
+        case "volte ":
+            return .singleTime
+        default:
+            return .session
         }
     }
 

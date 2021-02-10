@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TimeToGoalIcon" translatesAutoresizingMaskIntoConstraints="NO" id="dKd-qM-jQu">
-                                <rect key="frame" x="93" y="334" width="228" height="228"/>
+                                <rect key="frame" x="114" y="355" width="186" height="186"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dKd-qM-jQu" secondAttribute="height" multiplier="1:1" id="Aax-ag-phT"/>
@@ -29,7 +29,7 @@
                         <constraints>
                             <constraint firstItem="dKd-qM-jQu" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9YL-ni-sqY"/>
                             <constraint firstItem="dKd-qM-jQu" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Fut-94-x83"/>
-                            <constraint firstItem="dKd-qM-jQu" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.55" id="Wq6-Em-Sf4"/>
+                            <constraint firstItem="dKd-qM-jQu" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.45" id="Wq6-Em-Sf4"/>
                         </constraints>
                     </view>
                 </viewController>

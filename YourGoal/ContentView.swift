@@ -21,7 +21,7 @@ public class ContentViewModel: ObservableObject {
     @Published var goals: [Goal] = []
     @Published var journal: [JournalPage] = []
     @Published var profile: Profile?
-    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : .newGoal
+    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
     @Published var currentPage: Page = .home

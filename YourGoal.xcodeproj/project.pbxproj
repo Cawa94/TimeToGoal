@@ -79,6 +79,8 @@
 		DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */; };
 		DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */; };
 		DAC2CCED25CEA52800E363F5 /* MeasureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */; };
+		DAD1993A25D3DC0300EDEC6F /* DayTogglerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1993925D3DC0300EDEC6F /* DayTogglerView.swift */; };
+		DAD1995125D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */; };
 		DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */; };
 		DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321FF257B9E41007DB9F0 /* JournalDate.swift */; };
 		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
@@ -190,6 +192,8 @@
 		DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goals+Extension.swift"; sourceTree = "<group>"; };
 		DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Progress+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Progress+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnit.swift; sourceTree = "<group>"; };
+		DAD1993925D3DC0300EDEC6F /* DayTogglerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTogglerView.swift; sourceTree = "<group>"; };
+		DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
 		DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalMood.swift; sourceTree = "<group>"; };
 		DAE321FF257B9E41007DB9F0 /* JournalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDate.swift; sourceTree = "<group>"; };
 		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				DAF1A8C12551768900EBEAA6 /* TrackTimeView */,
 				DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */,
 				DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */,
+				DAD1993925D3DC0300EDEC6F /* DayTogglerView.swift */,
 				DABE55392567C84200923919 /* ExplanationView.swift */,
 				DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
@@ -365,6 +370,7 @@
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
 				DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */,
 				DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */,
+				DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -739,9 +745,11 @@
 				DAF1A8E025517F3300EBEAA6 /* TypeCellView.swift in Sources */,
 				DAB7DC83252232130087F9C8 /* Persistence.swift in Sources */,
 				DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */,
+				DAD1995125D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift in Sources */,
 				DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */,
 				DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */,
 				DA938A32253703B600446580 /* UIScren+Extensions.swift in Sources */,
+				DAD1993A25D3DC0300EDEC6F /* DayTogglerView.swift in Sources */,
 				DAC0854D25C413CD00FE4DBC /* GoalSmallProgressView.swift in Sources */,
 				DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */,
 				DA125FC925C1B8F900DA577E /* HomeView.swift in Sources */,
