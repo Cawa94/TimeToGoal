@@ -21,7 +21,7 @@ public class ContentViewModel: ObservableObject {
     @Published var goals: [Goal] = []
     @Published var journal: [JournalPage] = []
     @Published var profile: Profile?
-    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
+    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : .newGoal
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
     @Published var currentPage: Page = .home
@@ -157,7 +157,7 @@ struct ContentView: View {
         }, content: { item in
             switch item {
             case .tutorial:
-                TutorialView(activeSheet: $viewModel.activeSheet)
+                TutorialView(viewModel: .init(tutorialType: .whatAreSmartGoals), isPresented: .constant(false), activeSheet: $viewModel.activeSheet)
             case .newGoal:
                 NewGoalFirstView(viewModel: .init(), activeSheet: $viewModel.activeSheet)
             }

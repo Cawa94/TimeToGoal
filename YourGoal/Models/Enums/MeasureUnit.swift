@@ -53,9 +53,9 @@ enum MeasureUnit: String {
         case "sessioni":
             return .session
         case "pagine":
-            return .km
-        case "km":
             return .page
+        case "km":
+            return .km
         case "ore":
             return .hour
         case "volte":

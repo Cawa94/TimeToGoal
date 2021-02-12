@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "oven-mitt.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

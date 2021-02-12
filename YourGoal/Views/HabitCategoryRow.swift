@@ -23,7 +23,7 @@ struct HabitCategoryRow: View {
     @State var showHabitsView = false
 
     var body: some View {
-        HStack() {
+        HStack(spacing: 15) {
             VStack(alignment: .leading) {
                 Text(viewModel.category.name)
                     .fontWeight(.semibold)
@@ -41,7 +41,7 @@ struct HabitCategoryRow: View {
             viewModel.category.image
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: 40)
+                .frame(width: 55)
                 .padding([.top, .bottom], 10)
 
         }

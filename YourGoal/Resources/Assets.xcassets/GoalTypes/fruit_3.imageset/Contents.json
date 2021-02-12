@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "healthy-lifestyle.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

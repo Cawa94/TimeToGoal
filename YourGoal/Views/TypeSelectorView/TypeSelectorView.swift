@@ -14,7 +14,7 @@ public class TypeSelectorViewModel: ObservableObject {
 
     init(goal: Binding<Goal>) {
         self._goal = goal
-        self.goalTypesModels = GoalType.allValues.enumerated().map {
+        self.goalTypesModels = GoalType.allHabits.enumerated().map {
             TypeCellViewModel(id: $0.offset,
                               type: $0.element,
                               color: goal.wrappedValue.goalColor,

@@ -17,9 +17,6 @@ public class NewGoalTimeViewModel: ObservableObject {
     init(goal: Goal, isNew: Bool) {
         self.isNewGoal = isNew
         self.goal = goal
-        if self.goal.customTimeMeasure == nil {
-            self.goal.customTimeMeasure = goal.goalType.measureUnits.first?.namePlural
-        }
     }
 
 }
@@ -34,7 +31,8 @@ private extension CGFloat {
 struct NewGoalTimeView: View {
 
     @ObservedObject var viewModel: NewGoalTimeViewModel
-    
+
+    @State var showTutorial = false
     @State var showQuestionsView = false
     @State var completionDate = Date()
     @State var measureUnitSelectedIndex = 0
@@ -129,25 +127,37 @@ struct NewGoalTimeView: View {
 
                 Form {
                     Section(header: HStack {
+                        Text(viewModel.goal.goalType.isHabit ? "Il tuo 1º traguardo" : "Il tuo traguardo").applyFont(.fieldQuestion).multilineTextAlignment(.center)
                         Spacer()
-                        Text("Il tuo 1º traguardo").applyFont(.largeTitle).multilineTextAlignment(.center)
-                        Spacer()
+                        if viewModel.goal.goalType.isHabit {
+                            Button(action: {
+                                self.showTutorial = true
+                            }) {
+                                Text("info").applyFont(.smallButton).foregroundColor(viewModel.goal.goalColor)
+                                    .padding([.top, .bottom], 1)
+                                    .padding([.leading, .trailing], 10)
+                                    .cornerRadius(.defaultRadius)
+                                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                                .stroke(viewModel.goal.goalColor, lineWidth: 1))
+                            }
+                        }
                     }) {
-                        VStack {
+                        VStack(spacing: 10) {
                             if MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .singleTime
-                                || MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .time {
+                                || MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .time
+                                || MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .page {
                                 Text(viewModel.goal.goalType.timeSentence ?? "")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
-                                    .applyFont(.title2)
+                                    .applyFont(.largeTitle)
+                                timeRequiredView(timeRequiredBinding: timeRequiredBinding, customMeasureBinding: customMeasureBinding)
+                            } else {
                                 Spacer()
                                     .frame(height: 10)
                                 timeRequiredView(timeRequiredBinding: timeRequiredBinding, customMeasureBinding: customMeasureBinding)
-                            } else {
-                                timeRequiredView(timeRequiredBinding: timeRequiredBinding, customMeasureBinding: customMeasureBinding)
                                 Text(viewModel.goal.goalType.ofGoalSentence ?? "")
                                     .foregroundColor(.grayText)
-                                    .applyFont(.title2)
+                                    .applyFont(.largeTitle)
                             }
                         }
                     }
@@ -238,8 +248,15 @@ struct NewGoalTimeView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
+            if self.viewModel.goal.customTimeMeasure == nil || self.viewModel.goal.customTimeMeasure == "" {
+                self.viewModel.goal.customTimeMeasure = self.viewModel.goal.goalType.measureUnits.first?.namePlural
+            }
             updateCompletionDate()
         }
+        .sheet(isPresented: $showTutorial) {
+            TutorialView(viewModel: .init(tutorialType: .howToSetTarget), isPresented: $showTutorial, activeSheet: $activeSheet)
+        }
+
     }
 
     func timeRequiredView(timeRequiredBinding: Binding<String>, customMeasureBinding: Binding<String>) -> some View {
@@ -285,7 +302,7 @@ struct NewGoalTimeView: View {
                              thursdayBinding: Binding<String>, fridayBinding: Binding<String>,
                              saturdayBinding: Binding<String>, sundayBinding: Binding<String>) -> some View {
         Section(header: Text(String(format: viewModel.goal.goalType.timeForDayQuestion,
-                                    customMeasureBinding.wrappedValue)).applyFont(.fieldQuestion)) {
+                                    customMeasureBinding.wrappedValue.capitalized)).applyFont(.fieldQuestion)) {
             VStack {
                 HStack(spacing: 15) {
                     VStack {

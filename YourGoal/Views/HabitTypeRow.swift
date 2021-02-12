@@ -22,7 +22,7 @@ struct HabitTypeRow: View {
     @ObservedObject var viewModel: HabitTypeRowModel
 
     var body: some View {
-        HStack() {
+        HStack(spacing: 15) {
             Text(viewModel.habit.name)
                 .fontWeight(.semibold)
                 .applyFont(.largeTitle)
@@ -33,7 +33,7 @@ struct HabitTypeRow: View {
             Image(viewModel.habit.image)
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: 40)
+                .frame(width: 55)
                 .padding([.top, .bottom], 10)
 
         }

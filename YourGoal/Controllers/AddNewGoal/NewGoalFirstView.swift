@@ -34,9 +34,9 @@ struct NewGoalFirstView: View {
             BackgroundView(color: .defaultBackground) {
                 GeometryReader { container in
                     ZStack {
-                        NavigationLink(destination: NewGoalQuestionsView(viewModel: .init(goal: viewModel.newGoal, isNewGoal: true),
-                                                                         activeSheet: $activeSheet,
-                                                                         isPresented: $viewModel.showQuestionsPage),
+                        NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: GoalType.allGoals, goal: viewModel.newGoal),
+                                                                      activeSheet: $activeSheet,
+                                                                      isPresented: $viewModel.showHabitsPage),
                                        isActive: $viewModel.showQuestionsPage) {
                             EmptyView()
                         }.hidden()

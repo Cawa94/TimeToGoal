@@ -152,6 +152,10 @@ public class Goal: NSManagedObject {
                 return [.redGoal, .redGradient1, .redGradient2, .redGradient2, .redGradient1, .redGoal]
             case "grayGoal":
                 return [.grayGoal, .grayGradient1, .grayGradient2, .grayGradient2, .grayGradient1, .grayGoal]
+            case "yellowGoal":
+                return [.yellowGoal, .yellowGradient1, .yellowGradient2, .yellowGradient2, .yellowGradient1, .yellowGoal]
+            case "brownGoal":
+                return [.brownGoal, .brownGradient1, .brownGradient2, .brownGradient2, .brownGradient1, .brownGoal]
             default:
                 return []
             }
@@ -174,6 +178,10 @@ public class Goal: NSManagedObject {
             return [.redGoal, .redGradient1, .redGradient2]
         case "grayGoal":
             return [.grayGoal, .grayGradient1, .grayGradient2]
+        case "yellowGoal":
+            return [.yellowGoal, .yellowGradient1, .yellowGradient2]
+        case "brownGoal":
+            return [.brownGoal, .brownGradient1, .brownGradient2]
         default:
             return [.orangeGoal, .orangeGradient1, .orangeGradient2]
         }
@@ -193,6 +201,10 @@ public class Goal: NSManagedObject {
             return [.redGradient1, .redGoal, .redGradient1]
         case "grayGoal":
             return [.grayGradient1, .grayGoal, .grayGradient1]
+        case "yellowGoal":
+            return [.yellowGradient1, .yellowGoal, .yellowGradient1]
+        case "brownGoal":
+            return [.brownGradient1, .brownGoal, .brownGradient1]
         default:
             return [.orangeGradient1, .orangeGoal, .orangeGradient1]
         }
@@ -249,6 +261,7 @@ public class Goal: NSManagedObject {
     }
 
     func resetAllInfo() {
+        self.customTimeMeasure = nil
         self.monday = 0.0
         self.tuesday = 0.0
         self.wednesday = 0.0
@@ -256,12 +269,12 @@ public class Goal: NSManagedObject {
         self.friday = 0.0
         self.saturday = 0.0
         self.sunday = 0.0
-        self.name = ""
-        self.supportDefinition = ""
+        self.name = nil
+        self.supportDefinition = nil
         self.timeRequired = 0.0
-        self.whatDefinition = ""
-        self.whatWillChangeDefinition = ""
-        self.whyDefinition = ""
+        self.whatDefinition = nil
+        self.whatWillChangeDefinition = nil
+        self.whyDefinition = nil
     }
 
 }

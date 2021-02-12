@@ -10,14 +10,25 @@ import SwiftUI
 public class ExplanationViewModel: ObservableObject {
 
     @Published var pageNumber: Int
+    @Published var shouldDismissSheet: Bool
+    @Published var isLastPage: Bool
 
     @Binding var currentPage: Int
     @Binding var activeSheet: ActiveSheet?
+    @Binding var isPresented: Bool
 
-    init(pageNumber: Int, currentPage: Binding<Int>, activeSheet: Binding<ActiveSheet?>) {
+    init(pageNumber: Int,
+         shouldDismissSheet: Bool = true,
+         isLastPage: Bool = false,
+         currentPage: Binding<Int>,
+         activeSheet: Binding<ActiveSheet?>,
+         isPresented: Binding<Bool>) {
         self.pageNumber = pageNumber
+        self.shouldDismissSheet = shouldDismissSheet
+        self.isLastPage = isLastPage
         self._currentPage = currentPage
         self._activeSheet = activeSheet
+        self._isPresented = isPresented
     }
 
 }
@@ -28,7 +39,7 @@ struct ExplanationView: View {
 
     @ViewBuilder
     var body: some View {
-        GeometryReader { container in
+        ScrollView {
             VStack {
                 Spacer()
                     .frame(height: topSpace)
@@ -44,22 +55,24 @@ struct ExplanationView: View {
                     fourthPageText
                 }
 
-                Spacer()
-
                 if viewModel.pageNumber == 4 {
                     Text("tutorial_fourth_step_2")
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
                         .padding([.leading, .trailing], 25)
                         .applyFont(.title2)
-
-                    Spacer()
-                        .frame(height: 40)
                 }
 
+                Spacer()
+                    .frame(height: 40)
+
                 Button(action: {
-                    if viewModel.currentPage == 4 {
-                        viewModel.activeSheet = nil
+                    if viewModel.isLastPage {
+                        if viewModel.shouldDismissSheet {
+                            viewModel.activeSheet = nil
+                        } else {
+                            viewModel.isPresented = false
+                        }
                     } else {
                         withAnimation {
                             viewModel.currentPage += 1
@@ -84,7 +97,7 @@ struct ExplanationView: View {
 
                 Spacer()
                     .frame(height: DeviceFix.isSmallScreen ? 50 : 75)
-            }.frame(width: container.size.width, height: container.size.height)
+            }
         }.background(Color.defaultBackground)
     }
 
@@ -99,7 +112,7 @@ struct ExplanationView: View {
             Text("tutorial_first_step_3")
         }
         .multilineTextAlignment(.center)
-        .foregroundColor(.black)
+        .foregroundColor(.grayText)
         .padding([.leading, .trailing], 25)
         .applyFont(.title2)
     }
@@ -115,7 +128,7 @@ struct ExplanationView: View {
             Text("tutorial_second_step_5")
         }
         .multilineTextAlignment(.center)
-        .foregroundColor(.black)
+        .foregroundColor(.grayText)
         .padding([.leading, .trailing], 25)
         .applyFont(.title2)
     }
@@ -133,7 +146,7 @@ struct ExplanationView: View {
             Text("tutorial_third_step_6")
         }
         .multilineTextAlignment(.center)
-        .foregroundColor(.black)
+        .foregroundColor(.grayText)
         .padding([.leading, .trailing], 25)
         .applyFont(.title2)
     }
@@ -145,7 +158,7 @@ struct ExplanationView: View {
             Text("tutorial_fourth_step_1")
         }
         .multilineTextAlignment(.center)
-        .foregroundColor(.black)
+        .foregroundColor(.grayText)
         .padding([.leading, .trailing], 25)
         .applyFont(.title2)
     }

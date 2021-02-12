@@ -24,20 +24,14 @@ public class NewGoalQuestionsViewModel: ObservableObject {
 
 }
 
-private extension CGFloat {
-
-    static let hoursFieldsHeight: CGFloat = 85
-    static let pickerViewWidth: CGFloat = 40 // it's actually height, because it's rotated 90º
-
-}
-
 struct NewGoalQuestionsView: View {
 
     @ObservedObject var viewModel: NewGoalQuestionsViewModel
-    @Binding var activeSheet: ActiveSheet?
-    @Binding var isPresented: Bool
 
     @State var completionDate = Date()
+
+    @Binding var activeSheet: ActiveSheet?
+    @Binding var isPresented: Bool
 
     @ViewBuilder
     var body: some View {
@@ -79,16 +73,6 @@ struct NewGoalQuestionsView: View {
         BackgroundView(color: .defaultBackground) {
             ZStack {
                 Form {
-                    if !viewModel.goal.goalType.isHabit {
-                        Section(header: Text("add_goal_type_title").applyFont(.fieldQuestion)) {
-                            TypeSelectorView(viewModel: .init(goal: $viewModel.goal))
-                        }
-                        .textCase(nil)
-                        .buttonStyle(PlainButtonStyle())
-                        .listRowBackground(Color.defaultBackground)
-                        .foregroundColor(.fieldsTitleForegroundColor)
-                    }
-
                     Section(header: Text("goal_name_question").applyFont(.fieldQuestion)) {
                         VStack {
                             TextField("", text: nameBinding)

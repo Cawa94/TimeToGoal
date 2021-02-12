@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "table-clock.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
