@@ -48,14 +48,19 @@ extension Color {
     static let greenGradient2        = Color("greenGradient2")
 
     // brown
-    static let brownGoal         = Color("brownGoal")
-    static let brownGradient1    = Color("brownGradient1")
-    static let brownGradient2    = Color("brownGradient2")
+    static let brownGoal             = Color("brownGoal")
+    static let brownGradient1        = Color("brownGradient1")
+    static let brownGradient2        = Color("brownGradient2")
 
     // Orange
     static let orangeGoal            = Color("orangeGoal")
     static let orangeGradient1       = Color("orangeGradient1")
     static let orangeGradient2       = Color("orangeGradient2")
+
+    // Pink
+    static let pinkGoal              = Color("pinkGoal")
+    static let pinkGradient1         = Color("pinkGradient1")
+    static let pinkGradient2         = Color("pinkGradient2")
 
     // Red
     static let redGoal               = Color("redGoal")

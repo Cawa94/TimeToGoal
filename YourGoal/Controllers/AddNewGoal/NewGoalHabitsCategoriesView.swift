@@ -27,6 +27,7 @@ struct NewGoalHabitsCategoriesView: View {
     @ObservedObject var viewModel: NewGoalHabitsCategoriesViewModel
 
     @State var showHabitsView = false
+    @State var showTimeView = false
     @State var selectedIndex: Int?
 
     @Binding var activeSheet: ActiveSheet?
@@ -59,12 +60,21 @@ struct NewGoalHabitsCategoriesView: View {
                                 .listRowBackground(Color.defaultBackground)
 
                             if let index = selectedIndex {
-                                NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: HabitCategory.allValues[index].habits,
-                                                                                               goal: viewModel.newGoal),
-                                                                              activeSheet: $activeSheet,
-                                                                              isPresented: $showHabitsView),
-                                               isActive: $showHabitsView) {
-                                    EmptyView()
+                                if index == 6 {
+                                    NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.newGoal, isNew: true),
+                                                                                activeSheet: $activeSheet,
+                                                                                isPresented: $showTimeView),
+                                                   isActive: $showTimeView) {
+                                        EmptyView()
+                                    }
+                                } else {
+                                    NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: HabitCategory.allValues[index].habits,
+                                                                                                   goal: viewModel.newGoal),
+                                                                                  activeSheet: $activeSheet,
+                                                                                  isPresented: $showHabitsView),
+                                                   isActive: $showHabitsView) {
+                                        EmptyView()
+                                    }
                                 }
                             }
 
@@ -74,7 +84,14 @@ struct NewGoalHabitsCategoriesView: View {
                                         .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
                                         .onTapGesture {
                                             selectedIndex = index
-                                            showHabitsView = true
+                                            if selectedIndex == 6 {
+                                                viewModel.newGoal.goalType = .init(
+                                                    id: 53, label: "custom", name: "Personalizzato", image: "project_0",
+                                                    categoryId: [6], measureUnits: [.session, .km, .page, .hour, .time, .singleTime])
+                                                showTimeView = true
+                                            } else {
+                                                showHabitsView = true
+                                            }
                                         }
                                         .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
                                             withAnimation(.easeInOut(duration: 0.2)) {

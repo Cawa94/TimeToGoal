@@ -286,7 +286,7 @@ struct NewGoalTimeView: View {
                                                placeholder: "Unità di misura",
                                                selectionIndex: $measureUnitSelectedIndex,
                                                text: customMeasureBinding)
-                    .frame(width: vContainer.size.width / 2, height: 55)
+                    .frame(width: vContainer.size.width / 1.65, height: 55)
                     .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
                                                startPoint: .topLeading, endPoint: .bottomTrailing))
                     .cornerRadius(.defaultRadius)

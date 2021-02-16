@@ -20,7 +20,12 @@ public class ProfileImageSelectorViewModel: ObservableObject {
                 "man_1", "woman_1",
                 "man_2", "woman_2",
                 "man_3", "woman_3",
-                "man_4", "woman_4"]
+                "man_4", "woman_4",
+                "man_5", "woman_5",
+                "man_6", "woman_6",
+                "man_7", "woman_7",
+                "man_8", "woman_8",
+                "man_9", "woman_9"]
     }
 
 }
@@ -50,57 +55,64 @@ struct ProfileImageSelectorView: View {
             GeometryReader { container in
                 VStack() {
                     Spacer().frame(maxWidth: .infinity)
+
                     HStack {
-                        Spacer().frame(maxWidth: .infinity)
+
+                        Spacer()
+
                         ZStack {
                             RoundedRectangle(cornerRadius: .defaultRadius)
                                 .fill(Color.white)
                                 .cornerRadius(50)
 
-                            VStack {
-                                Spacer()
-                                    .frame(height: 20)
+                            ScrollView(showsIndicators: false) {
+                                VStack {
+                                    Spacer()
+                                        .frame(height: 20)
 
-                                ForEach(0..<viewModel.images.count/3) { row in
-                                    HStack(spacing: 25) {
-                                        ForEach(0..<3) { column in
-                                            let index = getIndexFor(row: row, column: column)
-                                            let image = viewModel.images[index]
-                                            Button(action: {
-                                                viewModel.profile.image = image
-                                                PersistenceController.shared.saveContext()
-                                                isPresented = false
-                                            }) {
-                                                if viewModel.profile.image == image {
-                                                    Image(image)
-                                                        .resizable()
-                                                        .aspectRatio(1.0, contentMode: .fit)
-                                                        .frame(width: 45)
-                                                        .overlay(
-                                                            RoundedRectangle(cornerRadius: .defaultRadius)
-                                                                .stroke(Color.goalColor, lineWidth: 2)
-                                                                .padding(-8)
-                                                        )
-                                                } else {
-                                                    Image(image)
-                                                        .resizable()
-                                                        .aspectRatio(1.0, contentMode: .fit)
-                                                        .frame(width: 45)
+                                    ForEach(0..<viewModel.images.count/3) { row in
+                                        HStack(spacing: 40) {
+                                            ForEach(0..<3) { column in
+                                                let index = getIndexFor(row: row, column: column)
+                                                let image = viewModel.images[index]
+                                                Button(action: {
+                                                    viewModel.profile.image = image
+                                                    PersistenceController.shared.saveContext()
+                                                    isPresented = false
+                                                }) {
+                                                    if viewModel.profile.image == image {
+                                                        Image(image)
+                                                            .resizable()
+                                                            .aspectRatio(1.0, contentMode: .fit)
+                                                            .frame(width: 45)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: .defaultRadius)
+                                                                    .stroke(Color.goalColor, lineWidth: 2)
+                                                                    .padding(-8)
+                                                            )
+                                                    } else {
+                                                        Image(image)
+                                                            .resizable()
+                                                            .aspectRatio(1.0, contentMode: .fit)
+                                                            .frame(width: 45)
+                                                    }
                                                 }
                                             }
-                                        }
-                                    }.frame(height: 80)
-                                    .buttonStyle(PlainButtonStyle())
+                                        }.frame(width: container.size.width / 1.3, height: 80)
+                                        .buttonStyle(PlainButtonStyle())
 
+                                    }
+
+                                    Spacer()
+                                        .frame(height: 20)
                                 }
-
-                                Spacer()
-                                    .frame(height: 20)
                             }
 
-                        }.frame(width: container.size.width / 1.35, alignment: .center)
-                        Spacer().frame(maxWidth: .infinity)
+                        }.frame(width: container.size.width / 1.2, height: container.size.height - 150, alignment: .center)
+
+                        Spacer()
                     }
+
                     Spacer().frame(maxWidth: .infinity)
                 }
             }

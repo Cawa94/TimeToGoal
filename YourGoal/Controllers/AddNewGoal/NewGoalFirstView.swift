@@ -9,7 +9,7 @@ import SwiftUI
 
 public class NewGoalFirstViewModel: ObservableObject {
 
-    @Published var showQuestionsPage = false
+    @Published var showGoalsPage = false
     @Published var showHabitsPage = false
     @Published var goalButtonPressed = false
     @Published var habitButtonPressed = false
@@ -36,8 +36,8 @@ struct NewGoalFirstView: View {
                     ZStack {
                         NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: GoalType.allGoals, goal: viewModel.newGoal),
                                                                       activeSheet: $activeSheet,
-                                                                      isPresented: $viewModel.showHabitsPage),
-                                       isActive: $viewModel.showQuestionsPage) {
+                                                                      isPresented: $viewModel.showGoalsPage),
+                                       isActive: $viewModel.showGoalsPage) {
                             EmptyView()
                         }.hidden()
 
@@ -72,7 +72,7 @@ struct NewGoalFirstView: View {
                                 )
                                 .scaleEffect(viewModel.goalButtonPressed ? 0.9 : 1.0)
                                 .onTapGesture {
-                                    viewModel.showQuestionsPage = true
+                                    viewModel.showGoalsPage = true
                                 }
                                 .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
                                     withAnimation(.easeInOut(duration: 0.2)) {

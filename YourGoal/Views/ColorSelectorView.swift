@@ -13,7 +13,7 @@ public class ColorSelectorViewModel: ObservableObject {
 
     var colors = ["orangeGoal", "redGoal", "greenGoal",
                   "blueGoal", "purpleGoal", "grayGoal",
-                  "yellowGoal", "brownGoal", "orangeGoal"]
+                  "yellowGoal", "brownGoal", "pinkGoal"]
 
     init(goal: Binding<Goal>) {
         self._currentGoal = goal

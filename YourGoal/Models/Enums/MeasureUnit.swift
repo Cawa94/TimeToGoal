@@ -42,7 +42,7 @@ enum MeasureUnit: String {
         case .time:
             return "volte"
         case .singleTime:
-            return "volte " // <- it's important to leave empty space in the end here
+            return "singole volte"
         }
     }
 
@@ -60,7 +60,7 @@ enum MeasureUnit: String {
             return .hour
         case "volte":
             return .time
-        case "volte ":
+        case "singole volte":
             return .singleTime
         default:
             return .session

@@ -21,7 +21,7 @@ public class ContentViewModel: ObservableObject {
     @Published var goals: [Goal] = []
     @Published var journal: [JournalPage] = []
     @Published var profile: Profile?
-    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : .newGoal
+    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
     @Published var currentPage: Page = .home
@@ -86,6 +86,7 @@ struct ContentView: View {
                         HomeView(viewModel: .init(goals: viewModel.goals,
                                                   journal: viewModel.journal,
                                                   profile: viewModel.profile,
+                                                  activeSheet: $viewModel.activeSheet,
                                                   refreshAllGoals: $viewModel.refreshAllGoals))
                         
                     case .statistics:
@@ -122,7 +123,7 @@ struct ContentView: View {
                                    iconName: "statistics")
                         TabBarIcon(viewRouter: viewRouter, assignedPage: .profile,
                                    width: geometry.size.width/5, height: geometry.size.height/28,
-                                   iconName: "profile")
+                                   iconName: "\(viewModel.profile?.image ?? "man_0")_border")
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height/8)
                     .background(Color.defaultBackground.shadow(radius: 1))

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "woman_8_border.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

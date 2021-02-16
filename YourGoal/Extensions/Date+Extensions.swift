@@ -72,6 +72,11 @@ extension Date {
         return differenceDate
     }
 
+    var isEvening: Bool {
+        let hours = Calendar.current.component(.hour, from: self)
+        return hours >= 17
+    }
+
 }
 
 extension Date: Strideable {

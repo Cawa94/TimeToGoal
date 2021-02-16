@@ -16,19 +16,22 @@ public class HomeViewModel: ObservableObject {
     @Published var showingTrackGoal = false
     @Published var showMotivation = false
 
+    @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
     
     let quote = FamousQuote.getOneRandom()
     let headerText: String
 
-    init(goals: [Goal], journal: [JournalPage], profile: Profile?, refreshAllGoals: Binding<Bool>) {
+    init(goals: [Goal], journal: [JournalPage], profile: Profile?,
+         activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
         self.goals = goals.filter { !$0.isArchived }
         self.journal = journal
         self.profile = profile
+        self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
         
         if let name = profile?.name, !name.isEmpty {
-            headerText = "Ciao \(name)"
+            headerText = "\(Date().isEvening ? "Buonasera" : "Buongiorno") \(name)"
         } else {
             headerText = goals.isEmpty ? "Benvenuto" : "Bentornato"
         }
@@ -59,7 +62,7 @@ struct HomeView: View {
                                 .applyFont(.navigationLargeTitle)
 
                             Spacer()
-
+/*
                             ZStack {
                                 Circle()
                                     .foregroundColor(.defaultBackground)
@@ -69,7 +72,7 @@ struct HomeView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 40, height: 40)
-                            }.padding(.trailing, 15)
+                            }.padding(.trailing, 15)*/
                         }
 
                         Text("I tuoi obiettivi")
@@ -87,6 +90,7 @@ struct HomeView: View {
                                         GoalSmallProgressView(viewModel: .init(goal: viewModel.goals[index],
                                                                                showingTrackGoal: $viewModel.showingTrackGoal,
                                                                                indexSelectedGoal: $viewModel.indexSelectedGoal,
+                                                                               activeSheet: $viewModel.activeSheet,
                                                                                goalIndex: index))
                                             .frame(height: container.size.height/4)
                                         Spacer()
@@ -102,6 +106,7 @@ struct HomeView: View {
                             GoalSmallProgressView(viewModel: .init(goal: nil,
                                                                    showingTrackGoal: $viewModel.showingTrackGoal,
                                                                    indexSelectedGoal: $viewModel.indexSelectedGoal,
+                                                                   activeSheet: $viewModel.activeSheet,
                                                                    goalIndex: nil))
                                 .padding([.leading, .trailing], 5)
                                 .frame(width: UIScreen.main.bounds.width, height: container.size.height/4)

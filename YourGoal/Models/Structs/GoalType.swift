@@ -165,25 +165,25 @@ struct GoalType: Identifiable {
               categoryId: [5], measureUnits: [.time], timeSentence: "Traccerò le mie spese"),
 
         .init(id: 42, label: "videocall_family", name: "Chiama la tua famiglia", image: "learn_3",
-              categoryId: [2], measureUnits: [.time], timeSentence: "Chiamerò la mia famiglia"),
+              categoryId: [2], measureUnits: [.time, .singleTime], timeSentence: "Chiamerò la mia famiglia"),
 
         .init(id: 43, label: "avoid_eat_out", name: "Evita di mangiare fuori", image: "cook_1",
-              categoryId: [4], measureUnits: [.time], timeSentence: "Eviterò di mangiare fuori"),
+              categoryId: [4], measureUnits: [.time, .singleTime], timeSentence: "Eviterò di mangiare fuori"),
 
         .init(id: 44, label: "plan_meals", name: "Pianifica il diario alimentare", image: "plan_2",
               categoryId: [3, 5], measureUnits: [.singleTime], timeSentence: "Pianificherò il diario alimentare"),
 
         .init(id: 45, label: "write_friends", name: "Scrivi agli amici", image: "love_3",
-              categoryId: [2], measureUnits: [.time], timeSentence: "Scriverò agli amici"),
+              categoryId: [2], measureUnits: [.time, .singleTime], timeSentence: "Scriverò agli amici"),
 
         .init(id: 46, label: "show_love", name: "Sii affettuoso", image: "love_2",
-              categoryId: [2], measureUnits: [.time], timeSentence: "Sarò affettuoso"),
+              categoryId: [2], measureUnits: [.time, .singleTime], timeSentence: "Sarò affettuoso"),
 
         .init(id: 47, label: "take_trash", name: "Butta la spazzatura", image: "home_7",
               categoryId: [5], measureUnits: [.singleTime], timeSentence: "Butterò la spazzatura"),
 
         .init(id: 48, label: "laundry", name: "Fai la lavatrice", image: "home_6",
-              categoryId: [5], measureUnits: [.time], timeSentence: "Farò la lavatrice"),
+              categoryId: [5], measureUnits: [.time, .singleTime], timeSentence: "Farò la lavatrice"),
 
         .init(id: 49, label: "clean_house", name: "Pulisci la casa", image: "home_3",
               categoryId: [5], measureUnits: [.singleTime], timeSentence: "Pulirò la casa"),

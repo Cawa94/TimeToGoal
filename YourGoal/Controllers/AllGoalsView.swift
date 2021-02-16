@@ -110,7 +110,7 @@ struct AllGoalsView: View {
         offsets.forEach{ offset in
             if let goal = section.goals?[offset] {
                 viewModel.goals.removeAll(where: { $0.id == goal.id })
-                viewModel.goals = viewModel.goals
+                viewModel.refreshAllGoals = true
                 PersistenceController.shared.container.viewContext.delete(goal)
                 PersistenceController.shared.saveContext()
             }

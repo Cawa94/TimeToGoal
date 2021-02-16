@@ -17,16 +17,18 @@ public class GoalSmallProgressViewModel: ObservableObject {
 
     @Published var goal: Goal?
 
+    @Binding var activeSheet: ActiveSheet?
     @Binding var showingTrackGoal: Bool
     @Binding var indexSelectedGoal: Int
 
     var goalIndex: Int?
 
     init(goal: Goal?, showingTrackGoal: Binding<Bool>,
-         indexSelectedGoal: Binding<Int>, goalIndex: Int?) {
+         indexSelectedGoal: Binding<Int>, activeSheet: Binding<ActiveSheet?>, goalIndex: Int?) {
         self.goal = goal
         self._showingTrackGoal = showingTrackGoal
         self._indexSelectedGoal = indexSelectedGoal
+        self._activeSheet = activeSheet
         self.goalIndex = goalIndex
     }
 
@@ -102,10 +104,16 @@ struct GoalSmallProgressView: View {
                             .rotationEffect(Angle(degrees: 270))
                             .padding(-(CGFloat.circleWidth/2))
 
-                        Image(viewModel.goal?.goalIcon ?? "")
-                            .resizable()
-                            .aspectRatio(1.0, contentMode: .fit)
-                            .frame(width: 50)
+                        VStack(spacing: 3) {
+                            Image(viewModel.goal?.goalIcon ?? "project_0")
+                                .resizable()
+                                .aspectRatio(1.0, contentMode: .fit)
+                                .frame(width: 50)
+                            Text("- 10 giorni")
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.grayText)
+                                .applyFont(.small)
+                        }
 
                     }.padding([.leading], 15)
                     .frame(width: container.size.width/100 * 40)
@@ -118,6 +126,7 @@ struct GoalSmallProgressView: View {
                                 .applyFont(.title)
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(.grayText)
+                            newGoalButton
                         } else if viewModel.isCompleted {
                             Text(viewModel.goal?.name ?? "")
                                 .multilineTextAlignment(.center)
@@ -191,6 +200,26 @@ struct GoalSmallProgressView: View {
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+            }.accentColor(viewModel.goal?.goalColor)
+        }
+    }
+
+    var newGoalButton: some View {
+        HStack {
+            Button(action: {
+                viewModel.activeSheet = .newGoal
+            }) {
+                Text("global_add")
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .applyFont(.smallButton)
+                    .multilineTextAlignment(.center)
+                    .padding([.top, .bottom], 10)
+                    .padding([.leading, .trailing], 40)
+                    .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
+                                               startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .cornerRadius(.defaultRadius)
+                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }.accentColor(viewModel.goal?.goalColor)
         }
     }

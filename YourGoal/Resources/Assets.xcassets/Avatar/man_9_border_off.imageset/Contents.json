@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "man_9_border_off.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
