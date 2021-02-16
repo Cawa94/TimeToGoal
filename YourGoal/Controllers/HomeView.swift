@@ -75,10 +75,14 @@ struct HomeView: View {
                             }.padding(.trailing, 15)*/
                         }
 
-                        Text("I tuoi obiettivi")
-                            .foregroundColor(.grayLight)
-                            .multilineTextAlignment(.center)
-                            .applyFont(.title3)
+                        HStack {
+                            Text("I tuoi obiettivi")
+                                .foregroundColor(.grayLight)
+                                .multilineTextAlignment(.leading)
+                                .padding([.leading], 15)
+                                .applyFont(.title3)
+                            Spacer()
+                        }
 
                         Spacer()
                             .frame(height: 0)
@@ -92,13 +96,13 @@ struct HomeView: View {
                                                                                indexSelectedGoal: $viewModel.indexSelectedGoal,
                                                                                activeSheet: $viewModel.activeSheet,
                                                                                goalIndex: index))
-                                            .frame(height: container.size.height/4)
+                                            .frame(height: container.size.height/3.2)
                                         Spacer()
                                     }
                                 }
                                 .padding([.leading, .trailing], 5)
                             }
-                            .frame(width: UIScreen.main.bounds.width, height: container.size.height/4 + 35)
+                            .frame(width: UIScreen.main.bounds.width, height: container.size.height/3.2 + 45)
                             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                             .colorScheme(.light)
@@ -109,19 +113,23 @@ struct HomeView: View {
                                                                    activeSheet: $viewModel.activeSheet,
                                                                    goalIndex: nil))
                                 .padding([.leading, .trailing], 5)
-                                .frame(width: UIScreen.main.bounds.width, height: container.size.height/4)
+                                .frame(width: UIScreen.main.bounds.width, height: container.size.height/3.2)
+                        }
+
+                        Spacer()
+                            .frame(height: 5)
+
+                        HStack {
+                            Text("La tua settimana")
+                                .foregroundColor(.grayLight)
+                                .multilineTextAlignment(.leading)
+                                .padding([.leading], 15)
+                                .applyFont(.title3)
+                            Spacer()
                         }
 
                         Spacer()
                             .frame(height: 15)
-
-                        Text("La tua settimana")
-                            .foregroundColor(.grayLight)
-                            .multilineTextAlignment(.center)
-                            .applyFont(.title3)
-
-                        Spacer()
-                            .frame(height: 20)
 
                         StatisticsSmallView(viewModel: .init(goals: viewModel.goals,
                                                              journal: viewModel.journal))

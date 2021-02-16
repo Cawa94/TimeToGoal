@@ -76,79 +76,106 @@ struct GoalSmallProgressView: View {
             ZStack {
                 Color.defaultBackground
 
-                HStack {
-                    ZStack {
-                        Circle().strokeBorder(AngularGradient(
+                VStack(spacing: 0) {
+                    if viewModel.goal == nil {
+                        Text("Nuovo obiettivo")
+                            .applyFont(.title)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.grayText)
+                    } else if viewModel.isCompleted {
+                        Text(viewModel.goal?.name ?? "")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(viewModel.goal?.goalColor)
+                            .applyFont(.title)
+                    } else {
+                        Text(viewModel.goal?.name ?? "")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(viewModel.goal?.goalColor)
+                            .lineLimit(2)
+                            .applyFont(.title)
+                    }
+
+                    HStack {
+                        ZStack {
+                            Circle().strokeBorder(AngularGradient(
+                                                    gradient: Gradient(colors: viewModel.goal?.circleGradientColors ?? Color.rainbowClosed),
+                                                    center: .center,
+                                                    startAngle: .degrees(0),
+                                                    endAngle: .degrees(360)),
+                                                  lineWidth: .circleWidth)
+                                .shadow(color: .black, radius: 5, x: 5, y: 5)
+                                .opacity(0.3)
+                                .padding(-(CGFloat.circleWidth/2))
+
+                            Circle()
+                                .strokeBorder(AngularGradient(
                                                 gradient: Gradient(colors: viewModel.goal?.circleGradientColors ?? Color.rainbowClosed),
                                                 center: .center,
                                                 startAngle: .degrees(0),
                                                 endAngle: .degrees(360)),
                                               lineWidth: .circleWidth)
-                            .shadow(color: .black, radius: 5, x: 5, y: 5)
-                            .opacity(0.3)
-                            .padding(-(CGFloat.circleWidth/2))
+                                .mask(Circle()
+                                        .trim(from: 0.0,
+                                              to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
+                                        .stroke(style: StrokeStyle(lineWidth: .circleWidth, lineCap: .round, lineJoin: .round))
+                                        .padding(CGFloat.circleWidth/2)
+                                )
+                                .rotationEffect(Angle(degrees: 270))
+                                .padding(-(CGFloat.circleWidth/2))
 
-                        Circle()
-                            .strokeBorder(AngularGradient(
-                                            gradient: Gradient(colors: viewModel.goal?.circleGradientColors ?? Color.rainbowClosed),
-                                            center: .center,
-                                            startAngle: .degrees(0),
-                                            endAngle: .degrees(360)),
-                                          lineWidth: .circleWidth)
-                            .mask(Circle()
-                                    .trim(from: 0.0,
-                                          to: CGFloat(min(Double((viewModel.goal?.timeCompleted ?? 0) / (viewModel.goal?.timeRequired ?? 1)), 1.0)))
-                                    .stroke(style: StrokeStyle(lineWidth: .circleWidth, lineCap: .round, lineJoin: .round))
-                                    .padding(CGFloat.circleWidth/2)
-                            )
-                            .rotationEffect(Angle(degrees: 270))
-                            .padding(-(CGFloat.circleWidth/2))
+                            VStack(spacing: 3) {
+                                Image(viewModel.goal?.goalIcon ?? "project_0")
+                                    .resizable()
+                                    .aspectRatio(1.0, contentMode: .fit)
+                                    .frame(width: 50)
+                                if let goal = viewModel.goal {
+                                    Text(String(format: "add_goal_days_required".localized(),
+                                                "\(goal.daysRequired)"))
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(.grayText)
+                                        .applyFont(.small)
+                                }
+                            }
 
-                        VStack(spacing: 3) {
-                            Image(viewModel.goal?.goalIcon ?? "project_0")
-                                .resizable()
-                                .aspectRatio(1.0, contentMode: .fit)
-                                .frame(width: 50)
-                            Text("- 10 giorni")
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.grayText)
-                                .applyFont(.small)
-                        }
+                        }.padding([.leading], 15)
+                        .frame(width: container.size.width/100 * 40)
 
-                    }.padding([.leading], 15)
-                    .frame(width: container.size.width/100 * 40)
+                        Spacer()
 
-                    Spacer()
+                        VStack {
+                            if let goal = viewModel.goal {
+                                if viewModel.isCompleted {
+                                    Text(goal.whyDefinition ?? "")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.center)
+                                        .applyFont(.small)
+                                        .padding([.leading, .trailing], 5)
+                                    if goal.goalType.isHabit {
+                                        renewGoalButton
+                                    } else {
+                                        archiveGoalButton
+                                    }
+                                } else {
+                                    Text(goal.whyDefinition ?? "")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.gray)
+                                        .multilineTextAlignment(.center)
+                                        .applyFont(.small)
+                                        .lineSpacing(-20)
+                                        .padding([.leading, .trailing], 5)
+                                    trackTimeButton
+                                }
+                            } else {
+                                Text("main_add_new_goal")
+                                    .applyFont(.title)
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.grayText)
+                                newGoalButton
+                            }
+                        }.frame(width: container.size.width/100 * 55)
 
-                    VStack {
-                        if viewModel.goal == nil {
-                            Text("main_add_new_goal")
-                                .applyFont(.title)
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.grayText)
-                            newGoalButton
-                        } else if viewModel.isCompleted {
-                            Text(viewModel.goal?.name ?? "")
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.grayText)
-                                .applyFont(.title2)
-                            Text("main_goal_completed")
-                                .foregroundColor(.grayText)
-                                .applyFont(.title)
-                        } else {
-                            Text(viewModel.goal?.name ?? "")
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.grayText)
-                                .lineLimit(2)
-                                .applyFont(.title2)
-                            Text(viewModel.completionDate)
-                                .fontWeight(.bold)
-                                .foregroundColor(viewModel.goal?.goalColor)
-                                .applyFont(.title)
-                            trackTimeButton
-                        }
-                    }.frame(width: container.size.width/100 * 55)
-
+                    }
                 }
             }
         }
@@ -185,6 +212,29 @@ struct GoalSmallProgressView: View {
             Button(action: {
                 viewModel.goal?.isArchived = true
                 PersistenceController.shared.saveContext()
+            }) {
+                HStack {
+                    Spacer()
+                    Text("global_archive")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .applyFont(.smallButton)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+                .padding([.top, .bottom], 10)
+                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
+                                           startPoint: .topLeading, endPoint: .bottomTrailing))
+                .cornerRadius(.defaultRadius)
+                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+            }.accentColor(viewModel.goal?.goalColor)
+        }
+    }
+
+    var renewGoalButton: some View {
+        HStack {
+            Button(action: {
+                // TO DO
             }) {
                 HStack {
                     Spacer()

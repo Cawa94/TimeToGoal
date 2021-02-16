@@ -6,7 +6,7 @@
   
 */
 
-"add_goal_days_required" = "%@ days";
+"add_goal_days_required" = "-%@ days";
 "add_goal_extimated_date_title" = "You'll reach your goal by the:";
 "add_goal_hours_for_day_title" = "How many hours you'll work each day?";
 "add_goal_hours_required_title" = "How many hours will it take?";
