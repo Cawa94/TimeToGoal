@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "046-badge.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

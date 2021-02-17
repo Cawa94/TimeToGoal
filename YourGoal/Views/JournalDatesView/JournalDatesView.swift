@@ -21,8 +21,8 @@ public class JournalDatesViewModel: ObservableObject {
         
         var journalDates: [JournalDate] = []
         let dayDurationInSeconds: TimeInterval = 60*60*24
-        let firstDate = (journal.first?.date ?? Date()).adding(days: -6) // to start 5 days early than first page
-        let finalDate = Date().adding(days: 6)
+        let firstDate = (journal.sorted(by: { $0.dayId < $1.dayId }).first?.date ?? Date()).adding(days: -4) // to start 4 days early than first page
+        let finalDate = Date().adding(days: 4)
         for date in stride(from: firstDate, to: finalDate, by: dayDurationInSeconds) {
             var emoji: String?
             if let page = journal.filter({ $0.dayId == date.customId }).first, let mood = page.mood {
@@ -48,8 +48,8 @@ struct JournalDatesView: View {
                 LazyHStack(spacing: 7.5) {
                     ForEach(viewModel.dates) { journalDate in
                         JournalDateView(journalDate: journalDate, isSelected: journalDate.id == viewModel.selectedDay.customId)
-                            .frame(width: journalDate.id == viewModel.selectedDay.customId ? 75 : 60,
-                                   height: journalDate.id == viewModel.selectedDay.customId ? 75 : 60)
+                            .frame(width: journalDate.id == viewModel.selectedDay.customId ? 80 : 60,
+                                   height: journalDate.id == viewModel.selectedDay.customId ? 80 : 60)
                             .background(journalDate.id == viewModel.selectedDay.customId
                                             ? LinearGradient(gradient: Gradient(colors: Color.rainbow),
                                                              startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -74,7 +74,7 @@ struct JournalDatesView: View {
                 }
             }
         }
-        .frame(height: 75, alignment: .center)
+        .frame(height: 80, alignment: .center)
         .cornerRadius(.defaultRadius)
         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
     }

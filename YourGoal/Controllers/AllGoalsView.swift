@@ -27,14 +27,16 @@ public class AllGoalsViewModel: ObservableObject {
                                              goals: goals.filter { $0.isArchived })]
         }
     }
+    @Published var challenges: [Challenge]
 
     @Binding var refreshAllGoals: Bool
     @Binding var activeSheet: ActiveSheet?
 
     var listSections: [ListSection]
 
-    init(goals: [Goal], refreshAllGoals: Binding<Bool>, activeSheet: Binding<ActiveSheet?>) {
+    init(goals: [Goal], challenges: [Challenge], refreshAllGoals: Binding<Bool>, activeSheet: Binding<ActiveSheet?>) {
         self.goals = goals
+        self.challenges = challenges
         self._refreshAllGoals = refreshAllGoals
         self._activeSheet = activeSheet
 
@@ -78,9 +80,10 @@ struct AllGoalsView: View {
                     List {
                         ForEach(viewModel.listSections) { section in
                             if let goals = section.goals, !goals.isEmpty {
-                                Section(header: Text(section.title).applyFont(.title3)) {
+                                Section(header: Text(section.title).applyFont(.title4)) {
                                     ForEach(goals) { goal in
-                                        GoalListRow(viewModel: .init(goal: goal))
+                                        GoalListRow(viewModel: .init(goal: goal,
+                                                                     challenges: viewModel.challenges))
                                     }
                                     .onDelete(perform: { offsets in
                                         self.removeItems(at: offsets, from: section)
@@ -102,7 +105,7 @@ struct AllGoalsView: View {
         }) {
             Text("global_add")
                 .foregroundColor(.grayText)
-                .applyFont(.title3)
+                .applyFont(.title4)
         }
     }
 

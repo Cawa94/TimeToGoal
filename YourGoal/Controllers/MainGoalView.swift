@@ -19,7 +19,6 @@ public class MainGoalViewModel: ObservableObject {
     @Published var goal: Goal {
         didSet {
             progressViewModel.goal = goal
-            calendarViewModel.goal = goal
             showFireworks = goal.isCompleted
             #if RELEASE
                 if goal?.isCompleted ?? false {
@@ -30,9 +29,8 @@ public class MainGoalViewModel: ObservableObject {
             #endif
         }
     }
-    @Published var allGoals: [Goal] // Used to show allGoals page
+    @Published var challenges: [Challenge]
     @Published var progressViewModel: GoalProgressViewModel
-    @Published var calendarViewModel: HorizontalCalendarViewModel
     @Published var showingTrackGoal = false
     @Published var showFireworks = false
     @Published var showingEditGoal = false
@@ -43,13 +41,12 @@ public class MainGoalViewModel: ObservableObject {
     @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
 
-    init(goal: Goal, allGoals: [Goal]? = nil, activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
+    init(goal: Goal, challenges: [Challenge], activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
         self.goal = goal
-        self.allGoals = allGoals ?? []
+        self.challenges = challenges
         self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
         self.progressViewModel = GoalProgressViewModel(goal: goal)
-        self.calendarViewModel = HorizontalCalendarViewModel(goal: goal)
     }
 
 }
@@ -86,7 +83,7 @@ struct MainGoalView: View {
                         .foregroundColor(.textForegroundColor)
                         .padding([.leading, .trailing], 10)
                         .lineLimit(smallQuotesLines)
-                        .applyFont(.title3)
+                        .applyFont(.title4)
 
                     Spacer()
 
@@ -220,7 +217,9 @@ struct MainGoalView: View {
                 )
             }.accentColor(viewModel.goal.goalColor)
             .fullScreenCover(isPresented: $viewModel.showingEditGoal, content: {
-                NewGoalTimeView(viewModel: .init(goal: viewModel.goal, isNew: false),
+                NewGoalTimeView(viewModel: .init(goal: viewModel.goal,
+                                                 challenges: viewModel.challenges,
+                                                 isNew: false),
                                 activeSheet: .constant(nil),
                                 isPresented: $viewModel.showingEditGoal)
             })

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "026-trophy.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

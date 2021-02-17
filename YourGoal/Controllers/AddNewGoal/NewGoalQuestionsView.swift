@@ -10,6 +10,8 @@ import SwiftUI
 public class NewGoalQuestionsViewModel: ObservableObject {
 
     @Published var goal: Goal
+    @Published var challenges: [Challenge]
+
     @Published var isColorsVisible = false
     @Published var isIconsVisible = false
     @Published var showSmartExplanation = false
@@ -17,8 +19,9 @@ public class NewGoalQuestionsViewModel: ObservableObject {
 
     var isNewGoal: Bool
 
-    init(goal: Goal, isNewGoal: Bool) {
+    init(goal: Goal, challenges: [Challenge], isNewGoal: Bool) {
         self.goal = goal
+        self.challenges = challenges
         self.isNewGoal = isNewGoal
     }
 
@@ -299,6 +302,34 @@ struct NewGoalQuestionsView: View {
                 viewModel.goal.timesHasBeenTracked = 0
                 viewModel.goal.createdAt = Date()
                 FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
+
+                if viewModel.goal.goalType.isHabit {
+                    if !viewModel.challenges.contains(where: { $0.id == 0 }) {
+                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                        challenge.id = 0
+                        challenge.progressMade = 1
+                    }
+                    if let challenge = viewModel.challenges.first(where: { $0.id == 11 }) {
+                        challenge.progressMade += 1
+                    } else {
+                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                        challenge.id = 11
+                        challenge.progressMade = 1
+                    }
+                } else {
+                    if !viewModel.challenges.contains(where: { $0.id == 1 }) {
+                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                        challenge.id = 1
+                        challenge.progressMade = 1
+                    }
+                    if let challenge = viewModel.challenges.first(where: { $0.id == 12 }) {
+                        challenge.progressMade += 1
+                    } else {
+                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                        challenge.id = 11
+                        challenge.progressMade = 1
+                    }
+                }
             }
             PersistenceController.shared.saveContext()
             self.activeSheet = nil

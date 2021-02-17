@@ -10,9 +10,12 @@ import SwiftUI
 public class ProfileViewModel: ObservableObject {
 
     @Published var profile: Profile
+    @Published var challenges: [Challenge]
     @Published var isProfileImagesVisible = false
 
-    init(profile: Profile?) {
+    @Binding var refreshchallenges: Bool
+
+    init(profile: Profile?, challenges: [Challenge], refreshchallenges: Binding<Bool>) {
         if let profile = profile {
             self.profile = profile
         } else {
@@ -21,6 +24,8 @@ public class ProfileViewModel: ObservableObject {
             PersistenceController.shared.saveContext()
             self.profile = profile
         }
+        self.challenges = challenges
+        self._refreshchallenges = refreshchallenges
     }
 
 }
@@ -34,6 +39,12 @@ struct ProfileView: View {
         let nameBinding = Binding<String>(get: {
             (viewModel.profile.name ?? "Nome")
         }, set: {
+            if $0 != "Nome", !(viewModel.challenges.contains(where: { $0.id == 6 })) {
+                let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                challenge.id = 6
+                challenge.progressMade = 1
+                viewModel.refreshchallenges = true
+            }
             viewModel.profile.name = $0
             PersistenceController.shared.saveContext()
         })
@@ -41,25 +52,23 @@ struct ProfileView: View {
         BackgroundView(color: .defaultBackground) {
             ZStack {
                 VStack {
-                    Spacer()
-                        .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
-
-                    HStack {
-                        Text("Profilo")
-                            .foregroundColor(.grayText)
-                            .multilineTextAlignment(.leading)
-                            .padding([.leading], 15)
-                            .applyFont(.navigationLargeTitle)
-
-                        Spacer()
-                    }
-
-                    Spacer()
-                        .frame(height: 10)
-
                     ScrollView(.vertical, showsIndicators: false) {
+                        
                         Spacer()
-                            .frame(height: 10)
+                            .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
+
+                        HStack {
+                            Text("Profilo")
+                                .foregroundColor(.grayText)
+                                .multilineTextAlignment(.leading)
+                                .padding([.leading], 15)
+                                .applyFont(.navigationLargeTitle)
+
+                            Spacer()
+                        }
+
+                        Spacer()
+                            .frame(height: 20)
 
                         ZStack {
                             Circle()
@@ -84,13 +93,15 @@ struct ProfileView: View {
                             .background(Color.defaultBackground)
                             .cornerRadius(.defaultRadius)
                             .disableAutocorrection(true)
-                            .applyFont(.body)
+                            .padding([.bottom], -15)
+                            .applyFont(.title)
+
                         Divider()
                             .frame(width: 200)
 
                         Spacer()
-                            .frame(height: 20)
-                        
+                            .frame(height: 40)
+
                         challengesView
                             .padding([.leading, .trailing], 15)
                     }
@@ -105,18 +116,40 @@ struct ProfileView: View {
     }
 
     var challengesView: some View {
-        VStack() {
-            ForEach(0..<8) { _ in
-                HStack {
-                    ForEach(0..<2) { _ in
-                        Image("badge")
-                            .resizable()
-                            .scaledToFit()
-                            .padding()
+        VStack(spacing: 30) {
+            ForEach(0..<ProfileChallenge.allValues.count/2) { row in
+                HStack(spacing: 15) {
+                    ForEach(0..<2) { column in
+                        let index = getIndexFor(row: row, column: column)
+                        let challenge = ProfileChallenge.allValues[index]
+                        ChallengeView(viewModel: .init(challenges: viewModel.challenges,
+                                                       challenge: challenge))
+                            .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                        .stroke(Color.grayBorder, lineWidth: 1))
+                            .background(Color.defaultBackground
+                                            .cornerRadius(.defaultRadius)
+                                            .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
+                            )
                     }
                 }
             }
+            
+            Spacer()
         }
+    }
+
+    func getIndexFor(row: Int, column: Int) -> Int {
+        /*
+            0  1
+          0 0  1
+          1 2  3
+          2 4  5
+          3 6  7
+          4 8  9
+          5 10 11
+          6 12 13
+        */
+        row + row + column
     }
 
 }

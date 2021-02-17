@@ -10,12 +10,14 @@ import SwiftUI
 public class NewGoalTimeViewModel: ObservableObject {
 
     @Published var goal: Goal
+    @Published var challenges: [Challenge]
     @Published var showErrorAlert = false
 
     var isNewGoal: Bool
 
-    init(goal: Goal, isNew: Bool) {
+    init(goal: Goal, challenges: [Challenge], isNew: Bool) {
         self.isNewGoal = isNew
+        self.challenges = challenges
         self.goal = goal
     }
 
@@ -118,6 +120,7 @@ struct NewGoalTimeView: View {
         BackgroundView(color: .defaultBackground, barTintColor: viewModel.goal.goalUIColor) {
             ZStack {
                 NavigationLink(destination: NewGoalQuestionsView(viewModel: .init(goal: viewModel.goal,
+                                                                                  challenges: viewModel.challenges,
                                                                                   isNewGoal: viewModel.isNewGoal),
                                                                  activeSheet: $activeSheet,
                                                                  isPresented: $showQuestionsView),

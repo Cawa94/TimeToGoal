@@ -103,7 +103,7 @@ struct StatisticsSmallView: View {
                                         .frame(height: barHeight)
                                         .opacity(0.3)
                                 }
-                            }
+                            }.clipShape(RoundedRectangle(cornerRadius: .defaultRadius))
                         }
                         Text(viewModel.dayShortFor(date: date))
                             .multilineTextAlignment(.center)

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "036-location.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

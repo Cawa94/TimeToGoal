@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "028-medal.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

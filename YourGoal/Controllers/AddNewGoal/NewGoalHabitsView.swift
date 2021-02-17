@@ -11,11 +11,13 @@ public class NewGoalHabitsViewModel: ObservableObject {
 
     @Published var habits: [GoalType]
     @Published var newGoal: Goal
+    @Published var challenges: [Challenge]
     @Published var pressedRow: [Bool] = []
 
-    init(habits: [GoalType], goal: Goal) {
+    init(habits: [GoalType], goal: Goal, challenges: [Challenge]) {
         self.habits = habits
         self.newGoal = goal
+        self.challenges = challenges
         
         for _ in habits {
             pressedRow.append(false)
@@ -60,7 +62,9 @@ struct NewGoalHabitsView: View {
                                 .listRowBackground(Color.defaultBackground)
 
                             if selectedIndex != nil {
-                                NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.newGoal, isNew: true),
+                                NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.newGoal,
+                                                                                             challenges: viewModel.challenges,
+                                                                                             isNew: true),
                                                                             activeSheet: $activeSheet,
                                                                             isPresented: $showTimeView),
                                                isActive: $showTimeView) {
@@ -74,6 +78,7 @@ struct NewGoalHabitsView: View {
                                         .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
                                         .onTapGesture {
                                             viewModel.newGoal.goalType = viewModel.habits[index]
+                                            viewModel.newGoal.name = viewModel.habits[index].name
                                             selectedIndex = index
                                             showTimeView = true
                                         }

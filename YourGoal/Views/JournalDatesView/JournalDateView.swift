@@ -14,16 +14,12 @@ struct JournalDateView: View {
 
     @ViewBuilder
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
 
             Text(journalDate.month)
                 .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
-                .fontWeight(isSelected ? .semibold : .regular )
-                .applyFont(.small)
-
-            Spacer()
-                .frame(height: 5)
+                .applyFont(isSelected ? .title2 : .small)
 
             if let emoji = journalDate.emoji {
                 HStack {
@@ -47,6 +43,7 @@ struct JournalDateView: View {
             Spacer()
         }
         .cornerRadius(.defaultRadius)
+        .frame(height: 80)
     }
 }
 /*

@@ -10,10 +10,12 @@ import SwiftUI
 public class NewGoalHabitsCategoriesViewModel: ObservableObject {
 
     @Published var newGoal: Goal
+    @Published var challenges: [Challenge]
     @Published var pressedRow: [Bool] = []
 
-    init(goal: Goal) {
+    init(goal: Goal, challenges: [Challenge]) {
         newGoal = goal
+        self.challenges = challenges
 
         for _ in HabitCategory.allValues {
             pressedRow.append(false)
@@ -61,7 +63,9 @@ struct NewGoalHabitsCategoriesView: View {
 
                             if let index = selectedIndex {
                                 if index == 6 {
-                                    NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.newGoal, isNew: true),
+                                    NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.newGoal,
+                                                                                                 challenges: viewModel.challenges,
+                                                                                                 isNew: true),
                                                                                 activeSheet: $activeSheet,
                                                                                 isPresented: $showTimeView),
                                                    isActive: $showTimeView) {
@@ -69,7 +73,8 @@ struct NewGoalHabitsCategoriesView: View {
                                     }
                                 } else {
                                     NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: HabitCategory.allValues[index].habits,
-                                                                                                   goal: viewModel.newGoal),
+                                                                                                   goal: viewModel.newGoal,
+                                                                                                   challenges: viewModel.challenges),
                                                                                   activeSheet: $activeSheet,
                                                                                   isPresented: $showHabitsView),
                                                    isActive: $showHabitsView) {

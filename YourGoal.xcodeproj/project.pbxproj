@@ -32,9 +32,11 @@
 		DA32B6D525B7558700CAA773 /* Vollkorn-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */; };
 		DA32B6D625B7558700CAA773 /* Vollkorn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6D425B7558700CAA773 /* Vollkorn.ttf */; };
 		DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA352844254ADD6500FF19FB /* AppDelegate.swift */; };
-		DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A340B25275E3400597C73 /* DayCellView.swift */; };
 		DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A3413252761A600597C73 /* MainGoalView.swift */; };
 		DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA47599A25470DE800A1ADA6 /* DeviceFix.swift */; };
+		DA4FC5B825DD1E0A00B65C26 /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4FC5B725DD1E0A00B65C26 /* ChallengeView.swift */; };
+		DA4FC5C025DD223800B65C26 /* Challenge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4FC5BF25DD223800B65C26 /* Challenge+CoreDataClass.swift */; };
+		DA4FC5D425DD239800B65C26 /* ProfileChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4FC5D325DD239800B65C26 /* ProfileChallenge.swift */; };
 		DA50012625BB129700853B50 /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50012525BB129700853B50 /* IconSelectorView.swift */; };
 		DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */; };
 		DA582A59252518CA00A37693 /* NewGoalQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */; };
@@ -71,7 +73,6 @@
 		DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC84252232130087F9C8 /* YourGoal.xcdatamodeld */; };
 		DAB7DC91252232140087F9C8 /* YourGoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC90252232140087F9C8 /* YourGoalTests.swift */; };
 		DAB7DC9C252232140087F9C8 /* YourGoalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC9B252232140087F9C8 /* YourGoalUITests.swift */; };
-		DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */; };
 		DABE55352567C70F00923919 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE55342567C70F00923919 /* TutorialView.swift */; };
 		DABE553A2567C84200923919 /* ExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABE55392567C84200923919 /* ExplanationView.swift */; };
 		DAC0854D25C413CD00FE4DBC /* GoalSmallProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */; };
@@ -139,9 +140,11 @@
 		DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vollkorn-Italic.ttf"; sourceTree = "<group>"; };
 		DA32B6D425B7558700CAA773 /* Vollkorn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vollkorn.ttf; sourceTree = "<group>"; };
 		DA352844254ADD6500FF19FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DA3A340B25275E3400597C73 /* DayCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCellView.swift; sourceTree = "<group>"; };
 		DA3A3413252761A600597C73 /* MainGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGoalView.swift; sourceTree = "<group>"; };
 		DA47599A25470DE800A1ADA6 /* DeviceFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFix.swift; sourceTree = "<group>"; };
+		DA4FC5B725DD1E0A00B65C26 /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
+		DA4FC5BF25DD223800B65C26 /* Challenge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Challenge+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Challenge+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		DA4FC5D325DD239800B65C26 /* ProfileChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChallenge.swift; sourceTree = "<group>"; };
 		DA50012525BB129700853B50 /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManualTimeView.swift; sourceTree = "<group>"; };
 		DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalQuestionsView.swift; sourceTree = "<group>"; };
@@ -184,7 +187,6 @@
 		DAB7DC97252232140087F9C8 /* YourGoalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YourGoalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB7DC9B252232140087F9C8 /* YourGoalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourGoalUITests.swift; sourceTree = "<group>"; };
 		DAB7DC9D252232140087F9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCalendarView.swift; sourceTree = "<group>"; };
 		DABE55342567C70F00923919 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		DABE55392567C84200923919 /* ExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationView.swift; sourceTree = "<group>"; };
 		DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSmallProgressView.swift; sourceTree = "<group>"; };
@@ -293,15 +295,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		DA3A340A25275E2000597C73 /* CalendarView */ = {
-			isa = PBXGroup;
-			children = (
-				DA3A340B25275E3400597C73 /* DayCellView.swift */,
-				DAB7DCAF252234300087F9C8 /* HorizontalCalendarView.swift */,
-			);
-			path = CalendarView;
-			sourceTree = "<group>";
-		};
 		DA47599625470DB200A1ADA6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +303,26 @@
 				DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		DA4FC5B225DD1D5A00B65C26 /* Selectors */ = {
+			isa = PBXGroup;
+			children = (
+				DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */,
+				DA50012525BB129700853B50 /* IconSelectorView.swift */,
+				DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */,
+			);
+			path = Selectors;
+			sourceTree = "<group>";
+		};
+		DA4FC5B325DD1D8900B65C26 /* Rows */ = {
+			isa = PBXGroup;
+			children = (
+				DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */,
+				DA86E0A425C8AD62000C44F7 /* HabitCategoryRow.swift */,
+				DA06DF7725C8B49500BACD0C /* HabitTypeRow.swift */,
+			);
+			path = Rows;
 			sourceTree = "<group>";
 		};
 		DA582A5D252518DA00A37693 /* Controllers */ = {
@@ -343,8 +356,8 @@
 				DA86E08425C87B4F000C44F7 /* NewGoalFirstView.swift */,
 				DA86E08F25C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift */,
 				DA06DF6F25C8B35E00BACD0C /* NewGoalHabitsView.swift */,
-				DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */,
 				DAEFAA9C2576424400B06680 /* NewGoalTimeView.swift */,
+				DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */,
 			);
 			path = AddNewGoal;
 			sourceTree = "<group>";
@@ -352,23 +365,19 @@
 		DA6EE2242524BF6E0064D2CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DA3A340A25275E2000597C73 /* CalendarView */,
 				DAAA9031257A58D900525B14 /* JournalDatesView */,
+				DA4FC5B325DD1D8900B65C26 /* Rows */,
+				DA4FC5B225DD1D5A00B65C26 /* Selectors */,
 				DAF1A8DE25517F1200EBEAA6 /* TypeSelectorView */,
 				DAF1A8C12551768900EBEAA6 /* TrackTimeView */,
 				DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */,
-				DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */,
+				DA4FC5B725DD1E0A00B65C26 /* ChallengeView.swift */,
 				DAD1993925D3DC0300EDEC6F /* DayTogglerView.swift */,
 				DABE55392567C84200923919 /* ExplanationView.swift */,
-				DA90BB61257FC4FD00B9D4D1 /* GoalListRow.swift */,
 				DA6EE2252524BF9F0064D2CE /* GoalProgressView.swift */,
 				DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */,
-				DA86E0A425C8AD62000C44F7 /* HabitCategoryRow.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
-				DA06DF7725C8B49500BACD0C /* HabitTypeRow.swift */,
-				DA50012525BB129700853B50 /* IconSelectorView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
-				DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */,
 				DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */,
 				DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */,
 			);
@@ -378,6 +387,7 @@
 		DA790BF5257B918400598B96 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				DA4FC5BF25DD223800B65C26 /* Challenge+CoreDataClass.swift */,
 				DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */,
 				DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */,
 				DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */,
@@ -421,6 +431,7 @@
 				DAF1A8B9255173F800EBEAA6 /* GoalType.swift */,
 				DA86E09725C8ABDE000C44F7 /* HabitCategory.swift */,
 				DAE321FF257B9E41007DB9F0 /* JournalDate.swift */,
+				DA4FC5D325DD239800B65C26 /* ProfileChallenge.swift */,
 				DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */,
 				DA9D02F12552AEE200DBFB2E /* WeekDay.swift */,
 			);
@@ -725,7 +736,6 @@
 				DAF1A8DA25517D6900EBEAA6 /* TypeSelectorView.swift in Sources */,
 				DAA2024F25C16D3E00501E00 /* TabBarIcon.swift in Sources */,
 				DAAA903B257A593400525B14 /* JournalDateView.swift in Sources */,
-				DA3A340C25275E3400597C73 /* DayCellView.swift in Sources */,
 				DA90BB50257FC38600B9D4D1 /* AllGoalsView.swift in Sources */,
 				DA90BB62257FC4FD00B9D4D1 /* GoalListRow.swift in Sources */,
 				DA9DA465257519320006B706 /* MotivationalView.swift in Sources */,
@@ -743,6 +753,7 @@
 				DA9D02FA2552F7BF00DBFB2E /* TimeSelectorType.swift in Sources */,
 				DA582A59252518CA00A37693 /* NewGoalQuestionsView.swift in Sources */,
 				DAF1A8E025517F3300EBEAA6 /* TypeCellView.swift in Sources */,
+				DA4FC5C025DD223800B65C26 /* Challenge+CoreDataClass.swift in Sources */,
 				DAB7DC83252232130087F9C8 /* Persistence.swift in Sources */,
 				DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */,
 				DAD1995125D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift in Sources */,
@@ -753,9 +764,9 @@
 				DAC0854D25C413CD00FE4DBC /* GoalSmallProgressView.swift in Sources */,
 				DAF5EDC02534985A00B351FE /* HoursSelectorView.swift in Sources */,
 				DA125FC925C1B8F900DA577E /* HomeView.swift in Sources */,
-				DAB7DCB0252234300087F9C8 /* HorizontalCalendarView.swift in Sources */,
 				DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */,
 				DA59593725C5A9A60074CE85 /* ProfileImageSelectorView.swift in Sources */,
+				DA4FC5D425DD239800B65C26 /* ProfileChallenge.swift in Sources */,
 				DA86E09025C8A530000C44F7 /* NewGoalHabitsCategoriesView.swift in Sources */,
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */,
@@ -786,6 +797,7 @@
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
 				DAC0855525C4220300FE4DBC /* StatisticsSmallView.swift in Sources */,
+				DA4FC5B825DD1E0A00B65C26 /* ChallengeView.swift in Sources */,
 				DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */,
 				DA8A53AA25C46A5300D030A9 /* View+Extensions.swift in Sources */,
 				DA084EDF25753DCE00CAC158 /* FamousQuote.swift in Sources */,

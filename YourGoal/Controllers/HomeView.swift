@@ -80,7 +80,7 @@ struct HomeView: View {
                                 .foregroundColor(.grayLight)
                                 .multilineTextAlignment(.leading)
                                 .padding([.leading], 15)
-                                .applyFont(.title3)
+                                .applyFont(.title4)
                             Spacer()
                         }
 
@@ -124,7 +124,7 @@ struct HomeView: View {
                                 .foregroundColor(.grayLight)
                                 .multilineTextAlignment(.leading)
                                 .padding([.leading], 15)
-                                .applyFont(.title3)
+                                .applyFont(.title4)
                             Spacer()
                         }
 

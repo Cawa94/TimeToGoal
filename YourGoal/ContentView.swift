@@ -21,9 +21,12 @@ public class ContentViewModel: ObservableObject {
     @Published var goals: [Goal] = []
     @Published var journal: [JournalPage] = []
     @Published var profile: Profile?
+    @Published var challenges: [Challenge] = []
+
     @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
+    @Published var refreshChallenges = false
     @Published var currentPage: Page = .home
     @Published var goalsButtonPressed = false // to animate button on tap
 
@@ -45,6 +48,9 @@ struct ContentView: View {
     var profileRequest: FetchRequest<Profile>
     var profile: FetchedResults<Profile> { profileRequest.wrappedValue }
 
+    var challengesRequest: FetchRequest<Challenge>
+    var challenges: FetchedResults<Challenge> { challengesRequest.wrappedValue }
+
     init() {
         self.goalsRequest = FetchRequest(
             entity: Goal.entity(),
@@ -64,6 +70,11 @@ struct ContentView: View {
             entity: Profile.entity(),
             sortDescriptors: []
         )
+
+        self.challengesRequest = FetchRequest(
+            entity: Challenge.entity(),
+            sortDescriptors: []
+        )
     }
 
     @ViewBuilder
@@ -74,13 +85,18 @@ struct ContentView: View {
                     switch viewRouter.currentPage {
                     case .goals:
                         AllGoalsView(viewModel: .init(goals: viewModel.goals,
+                                                      challenges: viewModel.challenges,
                                                       refreshAllGoals: $viewModel.refreshAllGoals,
                                                       activeSheet: $viewModel.activeSheet))
+                            .onDisappear(perform: {
+                                viewModel.refreshChallenges = true
+                            })
                     case .journal:
                         JournalView(viewModel: .init(journal: viewModel.journal,
-                                                     refreshJournal: $viewModel.refreshJournal))
+                                                     challenges: viewModel.challenges))
                             .onDisappear(perform: {
                                 viewModel.refreshJournal = true
+                                viewModel.refreshChallenges = true
                             })
                     case .home:
                         HomeView(viewModel: .init(goals: viewModel.goals,
@@ -88,11 +104,15 @@ struct ContentView: View {
                                                   profile: viewModel.profile,
                                                   activeSheet: $viewModel.activeSheet,
                                                   refreshAllGoals: $viewModel.refreshAllGoals))
-                        
+                            .onDisappear(perform: {
+                                viewModel.refreshChallenges = true
+                            })
                     case .statistics:
                         StatisticsView(viewModel: .init())
                     case .profile:
-                        ProfileView(viewModel: .init(profile: viewModel.profile))
+                        ProfileView(viewModel: .init(profile: viewModel.profile,
+                                                     challenges: viewModel.challenges,
+                                                     refreshchallenges: $viewModel.refreshChallenges))
                     }
                     HStack(spacing: 35) {
                         TabBarIcon(viewRouter: viewRouter, assignedPage: .goals,
@@ -134,6 +154,7 @@ struct ContentView: View {
         .onAppear(perform: {
             viewModel.refreshAllGoals = true
             viewModel.refreshJournal = true
+            viewModel.refreshChallenges = true
             viewModel.profile = profile.map { $0 }.first
         })
         .onReceive(viewModel.$refreshAllGoals, perform: {
@@ -148,6 +169,12 @@ struct ContentView: View {
                 viewModel.refreshJournal = false
             }
         })
+        .onReceive(viewModel.$refreshChallenges, perform: {
+            if $0 {
+                viewModel.challenges = challenges.map { $0 }
+                viewModel.refreshChallenges = false
+            }
+        })
         .fullScreenCover(item: $viewModel.activeSheet, onDismiss: {
             UserDefaults.standard.showTutorial = false
             for invalidGoal in goals.filter({ !$0.isValid }) {
@@ -155,12 +182,13 @@ struct ContentView: View {
             }
             PersistenceController.shared.saveContext()
             viewModel.refreshAllGoals = true
+            viewModel.refreshChallenges = true
         }, content: { item in
             switch item {
             case .tutorial:
                 TutorialView(viewModel: .init(tutorialType: .whatAreSmartGoals), isPresented: .constant(false), activeSheet: $viewModel.activeSheet)
             case .newGoal:
-                NewGoalFirstView(viewModel: .init(), activeSheet: $viewModel.activeSheet)
+                NewGoalFirstView(viewModel: .init(challenges: viewModel.challenges), activeSheet: $viewModel.activeSheet)
             }
         })
     }

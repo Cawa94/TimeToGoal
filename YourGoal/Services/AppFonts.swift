@@ -10,6 +10,7 @@ struct AppFonts: ViewModifier {
         case title
         case title2
         case title3
+        case title4
         case button
         case smallButton
         case body
@@ -53,6 +54,8 @@ struct AppFonts: ViewModifier {
         case .title2:
             return 22
         case .title3:
+            return 20
+        case .title4:
             return 18
         case .button:
             return 25

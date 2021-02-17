@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "006-ribbon.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

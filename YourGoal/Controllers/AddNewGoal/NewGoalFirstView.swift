@@ -13,9 +13,13 @@ public class NewGoalFirstViewModel: ObservableObject {
     @Published var showHabitsPage = false
     @Published var goalButtonPressed = false
     @Published var habitButtonPressed = false
-    @Published var newGoal: Goal
 
-    init() {
+    @Published var newGoal: Goal
+    @Published var challenges: [Challenge]
+
+    init(challenges: [Challenge]) {
+        self.challenges = challenges
+
         newGoal = Goal(context: PersistenceController.shared.container.viewContext)
         newGoal.color = "orangeGoal"
     }
@@ -34,14 +38,17 @@ struct NewGoalFirstView: View {
             BackgroundView(color: .defaultBackground) {
                 GeometryReader { container in
                     ZStack {
-                        NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: GoalType.allGoals, goal: viewModel.newGoal),
+                        NavigationLink(destination: NewGoalHabitsView(viewModel: .init(habits: GoalType.allGoals,
+                                                                                       goal: viewModel.newGoal,
+                                                                                       challenges: viewModel.challenges),
                                                                       activeSheet: $activeSheet,
                                                                       isPresented: $viewModel.showGoalsPage),
                                        isActive: $viewModel.showGoalsPage) {
                             EmptyView()
                         }.hidden()
 
-                        NavigationLink(destination: NewGoalHabitsCategoriesView(viewModel: .init(goal: viewModel.newGoal),
+                        NavigationLink(destination: NewGoalHabitsCategoriesView(viewModel: .init(goal: viewModel.newGoal,
+                                                                                                 challenges: viewModel.challenges),
                                                                                 activeSheet: $activeSheet,
                                                                                 isPresented: $viewModel.showHabitsPage),
                                        isActive: $viewModel.showHabitsPage) {
@@ -66,6 +73,8 @@ struct NewGoalFirstView: View {
 
                             goalSection
                                 .frame(width: container.size.width - 80, height: container.size.height/4)
+                                .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .stroke(Color.grayBorder, lineWidth: 1))
                                 .background(Color.defaultBackground
                                                 .cornerRadius(.defaultRadius)
                                                 .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
@@ -85,6 +94,8 @@ struct NewGoalFirstView: View {
 
                             habitSection
                                 .frame(width: container.size.width - 80, height: container.size.height/4)
+                                .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .stroke(Color.grayBorder, lineWidth: 1))
                                 .background(Color.defaultBackground
                                                 .cornerRadius(.defaultRadius)
                                                 .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
@@ -122,7 +133,7 @@ struct NewGoalFirstView: View {
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
                 .lineLimit(2)
-                .applyFont(.title3)
+                .applyFont(.title4)
         }
     }
 
@@ -140,7 +151,7 @@ struct NewGoalFirstView: View {
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
                 .lineLimit(2)
-                .applyFont(.title3)
+                .applyFont(.title4)
         }
     }
 
@@ -155,23 +166,10 @@ struct NewGoalFirstView: View {
         }
     }
 }
-
+/*
 struct NewGoalFirstView_Previews: PreviewProvider {
     static var previews: some View {
         NewGoalFirstView(viewModel: .init(), activeSheet: .constant(nil))
     }
 }
-
-struct DeferView<Content: View>: View {
-
-    let content: () -> Content
-
-    init(@ViewBuilder _ content: @escaping () -> Content) {
-        self.content = content
-    }
-
-    var body: some View {
-        content()
-    }
-
-}
+*/

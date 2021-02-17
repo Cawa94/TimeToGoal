@@ -11,6 +11,7 @@ import Combine
 public class JournalViewModel: ObservableObject {
 
     @Published var journal: [JournalPage]
+    @Published var challenges: [Challenge]
     @Published var selectedDay = Date() {
         didSet {
             if let page = journal.filter({ $0.dayId == selectedDay.customId }).first {
@@ -25,13 +26,11 @@ public class JournalViewModel: ObservableObject {
     @Published var notes: String = "journal_notes_question".localized()
     @Published var mood: String?
 
-    @Binding var refreshJournal: Bool
-
     let placeholderString = "journal_notes_question".localized()
 
-    init(journal: [JournalPage], refreshJournal: Binding<Bool>) {
+    init(journal: [JournalPage], challenges: [Challenge]) {
         self.journal = journal
-        self._refreshJournal = refreshJournal
+        self.challenges = challenges
     }
 
 }
@@ -147,6 +146,35 @@ struct JournalView: View {
             newPage.mood = viewModel.mood
             newPage.date = viewModel.selectedDay
             self.viewModel.journal.append(newPage)
+        }
+
+        var journal: [JournalPage] = []
+        for page in viewModel.journal {
+            if !(journal.contains(where: { $0.dayId == page.dayId })) {
+                journal.append(page)
+            }
+        }
+        let totalPagesCount = journal.count
+        if let challenge = viewModel.challenges.first(where: { $0.id == 13 }) {
+            challenge.progressMade = Double(totalPagesCount)
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 13
+            challenge.progressMade = Double(totalPagesCount)
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 14 }) {
+            challenge.progressMade = Double(totalPagesCount)
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 14
+            challenge.progressMade = Double(totalPagesCount)
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 15 }) {
+            challenge.progressMade = Double(totalPagesCount)
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 15
+            challenge.progressMade = Double(totalPagesCount)
         }
         PersistenceController.shared.saveContext()
     }

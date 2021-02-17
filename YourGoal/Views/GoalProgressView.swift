@@ -127,7 +127,7 @@ struct GoalProgressView: View {
                                 viewModel.timeRemaining, viewModel.goal?.customTimeMeasure ?? ""))
                         .fontWeight(.semibold)
                         .foregroundColor(.grayText)
-                        .applyFont(.title3)
+                        .applyFont(.title4)
                 }
             }
         }
