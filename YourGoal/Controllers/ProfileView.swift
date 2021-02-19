@@ -55,7 +55,7 @@ struct ProfileView: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         
                         Spacer()
-                            .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
+                            .frame(height: DeviceFix.isRoundedScreen ? 50 : 20)
 
                         HStack {
                             Text("Profilo")
@@ -108,7 +108,8 @@ struct ProfileView: View {
                 }
 
                 if viewModel.isProfileImagesVisible {
-                    ProfileImageSelectorView(viewModel: .init(profile: viewModel.profile),
+                    ProfileImageSelectorView(viewModel: .init(profile: viewModel.profile,
+                                                              refreshchallenges: $viewModel.refreshchallenges),
                                              isPresented: $viewModel.isProfileImagesVisible)
                 }
             }

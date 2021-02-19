@@ -26,12 +26,10 @@ struct HabitCategoryRow: View {
         HStack(spacing: 15) {
             VStack(alignment: .leading) {
                 Text(viewModel.category.name)
-                    .fontWeight(.semibold)
                     .applyFont(.largeTitle)
                     .foregroundColor(.grayText)
 
                 Text(viewModel.category.subtitle)
-                    .fontWeight(.semibold)
                     .applyFont(.title2)
                     .foregroundColor(.grayText)
             }

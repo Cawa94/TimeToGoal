@@ -28,6 +28,7 @@ public class AllGoalsViewModel: ObservableObject {
         }
     }
     @Published var challenges: [Challenge]
+    @Published var pressedRow: [Int: [Bool]] = [:]
 
     @Binding var refreshAllGoals: Bool
     @Binding var activeSheet: ActiveSheet?
@@ -46,6 +47,19 @@ public class AllGoalsViewModel: ObservableObject {
                              ListSection(id: 1,
                                          title: "all_goals_archived".localized(),
                                          goals: goals.filter { $0.isArchived })]
+
+        var arrayNotArchived: [Bool] = []
+        for _ in goals.filter({ !$0.isArchived }) {
+            arrayNotArchived.append(false)
+        }
+
+        var arrayArchived: [Bool] = []
+        for _ in goals.filter({ $0.isArchived }) {
+            arrayArchived.append(false)
+        }
+
+        pressedRow[0] = arrayNotArchived
+        pressedRow[1] = arrayArchived
     }
 
 }
@@ -53,6 +67,9 @@ public class AllGoalsViewModel: ObservableObject {
 struct AllGoalsView: View {
 
     @ObservedObject var viewModel: AllGoalsViewModel
+
+    @State var showMainGoalView = false
+    @State var selectedIndex: Int?
 
     @ViewBuilder
     var body: some View {
@@ -76,23 +93,41 @@ struct AllGoalsView: View {
                     }
 
                     Spacer()
-                    
+
+                    if let selectedIndex = selectedIndex {
+                        NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goals[selectedIndex],
+                                                                                  goals: $viewModel.goals,
+                                                                                  challenges: viewModel.challenges,
+                                                                                  isPresented: $showMainGoalView, activeSheet: $viewModel.activeSheet,
+                                                                                  refreshAllGoals: $viewModel.refreshAllGoals)),
+                                       isActive: $showMainGoalView) {
+                            EmptyView()
+                        }
+                    }
+
                     List {
-                        ForEach(viewModel.listSections) { section in
-                            if let goals = section.goals, !goals.isEmpty {
-                                Section(header: Text(section.title).applyFont(.title4)) {
-                                    ForEach(goals) { goal in
-                                        GoalListRow(viewModel: .init(goal: goal,
+                        ForEach(0..<viewModel.listSections.count, id: \.self) { sectionIndex in
+                            if let goals = viewModel.listSections[sectionIndex].goals, !goals.isEmpty {
+                                Section(header: Text(viewModel.listSections[sectionIndex].title).applyFont(.title4)) {
+                                    ForEach(0..<goals.count, id: \.self) { index in
+                                        GoalListRow(viewModel: .init(goal: goals[index],
                                                                      challenges: viewModel.challenges))
+                                            .scaleEffect((viewModel.pressedRow[sectionIndex]?[index] ?? false) ? 0.9 : 1.0)
+                                            .onTapGesture {
+                                                selectedIndex = index
+                                                showMainGoalView = true
+                                            }
+                                            .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                                                withAnimation(.easeInOut(duration: 0.2)) {
+                                                    viewModel.pressedRow[sectionIndex]?[index] = pressing
+                                                }
+                                            }, perform: {})
                                     }
-                                    .onDelete(perform: { offsets in
-                                        self.removeItems(at: offsets, from: section)
-                                    })
                                 }
                             }
                         }
                     }.listStyle(GroupedListStyle())
-                    
+
                 }.navigationBarHidden(true)
                 .navigationBarTitle("")
             }

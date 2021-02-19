@@ -24,7 +24,7 @@ struct GoalListRow: View {
     @ObservedObject var viewModel: GoalListRowModel
 
     var body: some View {
-        if !viewModel.goal.isArchived {
+        /*if !viewModel.goal.isArchived {
             NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goal,
                                                                       challenges: viewModel.challenges,
                                                                       activeSheet: .constant(nil),
@@ -32,10 +32,10 @@ struct GoalListRow: View {
                 rowContent
             }
             .listRowBackground(Color.defaultBackground)
-        } else {
+        } else {*/
             rowContent
                 .listRowBackground(Color.defaultBackground)
-        }
+        //}
     }
 
     var rowContent: some View {
@@ -51,7 +51,6 @@ struct GoalListRow: View {
                 .frame(width: 15)
 
             Text(viewModel.goal.name ?? "")
-                .fontWeight(.semibold)
                 .applyFont(.title2)
 
             Spacer()
@@ -64,7 +63,6 @@ struct GoalListRow: View {
 
     var percentageText: some View {
         Text("\(((viewModel.goal.timeCompleted / viewModel.goal.timeRequired) * 100), specifier: "%.0f")%")
-            .fontWeight(.semibold)
             .applyFont(.title2)
     }
 

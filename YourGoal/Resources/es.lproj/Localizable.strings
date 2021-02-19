@@ -107,7 +107,7 @@
 "main_edit_goal" = "Editar objetivo";
 "main_goal_completed" = "Has alcanzado tu objetivo!";
 "main_add_new_goal" = "Agrega un nuevo objetivo\npara comenzar!";
-"main_time_required" = "%@ %@ requeridas";
+"main_time_required" = "-%@ %@";
 "main_my_goal" = "Mi objetivo";
 "main_track_progress" = "Agregar progreso";
 "main_will_reach_goal" = "Alcanzarás tu\nobjetivo el";

@@ -12,6 +12,7 @@ struct TrackManualTimeView: View {
     @Binding var isPresented: Bool
 
     @State var currentGoal: Goal?
+    @State var challenges: [Challenge]
     @State var timeSpent: Int = 0
     @State var decimalSpent: Double = 00
 
@@ -51,7 +52,6 @@ struct TrackManualTimeView: View {
                         ForEach(self.timeOptions, id: \.self) { double in
                             Text("\(double)")
                                 .foregroundColor(.black)
-                                .fontWeight(.semibold)
                                 .applyFont(.title)
                         }
                     }
@@ -61,11 +61,9 @@ struct TrackManualTimeView: View {
                     if currentGoal?.timeTrackingType == .hoursWithMinutes || currentGoal?.timeTrackingType == .double {
                         if currentGoal?.timeTrackingType == .hoursWithMinutes {
                             Text("global_hours")
-                                .fontWeight(.semibold)
                                 .applyFont(.title2)
                         } else {
                             Text(".")
-                                .fontWeight(.semibold)
                                 .applyFont(.title2)
                         }
 
@@ -73,7 +71,6 @@ struct TrackManualTimeView: View {
                             ForEach(self.decimalOptions, id: \.self) { double in
                                 Text(double.stringWithoutDecimals)
                                     .foregroundColor(.black)
-                                    .fontWeight(.semibold)
                                     .applyFont(.title)
                             }
                         }
@@ -82,12 +79,10 @@ struct TrackManualTimeView: View {
 
                         if currentGoal?.timeTrackingType == .hoursWithMinutes {
                             Text("global_minutes")
-                                .fontWeight(.semibold)
                                 .applyFont(.title2)
                         }
                     }
                     Text("\(currentGoal?.customTimeMeasure ?? "")".capitalized)
-                        .fontWeight(.semibold)
                         .applyFont(.title2)
 
                     Spacer()
@@ -107,8 +102,11 @@ struct TrackManualTimeView: View {
                     currentGoal?.editedAt = Date()
                     if currentGoal?.isCompleted ?? false {
                         currentGoal?.completedAt = Date()
+                        currentGoal?.timesHasBeenCompleted += 1
                         FirebaseService.logConversion(.goalCompleted, goal: currentGoal)
+                        updateCompleteGoalChallenge()
                     }
+                    updateTrackingChallenge()
                     PersistenceController.shared.saveContext()
                     self.feedback.notificationOccurred(.success)
                     self.isPresented = false
@@ -117,7 +115,6 @@ struct TrackManualTimeView: View {
                 HStack {
                     Spacer()
                     Text("global_add")
-                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .padding([.top], 15)
@@ -138,6 +135,38 @@ struct TrackManualTimeView: View {
                 .frame(height: 15)
         }.foregroundColor(.black)
         .buttonStyle(PlainButtonStyle())
+    }
+
+    func updateCompleteGoalChallenge() {
+        if !(currentGoal?.goalType.isHabit ?? false) {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 10
+            challenge.progressMade = 1
+        }
+    }
+
+    func updateTrackingChallenge() {
+        if let challenge = challenges.first(where: { $0.id == 7 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 7
+            challenge.progressMade = 1
+        }
+        if let challenge = challenges.first(where: { $0.id == 8 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 8
+            challenge.progressMade = 1
+        }
+        if let challenge = challenges.first(where: { $0.id == 9 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 9
+            challenge.progressMade = 1
+        }
     }
 
     func createGoalProgress(time: Double) -> Progress {

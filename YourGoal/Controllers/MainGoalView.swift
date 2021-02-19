@@ -38,14 +38,19 @@ public class MainGoalViewModel: ObservableObject {
     @Published var showingAllGoals = false
     @Published var showMotivation = false
 
+    @Binding var isPresented: Bool
     @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
+    @Binding var goals: [Goal]
 
-    init(goal: Goal, challenges: [Challenge], activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
+    init(goal: Goal, goals: Binding<[Goal]>, challenges: [Challenge], isPresented: Binding<Bool>,
+         activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
         self.goal = goal
         self.challenges = challenges
+        self._isPresented = isPresented
         self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
+        self._goals = goals
         self.progressViewModel = GoalProgressViewModel(goal: goal)
     }
 
@@ -54,97 +59,160 @@ public class MainGoalViewModel: ObservableObject {
 struct MainGoalView: View {
 
     @ObservedObject var viewModel: MainGoalViewModel
+    @State private var feedback = UINotificationFeedbackGenerator()
 
     @ViewBuilder
     var body: some View {
         BackgroundView(color: .defaultBackground) {
-            ZStack {
-                Color.defaultBackground
+            GeometryReader { container in
+                ZStack {
+                    Color.defaultBackground
 
-                VStack {
-                    Spacer()
-                        .frame(height: 10)
+                    ScrollView {
+                        VStack(spacing: 10) {
+                            Spacer()
+                                .frame(height: 15)
 
-                    Text(viewModel.goal.name ?? "placeholder_first_goal".localized())
-                        .foregroundColor(.textForegroundColor)
-                        .multilineTextAlignment(.center)
-                        .padding([.leading, .trailing], 10)
-                        .lineLimit(2)
-                        .applyFont(.largeTitle)
+                            Text("\"\(viewModel.goal.whyDefinition ?? "placeholder_why_definition".localized())\"")
+                                .italic()
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.textForegroundColor)
+                                .padding([.leading, .trailing], 10)
+                                .applyFont(.title4)
 
-                    if DeviceFix.is65Screen {
-                        Spacer()
-                            .frame(height: 15)
-                    }
+                            Spacer()
+                                .frame(height: 25)
 
-                    Text("\"\(viewModel.goal.whyDefinition ?? "placeholder_why_definition".localized())\"")
-                        .italic()
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.textForegroundColor)
-                        .padding([.leading, .trailing], 10)
-                        .lineLimit(smallQuotesLines)
-                        .applyFont(.title4)
+                            GoalProgressView(viewModel: GoalProgressViewModel(goal: viewModel.goal))
+                                .frame(width: container.size.width - 50, height: container.size.width - 50)
 
-                    Spacer()
+                            Spacer()
+                                .frame(height: 25)
 
-                    GoalProgressView(viewModel: GoalProgressViewModel(goal: viewModel.goal))
-                        .padding([.leading, .trailing], 30)
-
-                    Spacer()
-                        .frame(height: 15)
-
-                    VStack {
-                        if (viewModel.goal.isCompleted) && !(viewModel.goal.isArchived) {
-                            archiveGoalButton
+                            deleteGoalButton
                                 .padding([.leading, .trailing], 15)
-                        } else if !(viewModel.goal.isCompleted) {
-                            trackTimeButton
-                                .padding([.leading, .trailing], 15)
-                            editGoalButton
-                                .padding([.leading, .trailing], 15)
+
+                            Spacer()
+                                .frame(height: 20)
                         }
                     }
 
-                    Spacer()
-                        .frame(height: 35)
-                }
-
-                if viewModel.showingTrackGoal {
-                    TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal, currentGoal: viewModel.goal)
-                        .transition(.move(edge: .bottom))
-                        .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
-                            if !isShowing {
-                                viewModel.goal = viewModel.goal
-                                if !ContentView.showedQuote {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        ContentView.showedQuote = true
-                                        viewModel.showMotivation = true
+                    if viewModel.showingTrackGoal {
+                        TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal,
+                                            currentGoal: viewModel.goal,
+                                            challenges: viewModel.challenges)
+                            .transition(.move(edge: .bottom))
+                            .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
+                                if !isShowing {
+                                    viewModel.goal = viewModel.goal
+                                    if !ContentView.showedQuote {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            ContentView.showedQuote = true
+                                            viewModel.showMotivation = true
+                                        }
                                     }
                                 }
-                            }
-                        })
-                }
+                            })
+                    }
 
-                if viewModel.showFireworks {
-                    FireworksView(isPresented: $viewModel.showFireworks)
-                        .ignoresSafeArea()
-                        .allowsHitTesting(false)
-                }
+                    if viewModel.showFireworks {
+                        FireworksView(isPresented: $viewModel.showFireworks)
+                            .ignoresSafeArea()
+                            .allowsHitTesting(false)
+                    }
 
-                if viewModel.showMotivation {
-                    MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
-                        .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
-                }
-            }.navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
+                    if viewModel.showMotivation {
+                        MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
+                            .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
+                    }
+
+                }.navigationBarTitle(viewModel.goal.name ?? "", displayMode: .inline)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading:
+                    Button(action: {
+                        self.viewModel.isPresented = false
+                    }) {
+                        Image(systemName: "chevron.left")
+                }, trailing: editButton)
+            }
+        }.fullScreenCover(isPresented: $viewModel.showingEditGoal, content: {
+            NavigationView {
+                NewGoalTimeView(viewModel: .init(goal: viewModel.goal,
+                                                 challenges: viewModel.challenges,
+                                                 isNew: false),
+                                activeSheet: $viewModel.activeSheet,
+                                isPresented: $viewModel.showingEditGoal)
+            }
+        })
+    }
+
+    func updateCompleteGoalChallenge() {
+        if !(viewModel.goal.goalType.isHabit) {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 10
+            challenge.progressMade = 1
         }
+    }
+
+    func updateTrackingChallenge() {
+        if let challenge = viewModel.challenges.first(where: { $0.id == 7 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 7
+            challenge.progressMade = 1
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 8 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 8
+            challenge.progressMade = 1
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 9 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 9
+            challenge.progressMade = 1
+        }
+    }
+
+    func createGoalProgress(time: Double) -> Progress {
+        let progress = Progress(context: PersistenceController.shared.container.viewContext)
+        progress.date = Date()
+        progress.hoursOfWork = time
+        progress.dayId = Date().customId
+        return progress
+    }
+
+    func trackGoalWithSingleTime() {
+        viewModel.goal.timesHasBeenTracked += 1
+        let timeTracked = Double(1)
+        FirebaseService.logEvent(.timeTracked)
+        viewModel.goal.timeCompleted += timeTracked
+        let progress = createGoalProgress(time: timeTracked)
+        viewModel.goal.addToProgress(progress)
+        viewModel.goal.editedAt = Date()
+        if viewModel.goal.isCompleted {
+            viewModel.goal.completedAt = Date()
+            viewModel.goal.timesHasBeenCompleted += 1
+            FirebaseService.logConversion(.goalCompleted, goal: viewModel.goal)
+            updateCompleteGoalChallenge()
+        }
+        updateTrackingChallenge()
+        PersistenceController.shared.saveContext()
+        self.feedback.notificationOccurred(.success)
     }
 
     var trackTimeButton: some View {
         HStack {
             Button(action: {
                 withAnimation {
-                    if !(viewModel.goal.isCompleted) {
+                    if MeasureUnit.getFrom(viewModel.goal.customTimeMeasure ?? "") == .singleTime {
+                        trackGoalWithSingleTime()
+                        viewModel.showingTrackGoal = false
+                    } else {
                         FirebaseService.logEvent(.trackTimeButton)
                         viewModel.showingTrackGoal = true
                         viewModel.refreshAllGoals = true
@@ -154,7 +222,6 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("main_track_progress")
-                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .applyFont(.button)
                         .multilineTextAlignment(.center)
@@ -179,14 +246,13 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("global_archive")
-                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .applyFont(.button)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
+                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
                                            startPoint: .topLeading, endPoint: .bottomTrailing))
                 .cornerRadius(.defaultRadius)
                 .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
@@ -194,47 +260,39 @@ struct MainGoalView: View {
         }
     }
 
-    var editGoalButton: some View {
+    var deleteGoalButton: some View {
         HStack {
             Button(action: {
-                FirebaseService.logEvent(.editGoalButton)
-                viewModel.showingEditGoal = true
+                viewModel.goals.removeAll(where: { $0.id == viewModel.goal.id })
+                viewModel.refreshAllGoals = true
+                PersistenceController.shared.container.viewContext.delete(viewModel.goal)
+                PersistenceController.shared.saveContext()
+                self.viewModel.isPresented = false
             }) {
                 HStack {
                     Spacer()
-                    Text("global_details")
-                        .fontWeight(.semibold)
-                        .foregroundColor(viewModel.goal.goalColor)
+                    Text("Cancella")
+                        .foregroundColor(.white)
                         .applyFont(.button)
+                        .multilineTextAlignment(.center)
                     Spacer()
                 }
-                .padding(15.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: .defaultRadius)
-                        .stroke(lineWidth: 2.0)
-                        .foregroundColor(viewModel.goal.goalColor)
-                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-                )
+                .padding([.top, .bottom], 15)
+                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                           startPoint: .topLeading, endPoint: .bottomTrailing))
+                .cornerRadius(.defaultRadius)
+                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }.accentColor(viewModel.goal.goalColor)
-            .fullScreenCover(isPresented: $viewModel.showingEditGoal, content: {
-                NewGoalTimeView(viewModel: .init(goal: viewModel.goal,
-                                                 challenges: viewModel.challenges,
-                                                 isNew: false),
-                                activeSheet: .constant(nil),
-                                isPresented: $viewModel.showingEditGoal)
-            })
         }
     }
 
-    var smallQuotesLines: Int {
-        if DeviceFix.isSmallScreen {
-            return 2
-        } else if DeviceFix.is65Screen {
-            return 4
-        } else if DeviceFix.isRoundedScreen {
-            return 3
-        } else {
-            return 2
+    var editButton: some View {
+        Button(action: {
+            viewModel.showingEditGoal = true
+        }) {
+            Text("Modifica")
+                .foregroundColor(.grayText)
+                .applyFont(.title4)
         }
     }
 

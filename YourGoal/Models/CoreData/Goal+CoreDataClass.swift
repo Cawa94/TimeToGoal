@@ -126,10 +126,7 @@ public class Goal: NSManagedObject {
     }
 
     var isValid: Bool {
-        if !(name?.isEmpty ?? true), timeRequired != 0, atLeastOneDayWorking {
-            return true
-        }
-        return false
+        return createdAt != nil
     }
 
     var atLeastOneDayWorking: Bool {

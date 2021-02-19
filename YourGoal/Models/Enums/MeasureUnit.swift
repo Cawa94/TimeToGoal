@@ -42,7 +42,7 @@ enum MeasureUnit: String {
         case .time:
             return "volte"
         case .singleTime:
-            return "singole volte"
+            return "giorni"
         }
     }
 
@@ -60,7 +60,7 @@ enum MeasureUnit: String {
             return .hour
         case "volte":
             return .time
-        case "singole volte":
+        case "giorni":
             return .singleTime
         default:
             return .session

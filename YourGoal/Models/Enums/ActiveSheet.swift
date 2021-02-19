@@ -9,7 +9,7 @@ import SwiftUI
 
 enum ActiveSheet: Identifiable { // Used to present controllers
 
-    case tutorial, newGoal
+    case tutorial, newGoal, renewGoal
 
     var id: Int {
         hashValue

@@ -9,25 +9,23 @@ import SwiftUI
 
 struct DayTogglerView: View {
 
-    @State var isSelected: Bool = false
+    //@State var isSelected: Bool = false
 
     @Binding var bindingString: String
     @Binding var goal: Goal
 
     var body: some View {
         Button(action: {
-            if !isSelected {
+            if !($bindingString.wrappedValue == "1.0") {
                 $bindingString.wrappedValue = "1.0"
-                isSelected = true
             } else {
                 $bindingString.wrappedValue = "0.0"
-                isSelected = false
             }
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: .defaultRadius)
                     .stroke(Color.grayBorder, lineWidth: 1)
-                if isSelected {
+                if $bindingString.wrappedValue == "1.0" {
                     RoundedRectangle(cornerRadius: .defaultRadius)
                         .fill(LinearGradient(gradient: Gradient(colors: goal.rectGradientColors),
                                              startPoint: .topLeading, endPoint: .bottomTrailing))

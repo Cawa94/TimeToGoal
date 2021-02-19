@@ -22,13 +22,13 @@ public class ContentViewModel: ObservableObject {
     @Published var journal: [JournalPage] = []
     @Published var profile: Profile?
     @Published var challenges: [Challenge] = []
-
     @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
     @Published var refreshChallenges = false
     @Published var currentPage: Page = .home
     @Published var goalsButtonPressed = false // to animate button on tap
+    @Published var goalToRenew: Goal? // to animate button on tap
 
 }
 
@@ -101,9 +101,10 @@ struct ContentView: View {
                     case .home:
                         HomeView(viewModel: .init(goals: viewModel.goals,
                                                   journal: viewModel.journal,
+                                                  challenges: viewModel.challenges,
                                                   profile: viewModel.profile,
                                                   activeSheet: $viewModel.activeSheet,
-                                                  refreshAllGoals: $viewModel.refreshAllGoals))
+                                                  goalToRenew: $viewModel.goalToRenew))
                             .onDisappear(perform: {
                                 viewModel.refreshChallenges = true
                             })
@@ -189,6 +190,16 @@ struct ContentView: View {
                 TutorialView(viewModel: .init(tutorialType: .whatAreSmartGoals), isPresented: .constant(false), activeSheet: $viewModel.activeSheet)
             case .newGoal:
                 NewGoalFirstView(viewModel: .init(challenges: viewModel.challenges), activeSheet: $viewModel.activeSheet)
+            case .renewGoal:
+                if let goal = viewModel.goalToRenew {
+                    NavigationView {
+                        NewGoalTimeView(viewModel: .init(goal: goal,
+                                                         challenges: viewModel.challenges,
+                                                         isRenewingHabit: true),
+                                        activeSheet: $viewModel.activeSheet,
+                                        isPresented: .constant(true))
+                    }
+                }
             }
         })
     }

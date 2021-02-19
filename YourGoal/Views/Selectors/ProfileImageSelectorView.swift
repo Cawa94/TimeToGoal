@@ -11,8 +11,11 @@ public class ProfileImageSelectorViewModel: ObservableObject {
 
     @State var profile: Profile
 
-    init(profile: Profile) {
+    @Binding var refreshchallenges: Bool
+
+    init(profile: Profile, refreshchallenges: Binding<Bool>) {
         self.profile = profile
+        self._refreshchallenges = refreshchallenges
     }
 
     var images: [String] {
@@ -76,6 +79,10 @@ struct ProfileImageSelectorView: View {
                                                 let index = getIndexFor(row: row, column: column)
                                                 let image = viewModel.images[index]
                                                 Button(action: {
+                                                    let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                                                    challenge.id = 5
+                                                    challenge.progressMade = 1
+                                                    viewModel.refreshchallenges = true
                                                     viewModel.profile.image = image
                                                     PersistenceController.shared.saveContext()
                                                     isPresented = false

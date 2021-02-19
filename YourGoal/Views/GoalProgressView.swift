@@ -98,11 +98,9 @@ struct GoalProgressView: View {
                         .foregroundColor(.grayText)
                 } else if viewModel.isCompleted {
                     Text("main_weel_done")
-                        .fontWeight(.semibold)
                         .foregroundColor(.grayText)
                         .applyFont(.largeTitle)
                     Text("main_goal_completed")
-                        .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.grayText)
                         .applyFont(.title2)
@@ -110,7 +108,7 @@ struct GoalProgressView: View {
                     Image(viewModel.goal?.goalIcon ?? "")
                         .resizable()
                         .aspectRatio(1.0, contentMode: .fit)
-                        .frame(width: 58)
+                        .frame(width: 75)
                     Text("main_will_reach_goal")
                         .multilineTextAlignment(.center)
                         .foregroundColor(.grayText)
@@ -122,12 +120,6 @@ struct GoalProgressView: View {
 
                     Spacer()
                         .frame(height: 3)
-
-                    Text(String(format: "main_time_required".localized(),
-                                viewModel.timeRemaining, viewModel.goal?.customTimeMeasure ?? ""))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.grayText)
-                        .applyFont(.title4)
                 }
             }
         }

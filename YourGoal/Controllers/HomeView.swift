@@ -11,25 +11,27 @@ public class HomeViewModel: ObservableObject {
 
     @Published var goals: [Goal]
     @Published var journal: [JournalPage]
+    @Published var challenges: [Challenge]
     @Published var profile: Profile?
     @Published var indexSelectedGoal: Int = 0
     @Published var showingTrackGoal = false
     @Published var showMotivation = false
 
     @Binding var activeSheet: ActiveSheet?
-    @Binding var refreshAllGoals: Bool
+    @Binding var goalToRenew: Goal?
     
     let quote = FamousQuote.getOneRandom()
     let headerText: String
 
-    init(goals: [Goal], journal: [JournalPage], profile: Profile?,
-         activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
+    init(goals: [Goal], journal: [JournalPage], challenges: [Challenge], profile: Profile?,
+         activeSheet: Binding<ActiveSheet?>, goalToRenew: Binding<Goal?>) {
         self.goals = goals.filter { !$0.isArchived }
         self.journal = journal
+        self.challenges = challenges
         self.profile = profile
         self._activeSheet = activeSheet
-        self._refreshAllGoals = refreshAllGoals
-        
+        self._goalToRenew = goalToRenew
+
         if let name = profile?.name, !name.isEmpty {
             headerText = "\(Date().isEvening ? "Buonasera" : "Buongiorno") \(name)"
         } else {
@@ -50,9 +52,9 @@ struct HomeView: View {
                 ZStack {
                     Color.defaultBackground
 
-                    VStack {
+                    VStack(spacing: 0) {
                         Spacer()
-                            .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
+                            .frame(height: DeviceFix.isRoundedScreen ? 50 : 20)
 
                         HStack {
                             Text(viewModel.headerText)
@@ -75,6 +77,9 @@ struct HomeView: View {
                             }.padding(.trailing, 15)*/
                         }
 
+                        Spacer()
+                            .frame(height: 10)
+                        
                         HStack {
                             Text("I tuoi obiettivi")
                                 .foregroundColor(.grayLight)
@@ -84,15 +89,16 @@ struct HomeView: View {
                             Spacer()
                         }
 
-                        Spacer()
-                            .frame(height: 0)
+                        
 
                         if !viewModel.goals.isEmpty {
                             TabView {
                                 ForEach(0..<viewModel.goals.count) { index in
                                     VStack {
                                         GoalSmallProgressView(viewModel: .init(goal: viewModel.goals[index],
+                                                                               challenges: viewModel.challenges,
                                                                                showingTrackGoal: $viewModel.showingTrackGoal,
+                                                                               goalToRenew: $viewModel.goalToRenew,
                                                                                indexSelectedGoal: $viewModel.indexSelectedGoal,
                                                                                activeSheet: $viewModel.activeSheet,
                                                                                goalIndex: index))
@@ -108,7 +114,9 @@ struct HomeView: View {
                             .colorScheme(.light)
                         } else {
                             GoalSmallProgressView(viewModel: .init(goal: nil,
+                                                                   challenges: viewModel.challenges,
                                                                    showingTrackGoal: $viewModel.showingTrackGoal,
+                                                                   goalToRenew: $viewModel.goalToRenew,
                                                                    indexSelectedGoal: $viewModel.indexSelectedGoal,
                                                                    activeSheet: $viewModel.activeSheet,
                                                                    goalIndex: nil))
@@ -141,7 +149,8 @@ struct HomeView: View {
 
                     if viewModel.showingTrackGoal {
                         TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal,
-                                            currentGoal: viewModel.goals[viewModel.indexSelectedGoal])
+                                            currentGoal: viewModel.goals[viewModel.indexSelectedGoal],
+                                            challenges: viewModel.challenges)
                             .transition(.move(edge: .bottom))
                             .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
                                 if !isShowing {

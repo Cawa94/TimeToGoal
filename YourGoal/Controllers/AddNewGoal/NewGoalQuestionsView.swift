@@ -233,7 +233,6 @@ struct NewGoalQuestionsView: View {
                             HStack {
                                 Spacer()
                                 Text(viewModel.isNewGoal ? "global_add" : "global_update")
-                                    .fontWeight(.semibold)
                                     .foregroundColor(.white)
                                     .applyFont(.button)
                                     .multilineTextAlignment(.center)
@@ -295,45 +294,43 @@ struct NewGoalQuestionsView: View {
     }
 
     func storeNewGoal() {
-        if viewModel.goal.isValid {
-            viewModel.goal.editedAt = Date()
-            if viewModel.isNewGoal {
-                viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
-                viewModel.goal.timesHasBeenTracked = 0
-                viewModel.goal.createdAt = Date()
-                FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
+        viewModel.goal.editedAt = Date()
+        if viewModel.isNewGoal {
+            viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
+            viewModel.goal.timesHasBeenTracked = 0
+            viewModel.goal.createdAt = Date()
+            FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
 
-                if viewModel.goal.goalType.isHabit {
-                    if !viewModel.challenges.contains(where: { $0.id == 0 }) {
-                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-                        challenge.id = 0
-                        challenge.progressMade = 1
-                    }
-                    if let challenge = viewModel.challenges.first(where: { $0.id == 11 }) {
-                        challenge.progressMade += 1
-                    } else {
-                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-                        challenge.id = 11
-                        challenge.progressMade = 1
-                    }
+            if viewModel.goal.goalType.isHabit {
+                if !viewModel.challenges.contains(where: { $0.id == 0 }) {
+                    let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                    challenge.id = 0
+                    challenge.progressMade = 1
+                }
+                if let challenge = viewModel.challenges.first(where: { $0.id == 11 }) {
+                    challenge.progressMade += 1
                 } else {
-                    if !viewModel.challenges.contains(where: { $0.id == 1 }) {
-                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-                        challenge.id = 1
-                        challenge.progressMade = 1
-                    }
-                    if let challenge = viewModel.challenges.first(where: { $0.id == 12 }) {
-                        challenge.progressMade += 1
-                    } else {
-                        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-                        challenge.id = 11
-                        challenge.progressMade = 1
-                    }
+                    let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                    challenge.id = 11
+                    challenge.progressMade = 1
+                }
+            } else {
+                if !viewModel.challenges.contains(where: { $0.id == 1 }) {
+                    let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                    challenge.id = 1
+                    challenge.progressMade = 1
+                }
+                if let challenge = viewModel.challenges.first(where: { $0.id == 12 }) {
+                    challenge.progressMade += 1
+                } else {
+                    let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+                    challenge.id = 11
+                    challenge.progressMade = 1
                 }
             }
-            PersistenceController.shared.saveContext()
-            self.activeSheet = nil
         }
+        PersistenceController.shared.saveContext()
+        self.activeSheet = nil
     }
 
 }

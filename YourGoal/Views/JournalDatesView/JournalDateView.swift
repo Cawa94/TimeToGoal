@@ -24,7 +24,6 @@ struct JournalDateView: View {
             if let emoji = journalDate.emoji {
                 HStack {
                     Text(journalDate.number)
-                        .fontWeight(isSelected ? .semibold : .regular )
                         .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
                         .applyFont(isSelected ? .title : .title2)
 
@@ -35,7 +34,6 @@ struct JournalDateView: View {
                 }
             } else {
                 Text(journalDate.number)
-                    .fontWeight(isSelected ? .semibold : .regular )
                     .foregroundColor(isSelected ? .white : Color.black.opacity(0.5))
                     .applyFont(isSelected ? .title : .title2)
             }

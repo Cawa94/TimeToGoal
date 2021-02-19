@@ -51,7 +51,7 @@ struct JournalView: View {
         BackgroundView(color: .defaultBackground) {
             VStack {
                 Spacer()
-                    .frame(height: DeviceFix.isRoundedScreen ? 60 : 20)
+                    .frame(height: DeviceFix.isRoundedScreen ? 50 : 20)
 
                 HStack {
                     Text("global_journal")

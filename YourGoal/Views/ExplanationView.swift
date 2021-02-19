@@ -82,7 +82,6 @@ struct ExplanationView: View {
                     HStack {
                         Spacer()
                         Text(viewModel.pageNumber == 4 ? "tutorial_close_button" : "global_next")
-                            .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
                             .applyFont(.button)
@@ -104,11 +103,9 @@ struct ExplanationView: View {
     var firstPageText: some View {
         Group {
             Text("tutorial_first_step_1") +
-            Text("TimeToGoal")
-                .fontWeight(.semibold) +
+            Text("TimeToGoal") +
             Text("tutorial_first_step_2") +
-            Text("SMART")
-                .fontWeight(.semibold) +
+            Text("SMART") +
             Text("tutorial_first_step_3")
         }
         .multilineTextAlignment(.center)
@@ -120,11 +117,9 @@ struct ExplanationView: View {
     var secondPageText: some View {
         Group {
             Text("tutorial_second_step_1") +
-            Text("tutorial_second_step_2")
-                .fontWeight(.semibold) +
+            Text("tutorial_second_step_2") +
             Text("tutorial_second_step_3") +
-            Text("tutorial_second_step_4")
-                .fontWeight(.semibold) +
+            Text("tutorial_second_step_4") +
             Text("tutorial_second_step_5")
         }
         .multilineTextAlignment(.center)
@@ -135,14 +130,11 @@ struct ExplanationView: View {
 
     var thirdPageText: some View {
         Group {
-            Text("tutorial_third_step_1")
-                .fontWeight(.semibold) +
+            Text("tutorial_third_step_1") +
             Text("tutorial_third_step_2") +
-            Text("tutorial_third_step_3")
-                .fontWeight(.semibold) +
+            Text("tutorial_third_step_3") +
             Text("tutorial_third_step_4") +
-            Text("tutorial_third_step_5")
-                .fontWeight(.semibold) +
+            Text("tutorial_third_step_5") +
             Text("tutorial_third_step_6")
         }
         .multilineTextAlignment(.center)
@@ -153,8 +145,7 @@ struct ExplanationView: View {
 
     var fourthPageText: some View {
         Group {
-            Text("TimeToGoal")
-                .fontWeight(.semibold) +
+            Text("TimeToGoal") +
             Text("tutorial_fourth_step_1")
         }
         .multilineTextAlignment(.center)

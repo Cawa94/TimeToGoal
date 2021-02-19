@@ -16,17 +16,21 @@ private extension CGFloat {
 public class GoalSmallProgressViewModel: ObservableObject {
 
     @Published var goal: Goal?
+    @Published var challenges: [Challenge]
 
     @Binding var activeSheet: ActiveSheet?
     @Binding var showingTrackGoal: Bool
+    @Binding var goalToRenew: Goal?
     @Binding var indexSelectedGoal: Int
 
     var goalIndex: Int?
 
-    init(goal: Goal?, showingTrackGoal: Binding<Bool>,
+    init(goal: Goal?, challenges: [Challenge], showingTrackGoal: Binding<Bool>, goalToRenew: Binding<Goal?>,
          indexSelectedGoal: Binding<Int>, activeSheet: Binding<ActiveSheet?>, goalIndex: Int?) {
         self.goal = goal
+        self.challenges = challenges
         self._showingTrackGoal = showingTrackGoal
+        self._goalToRenew = goalToRenew
         self._indexSelectedGoal = indexSelectedGoal
         self._activeSheet = activeSheet
         self.goalIndex = goalIndex
@@ -69,6 +73,7 @@ public class GoalSmallProgressViewModel: ObservableObject {
 struct GoalSmallProgressView: View {
 
     @ObservedObject var viewModel: GoalSmallProgressViewModel
+    @State private var feedback = UINotificationFeedbackGenerator()
 
     @ViewBuilder
     var body: some View {
@@ -129,13 +134,13 @@ struct GoalSmallProgressView: View {
                                     .aspectRatio(1.0, contentMode: .fit)
                                     .frame(width: 50)
                                 if let goal = viewModel.goal {
-                                    Text(String(format: "add_goal_days_required".localized(),
-                                                "\(goal.daysRequired)"))
+                                    Text(String(format: "main_time_required".localized(),
+                                                viewModel.timeRemaining, goal.customTimeMeasure ?? ""))
                                         .multilineTextAlignment(.center)
                                         .foregroundColor(.grayText)
                                         .applyFont(.small)
                                 }
-                            }
+                            }.padding([.top], -4)
 
                         }.padding([.leading], 15)
                         .frame(width: container.size.width/100 * 40)
@@ -181,11 +186,73 @@ struct GoalSmallProgressView: View {
         }
     }
 
+    func updateCompleteGoalChallenge() {
+        if !(viewModel.goal?.goalType.isHabit ?? false) {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 10
+            challenge.progressMade = 1
+        }
+    }
+
+    func updateTrackingChallenge() {
+        if let challenge = viewModel.challenges.first(where: { $0.id == 7 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 7
+            challenge.progressMade = 1
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 8 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 8
+            challenge.progressMade = 1
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 9 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 9
+            challenge.progressMade = 1
+        }
+    }
+
+    func createGoalProgress(time: Double) -> Progress {
+        let progress = Progress(context: PersistenceController.shared.container.viewContext)
+        progress.date = Date()
+        progress.hoursOfWork = time
+        progress.dayId = Date().customId
+        return progress
+    }
+
+    func trackGoalWithSingleTime() {
+        viewModel.goal?.timesHasBeenTracked += 1
+        let timeTracked = Double(1)
+        FirebaseService.logEvent(.timeTracked)
+        viewModel.goal?.timeCompleted += timeTracked
+        let progress = createGoalProgress(time: timeTracked)
+        viewModel.goal?.addToProgress(progress)
+        viewModel.goal?.editedAt = Date()
+        if viewModel.goal?.isCompleted ?? false {
+            viewModel.goal?.completedAt = Date()
+            viewModel.goal?.timesHasBeenCompleted += 1
+            FirebaseService.logConversion(.goalCompleted, goal: viewModel.goal)
+            updateCompleteGoalChallenge()
+        }
+        updateTrackingChallenge()
+        PersistenceController.shared.saveContext()
+        self.feedback.notificationOccurred(.success)
+    }
+
     var trackTimeButton: some View {
         HStack {
             Button(action: {
                 withAnimation {
-                    if !(viewModel.goal?.isCompleted ?? true) {
+                    if MeasureUnit.getFrom(viewModel.goal?.customTimeMeasure ?? "") == .singleTime {
+                        trackGoalWithSingleTime()
+                        viewModel.showingTrackGoal = false
+                    } else {
                         FirebaseService.logEvent(.trackTimeButton)
                         viewModel.indexSelectedGoal = viewModel.goalIndex ?? 0
                         viewModel.showingTrackGoal = true
@@ -193,7 +260,6 @@ struct GoalSmallProgressView: View {
                 }
             }) {
                 Text("main_track_progress")
-                    .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .applyFont(.smallButton)
                     .multilineTextAlignment(.center)
@@ -213,20 +279,16 @@ struct GoalSmallProgressView: View {
                 viewModel.goal?.isArchived = true
                 PersistenceController.shared.saveContext()
             }) {
-                HStack {
-                    Spacer()
-                    Text("global_archive")
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .applyFont(.smallButton)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                .padding([.top, .bottom], 10)
-                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
-                                           startPoint: .topLeading, endPoint: .bottomTrailing))
-                .cornerRadius(.defaultRadius)
-                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                Text("global_archive")
+                    .foregroundColor(.white)
+                    .applyFont(.smallButton)
+                    .multilineTextAlignment(.center)
+                    .padding([.top, .bottom], 10)
+                    .padding([.leading, .trailing], 15)
+                    .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
+                                               startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .cornerRadius(.defaultRadius)
+                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }.accentColor(viewModel.goal?.goalColor)
         }
     }
@@ -234,22 +296,19 @@ struct GoalSmallProgressView: View {
     var renewGoalButton: some View {
         HStack {
             Button(action: {
-                // TO DO
+                viewModel.goalToRenew = viewModel.goal
+                viewModel.activeSheet = .renewGoal
             }) {
-                HStack {
-                    Spacer()
-                    Text("global_archive")
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .applyFont(.smallButton)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                .padding([.top, .bottom], 10)
-                .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
-                                           startPoint: .topLeading, endPoint: .bottomTrailing))
-                .cornerRadius(.defaultRadius)
-                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                Text("Nuovo traguardo")
+                    .foregroundColor(.white)
+                    .applyFont(.smallButton)
+                    .multilineTextAlignment(.center)
+                    .padding([.top, .bottom], 10)
+                    .padding([.leading, .trailing], 15)
+                    .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
+                                               startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .cornerRadius(.defaultRadius)
+                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
             }.accentColor(viewModel.goal?.goalColor)
         }
     }
@@ -260,7 +319,6 @@ struct GoalSmallProgressView: View {
                 viewModel.activeSheet = .newGoal
             }) {
                 Text("global_add")
-                    .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .applyFont(.smallButton)
                     .multilineTextAlignment(.center)
