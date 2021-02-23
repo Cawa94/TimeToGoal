@@ -243,24 +243,29 @@ public class Goal: NSManagedObject {
     }
 
     func workOn(date: Date) -> Bool {
+        let workOnDay: Bool
         switch date.dayNumber {
         case 1:
-            return workOnSunday
+            workOnDay = workOnSunday
         case 2:
-            return workOnMonday
+            workOnDay = workOnMonday
         case 3:
-            return workOnTuesday
+            workOnDay = workOnTuesday
         case 4:
-            return workOnWednesday
+            workOnDay = workOnWednesday
         case 5:
-            return workOnThursday
+            workOnDay = workOnThursday
         case 6:
-            return workOnFriday
+            workOnDay = workOnFriday
         case 7:
-            return workOnSaturday
+            workOnDay = workOnSaturday
         default:
-            return false
+            workOnDay = false
         }
+        if let createdAt = createdAt {
+            return date >= createdAt && date <= updatedCompletionDate ? workOnDay : false
+        }
+        return date <= updatedCompletionDate ? workOnDay : false
     }
 
     func resetAllInfo() {

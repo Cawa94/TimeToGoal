@@ -109,7 +109,7 @@ struct ContentView: View {
                                 viewModel.refreshChallenges = true
                             })
                     case .statistics:
-                        StatisticsView(viewModel: .init())
+                        StatisticsView(viewModel: .init(goals: viewModel.goals))
                     case .profile:
                         ProfileView(viewModel: .init(profile: viewModel.profile,
                                                      challenges: viewModel.challenges,

@@ -23,6 +23,7 @@
 		DA125FD125C1CAE800DA577E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FD025C1CAE800DA577E /* ProfileView.swift */; };
 		DA125FD625C1CAF200DA577E /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FD525C1CAF200DA577E /* StatisticsView.swift */; };
 		DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */; };
+		DA1C174525E5131E007A121A /* CalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1C174425E5131E007A121A /* CalendarDayView.swift */; };
 		DA1DD67825B72E1700981105 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD67725B72E1700981105 /* GoogleService-Info.plist */; };
 		DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1DD67C25B73C9500981105 /* AppFonts.swift */; };
 		DA1DD69825B746BF00981105 /* Caveat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD69425B746BF00981105 /* Caveat.ttf */; };
@@ -64,6 +65,7 @@
 		DAA2024F25C16D3E00501E00 /* TabBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */; };
 		DAAA9033257A58FD00525B14 /* JournalDatesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA9032257A58FD00525B14 /* JournalDatesView.swift */; };
 		DAAA903B257A593400525B14 /* JournalDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAA903A257A593400525B14 /* JournalDateView.swift */; };
+		DAB2A42825E3F3CC00EED1A6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB2A42725E3F3CC00EED1A6 /* CalendarView.swift */; };
 		DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB4CE71252B556900DAA871 /* Double+Extensions.swift */; };
 		DAB7DC7A252232130087F9C8 /* YourGoalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC79252232130087F9C8 /* YourGoalApp.swift */; };
 		DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB7DC7B252232130087F9C8 /* ContentView.swift */; };
@@ -131,6 +133,7 @@
 		DA125FD025C1CAE800DA577E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DA125FD525C1CAF200DA577E /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		DA1707A12528889A0082FC82 /* TrackHoursSpentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackHoursSpentView.swift; sourceTree = "<group>"; };
+		DA1C174425E5131E007A121A /* CalendarDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayView.swift; sourceTree = "<group>"; };
 		DA1DD67725B72E1700981105 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA1DD67C25B73C9500981105 /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		DA1DD69425B746BF00981105 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 		DAA2024E25C16D3E00501E00 /* TabBarIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIcon.swift; sourceTree = "<group>"; };
 		DAAA9032257A58FD00525B14 /* JournalDatesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDatesView.swift; sourceTree = "<group>"; };
 		DAAA903A257A593400525B14 /* JournalDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDateView.swift; sourceTree = "<group>"; };
+		DAB2A42725E3F3CC00EED1A6 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		DAB4CE71252B556900DAA871 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		DAB7DC76252232130087F9C8 /* YourGoal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourGoal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB7DC79252232130087F9C8 /* YourGoalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourGoalApp.swift; sourceTree = "<group>"; };
@@ -371,6 +375,8 @@
 				DAF1A8DE25517F1200EBEAA6 /* TypeSelectorView */,
 				DAF1A8C12551768900EBEAA6 /* TrackTimeView */,
 				DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */,
+				DA1C174425E5131E007A121A /* CalendarDayView.swift */,
+				DAB2A42725E3F3CC00EED1A6 /* CalendarView.swift */,
 				DA4FC5B725DD1E0A00B65C26 /* ChallengeView.swift */,
 				DAD1993925D3DC0300EDEC6F /* DayTogglerView.swift */,
 				DABE55392567C84200923919 /* ExplanationView.swift */,
@@ -756,6 +762,7 @@
 				DA4FC5C025DD223800B65C26 /* Challenge+CoreDataClass.swift in Sources */,
 				DAB7DC83252232130087F9C8 /* Persistence.swift in Sources */,
 				DA05028C25264263000C4DC0 /* Color+Extensions.swift in Sources */,
+				DA1C174525E5131E007A121A /* CalendarDayView.swift in Sources */,
 				DAD1995125D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift in Sources */,
 				DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */,
 				DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */,
@@ -795,6 +802,7 @@
 				DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */,
 				DA06DF7825C8B49500BACD0C /* HabitTypeRow.swift in Sources */,
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
+				DAB2A42825E3F3CC00EED1A6 /* CalendarView.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
 				DAC0855525C4220300FE4DBC /* StatisticsSmallView.swift in Sources */,
 				DA4FC5B825DD1E0A00B65C26 /* ChallengeView.swift in Sources */,
