@@ -8,9 +8,9 @@
 import SwiftUI
 import StoreKit
 
-private extension Color {
+private extension CGFloat {
 
-    static let textForegroundColor: Color = .black
+    static let circleWidth: CGFloat = 40
 
 }
 
@@ -18,25 +18,17 @@ public class MainGoalViewModel: ObservableObject {
 
     @Published var goal: Goal {
         didSet {
-            progressViewModel.goal = goal
-            showFireworks = goal.isCompleted
-            #if RELEASE
+            /*#if RELEASE
                 if goal?.isCompleted ?? false {
                     if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                         SKStoreReviewController.requestReview(in: scene)
                     }
                 }
-            #endif
+            #endif*/
         }
     }
     @Published var challenges: [Challenge]
-    @Published var progressViewModel: GoalProgressViewModel
-    @Published var showingTrackGoal = false
-    @Published var showFireworks = false
     @Published var showingEditGoal = false
-    @Published var showingJournal = false
-    @Published var showingAllGoals = false
-    @Published var showMotivation = false
 
     @Binding var isPresented: Bool
     @Binding var activeSheet: ActiveSheet?
@@ -51,7 +43,34 @@ public class MainGoalViewModel: ObservableObject {
         self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
         self._goals = goals
-        self.progressViewModel = GoalProgressViewModel(goal: goal)
+    }
+
+    var isCompleted: Bool {
+        return goal.isCompleted
+    }
+
+    var timeRemaining: String {
+        if goal.timeTrackingType == .hoursWithMinutes {
+            let dateRemaining = Double(goal.timeRequired).asHoursAndMinutes
+                .remove(Double(goal.timeCompleted).asHoursAndMinutes)
+            if dateRemaining > Date().zeroHours {
+                return dateRemaining.formattedAsHoursString
+            } else {
+                return "0"
+            }
+        } else {
+            let timeRemaining = Double(goal.timeRequired) - Double(goal.timeCompleted)
+            if timeRemaining > 0 {
+                return goal.timeTrackingType == .double
+                    ? "\(timeRemaining.stringWithTwoDecimals)" : "\(timeRemaining.stringWithoutDecimals)"
+            } else {
+                return "0"
+            }
+        }
+    }
+
+    var completionDate: String {
+        return (goal.updatedCompletionDate).formattedAsDateString
     }
 
 }
@@ -69,62 +88,84 @@ struct MainGoalView: View {
                     Color.defaultBackground
 
                     ScrollView {
-                        VStack(spacing: 10) {
+                        VStack(spacing: 0) {
                             Spacer()
-                                .frame(height: 15)
+                                .frame(height: 35)
 
-                            Text("\"\(viewModel.goal.whyDefinition ?? "placeholder_why_definition".localized())\"")
-                                .italic()
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(.textForegroundColor)
-                                .padding([.leading, .trailing], 10)
-                                .applyFont(.title4)
+                            ZStack {
+                                Circle().strokeBorder(AngularGradient(
+                                                        gradient: Gradient(colors: viewModel.goal.circleGradientColors),
+                                                        center: .center,
+                                                        startAngle: .degrees(0),
+                                                        endAngle: .degrees(360)),
+                                                      lineWidth: .circleWidth)
+                                    .shadow(color: .black, radius: 5, x: 5, y: 5)
+                                    .opacity(0.3)
+                                    .padding(-(CGFloat.circleWidth/2))
+
+                                Circle()
+                                    .strokeBorder(AngularGradient(
+                                                    gradient: Gradient(colors: viewModel.goal.circleGradientColors),
+                                                    center: .center,
+                                                    startAngle: .degrees(0),
+                                                    endAngle: .degrees(360)),
+                                                  lineWidth: .circleWidth)
+                                    .mask(Circle()
+                                            .trim(from: 0.0,
+                                                  to: CGFloat(min(Double((viewModel.goal.timeCompleted) / (viewModel.goal.timeRequired)), 1.0)))
+                                            .stroke(style: StrokeStyle(lineWidth: .circleWidth, lineCap: .round, lineJoin: .round))
+                                            .padding(CGFloat.circleWidth/2)
+                                    )
+                                    .rotationEffect(Angle(degrees: 270))
+                                    .padding(-(CGFloat.circleWidth/2))
+
+                                VStack(spacing: 10) {
+                                    Image(viewModel.goal.goalIcon)
+                                        .resizable()
+                                        .aspectRatio(1.0, contentMode: .fit)
+                                        .frame(width: 70)
+
+                                    Text(String(format: "main_time_required".localized(),
+                                                viewModel.timeRemaining, viewModel.goal.customTimeMeasure ?? ""))
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(.grayText)
+                                        .applyFont(.title)
+                                }.padding([.top], -4)
+                            }
+                            .frame(width: 275, height: 275)
+
+                            Spacer()
+                                .frame(height: 40)
+
+                            if !viewModel.isCompleted {
+                                Text("main_will_reach_goal")
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.grayText)
+                                    .applyFont(.title2)
+
+                                Text(viewModel.completionDate)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(viewModel.goal.goalColor)
+                                    .applyFont(.title)
+                            }
 
                             Spacer()
                                 .frame(height: 25)
 
-                            GoalProgressView(viewModel: GoalProgressViewModel(goal: viewModel.goal))
-                                .frame(width: container.size.width - 50, height: container.size.width - 50)
+                            HStack(spacing: 10) {
+                                archiveGoalButton
 
-                            Spacer()
-                                .frame(height: 25)
-
-                            deleteGoalButton
-                                .padding([.leading, .trailing], 15)
+                                deleteGoalButton
+                            }
 
                             Spacer()
                                 .frame(height: 20)
-                        }
+                        }.padding([.leading, .trailing], 15)
                     }
 
-                    if viewModel.showingTrackGoal {
-                        TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal,
-                                            currentGoal: viewModel.goal,
-                                            challenges: viewModel.challenges)
-                            .transition(.move(edge: .bottom))
-                            .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
-                                if !isShowing {
-                                    viewModel.goal = viewModel.goal
-                                    if !ContentView.showedQuote {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                            ContentView.showedQuote = true
-                                            viewModel.showMotivation = true
-                                        }
-                                    }
-                                }
-                            })
-                    }
-
-                    if viewModel.showFireworks {
-                        FireworksView(isPresented: $viewModel.showFireworks)
-                            .ignoresSafeArea()
-                            .allowsHitTesting(false)
-                    }
-
-                    if viewModel.showMotivation {
-                        MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
-                            .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
-                    }
+                    /*FireworksView(isPresented: $viewModel.showFireworks)
+                        .ignoresSafeArea()
+                        .allowsHitTesting(false)*/
 
                 }.navigationBarTitle(viewModel.goal.name ?? "", displayMode: .inline)
                 .navigationBarBackButtonHidden(true)
@@ -146,96 +187,6 @@ struct MainGoalView: View {
         })
     }
 
-    func updateCompleteGoalChallenge() {
-        if !(viewModel.goal.goalType.isHabit) {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 10
-            challenge.progressMade = 1
-        }
-    }
-
-    func updateTrackingChallenge() {
-        if let challenge = viewModel.challenges.first(where: { $0.id == 7 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 7
-            challenge.progressMade = 1
-        }
-        if let challenge = viewModel.challenges.first(where: { $0.id == 8 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 8
-            challenge.progressMade = 1
-        }
-        if let challenge = viewModel.challenges.first(where: { $0.id == 9 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 9
-            challenge.progressMade = 1
-        }
-    }
-
-    func createGoalProgress(time: Double) -> Progress {
-        let progress = Progress(context: PersistenceController.shared.container.viewContext)
-        progress.date = Date()
-        progress.hoursOfWork = time
-        progress.dayId = Date().customId
-        return progress
-    }
-
-    func trackGoalWithSingleTime() {
-        viewModel.goal.timesHasBeenTracked += 1
-        let timeTracked = Double(1)
-        FirebaseService.logEvent(.timeTracked)
-        viewModel.goal.timeCompleted += timeTracked
-        let progress = createGoalProgress(time: timeTracked)
-        viewModel.goal.addToProgress(progress)
-        viewModel.goal.editedAt = Date()
-        if viewModel.goal.isCompleted {
-            viewModel.goal.completedAt = Date()
-            viewModel.goal.timesHasBeenCompleted += 1
-            FirebaseService.logConversion(.goalCompleted, goal: viewModel.goal)
-            updateCompleteGoalChallenge()
-        }
-        updateTrackingChallenge()
-        PersistenceController.shared.saveContext()
-        self.feedback.notificationOccurred(.success)
-    }
-
-    var trackTimeButton: some View {
-        HStack {
-            Button(action: {
-                withAnimation {
-                    if MeasureUnit.getFrom(viewModel.goal.customTimeMeasure ?? "") == .singleTime {
-                        trackGoalWithSingleTime()
-                        viewModel.showingTrackGoal = false
-                    } else {
-                        FirebaseService.logEvent(.trackTimeButton)
-                        viewModel.showingTrackGoal = true
-                        viewModel.refreshAllGoals = true
-                    }
-                }
-            }) {
-                HStack {
-                    Spacer()
-                    Text("main_track_progress")
-                        .foregroundColor(.white)
-                        .applyFont(.button)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
-                                           startPoint: .topLeading, endPoint: .bottomTrailing))
-                .cornerRadius(.defaultRadius)
-                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal.goalColor)
-        }
-    }
-
     var archiveGoalButton: some View {
         HStack {
             Button(action: {
@@ -246,16 +197,18 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("global_archive")
-                        .foregroundColor(.white)
+                        .foregroundColor(viewModel.goal.goalColor)
                         .applyFont(.button)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
-                                           startPoint: .topLeading, endPoint: .bottomTrailing))
-                .cornerRadius(.defaultRadius)
-                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(viewModel.goal.goalColor)
+                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                )
             }.accentColor(viewModel.goal.goalColor)
         }
     }
@@ -272,16 +225,18 @@ struct MainGoalView: View {
                 HStack {
                     Spacer()
                     Text("Cancella")
-                        .foregroundColor(.white)
+                        .foregroundColor(viewModel.goal.goalColor)
                         .applyFont(.button)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
                 .padding([.top, .bottom], 15)
-                .background(LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
-                                           startPoint: .topLeading, endPoint: .bottomTrailing))
-                .cornerRadius(.defaultRadius)
-                .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                .overlay(
+                    RoundedRectangle(cornerRadius: .defaultRadius)
+                        .stroke(lineWidth: 2.0)
+                        .foregroundColor(viewModel.goal.goalColor)
+                        .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
+                )
             }.accentColor(viewModel.goal.goalColor)
         }
     }

@@ -90,7 +90,7 @@ public class Goal: NSManagedObject {
 
                 self.daysRequired = Int16(daysRequired)
 
-                return Date().adding(days: daysRequired)
+                return daysRequired < 0 ? Date() : Date().adding(days: daysRequired)
             } else {
                 let dayTimes = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
 
@@ -109,7 +109,7 @@ public class Goal: NSManagedObject {
 
                 self.daysRequired = Int16(daysRequired)
 
-                return Date().adding(days: daysRequired)
+                return daysRequired < 0 ? Date() : Date().adding(days: daysRequired)
             }
         } else {
             return Date()

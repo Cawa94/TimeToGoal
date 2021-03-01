@@ -75,41 +75,41 @@ struct AllGoalsView: View {
     var body: some View {
         NavigationView {
             BackgroundView(color: .defaultBackground) {
-                VStack {
-                    Spacer()
-                        .frame(height: 15)
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack() {
+                        Spacer()
+                            .frame(height: 15)
 
-                    HStack {
-                        Text("all_goals_title")
-                            .foregroundColor(.grayText)
-                            .multilineTextAlignment(.leading)
-                            .padding([.leading], 15)
-                            .applyFont(.navigationLargeTitle)
+                        HStack {
+                            Text("all_goals_title")
+                                .foregroundColor(.grayText)
+                                .multilineTextAlignment(.leading)
+                                .padding([.leading], 15)
+                                .applyFont(.navigationLargeTitle)
+
+                            Spacer()
+
+                            addNewButton
+                                .padding(.trailing, 15)
+                        }
 
                         Spacer()
 
-                        addNewButton
-                            .padding(.trailing, 15)
-                    }
-
-                    Spacer()
-
-                    if let selectedIndex = selectedIndex {
-                        NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goals[selectedIndex],
-                                                                                  goals: $viewModel.goals,
-                                                                                  challenges: viewModel.challenges,
-                                                                                  isPresented: $showMainGoalView, activeSheet: $viewModel.activeSheet,
-                                                                                  refreshAllGoals: $viewModel.refreshAllGoals)),
-                                       isActive: $showMainGoalView) {
-                            EmptyView()
+                        if let selectedIndex = selectedIndex {
+                            NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goals[selectedIndex],
+                                                                                      goals: $viewModel.goals,
+                                                                                      challenges: viewModel.challenges,
+                                                                                      isPresented: $showMainGoalView, activeSheet: $viewModel.activeSheet,
+                                                                                      refreshAllGoals: $viewModel.refreshAllGoals)),
+                                           isActive: $showMainGoalView) {
+                                EmptyView()
+                            }
                         }
-                    }
 
-                    List {
                         ForEach(0..<viewModel.listSections.count, id: \.self) { sectionIndex in
                             if let goals = viewModel.listSections[sectionIndex].goals, !goals.isEmpty {
-                                Section(header: Text(viewModel.listSections[sectionIndex].title).applyFont(.title4)) {
-                                    ForEach(0..<goals.count, id: \.self) { index in
+                                ForEach(0..<goals.count, id: \.self) { index in
+                                    VStack {
                                         GoalListRow(viewModel: .init(goal: goals[index],
                                                                      challenges: viewModel.challenges))
                                             .scaleEffect((viewModel.pressedRow[sectionIndex]?[index] ?? false) ? 0.9 : 1.0)
@@ -122,14 +122,17 @@ struct AllGoalsView: View {
                                                     viewModel.pressedRow[sectionIndex]?[index] = pressing
                                                 }
                                             }, perform: {})
-                                    }
+                                    }.padding([.top, .leading, .trailing], 20)
                                 }
                             }
                         }
-                    }.listStyle(GroupedListStyle())
 
-                }.navigationBarHidden(true)
-                .navigationBarTitle("")
+                        Spacer()
+                            .frame(height: 40)
+
+                    }.navigationBarHidden(true)
+                    .navigationBarTitle("")
+                }
             }
         }
     }
@@ -141,17 +144,6 @@ struct AllGoalsView: View {
             Text("global_add")
                 .foregroundColor(.grayText)
                 .applyFont(.title4)
-        }
-    }
-
-    func removeItems(at offsets: IndexSet, from section: ListSection) {
-        offsets.forEach{ offset in
-            if let goal = section.goals?[offset] {
-                viewModel.goals.removeAll(where: { $0.id == goal.id })
-                viewModel.refreshAllGoals = true
-                PersistenceController.shared.container.viewContext.delete(goal)
-                PersistenceController.shared.saveContext()
-            }
         }
     }
 

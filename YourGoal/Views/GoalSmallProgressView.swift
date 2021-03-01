@@ -236,7 +236,11 @@ struct GoalSmallProgressView: View {
         viewModel.goal?.editedAt = Date()
         if viewModel.goal?.isCompleted ?? false {
             viewModel.goal?.completedAt = Date()
-            viewModel.goal?.timesHasBeenCompleted += 1
+            if viewModel.goal?.datesHasBeenCompleted != nil {
+                viewModel.goal?.datesHasBeenCompleted?.append(Date())
+            } else {
+                viewModel.goal?.datesHasBeenCompleted = [Date()]
+            }
             FirebaseService.logConversion(.goalCompleted, goal: viewModel.goal)
             updateCompleteGoalChallenge()
         }

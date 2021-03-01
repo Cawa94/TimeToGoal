@@ -133,7 +133,7 @@ struct NewGoalTimeView: View {
                 Form {
                     Section(header: HStack {
                         Text(viewModel.goal.goalType.isHabit
-                                ? "Il tuo \(viewModel.goal.timesHasBeenCompleted + 1)º traguardo"
+                                ? "Il tuo \((viewModel.goal.datesHasBeenCompleted?.count ?? 0) + 1)º traguardo"
                                 : "Il tuo traguardo").applyFont(.fieldQuestion).multilineTextAlignment(.center)
                         Spacer()
                         if viewModel.goal.goalType.isHabit {
@@ -251,6 +251,9 @@ struct NewGoalTimeView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
+            if viewModel.isRenewingHabit {
+                viewModel.goal.timeCompleted = 0
+            }
             if self.viewModel.goal.customTimeMeasure == nil || self.viewModel.goal.customTimeMeasure == "" {
                 self.viewModel.goal.customTimeMeasure = self.viewModel.goal.goalType.measureUnits.first?.namePlural
             }
@@ -474,8 +477,8 @@ struct NewGoalTimeView: View {
 
     func updateGoalWithNewTarget() {
         viewModel.goal.editedAt = Date()
-        viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
         viewModel.goal.timeCompleted = 0
+        viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
 
         if let challenge = viewModel.challenges.first(where: { $0.id == 2 }) {
             challenge.progressMade += 1

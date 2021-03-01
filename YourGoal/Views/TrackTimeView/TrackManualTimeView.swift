@@ -102,7 +102,11 @@ struct TrackManualTimeView: View {
                     currentGoal?.editedAt = Date()
                     if currentGoal?.isCompleted ?? false {
                         currentGoal?.completedAt = Date()
-                        currentGoal?.timesHasBeenCompleted += 1
+                        if currentGoal?.datesHasBeenCompleted != nil {
+                            currentGoal?.datesHasBeenCompleted?.append(Date())
+                        } else {
+                            currentGoal?.datesHasBeenCompleted = [Date()]
+                        }
                         FirebaseService.logConversion(.goalCompleted, goal: currentGoal)
                         updateCompleteGoalChallenge()
                     }

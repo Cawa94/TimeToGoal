@@ -15,6 +15,14 @@ public class StatisticsViewModel: ObservableObject {
         self.goals = goals
     }
 
+    var completedGoals: Int {
+        goals.filter( { !$0.goalType.isHabit && $0.isCompleted }).count
+    }
+
+    var targetRenewed: Int {
+        goals.filter( { $0.goalType.isHabit }).map { ($0.datesHasBeenCompleted?.count ?? 0) }.reduce(0, +)
+    }
+
 }
 
 struct StatisticsView: View {
@@ -56,11 +64,11 @@ struct StatisticsView: View {
                         }
 
                         Spacer()
-                            .frame(height: 20)
+                            .frame(height: 0)
 
-                        HStack(spacing: 20) {
+                        HStack(spacing: 15) {
                             VStack {
-                                Text("Striscia attuale")
+                                Text("Striscia attuale giorni consecutivi")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
@@ -69,8 +77,8 @@ struct StatisticsView: View {
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)
-                            }.padding(.leading, 10)
-                            
+                            }.frame(width: container.size.width/2 - 15)
+
                             VStack {
                                 Text("Record giorni consecutivi")
                                     .foregroundColor(.grayText)
@@ -81,8 +89,37 @@ struct StatisticsView: View {
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)
-                            }.padding(.trailing, 10)
-                        }
+                            }.frame(width: container.size.width/2 - 15)
+                        }.padding(.bottom, 15)
+
+                        HStack(spacing: 15) {
+                            VStack {
+                                Text("Obiettivi SMART completati")
+                                    .foregroundColor(.grayText)
+                                    .multilineTextAlignment(.center)
+                                    .applyFont(.title2)
+
+                                Text("\(viewModel.completedGoals)")
+                                    .foregroundColor(.grayText)
+                                    .multilineTextAlignment(.center)
+                                    .applyFont(.navigationLargeTitle)
+                            }.frame(width: container.size.width/2 - 15)
+
+                            VStack {
+                                Text("Traguardi raggiunti")
+                                    .foregroundColor(.grayText)
+                                    .multilineTextAlignment(.center)
+                                    .applyFont(.title2)
+
+                                Text("\(viewModel.targetRenewed)")
+                                    .foregroundColor(.grayText)
+                                    .multilineTextAlignment(.center)
+                                    .applyFont(.navigationLargeTitle)
+                            }.frame(width: container.size.width/2 - 15)
+                        }.padding(.bottom, 15)
+
+                        Spacer()
+                            .frame(height: 5)
                     }
                 }
             }

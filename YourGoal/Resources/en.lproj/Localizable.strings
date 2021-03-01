@@ -110,7 +110,7 @@
 "main_time_required" = "-%@ %@";
 "main_my_goal" = "My goal";
 "main_track_progress" = "Track progress";
-"main_will_reach_goal" = "You'll reach your\ngoal by the";
+"main_will_reach_goal" = "You'll reach your goal by the";
 
 "motivational_sentence_1" = "Setting goals is the first step in turning the invisible into the visible";
 "motivational_author_1" = "Tony Robbins";

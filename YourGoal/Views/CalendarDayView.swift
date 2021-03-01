@@ -26,19 +26,54 @@ struct CalendarDayView: View {
                 .padding(8)
                 .overlay(
                     ZStack {
-                        Text(String(self.calendar.component(.day, from: date)))
-                            .applyFont(.title2)
-                            .foregroundColor(date <= Date() ? .grayText : .grayLight)
-                            .opacity(date <= Date() ? 1 : 0.4)
-                        
-                        if let goal = goals.first(where: { $0.updatedCompletionDate.withoutHours == date.withoutHours }) {
-                            if goal.isCompleted {
-                                Circle()
-                                    .fill(goal.goalColor)
-                            } else {
-                                Circle()
-                                    .strokeBorder(goal.goalColor, lineWidth: 2)
-                                    .opacity(0.4)
+                        if let goal = goals
+                                   .first(where: { ($0.datesHasBeenCompleted?.contains(where: { $0.withoutHours == date.withoutHours }) ?? false) }) {
+                            Circle()
+                                .fill(goal.goalColor)
+
+                            ZStack {
+                                Text(String(self.calendar.component(.day, from: date)))
+                                    .applyFont(.title2)
+                                    .foregroundColor(.white)
+
+                                if date.withoutHours == Date().withoutHours {
+                                    Rectangle()
+                                        .foregroundColor(.red)
+                                        .frame(width: 25, height: 1)
+                                        .padding(.top, 20)
+                                }
+                            }
+                        } else if let goal = goals.first(where: { $0.updatedCompletionDate.withoutHours == date.withoutHours }) {
+                            Circle()
+                                .strokeBorder(goal.goalColor, lineWidth: 2)
+                                .opacity(0.5)
+
+                            ZStack {
+                                Text(String(self.calendar.component(.day, from: date)))
+                                    .applyFont(.title2)
+                                    .foregroundColor(.grayText)
+                                    .opacity(0.7)
+
+                                if date.withoutHours == Date().withoutHours {
+                                    Rectangle()
+                                        .foregroundColor(.red)
+                                        .frame(width: 25, height: 1)
+                                        .padding(.top, 20)
+                                }
+                            }
+                         } else {
+                            ZStack {
+                                Text(String(self.calendar.component(.day, from: date)))
+                                    .applyFont(.title2)
+                                    .foregroundColor(date <= Date() ? .grayText : .grayLight)
+                                    .opacity(date <= Date() ? 1 : 0.4)
+
+                                if date.withoutHours == Date().withoutHours {
+                                    Rectangle()
+                                        .foregroundColor(.red)
+                                        .frame(width: 25, height: 1)
+                                        .padding(.top, 20)
+                                }
                             }
                         }
                     }
