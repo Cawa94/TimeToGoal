@@ -35,13 +35,6 @@ struct CalendarDayView: View {
                                 Text(String(self.calendar.component(.day, from: date)))
                                     .applyFont(.title2)
                                     .foregroundColor(.white)
-
-                                if date.withoutHours == Date().withoutHours {
-                                    Rectangle()
-                                        .foregroundColor(.red)
-                                        .frame(width: 25, height: 1)
-                                        .padding(.top, 20)
-                                }
                             }
                         } else if let goal = goals.first(where: { $0.updatedCompletionDate.withoutHours == date.withoutHours }) {
                             Circle()
@@ -53,13 +46,6 @@ struct CalendarDayView: View {
                                     .applyFont(.title2)
                                     .foregroundColor(.grayText)
                                     .opacity(0.7)
-
-                                if date.withoutHours == Date().withoutHours {
-                                    Rectangle()
-                                        .foregroundColor(.red)
-                                        .frame(width: 25, height: 1)
-                                        .padding(.top, 20)
-                                }
                             }
                          } else {
                             ZStack {
@@ -67,13 +53,6 @@ struct CalendarDayView: View {
                                     .applyFont(.title2)
                                     .foregroundColor(date <= Date() ? .grayText : .grayLight)
                                     .opacity(date <= Date() ? 1 : 0.4)
-
-                                if date.withoutHours == Date().withoutHours {
-                                    Rectangle()
-                                        .foregroundColor(.red)
-                                        .frame(width: 25, height: 1)
-                                        .padding(.top, 20)
-                                }
                             }
                         }
                     }

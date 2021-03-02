@@ -10,6 +10,7 @@ import SwiftUI
 struct TrackHoursSpentView: View {
 
     @Binding var isPresented: Bool
+    @Binding var hasTrackedGoal: Bool
 
     @State var currentGoal: Goal?
     @State var challenges: [Challenge]
@@ -35,7 +36,7 @@ struct TrackHoursSpentView: View {
                     VStack {
                         Spacer()
                             .frame(height: 30)
-                        Text("\(currentGoal?.goalType.timeSpentQuestion ?? "")")
+                        Text("goal_custom_time_spent")
                             .multilineTextAlignment(.center)
                             .foregroundColor(currentGoal?.goalColor)
                             .padding([.leading, .trailing], 10)
@@ -51,6 +52,7 @@ struct TrackHoursSpentView: View {
                         Spacer()
                         //if trackMode == 0 {
                             TrackManualTimeView(isPresented: $isPresented,
+                                                hasTrackedGoal: $hasTrackedGoal,
                                                 currentGoal: currentGoal,
                                                 challenges: challenges)
                         /*} else {

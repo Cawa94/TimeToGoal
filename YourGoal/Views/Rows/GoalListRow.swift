@@ -53,12 +53,18 @@ struct GoalListRow: View {
 
                 HStack(spacing: 0) {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text("Striscia attuale")
-                            .applyFont(.title2)
-                            .foregroundColor(.grayText)
-                        Text("2 \(viewModel.goal.customTimeMeasure ?? "")")
-                            .applyFont(.title)
-                            .foregroundColor(viewModel.goal.goalColor)
+                        if !viewModel.goal.isArchived {
+                            Text("Striscia attuale")
+                                .applyFont(.title2)
+                                .foregroundColor(.grayText)
+                            Text("\(viewModel.goal.consecutiveDays) giorni")
+                                .applyFont(.title)
+                                .foregroundColor(viewModel.goal.goalColor)
+                        } else {
+                            Text("Archiviato".uppercased())
+                                .applyFont(.title)
+                                .foregroundColor(.grayText)
+                        }
 
                         Spacer()
                             .frame(height: 5)

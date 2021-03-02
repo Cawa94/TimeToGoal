@@ -22,17 +22,19 @@ public class GoalSmallProgressViewModel: ObservableObject {
     @Binding var showingTrackGoal: Bool
     @Binding var goalToRenew: Goal?
     @Binding var indexSelectedGoal: Int
+    @Binding var hasTrackedGoal: Bool
 
     var goalIndex: Int?
 
     init(goal: Goal?, challenges: [Challenge], showingTrackGoal: Binding<Bool>, goalToRenew: Binding<Goal?>,
-         indexSelectedGoal: Binding<Int>, activeSheet: Binding<ActiveSheet?>, goalIndex: Int?) {
+         indexSelectedGoal: Binding<Int>, activeSheet: Binding<ActiveSheet?>, hasTrackedGoal: Binding<Bool>, goalIndex: Int?) {
         self.goal = goal
         self.challenges = challenges
         self._showingTrackGoal = showingTrackGoal
         self._goalToRenew = goalToRenew
         self._indexSelectedGoal = indexSelectedGoal
         self._activeSheet = activeSheet
+        self._hasTrackedGoal = hasTrackedGoal
         self.goalIndex = goalIndex
     }
 
@@ -73,6 +75,7 @@ public class GoalSmallProgressViewModel: ObservableObject {
 struct GoalSmallProgressView: View {
 
     @ObservedObject var viewModel: GoalSmallProgressViewModel
+
     @State private var feedback = UINotificationFeedbackGenerator()
 
     @ViewBuilder
@@ -182,6 +185,11 @@ struct GoalSmallProgressView: View {
 
                     }
                 }
+
+                if viewModel.isCompleted {
+                    FireworksView(isPresented: .constant(viewModel.isCompleted))
+                        .allowsHitTesting(false)
+                }
             }
         }
     }
@@ -247,6 +255,7 @@ struct GoalSmallProgressView: View {
         updateTrackingChallenge()
         PersistenceController.shared.saveContext()
         self.feedback.notificationOccurred(.success)
+        viewModel.hasTrackedGoal = true
     }
 
     var trackTimeButton: some View {

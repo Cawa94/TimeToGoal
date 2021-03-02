@@ -18,10 +18,10 @@ public class JournalDatesViewModel: ObservableObject {
     init(journal: [JournalPage], selectedDay: Binding<Date>) {
         self.journal = journal
         self._selectedDay = selectedDay
-        
+
         var journalDates: [JournalDate] = []
         let dayDurationInSeconds: TimeInterval = 60*60*24
-        let firstDate = (journal.sorted(by: { $0.dayId < $1.dayId }).first?.date ?? Date()).adding(days: -4) // to start 4 days early than first page
+        let firstDate = (journal.sorted(by: { $0.date ?? Date() < $1.date ?? Date() }).first?.date ?? Date()).adding(days: -4) // to start 4 days early than first page
         let finalDate = Date().adding(days: 4)
         for date in stride(from: firstDate, to: finalDate, by: dayDurationInSeconds) {
             var emoji: String?

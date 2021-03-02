@@ -147,7 +147,7 @@ struct JournalView: View {
             newPage.date = viewModel.selectedDay
             self.viewModel.journal.append(newPage)
         }
-
+/*
         var journal: [JournalPage] = []
         for page in viewModel.journal {
             if !(journal.contains(where: { $0.dayId == page.dayId })) {
@@ -175,7 +175,7 @@ struct JournalView: View {
             let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
             challenge.id = 15
             challenge.progressMade = Double(totalPagesCount)
-        }
+        }*/
         PersistenceController.shared.saveContext()
     }
 

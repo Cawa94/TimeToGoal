@@ -10,25 +10,17 @@ import StoreKit
 
 private extension CGFloat {
 
-    static let circleWidth: CGFloat = 40
+    static let circleWidth: CGFloat = 30
+    static let circleSize: CGFloat = 225
 
 }
 
 public class MainGoalViewModel: ObservableObject {
 
-    @Published var goal: Goal {
-        didSet {
-            /*#if RELEASE
-                if goal?.isCompleted ?? false {
-                    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                        SKStoreReviewController.requestReview(in: scene)
-                    }
-                }
-            #endif*/
-        }
-    }
+    @Published var goal: Goal
     @Published var challenges: [Challenge]
     @Published var showingEditGoal = false
+    @Published var showWarningAlert = false
 
     @Binding var isPresented: Bool
     @Binding var activeSheet: ActiveSheet?
@@ -130,24 +122,16 @@ struct MainGoalView: View {
                                         .multilineTextAlignment(.center)
                                         .foregroundColor(.grayText)
                                         .applyFont(.title)
-                                }.padding([.top], -4)
+                                }
                             }
-                            .frame(width: 275, height: 275)
+                            .frame(width: .circleSize, height: .circleSize)
 
                             Spacer()
                                 .frame(height: 40)
 
-                            if !viewModel.isCompleted {
-                                Text("main_will_reach_goal")
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.title2)
+                            answersSummaryFirstPart
 
-                                Text(viewModel.completionDate)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(viewModel.goal.goalColor)
-                                    .applyFont(.title)
-                            }
+                            answersSummarySecondPart
 
                             Spacer()
                                 .frame(height: 25)
@@ -159,13 +143,9 @@ struct MainGoalView: View {
                             }
 
                             Spacer()
-                                .frame(height: 20)
+                                .frame(height: 40)
                         }.padding([.leading, .trailing], 15)
                     }
-
-                    /*FireworksView(isPresented: $viewModel.showFireworks)
-                        .ignoresSafeArea()
-                        .allowsHitTesting(false)*/
 
                 }.navigationBarTitle(viewModel.goal.name ?? "", displayMode: .inline)
                 .navigationBarBackButtonHidden(true)
@@ -187,16 +167,98 @@ struct MainGoalView: View {
         })
     }
 
+    var answersSummaryFirstPart: some View {
+        VStack(spacing: 10) {
+            HStack {
+                Text("goal_custom_main_question")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayLight)
+                    .applyFont(.title3)
+                Spacer()
+            }
+
+            HStack {
+                Text(viewModel.goal.whatDefinition ?? "Non definito")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayText)
+                    .applyFont(.title3)
+                Spacer()
+            }
+
+            Spacer()
+                .frame(height: 0)
+
+            HStack {
+                Text("goal_custom_why_question")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayLight)
+                    .applyFont(.title3)
+                Spacer()
+            }
+
+            HStack {
+                Text(viewModel.goal.whyDefinition ?? "Non definito")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayText)
+                    .applyFont(.title3)
+                Spacer()
+            }
+        }
+    }
+
+    var answersSummarySecondPart: some View {
+        VStack(spacing: 10) {
+            Spacer()
+                .frame(height: 0)
+
+            HStack {
+                Text("goal_custom_what_change_question")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayLight)
+                    .applyFont(.title3)
+                Spacer()
+            }
+
+            HStack {
+                Text(viewModel.goal.whatWillChangeDefinition ?? "Non definito")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayText)
+                    .applyFont(.title3)
+                Spacer()
+            }
+
+            Spacer()
+                .frame(height: 0)
+
+            HStack {
+                Text("goal_custom_support_question")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayLight)
+                    .applyFont(.title3)
+                Spacer()
+            }
+
+            HStack {
+                Text(viewModel.goal.supportDefinition ?? "Non definito")
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.grayText)
+                    .applyFont(.title3)
+                Spacer()
+            }
+        }
+    }
+
     var archiveGoalButton: some View {
         HStack {
             Button(action: {
-                viewModel.goal.isArchived = true
-                PersistenceController.shared.saveContext()
+                viewModel.goal.isArchived = viewModel.goal.isArchived ? false : true
                 viewModel.refreshAllGoals = true
+                PersistenceController.shared.saveContext()
+                viewModel.isPresented = false
             }) {
                 HStack {
                     Spacer()
-                    Text("global_archive")
+                    Text(viewModel.goal.isArchived ? "Riattiva" : "global_archive")
                         .foregroundColor(viewModel.goal.goalColor)
                         .applyFont(.button)
                         .multilineTextAlignment(.center)
@@ -216,11 +278,7 @@ struct MainGoalView: View {
     var deleteGoalButton: some View {
         HStack {
             Button(action: {
-                viewModel.goals.removeAll(where: { $0.id == viewModel.goal.id })
-                viewModel.refreshAllGoals = true
-                PersistenceController.shared.container.viewContext.delete(viewModel.goal)
-                PersistenceController.shared.saveContext()
-                self.viewModel.isPresented = false
+                viewModel.showWarningAlert = true
             }) {
                 HStack {
                     Spacer()
@@ -238,16 +296,32 @@ struct MainGoalView: View {
                         .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
                 )
             }.accentColor(viewModel.goal.goalColor)
+            .alert(isPresented: $viewModel.showWarningAlert) {
+                Alert(title: Text("ASPETTA"),
+                      message: Text("Sei sicuro di voler cancellare quest'obiettivo o abitudine?"),
+                      primaryButton: .destructive(Text("Cancella")) {
+                        viewModel.goals.removeAll(where: { $0.id == viewModel.goal.id })
+                        viewModel.refreshAllGoals = true
+                        PersistenceController.shared.container.viewContext.delete(viewModel.goal)
+                        PersistenceController.shared.saveContext()
+                        viewModel.isPresented = false
+                      },
+                      secondaryButton: .cancel())
+            }
         }
     }
 
     var editButton: some View {
         Button(action: {
-            viewModel.showingEditGoal = true
+            if !viewModel.goal.isArchived {
+                viewModel.showingEditGoal = true
+            }
         }) {
-            Text("Modifica")
-                .foregroundColor(.grayText)
-                .applyFont(.title4)
+            if !viewModel.goal.isArchived {
+                Text("Modifica")
+                    .foregroundColor(.grayText)
+                    .applyFont(.title4)
+            }
         }
     }
 

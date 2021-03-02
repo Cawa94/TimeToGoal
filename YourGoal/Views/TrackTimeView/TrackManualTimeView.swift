@@ -10,6 +10,7 @@ import SwiftUI
 struct TrackManualTimeView: View {
 
     @Binding var isPresented: Bool
+    @Binding var hasTrackedGoal: Bool
 
     @State var currentGoal: Goal?
     @State var challenges: [Challenge]
@@ -30,11 +31,11 @@ struct TrackManualTimeView: View {
         case .hoursWithMinutes:
             return [00, 15, 30, 45]
         case .double:
-            var hoursArray: [Double] = []
-            for hour in 0...99 {
-                hoursArray.append(Double(hour))
+            var decimalArray: [Double] = []
+            for decimal in 0...99 {
+                decimalArray.append(Double(decimal))
             }
-            return hoursArray
+            return decimalArray
         default:
             return []
         }
@@ -114,6 +115,7 @@ struct TrackManualTimeView: View {
                     PersistenceController.shared.saveContext()
                     self.feedback.notificationOccurred(.success)
                     self.isPresented = false
+                    self.hasTrackedGoal = true
                 }
             }) {
                 HStack {

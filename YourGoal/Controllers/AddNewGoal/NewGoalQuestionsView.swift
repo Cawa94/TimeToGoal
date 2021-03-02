@@ -92,7 +92,7 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text(viewModel.goal.goalType.mainQuestion).applyFont(.fieldQuestion)) {
+                    Section(header: Text("goal_custom_main_question").applyFont(.fieldQuestion)) {
                         VStack {
                             ZStack {
                                 TextEditor(text: whatBinding)
@@ -112,7 +112,7 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text(viewModel.goal.goalType.whyQuestion).applyFont(.fieldQuestion)) {
+                    Section(header: Text("goal_custom_why_question").applyFont(.fieldQuestion)) {
                         VStack {
                             ZStack {
                                 TextEditor(text: whyBinding)
@@ -132,7 +132,7 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text(viewModel.goal.goalType.whatWillChangeQuestion).applyFont(.fieldQuestion)) {
+                    Section(header: Text("goal_custom_what_change_question").applyFont(.fieldQuestion)) {
                         VStack {
                             ZStack {
                                 TextEditor(text: whatChangeBinding)
@@ -152,7 +152,7 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text(viewModel.goal.goalType.supportQuestion).applyFont(.fieldQuestion)) {
+                    Section(header: Text("goal_custom_support_question").applyFont(.fieldQuestion)) {
                         VStack {
                             ZStack {
                                 TextEditor(text: supportBinding)

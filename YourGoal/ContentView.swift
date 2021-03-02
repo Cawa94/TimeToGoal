@@ -109,7 +109,11 @@ struct ContentView: View {
                                 viewModel.refreshChallenges = true
                             })
                     case .statistics:
-                        StatisticsView(viewModel: .init(goals: viewModel.goals))
+                        StatisticsView(viewModel: .init(goals: viewModel.goals,
+                                                        challenges: viewModel.challenges))
+                            .onDisappear(perform: {
+                                viewModel.refreshChallenges = true
+                            })
                     case .profile:
                         ProfileView(viewModel: .init(profile: viewModel.profile,
                                                      challenges: viewModel.challenges,

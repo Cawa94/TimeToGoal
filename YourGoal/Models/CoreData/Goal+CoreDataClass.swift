@@ -134,6 +134,10 @@ public class Goal: NSManagedObject {
             || friday != 0 || saturday != 0 || sunday != 0
     }
 
+    func isCompletedAt(date: Date) -> Bool {
+        dayPercentageAt(date: date) >= 1
+    }
+
     var circleGradientColors: [Color] {
         if self.isValid {
             switch self.color {
@@ -283,6 +287,39 @@ public class Goal: NSManagedObject {
         self.whatDefinition = nil
         self.whatWillChangeDefinition = nil
         self.whyDefinition = nil
+    }
+
+    var consecutiveDays: Int {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let startDate = createdAt ?? formatter.date(from: "2021/01/01 23:00") ?? Date()
+        let endDate = Date()
+        let goalInterval = DateInterval(start: startDate, end: endDate)
+        let calendar = Calendar.current
+        let days = calendar.generateDates(
+            inside: goalInterval,
+            matching: DateComponents(hour: 0, minute: 0, second: 0)
+        )
+
+        var record = 0
+
+        for date in days {
+            if isCompletedAt(date: date) {
+                var currentStreak = 1
+                var isInStreak = true
+                while isInStreak {
+                    let nextDay = date.adding(days: currentStreak)
+                    if isCompletedAt(date: nextDay) {
+                        currentStreak += 1
+                    } else {
+                        isInStreak = false
+                    }
+                }
+                record = currentStreak > record ? currentStreak : record
+            }
+        }
+
+        return record
     }
 
 }

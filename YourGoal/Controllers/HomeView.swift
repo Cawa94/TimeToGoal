@@ -15,6 +15,7 @@ public class HomeViewModel: ObservableObject {
     @Published var profile: Profile?
     @Published var indexSelectedGoal: Int = 0
     @Published var showingTrackGoal = false
+    @Published var hasTrackedGoal = false
     @Published var showMotivation = false
 
     @Binding var activeSheet: ActiveSheet?
@@ -89,8 +90,6 @@ struct HomeView: View {
                             Spacer()
                         }
 
-                        
-
                         if !viewModel.goals.isEmpty {
                             TabView {
                                 ForEach(0..<viewModel.goals.count) { index in
@@ -101,6 +100,7 @@ struct HomeView: View {
                                                                                goalToRenew: $viewModel.goalToRenew,
                                                                                indexSelectedGoal: $viewModel.indexSelectedGoal,
                                                                                activeSheet: $viewModel.activeSheet,
+                                                                               hasTrackedGoal: $viewModel.hasTrackedGoal,
                                                                                goalIndex: index))
                                             .frame(height: container.size.height/3.2)
                                         Spacer()
@@ -119,6 +119,7 @@ struct HomeView: View {
                                                                    goalToRenew: $viewModel.goalToRenew,
                                                                    indexSelectedGoal: $viewModel.indexSelectedGoal,
                                                                    activeSheet: $viewModel.activeSheet,
+                                                                   hasTrackedGoal: $viewModel.hasTrackedGoal,
                                                                    goalIndex: nil))
                                 .padding([.leading, .trailing], 5)
                                 .frame(width: UIScreen.main.bounds.width, height: container.size.height/3.2)
@@ -149,19 +150,10 @@ struct HomeView: View {
 
                     if viewModel.showingTrackGoal {
                         TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal,
+                                            hasTrackedGoal: $viewModel.hasTrackedGoal,
                                             currentGoal: viewModel.goals[viewModel.indexSelectedGoal],
                                             challenges: viewModel.challenges)
                             .transition(.move(edge: .bottom))
-                            .onReceive(viewModel.$showingTrackGoal, perform: { isShowing in
-                                if !isShowing {
-                                    if !ContentView.showedQuote {
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                            ContentView.showedQuote = true
-                                            viewModel.showMotivation = true
-                                        }
-                                    }
-                                }
-                            })
                     }
                     
                     if viewModel.showMotivation {
@@ -170,7 +162,23 @@ struct HomeView: View {
                     }
                 }
             }
-        }
+        }.onReceive(viewModel.$hasTrackedGoal, perform: { hasTrackedGoal in
+            if hasTrackedGoal {
+                if !ContentView.showedQuote {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        ContentView.showedQuote = true
+                        viewModel.showMotivation = true
+                    }
+                }
+                if viewModel.goals[viewModel.indexSelectedGoal].isCompleted {
+                    #if RELEASE
+                        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            SKStoreReviewController.requestReview(in: scene)
+                        }
+                    #endif
+                }
+            }
+        })
     }
 
 }

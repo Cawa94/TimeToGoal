@@ -35,9 +35,9 @@ struct ProfileChallenge: Identifiable {
         .init(id: 10, name: "Completa un obiettivo SMART", image: "006-ribbon", goalToReach: 1),
         .init(id: 11, name: "Crea 5 abitudini SMART", image: "007-star", goalToReach: 5),
         .init(id: 12, name: "Crea 5 obiettivi SMART", image: "011-medal", goalToReach: 5),
-        .init(id: 13, name: "Scrivi 100 pagine nel tuo diario", image: "017-gold medal", goalToReach: 100),
-        .init(id: 14, name: "Scrivi 50 pagine nel tuo diario", image: "018-silver medal", goalToReach: 50),
-        .init(id: 15, name: "Scrivi 20 pagine nel tuo diario", image: "019-bronze medal", goalToReach: 20)
+        .init(id: 13, name: "Completa tutte le abitudini per 100 giorni consecutivi", image: "017-gold medal", goalToReach: 100),
+        .init(id: 14, name: "Completa tutte le abitudini per 50 giorni consecutivi", image: "018-silver medal", goalToReach: 50),
+        .init(id: 15, name: "Completa tutte le abitudini per 20 giorni consecutivi", image: "019-bronze medal", goalToReach: 20)
     ]
 
 }

@@ -242,34 +242,6 @@ extension GoalType {
         return "goal_custom_measure_unit".localized()
     }
 
-    var mainQuestion: String {
-        return "goal_custom_main_question".localized()
-    }
-
-    var whyQuestion: String {
-        return "goal_custom_why_question".localized()
-    }
-
-    var whatWillChangeQuestion: String {
-        return "goal_custom_what_change_question".localized()
-    }
-
-    var supportQuestion: String {
-        return "goal_custom_support_question".localized()
-    }
-
-    var timeRequiredQuestion: String {
-        return "goal_custom_time_required".localized()
-    }
-
-    var timeForDayQuestion: String {
-        return "goal_custom_time_for_day".localized()
-    }
-
-    var timeSpentQuestion: String {
-        return "goal_custom_time_spent".localized()
-    }
-
 }
 
 extension GoalType: Equatable {

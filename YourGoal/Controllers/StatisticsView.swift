@@ -10,9 +10,13 @@ import SwiftUI
 public class StatisticsViewModel: ObservableObject {
 
     @Published var goals: [Goal]
+    @Published var validGoals: [Goal]
+    @Published var challenges: [Challenge]
 
-    init(goals: [Goal]) {
+    init(goals: [Goal], challenges: [Challenge]) {
         self.goals = goals
+        self.validGoals = goals.filter { !$0.isArchived }
+        self.challenges = challenges
     }
 
     var completedGoals: Int {
@@ -28,14 +32,18 @@ public class StatisticsViewModel: ObservableObject {
 struct StatisticsView: View {
 
     @ObservedObject var viewModel: StatisticsViewModel
+
     @Environment(\.calendar) var calendar
 
-    private var year: DateInterval {
+    @State var currentGoalStreak: Int = 0
+    @State var recordGoalStreak: Int = 0
+
+    private var goalsDateInterval: DateInterval {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let startDate = viewModel.goals.sorted(by: { ($0.createdAt ?? Date()) < ($1.createdAt ?? Date()) })
+        let startDate = viewModel.validGoals.sorted(by: { ($0.createdAt ?? Date()) < ($1.createdAt ?? Date()) })
             .first?.createdAt ?? formatter.date(from: "2021/01/01 23:00") ?? Date()
-        let endDate = viewModel.goals.sorted(by: { ($0.updatedCompletionDate) < ($1.updatedCompletionDate) })
+        let endDate = viewModel.validGoals.sorted(by: { ($0.updatedCompletionDate) < ($1.updatedCompletionDate) })
             .last?.updatedCompletionDate ?? Date()
         return DateInterval(start: startDate, end: endDate)
     }
@@ -59,8 +67,8 @@ struct StatisticsView: View {
                             Spacer()
                         }
 
-                        CalendarView(interval: year, monthWidth: container.size.width) { date in
-                            CalendarDayView(goals: viewModel.goals, date: date)
+                        CalendarView(interval: goalsDateInterval, monthWidth: container.size.width) { date in
+                            CalendarDayView(goals: viewModel.validGoals, date: date)
                         }
 
                         Spacer()
@@ -73,7 +81,7 @@ struct StatisticsView: View {
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
 
-                                Text("7")
+                                Text("\(currentGoalStreak)")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)
@@ -85,7 +93,7 @@ struct StatisticsView: View {
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
 
-                                Text("22")
+                                Text("\(recordGoalStreak)")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)
@@ -123,7 +131,43 @@ struct StatisticsView: View {
                     }
                 }
             }
+        }.onAppear {
+            currentGoalStreak = viewModel.validGoals.globalStreak
+            if let challenge = viewModel.challenges.first(where: { $0.id == 15 }) {
+                let streakRecord = challenge.progressMade
+                if currentGoalStreak > Int(streakRecord) {
+                    recordGoalStreak = currentGoalStreak
+                    updateChallengesWith(record: currentGoalStreak)
+                } else {
+                    recordGoalStreak = Int(streakRecord)
+                }
+            }
         }
+    }
+
+    func updateChallengesWith(record: Int) {
+        if let challenge = viewModel.challenges.first(where: { $0.id == 13 }) {
+            challenge.progressMade = Double(record)
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 13
+            challenge.progressMade = Double(record)
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 14 }) {
+            challenge.progressMade = Double(record)
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 14
+            challenge.progressMade = Double(record)
+        }
+        if let challenge = viewModel.challenges.first(where: { $0.id == 15 }) {
+            challenge.progressMade = Double(record)
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 15
+            challenge.progressMade = Double(record)
+        }
+        PersistenceController.shared.saveContext()
     }
 
 }
