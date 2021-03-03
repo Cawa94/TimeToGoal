@@ -61,7 +61,7 @@ struct NewGoalFirstView: View {
                             Spacer()
                                 .frame(height: 10)
 
-                            Text("Che cosa vuoi raggiungere?")
+                            Text("Cosa vuoi creare?")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.center)
                                 .padding([.leading, .trailing], 10)
@@ -71,29 +71,7 @@ struct NewGoalFirstView: View {
                             Spacer()
                                 .frame(height: 30)
 
-                            goalSection
-                                .frame(width: container.size.width - 80, height: container.size.height/4)
-                                .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
-                                            .stroke(Color.grayBorder, lineWidth: 1))
-                                .background(Color.defaultBackground
-                                                .cornerRadius(.defaultRadius)
-                                                .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
-                                )
-                                .scaleEffect(viewModel.goalButtonPressed ? 0.9 : 1.0)
-                                .onTapGesture {
-                                    viewModel.showGoalsPage = true
-                                }
-                                .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
-                                    withAnimation(.easeInOut(duration: 0.2)) {
-                                        viewModel.goalButtonPressed = pressing
-                                    }
-                                }, perform: {})
-
-                            Spacer()
-                                .frame(height: 50)
-
                             habitSection
-                                .frame(width: container.size.width - 80, height: container.size.height/4)
                                 .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
                                             .stroke(Color.grayBorder, lineWidth: 1))
                                 .background(Color.defaultBackground
@@ -111,7 +89,27 @@ struct NewGoalFirstView: View {
                                 }, perform: {})
 
                             Spacer()
-                        }
+                                .frame(height: 50)
+
+                            goalSection
+                                .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                            .stroke(Color.grayBorder, lineWidth: 1))
+                                .background(Color.defaultBackground
+                                                .cornerRadius(.defaultRadius)
+                                                .shadow(color: Color.blackShadow, radius: 5, x: 5, y: 5)
+                                )
+                                .scaleEffect(viewModel.goalButtonPressed ? 0.9 : 1.0)
+                                .onTapGesture {
+                                    viewModel.showGoalsPage = true
+                                }
+                                .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        viewModel.goalButtonPressed = pressing
+                                    }
+                                }, perform: {})
+
+                            Spacer()
+                        }.padding([.leading, .trailing], 20)
                     }.navigationBarTitle("Nuovo obiettivo", displayMode: .large)
                     .navigationBarItems(trailing: closeButton)
                 }
@@ -128,13 +126,13 @@ struct NewGoalFirstView: View {
                 .lineLimit(2)
                 .applyFont(.largeTitle)
             
-            Text("Progetto, libro, km")
+            Text("Scrivere un libro, creare un sito web, correre una maratona")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
                 .lineLimit(2)
-                .applyFont(.title4)
-        }
+                .applyFont(.title3)
+        }.padding(20)
     }
 
     var habitSection: some View {
@@ -146,13 +144,13 @@ struct NewGoalFirstView: View {
                 .lineLimit(2)
                 .applyFont(.largeTitle)
             
-            Text("Leggere, allenarsi, bere")
+            Text("Lavarti i denti, meditare, pulire il giardino")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
                 .lineLimit(2)
-                .applyFont(.title4)
-        }
+                .applyFont(.title3)
+        }.padding(20)
     }
 
     var closeButton: some View {

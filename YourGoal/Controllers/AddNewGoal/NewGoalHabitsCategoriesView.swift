@@ -53,7 +53,7 @@ struct NewGoalHabitsCategoriesView: View {
                             Spacer()
                                 .frame(height: 10)
 
-                            Text("Scegli un'abitudine")
+                            Text("Che tipo di abitudine?")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.center)
                                 .padding([.leading, .trailing], 10)

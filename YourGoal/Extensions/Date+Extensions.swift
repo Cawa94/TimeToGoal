@@ -18,8 +18,8 @@ extension Date {
 
     var formattedAsHoursString: String {
         let days = Calendar.current.component(.day, from: self)
-        var hours = Calendar.current.component(.hour, from: self)
-        if days != 31 { // sometimes days are set as 31 instead of 0
+        var hours = Calendar.current.component(.hour, from: self) - 1 // to compensate for adding 1 in .asHoursAndMinutes
+        if days != 31 { // by default day it's always set at 31. If it's different it means it's more than 24 hours of time
             hours += days * 24
         }
         let minutes = Calendar.current.component(.minute, from: self)
@@ -59,17 +59,12 @@ extension Date {
     }
 
     var zeroHours: Date {
-        var components = DateComponents()
-        components.day = 0
-        components.hour = 0
-        components.minute = 0
-        return Calendar.current.date(from: components) ?? Date()
+        0.00.asHoursAndMinutes
     }
 
     func remove(_ date: Date) -> Date {
-        let differenceComponents = Calendar.current.dateComponents([.day, .hour, .minute,], from: date, to: self)
-        let differenceDate = Calendar.current.date(from: differenceComponents) ?? Date()
-        return differenceDate
+        let difference = (self.timeIntervalSince(0.00.asHoursAndMinutes) - date.timeIntervalSince(0.00.asHoursAndMinutes))
+        return Date(timeInterval: difference, since: 0.00.asHoursAndMinutes)
     }
 
     var isEvening: Bool {

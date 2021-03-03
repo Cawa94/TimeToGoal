@@ -333,7 +333,7 @@ struct NewGoalTimeView: View {
                              tuesdayBinding: Binding<String>, wednesdayBinding: Binding<String>,
                              thursdayBinding: Binding<String>, fridayBinding: Binding<String>,
                              saturdayBinding: Binding<String>, sundayBinding: Binding<String>) -> some View {
-        Section(header: Text(String(format: "goal_custom_time_for_day",
+        Section(header: Text(String(format: "goal_custom_time_for_day".localized(),
                                     customMeasureBinding.wrappedValue.capitalized)).applyFont(.fieldQuestion)) {
             VStack {
                 HStack(spacing: 15) {

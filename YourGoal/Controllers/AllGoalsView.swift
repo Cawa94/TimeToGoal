@@ -65,8 +65,10 @@ struct AllGoalsView: View {
                             NavigationLink(destination: MainGoalView(viewModel: .init(goal: viewModel.goals[selectedIndex],
                                                                                       goals: $viewModel.goals,
                                                                                       challenges: viewModel.challenges,
-                                                                                      isPresented: $showMainGoalView, activeSheet: $viewModel.activeSheet,
-                                                                                      refreshAllGoals: $viewModel.refreshAllGoals)),
+                                                                                      isPresented: $showMainGoalView,
+                                                                                      activeSheet: $viewModel.activeSheet,
+                                                                                      refreshAllGoals: $viewModel.refreshAllGoals,
+                                                                                      selectedIndex: $selectedIndex)),
                                            isActive: $showMainGoalView) {
                                 EmptyView()
                             }

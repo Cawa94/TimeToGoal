@@ -53,7 +53,7 @@ struct NewGoalHabitsView: View {
                             Spacer()
                                 .frame(height: 10)
 
-                            Text("Scegli un'abitudine")
+                            Text(viewModel.newGoal.goalType.isHabit ? "Scegli un'abitudine" : "Scegli un'obiettivo")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.center)
                                 .padding([.leading, .trailing], 10)

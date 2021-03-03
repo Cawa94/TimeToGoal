@@ -20,8 +20,11 @@ extension Double {
     var asHoursAndMinutes: Date {
         var components = DateComponents()
         components.day = Int(self / 24)
-        components.hour = Int(self.truncatingRemainder(dividingBy: 24))
+        components.hour = Int(self.truncatingRemainder(dividingBy: 24)) + 1
         components.minute = Int(Double(self.truncatingRemainder(dividingBy: 1) * 100).stringWithoutDecimals) ?? 0
+        //debugPrint("SELF: \(self) - DATE: \((Calendar.current.date(from: components) ?? Date()))")
+        components.year = 2020
+        //debugPrint("SELF: \(self) - DATE: \((Calendar.current.date(from: components) ?? Date()))")
         return Calendar.current.date(from: components) ?? Date()
     }
 

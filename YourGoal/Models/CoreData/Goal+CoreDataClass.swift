@@ -243,7 +243,17 @@ public class Goal: NSManagedObject {
             worked += progress.hoursOfWork
         }
 
-        return CGFloat(worked/toWork * 100)
+        if timeTrackingType == .hoursWithMinutes {
+            //debugPrint("HOURS WORKED: \(worked) - \(worked.asHoursAndMinutes)")
+            //debugPrint("TOWORK: \(toWork) - \(toWork.asHoursAndMinutes)")
+
+            let percentage = (worked.asHoursAndMinutes.timeIntervalSince(0.00.asHoursAndMinutes)) / (toWork.asHoursAndMinutes.timeIntervalSince(0.00.asHoursAndMinutes))
+            //debugPrint("DATE PERCENTAGE: \(percentage)")
+
+            return CGFloat(percentage * 100)
+        } else {
+            return CGFloat(worked/toWork * 100)
+        }
     }
 
     func workOn(date: Date) -> Bool {
@@ -267,7 +277,7 @@ public class Goal: NSManagedObject {
             workOnDay = false
         }
         if let createdAt = createdAt {
-            return date >= createdAt && date <= updatedCompletionDate ? workOnDay : false
+            return date.withoutHours >= createdAt.withoutHours && date <= updatedCompletionDate ? workOnDay : false
         }
         return date <= updatedCompletionDate ? workOnDay : false
     }

@@ -25,15 +25,17 @@ public class MainGoalViewModel: ObservableObject {
     @Binding var isPresented: Bool
     @Binding var activeSheet: ActiveSheet?
     @Binding var refreshAllGoals: Bool
+    @Binding var selectedIndex: Int?
     @Binding var goals: [Goal]
 
     init(goal: Goal, goals: Binding<[Goal]>, challenges: [Challenge], isPresented: Binding<Bool>,
-         activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>) {
+         activeSheet: Binding<ActiveSheet?>, refreshAllGoals: Binding<Bool>, selectedIndex: Binding<Int?>) {
         self.goal = goal
         self.challenges = challenges
         self._isPresented = isPresented
         self._activeSheet = activeSheet
         self._refreshAllGoals = refreshAllGoals
+        self._selectedIndex = selectedIndex
         self._goals = goals
     }
 
@@ -300,10 +302,11 @@ struct MainGoalView: View {
                 Alert(title: Text("ASPETTA"),
                       message: Text("Sei sicuro di voler cancellare quest'obiettivo o abitudine?"),
                       primaryButton: .destructive(Text("Cancella")) {
+                        viewModel.selectedIndex = nil
                         viewModel.goals.removeAll(where: { $0.id == viewModel.goal.id })
-                        viewModel.refreshAllGoals = true
                         PersistenceController.shared.container.viewContext.delete(viewModel.goal)
                         PersistenceController.shared.saveContext()
+                        viewModel.refreshAllGoals = true
                         viewModel.isPresented = false
                       },
                       secondaryButton: .cancel())
