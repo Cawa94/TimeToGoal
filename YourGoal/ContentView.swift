@@ -191,7 +191,7 @@ struct ContentView: View {
         }, content: { item in
             switch item {
             case .tutorial:
-                TutorialView(viewModel: .init(tutorialType: .whatAreSmartGoals), isPresented: .constant(false), activeSheet: $viewModel.activeSheet)
+                TutorialView(viewModel: .init(tutorialType: .introduction), isPresented: .constant(false), activeSheet: $viewModel.activeSheet)
             case .newGoal:
                 NewGoalFirstView(viewModel: .init(challenges: viewModel.challenges), activeSheet: $viewModel.activeSheet)
             case .renewGoal:

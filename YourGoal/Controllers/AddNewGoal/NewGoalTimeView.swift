@@ -70,6 +70,13 @@ struct NewGoalTimeView: View {
             viewModel.goal = viewModel.goal
         })
 
+        let timeFrameBinding = Binding<String>(get: {
+            viewModel.goal.timeFrame ?? ""
+        }, set: {
+            viewModel.goal.timeFrame = $0
+            viewModel.goal = viewModel.goal
+        })
+
         let mondayBinding = Binding<String>(get: {
             "\(viewModel.goal.monday)"
         }, set: {
@@ -132,15 +139,13 @@ struct NewGoalTimeView: View {
 
                 Form {
                     Section(header: HStack {
-                        Text(viewModel.goal.goalType.isHabit
-                                ? "Il tuo \((viewModel.goal.datesHasBeenCompleted?.count ?? 0) + 1)º traguardo"
-                                : "Il tuo traguardo").applyFont(.fieldQuestion).multilineTextAlignment(.center)
+                        Text("Il tuo traguardo").applyFont(.fieldQuestion).multilineTextAlignment(.center)
                         Spacer()
                         if viewModel.goal.goalType.isHabit {
                             Button(action: {
                                 self.showTutorial = true
                             }) {
-                                Text("info").applyFont(.smallButton).foregroundColor(viewModel.goal.goalColor)
+                                Text("aiuto").applyFont(.smallButton).foregroundColor(viewModel.goal.goalColor)
                                     .padding([.top, .bottom], 1)
                                     .padding([.leading, .trailing], 10)
                                     .cornerRadius(.defaultRadius)
@@ -165,6 +170,15 @@ struct NewGoalTimeView: View {
                                 Text(viewModel.goal.goalType.ofGoalSentence ?? "")
                                     .foregroundColor(.grayText)
                                     .applyFont(.largeTitle)
+                            }
+                            Spacer()
+                                .frame(height: 0)
+                            if viewModel.goal.goalType.isHabit {
+                                HStack(spacing: 10) {
+                                    weeklyButton(timeFrameBinding: timeFrameBinding)
+                                    monthlyButton(timeFrameBinding: timeFrameBinding)
+                                    freeButton(timeFrameBinding: timeFrameBinding)
+                                }
                             }
                         }
                     }
@@ -260,7 +274,7 @@ struct NewGoalTimeView: View {
             updateCompletionDate()
         }
         .sheet(isPresented: $showTutorial) {
-            TutorialView(viewModel: .init(tutorialType: .howToSetTarget), isPresented: $showTutorial, activeSheet: $activeSheet)
+            TutorialView(viewModel: .init(tutorialType: .target), isPresented: $showTutorial, activeSheet: $activeSheet)
         }
 
     }
@@ -327,6 +341,81 @@ struct NewGoalTimeView: View {
                 Spacer()
             }
         }.frame(height: 55)
+    }
+
+    func weeklyButton(timeFrameBinding: Binding<String>) -> some View {
+        HStack {
+            Button(action: {
+                timeFrameBinding.wrappedValue = "weekly"
+            }) {
+                HStack {
+                    Spacer()
+                    Text("Alla settimana")
+                    Spacer()
+                }
+                    .foregroundColor(timeFrameBinding.wrappedValue == "weekly" ? .white : .gray)
+                    .applyFont(.smallButton)
+                    .multilineTextAlignment(.center)
+                    .padding([.top, .bottom], 10)
+                    .background(timeFrameBinding.wrappedValue == "weekly"
+                                    ? LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                                     startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    : nil)
+                    .cornerRadius(.defaultRadius)
+                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                .stroke(Color.grayBorder, lineWidth: 1))
+            }.accentColor(viewModel.goal.goalColor)
+        }
+    }
+
+    func monthlyButton(timeFrameBinding: Binding<String>) -> some View {
+        HStack {
+            Button(action: {
+                timeFrameBinding.wrappedValue = "monthly"
+            }) {
+                HStack {
+                    Spacer()
+                    Text("Al mese")
+                    Spacer()
+                }
+                    .foregroundColor(timeFrameBinding.wrappedValue == "monthly" ? .white : .gray)
+                    .applyFont(.smallButton)
+                    .multilineTextAlignment(.center)
+                    .padding([.top, .bottom], 10)
+                    .background(timeFrameBinding.wrappedValue == "monthly"
+                                    ? LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                                     startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    : nil)
+                    .cornerRadius(.defaultRadius)
+                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                .stroke(Color.grayBorder, lineWidth: 1))
+            }.accentColor(viewModel.goal.goalColor)
+        }
+    }
+
+    func freeButton(timeFrameBinding: Binding<String>) -> some View {
+        HStack {
+            Button(action: {
+                timeFrameBinding.wrappedValue = "free"
+            }) {
+                HStack {
+                    Spacer()
+                    Text("Senza fretta")
+                    Spacer()
+                }
+                    .foregroundColor(timeFrameBinding.wrappedValue == "free" ? .white : .gray)
+                    .applyFont(.smallButton)
+                    .multilineTextAlignment(.center)
+                    .padding([.top, .bottom], 10)
+                    .background(timeFrameBinding.wrappedValue == "free"
+                                    ? LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
+                                                     startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    : nil)
+                    .cornerRadius(.defaultRadius)
+                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
+                                .stroke(Color.grayBorder, lineWidth: 1))
+            }.accentColor(viewModel.goal.goalColor)
+        }
     }
 
     func daySelectorsSection(customMeasureBinding: Binding<String>, mondayBinding: Binding<String>,

@@ -28,6 +28,10 @@ public class Goal: NSManagedObject {
         return MeasureUnit.getFrom(customTimeMeasure ?? "").timeTrackingType
     }
 
+    var timeFrameType: TimeFrameType {
+        return TimeFrameType.getFrom(timeFrame ?? "")
+    }
+
     var goalColor: Color {
         Color(color ?? "orangeColor")
     }
@@ -244,11 +248,7 @@ public class Goal: NSManagedObject {
         }
 
         if timeTrackingType == .hoursWithMinutes {
-            //debugPrint("HOURS WORKED: \(worked) - \(worked.asHoursAndMinutes)")
-            //debugPrint("TOWORK: \(toWork) - \(toWork.asHoursAndMinutes)")
-
             let percentage = (worked.asHoursAndMinutes.timeIntervalSince(0.00.asHoursAndMinutes)) / (toWork.asHoursAndMinutes.timeIntervalSince(0.00.asHoursAndMinutes))
-            //debugPrint("DATE PERCENTAGE: \(percentage)")
 
             return CGFloat(percentage * 100)
         } else {

@@ -39,6 +39,7 @@
 		DA4FC5C025DD223800B65C26 /* Challenge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4FC5BF25DD223800B65C26 /* Challenge+CoreDataClass.swift */; };
 		DA4FC5D425DD239800B65C26 /* ProfileChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4FC5D325DD239800B65C26 /* ProfileChallenge.swift */; };
 		DA50012625BB129700853B50 /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA50012525BB129700853B50 /* IconSelectorView.swift */; };
+		DA53664B25F69DC000300476 /* TimeFrameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA53664A25F69DC000300476 /* TimeFrameType.swift */; };
 		DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */; };
 		DA582A59252518CA00A37693 /* NewGoalQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */; };
 		DA59593225C5A3F90074CE85 /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */; };
@@ -148,6 +149,7 @@
 		DA4FC5BF25DD223800B65C26 /* Challenge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Challenge+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Challenge+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DA4FC5D325DD239800B65C26 /* ProfileChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChallenge.swift; sourceTree = "<group>"; };
 		DA50012525BB129700853B50 /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
+		DA53664A25F69DC000300476 /* TimeFrameType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFrameType.swift; sourceTree = "<group>"; };
 		DA55C8EE2528977200CA5297 /* TrackManualTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackManualTimeView.swift; sourceTree = "<group>"; };
 		DA582A58252518CA00A37693 /* NewGoalQuestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalQuestionsView.swift; sourceTree = "<group>"; };
 		DA59593125C5A3F90074CE85 /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Profile+CoreDataClass.swift"; sourceTree = "<absolute>"; };
@@ -525,6 +527,7 @@
 				DA084EE6257549BA00CAC158 /* ActiveSheet.swift */,
 				DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */,
 				DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */,
+				DA53664A25F69DC000300476 /* TimeFrameType.swift */,
 				DA9D02F92552F7BF00DBFB2E /* TimeSelectorType.swift */,
 			);
 			path = Enums;
@@ -800,6 +803,7 @@
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
 				DAB2A42825E3F3CC00EED1A6 /* CalendarView.swift in Sources */,
 				DA938A2C2536FD9300446580 /* FireworksView.swift in Sources */,
+				DA53664B25F69DC000300476 /* TimeFrameType.swift in Sources */,
 				DAC0855525C4220300FE4DBC /* StatisticsSmallView.swift in Sources */,
 				DA4FC5B825DD1E0A00B65C26 /* ChallengeView.swift in Sources */,
 				DA1707A22528889A0082FC82 /* TrackHoursSpentView.swift in Sources */,

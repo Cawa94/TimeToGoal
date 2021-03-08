@@ -88,7 +88,7 @@ struct JournalView: View {
         BackgroundView(color: .defaultBackground) {
             JournalDatesView(viewModel: JournalDatesViewModel(journal: viewModel.journal,
                                                               selectedDay: $viewModel.selectedDay))
-                .padding([.leading, .trailing, .bottom], 15)
+                .padding([.bottom], 15)
 
             TextEditor(text: notesBinding)
                 .background(Color.defaultBackground)

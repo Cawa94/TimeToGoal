@@ -68,6 +68,7 @@ struct JournalDatesView: View {
                             }
                     }
                 }
+                .padding([.leading, .trailing], 10)
                 .cornerRadius(.defaultRadius)
                 .onAppear {
                     scrollView.scrollTo(viewModel.selectedDay.adding(days: -2).customId)

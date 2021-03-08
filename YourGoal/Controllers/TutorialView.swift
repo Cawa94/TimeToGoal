@@ -9,9 +9,9 @@ import SwiftUI
 
 public class TutorialViewModel: ObservableObject {
 
-    enum TutorialType {
-        case whatAreSmartGoals
-        case howToSetTarget
+    enum TutorialType: String {
+        case introduction
+        case target
     }
 
     @Published var tutorialType: TutorialType
@@ -22,9 +22,9 @@ public class TutorialViewModel: ObservableObject {
 
     var tutorialTitle: String {
         switch tutorialType {
-        case .whatAreSmartGoals:
-            return "tutorial_title".localized()
-        case .howToSetTarget:
+        case .introduction:
+            return "tutorial_introduction_title".localized()
+        case .target:
             return "Traguardi 🎯🏆".localized()
         }
     }
@@ -45,36 +45,48 @@ struct TutorialView: View {
             BackgroundView(color: .defaultBackground) {
                 TabView(selection: $currentPage) {
                     switch viewModel.tutorialType {
-                    case .whatAreSmartGoals:
+                    case .introduction:
                         ExplanationView(viewModel: .init(pageNumber: 1,
+                                                         tutorialType: viewModel.tutorialType,
                                                          currentPage: $currentPage,
                                                          activeSheet: $activeSheet,
                                                          isPresented: $isPresented)).tag(1)
                         ExplanationView(viewModel: .init(pageNumber: 2,
+                                                         tutorialType: viewModel.tutorialType,
                                                          currentPage: $currentPage,
                                                          activeSheet: $activeSheet,
                                                          isPresented: $isPresented)).tag(2)
                         ExplanationView(viewModel: .init(pageNumber: 3,
+                                                         tutorialType: viewModel.tutorialType,
                                                          currentPage: $currentPage,
                                                          activeSheet: $activeSheet,
                                                          isPresented: $isPresented)).tag(3)
                         ExplanationView(viewModel: .init(pageNumber: 4,
                                                          isLastPage: true,
+                                                         tutorialType: viewModel.tutorialType,
                                                          currentPage: $currentPage,
                                                          activeSheet: $activeSheet,
                                                          isPresented: $isPresented)).tag(4)
-                    case .howToSetTarget:
-                        ExplanationView(viewModel: .init(pageNumber: 3,
+                    case .target:
+                        ExplanationView(viewModel: .init(pageNumber: 1,
                                                          shouldDismissSheet: false,
+                                                         tutorialType: viewModel.tutorialType,
                                                          currentPage: $currentPage,
                                                          activeSheet: $activeSheet,
                                                          isPresented: $isPresented)).tag(1)
-                        ExplanationView(viewModel: .init(pageNumber: 4,
+                        ExplanationView(viewModel: .init(pageNumber: 2,
                                                          shouldDismissSheet: false,
-                                                         isLastPage: true,
+                                                         tutorialType: viewModel.tutorialType,
                                                          currentPage: $currentPage,
                                                          activeSheet: $activeSheet,
                                                          isPresented: $isPresented)).tag(2)
+                        ExplanationView(viewModel: .init(pageNumber: 3,
+                                                         shouldDismissSheet: false,
+                                                         isLastPage: true,
+                                                         tutorialType: viewModel.tutorialType,
+                                                         currentPage: $currentPage,
+                                                         activeSheet: $activeSheet,
+                                                         isPresented: $isPresented)).tag(3)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))

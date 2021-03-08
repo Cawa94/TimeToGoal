@@ -46,7 +46,6 @@ public class GoalSmallProgressViewModel: ObservableObject {
         if goal?.timeTrackingType == .hoursWithMinutes {
             let dateRemaining = Double(goal?.timeRequired ?? 0).asHoursAndMinutes
                 .remove(Double(goal?.timeCompleted ?? 0).asHoursAndMinutes)
-            debugPrint("DATE REMAINING: \(dateRemaining)")
             if dateRemaining > Date().zeroHours {
                 return dateRemaining.formattedAsHoursString
             } else {

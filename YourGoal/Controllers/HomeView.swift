@@ -155,21 +155,21 @@ struct HomeView: View {
                                             challenges: viewModel.challenges)
                             .transition(.move(edge: .bottom))
                     }
-                    
+                    /*
                     if viewModel.showMotivation {
                         MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
                             .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.75)))
-                    }
+                    }*/
                 }
             }
         }.onReceive(viewModel.$hasTrackedGoal, perform: { hasTrackedGoal in
             if hasTrackedGoal {
-                if !ContentView.showedQuote {
+                /*if !ContentView.showedQuote {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         ContentView.showedQuote = true
                         viewModel.showMotivation = true
                     }
-                }
+                }*/
                 if viewModel.goals[viewModel.indexSelectedGoal].isCompleted {
                     #if RELEASE
                         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {

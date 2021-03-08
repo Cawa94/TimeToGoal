@@ -12,6 +12,7 @@ public class ExplanationViewModel: ObservableObject {
     @Published var pageNumber: Int
     @Published var shouldDismissSheet: Bool
     @Published var isLastPage: Bool
+    @Published var tutorialType: TutorialViewModel.TutorialType
 
     @Binding var currentPage: Int
     @Binding var activeSheet: ActiveSheet?
@@ -20,12 +21,14 @@ public class ExplanationViewModel: ObservableObject {
     init(pageNumber: Int,
          shouldDismissSheet: Bool = true,
          isLastPage: Bool = false,
+         tutorialType: TutorialViewModel.TutorialType,
          currentPage: Binding<Int>,
          activeSheet: Binding<ActiveSheet?>,
          isPresented: Binding<Bool>) {
         self.pageNumber = pageNumber
         self.shouldDismissSheet = shouldDismissSheet
         self.isLastPage = isLastPage
+        self.tutorialType = tutorialType
         self._currentPage = currentPage
         self._activeSheet = activeSheet
         self._isPresented = isPresented
@@ -55,17 +58,6 @@ struct ExplanationView: View {
                     fourthPageText
                 }
 
-                if viewModel.pageNumber == 4 {
-                    Text("tutorial_fourth_step_2")
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-                        .padding([.leading, .trailing], 25)
-                        .applyFont(.title2)
-                }
-
-                Spacer()
-                    .frame(height: 40)
-
                 Button(action: {
                     if viewModel.isLastPage {
                         if viewModel.shouldDismissSheet {
@@ -81,7 +73,7 @@ struct ExplanationView: View {
                 }) {
                     HStack {
                         Spacer()
-                        Text(viewModel.pageNumber == 4 ? "tutorial_close_button" : "global_next")
+                        Text(viewModel.isLastPage ? "tutorial_introduction_button" : "global_next")
                             .foregroundColor(.white)
                             .multilineTextAlignment(.center)
                             .applyFont(.button)
@@ -101,57 +93,35 @@ struct ExplanationView: View {
     }
 
     var firstPageText: some View {
-        Group {
-            Text("tutorial_first_step_1") +
-            Text("TimeToGoal") +
-            Text("tutorial_first_step_2") +
-            Text("SMART") +
-            Text("tutorial_first_step_3")
-        }
-        .multilineTextAlignment(.center)
-        .foregroundColor(.grayText)
-        .padding([.leading, .trailing], 25)
-        .applyFont(.title2)
+        Text("tutorial_\(viewModel.tutorialType.rawValue)_first_step".localized())
+            .multilineTextAlignment(.center)
+            .foregroundColor(.grayText)
+            .padding([.leading, .trailing], 25)
+            .applyFont(.title)
     }
 
     var secondPageText: some View {
-        Group {
-            Text("tutorial_second_step_1") +
-            Text("tutorial_second_step_2") +
-            Text("tutorial_second_step_3") +
-            Text("tutorial_second_step_4") +
-            Text("tutorial_second_step_5")
-        }
-        .multilineTextAlignment(.center)
-        .foregroundColor(.grayText)
-        .padding([.leading, .trailing], 25)
-        .applyFont(.title2)
+        Text("tutorial_\(viewModel.tutorialType.rawValue)_second_step".localized())
+            .multilineTextAlignment(.center)
+            .foregroundColor(.grayText)
+            .padding([.leading, .trailing], 25)
+            .applyFont(.title)
     }
 
     var thirdPageText: some View {
-        Group {
-            Text("tutorial_third_step_1") +
-            Text("tutorial_third_step_2") +
-            Text("tutorial_third_step_3") +
-            Text("tutorial_third_step_4") +
-            Text("tutorial_third_step_5") +
-            Text("tutorial_third_step_6")
-        }
-        .multilineTextAlignment(.center)
-        .foregroundColor(.grayText)
-        .padding([.leading, .trailing], 25)
-        .applyFont(.title2)
+        Text("tutorial_\(viewModel.tutorialType.rawValue)_third_step".localized())
+            .multilineTextAlignment(.center)
+            .foregroundColor(.grayText)
+            .padding([.leading, .trailing], 25)
+            .applyFont(.title)
     }
 
     var fourthPageText: some View {
-        Group {
-            Text("TimeToGoal") +
-            Text("tutorial_fourth_step_1")
-        }
-        .multilineTextAlignment(.center)
-        .foregroundColor(.grayText)
-        .padding([.leading, .trailing], 25)
-        .applyFont(.title2)
+        Text("tutorial_\(viewModel.tutorialType.rawValue)_fourth_step".localized())
+            .multilineTextAlignment(.center)
+            .foregroundColor(.grayText)
+            .padding([.leading, .trailing], 25)
+            .applyFont(.title)
     }
 
     var topSpace: CGFloat {
