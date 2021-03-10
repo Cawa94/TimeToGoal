@@ -69,12 +69,16 @@ struct GoalListRow: View {
                         Spacer()
                             .frame(height: 5)
 
-                        Text("Traguardo raggiunto")
-                            .applyFont(.title2)
-                            .foregroundColor(.grayText)
-                        Text("\(viewModel.goal.datesHasBeenCompleted?.count ?? 0) volte")
-                            .applyFont(.title)
-                            .foregroundColor(viewModel.goal.goalColor)
+                        if viewModel.goal.goalType.isHabit {
+                            Text(viewModel.goal.timeFrameType == .weekly
+                                    ? "Settimane perfette"
+                                    : "Mesi perfetti")
+                                .applyFont(.title2)
+                                .foregroundColor(.grayText)
+                            Text("\(viewModel.goal.timesHasBeenCompleted)")
+                                .applyFont(.title)
+                                .foregroundColor(viewModel.goal.goalColor)
+                        }
                     }
 
                     Spacer()

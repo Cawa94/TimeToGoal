@@ -104,15 +104,21 @@ struct TrackManualTimeView: View {
                     currentGoal?.editedAt = Date()
                     if currentGoal?.isCompleted ?? false {
                         currentGoal?.completedAt = Date()
-                        if currentGoal?.datesHasBeenCompleted != nil {
-                            currentGoal?.datesHasBeenCompleted?.append(Date())
+                        if currentGoal?.timesHasBeenCompleted != nil {
+                            currentGoal?.timesHasBeenCompleted += 1
                         } else {
-                            currentGoal?.datesHasBeenCompleted = [Date()]
+                            currentGoal?.timesHasBeenCompleted = 1
                         }
                         FirebaseService.logConversion(.goalCompleted, goal: currentGoal)
-                        updateCompleteGoalChallenge()
+                        if !(currentGoal?.goalType.isHabit ?? false) {
+                            updateCompleteGoalChallenge()
+                        } else if currentGoal?.timeFrameType == .weekly {
+                            updatePerfectWeekChallenges()
+                        }
                     }
-                    updateTrackingChallenge()
+                    if currentGoal?.goalType.isHabit ?? false {
+                        updateTrackingChallenge()
+                    }
                     PersistenceController.shared.saveContext()
                     self.feedback.notificationOccurred(.success)
                     self.isPresented = false
@@ -144,12 +150,36 @@ struct TrackManualTimeView: View {
         .buttonStyle(PlainButtonStyle())
     }
 
-    func updateCompleteGoalChallenge() {
-        if !(currentGoal?.goalType.isHabit ?? false) {
+    func updatePerfectWeekChallenges() {
+        if let challenge = challenges.first(where: { $0.id == 2 }) {
+            challenge.progressMade += 1
+        } else {
             let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 10
+            challenge.id = 2
             challenge.progressMade = 1
         }
+
+        if let challenge = challenges.first(where: { $0.id == 3 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 3
+            challenge.progressMade = 1
+        }
+
+        if let challenge = challenges.first(where: { $0.id == 4 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 4
+            challenge.progressMade = 1
+        }
+    }
+
+    func updateCompleteGoalChallenge() {
+        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+        challenge.id = 10
+        challenge.progressMade = 1
     }
 
     func updateTrackingChallenge() {

@@ -24,7 +24,7 @@ public class StatisticsViewModel: ObservableObject {
     }
 
     var targetRenewed: Int {
-        goals.filter( { $0.goalType.isHabit }).map { ($0.datesHasBeenCompleted?.count ?? 0) }.reduce(0, +)
+        goals.filter( { $0.goalType.isHabit }).map { Int(($0.timesHasBeenCompleted)) }.reduce(0, +)
     }
 
 }
@@ -43,8 +43,7 @@ struct StatisticsView: View {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let startDate = viewModel.validGoals.sorted(by: { ($0.createdAt ?? Date()) < ($1.createdAt ?? Date()) })
             .first?.createdAt ?? formatter.date(from: "2021/01/01 23:00") ?? Date()
-        let endDate = viewModel.validGoals.sorted(by: { ($0.updatedCompletionDate) < ($1.updatedCompletionDate) })
-            .last?.updatedCompletionDate ?? Date()
+        let endDate = Date()
         return DateInterval(start: startDate, end: endDate)
     }
 

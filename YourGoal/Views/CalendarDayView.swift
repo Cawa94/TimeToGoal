@@ -27,7 +27,7 @@ struct CalendarDayView: View {
                 .overlay(
                     ZStack {
                         if let goal = goals
-                                   .first(where: { ($0.datesHasBeenCompleted?.contains(where: { $0.withoutHours == date.withoutHours }) ?? false) }) {
+                            .first(where: { !$0.goalType.isHabit && $0.completedAt?.withoutHours == date.withoutHours }) {
                             Circle()
                                 .fill(goal.goalColor)
 
@@ -36,7 +36,16 @@ struct CalendarDayView: View {
                                     .applyFont(.title2)
                                     .foregroundColor(.white)
                             }
-                        } else if let goal = goals.first(where: { $0.updatedCompletionDate.withoutHours == date.withoutHours }) {
+                        } else if date.withoutHours == Date().withoutHours {
+                            Circle()
+                                .fill(Color.grayText)
+
+                            ZStack {
+                                Text(String(self.calendar.component(.day, from: date)))
+                                    .applyFont(.title2)
+                                    .foregroundColor(.white)
+                            }
+                        } else if let goal = goals.first(where: { $0.updatedCompletionDate?.withoutHours == date.withoutHours }) {
                             Circle()
                                 .strokeBorder(goal.goalColor, lineWidth: 2)
                                 .opacity(0.5)

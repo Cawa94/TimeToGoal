@@ -48,8 +48,16 @@ extension Date {
         Calendar.current.component(.weekday, from: self)
     }
 
+    var monthDay: Int {
+        Calendar.current.component(.day, from: self)
+    }
+
     var monthNumber: Int {
         Calendar.current.component(.month, from: self)
+    }
+
+    var weekOfYear: Int {
+        Calendar.current.component(.weekOfYear, from: self)
     }
 
     var startOfWeek: Date? {

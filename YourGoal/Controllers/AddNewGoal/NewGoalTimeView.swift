@@ -12,13 +12,12 @@ public class NewGoalTimeViewModel: ObservableObject {
     @Published var goal: Goal
     @Published var challenges: [Challenge]
     @Published var showErrorAlert = false
+    @Published var startDate = Date()
 
     var isNewGoal: Bool
-    var isRenewingHabit: Bool
 
-    init(goal: Goal, challenges: [Challenge], isNew: Bool = false, isRenewingHabit: Bool = false) {
+    init(goal: Goal, challenges: [Challenge], isNew: Bool = false) {
         self.isNewGoal = isNew
-        self.isRenewingHabit = isRenewingHabit
         self.challenges = challenges
         self.goal = goal
     }
@@ -139,9 +138,9 @@ struct NewGoalTimeView: View {
 
                 Form {
                     Section(header: HStack {
-                        Text("Il tuo traguardo").applyFont(.fieldQuestion).multilineTextAlignment(.center)
+                        Text("Il tuo obiettivo").applyFont(.fieldQuestion).multilineTextAlignment(.center)
                         Spacer()
-                        if viewModel.goal.goalType.isHabit {
+                        /*if viewModel.goal.goalType.isHabit {
                             Button(action: {
                                 self.showTutorial = true
                             }) {
@@ -152,7 +151,7 @@ struct NewGoalTimeView: View {
                                     .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
                                                 .stroke(viewModel.goal.goalColor, lineWidth: 1))
                             }
-                        }
+                        }*/
                     }) {
                         VStack(spacing: 10) {
                             if MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .singleTime
@@ -177,7 +176,7 @@ struct NewGoalTimeView: View {
                                 HStack(spacing: 10) {
                                     weeklyButton(timeFrameBinding: timeFrameBinding)
                                     monthlyButton(timeFrameBinding: timeFrameBinding)
-                                    freeButton(timeFrameBinding: timeFrameBinding)
+                                    //freeButton(timeFrameBinding: timeFrameBinding)
                                 }
                             }
                         }
@@ -200,36 +199,34 @@ struct NewGoalTimeView: View {
                                             saturdayBinding: saturdayBinding, sundayBinding: sundayBinding)
                     }
 
-                    Section(header: Text("add_goal_extimated_date_title").applyFont(.fieldQuestion)) {
-                        VStack {
-                            Text(completionDate.formattedAsDateString)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .background(Color.clear)
-                                .foregroundColor(viewModel.goal.goalColor)
-                                .applyFont(.largeTitle)
+                    if timeFrameBinding.wrappedValue == "free" {
+                        Section(header: Text("add_goal_extimated_date_title").applyFont(.fieldQuestion)) {
+                            VStack {
+                                Text(completionDate.formattedAsDateString)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .background(Color.clear)
+                                    .foregroundColor(viewModel.goal.goalColor)
+                                    .applyFont(.largeTitle)
+                            }
                         }
+                        .applyFont(.body)
+                        .textCase(nil)
+                        .listRowBackground(Color.defaultBackground)
+                        .foregroundColor(.fieldsTitleForegroundColor)
                     }
-                    .applyFont(.body)
-                    .textCase(nil)
-                    .listRowBackground(Color.defaultBackground)
-                    .foregroundColor(.fieldsTitleForegroundColor)
                     
                     Section {
                         Button(action: {
                             if viewModel.goal.timeRequired != 0, viewModel.goal.atLeastOneDayWorking {
-                                if viewModel.isRenewingHabit {
-                                    updateGoalWithNewTarget()
-                                } else {
-                                    viewModel.goal = viewModel.goal
-                                    showQuestionsView = true
-                                }
+                                viewModel.goal = viewModel.goal
+                                showQuestionsView = true
                             } else {
                                 viewModel.showErrorAlert = true
                             }
                         }) {
                             HStack {
                                 Spacer()
-                                Text(viewModel.isRenewingHabit ? "Imposta nuovo traguardo" : "global_next")
+                                Text("global_next")
                                     .foregroundColor(.white)
                                     .applyFont(.button)
                                     .multilineTextAlignment(.center)
@@ -257,7 +254,7 @@ struct NewGoalTimeView: View {
                     .listRowBackground(Color.defaultBackground)
                 }
             }
-            .navigationBarTitle(viewModel.isRenewingHabit ? "Nuovo traguardo" : "global_time_required", displayMode: .inline)
+            .navigationBarTitle("global_time_required", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: leadingButton, trailing: trailingButton)
         }
@@ -265,9 +262,6 @@ struct NewGoalTimeView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
-            if viewModel.isRenewingHabit {
-                viewModel.goal.timeCompleted = 0
-            }
             if self.viewModel.goal.customTimeMeasure == nil || self.viewModel.goal.customTimeMeasure == "" {
                 self.viewModel.goal.customTimeMeasure = self.viewModel.goal.goalType.measureUnits.first?.namePlural
             }
@@ -286,9 +280,7 @@ struct NewGoalTimeView: View {
             }
             self.isPresented = false
         }) {
-            if !viewModel.isRenewingHabit {
-                Image(systemName: "chevron.left")
-            }
+            Image(systemName: "chevron.left")
         }
     }
 
@@ -296,7 +288,7 @@ struct NewGoalTimeView: View {
         Button(action: {
             self.activeSheet = nil
         }) {
-            if viewModel.isNewGoal || viewModel.isRenewingHabit {
+            if viewModel.isNewGoal {
                 Image("close")
                     .resizable()
                     .aspectRatio(1.0, contentMode: .fit)
@@ -400,7 +392,7 @@ struct NewGoalTimeView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Senza fretta")
+                    Text("In totale")
                     Spacer()
                 }
                     .foregroundColor(timeFrameBinding.wrappedValue == "free" ? .white : .gray)
@@ -561,40 +553,7 @@ struct NewGoalTimeView: View {
     }
 
     func updateCompletionDate() {
-        completionDate = viewModel.goal.updatedCompletionDate
-    }
-
-    func updateGoalWithNewTarget() {
-        viewModel.goal.editedAt = Date()
-        viewModel.goal.timeCompleted = 0
-        viewModel.goal.completionDateExtimated = viewModel.goal.updatedCompletionDate
-
-        if let challenge = viewModel.challenges.first(where: { $0.id == 2 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 2
-            challenge.progressMade = 1
-        }
-
-        if let challenge = viewModel.challenges.first(where: { $0.id == 3 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 3
-            challenge.progressMade = 1
-        }
-
-        if let challenge = viewModel.challenges.first(where: { $0.id == 4 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 4
-            challenge.progressMade = 1
-        }
-
-        PersistenceController.shared.saveContext()
-        self.activeSheet = nil
+        completionDate = viewModel.goal.updatedCompletionDate ?? Date()
     }
 
 }

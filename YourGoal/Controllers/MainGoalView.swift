@@ -63,10 +63,6 @@ public class MainGoalViewModel: ObservableObject {
         }
     }
 
-    var completionDate: String {
-        return (goal.updatedCompletionDate).formattedAsDateString
-    }
-
 }
 
 struct MainGoalView: View {

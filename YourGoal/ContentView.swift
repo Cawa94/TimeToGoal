@@ -37,6 +37,7 @@ struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
     @StateObject var viewRouter = ViewRouter()
 
+    static var firstOpen = true
     static var showedQuote = false
 
     var goalsRequest: FetchRequest<Goal>
@@ -165,6 +166,10 @@ struct ContentView: View {
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {
                 viewModel.goals = goals.filter { $0.isValid }
+                if ContentView.firstOpen && (Date().dayNumber == 2 || Date().monthDay == 1) {
+                    checkAndRestartHabits()
+                    ContentView.firstOpen = false
+                }
                 viewModel.refreshAllGoals = false
             }
         })
@@ -194,18 +199,25 @@ struct ContentView: View {
                 TutorialView(viewModel: .init(tutorialType: .introduction), isPresented: .constant(false), activeSheet: $viewModel.activeSheet)
             case .newGoal:
                 NewGoalFirstView(viewModel: .init(challenges: viewModel.challenges), activeSheet: $viewModel.activeSheet)
-            case .renewGoal:
-                if let goal = viewModel.goalToRenew {
-                    NavigationView {
-                        NewGoalTimeView(viewModel: .init(goal: goal,
-                                                         challenges: viewModel.challenges,
-                                                         isRenewingHabit: true),
-                                        activeSheet: $viewModel.activeSheet,
-                                        isPresented: .constant(true))
-                    }
-                }
             }
         })
+    }
+
+    func checkAndRestartHabits() {
+        for goal in viewModel.goals.filter({ $0.goalType.isHabit }) {
+            if goal.timeFrameType == .weekly,
+               Date().dayNumber == 2,
+               !(goal.progress?.compactMap({ $0 as? Progress }).contains(where: { $0.date?.withoutHours == Date().withoutHours }) ?? false) { // it's monday and user didn't already tracked today
+                goal.timeCompleted = 0
+                goal.completedAt = nil
+            }
+            if goal.timeFrameType == .monthly,
+               Date().monthDay == 1,
+               !(goal.progress?.compactMap({ $0 as? Progress }).contains(where: { $0.date?.withoutHours == Date().withoutHours }) ?? false) { // it's first month day and user didn't already tracked today
+                goal.timeCompleted = 0
+                goal.completedAt = nil
+            }
+        }
     }
 
 }

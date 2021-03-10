@@ -72,51 +72,55 @@ public class Goal: NSManagedObject {
         self.sunday > 0
     }
 
-    var updatedCompletionDate: Date {
-        if timeRequired != 0, atLeastOneDayWorking {
-            if timeTrackingType == .hoursWithMinutes {
-                let dayHours = [sunday.asHoursAndMinutes, monday.asHoursAndMinutes, tuesday.asHoursAndMinutes,
-                                wednesday.asHoursAndMinutes, thursday.asHoursAndMinutes, friday.asHoursAndMinutes,
-                                saturday.asHoursAndMinutes]
+    var updatedCompletionDate: Date? {
+        if !goalType.isHabit {
+            if timeRequired != 0, atLeastOneDayWorking {
+                if timeTrackingType == .hoursWithMinutes {
+                    let dayHours = [sunday.asHoursAndMinutes, monday.asHoursAndMinutes, tuesday.asHoursAndMinutes,
+                                    wednesday.asHoursAndMinutes, thursday.asHoursAndMinutes, friday.asHoursAndMinutes,
+                                    saturday.asHoursAndMinutes]
 
-                var daysRequired = -1
-                var decreasingTotal = self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes)
-                var dayNumber = Date().dayNumber
+                    var daysRequired = -1
+                    var decreasingTotal = self.timeRequired.asHoursAndMinutes.remove(self.timeCompleted.asHoursAndMinutes)
+                    var dayNumber = Date().dayNumber
 
-                while decreasingTotal > Date().zeroHours {
-                    daysRequired += 1
-                    decreasingTotal = decreasingTotal.remove(dayHours[dayNumber - 1])
-                    dayNumber += 1
-                    if dayNumber == 8 {
-                        dayNumber = 1
+                    while decreasingTotal > Date().zeroHours {
+                        daysRequired += 1
+                        decreasingTotal = decreasingTotal.remove(dayHours[dayNumber - 1])
+                        dayNumber += 1
+                        if dayNumber == 8 {
+                            dayNumber = 1
+                        }
                     }
+
+                    self.daysRequired = Int16(daysRequired)
+
+                    return daysRequired < 0 ? Date() : Date().adding(days: daysRequired)
+                } else {
+                    let dayTimes = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+
+                    var daysRequired = -1
+                    var decreasingTotal = self.timeRequired - self.timeCompleted
+                    var dayNumber = Date().dayNumber
+
+                    while decreasingTotal > 0 {
+                        daysRequired += 1
+                        decreasingTotal = decreasingTotal - dayTimes[dayNumber - 1]
+                        dayNumber += 1
+                        if dayNumber == 8 {
+                            dayNumber = 1
+                        }
+                    }
+
+                    self.daysRequired = Int16(daysRequired)
+
+                    return daysRequired < 0 ? Date() : Date().adding(days: daysRequired)
                 }
-
-                self.daysRequired = Int16(daysRequired)
-
-                return daysRequired < 0 ? Date() : Date().adding(days: daysRequired)
             } else {
-                let dayTimes = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
-
-                var daysRequired = -1
-                var decreasingTotal = self.timeRequired - self.timeCompleted
-                var dayNumber = Date().dayNumber
-
-                while decreasingTotal > 0 {
-                    daysRequired += 1
-                    decreasingTotal = decreasingTotal - dayTimes[dayNumber - 1]
-                    dayNumber += 1
-                    if dayNumber == 8 {
-                        dayNumber = 1
-                    }
-                }
-
-                self.daysRequired = Int16(daysRequired)
-
-                return daysRequired < 0 ? Date() : Date().adding(days: daysRequired)
+                return Date()
             }
         } else {
-            return Date()
+            return nil
         }
     }
 
@@ -276,10 +280,30 @@ public class Goal: NSManagedObject {
         default:
             workOnDay = false
         }
-        if let createdAt = createdAt {
-            return date.withoutHours >= createdAt.withoutHours && date <= updatedCompletionDate ? workOnDay : false
+        if let updatedCompletionDate = updatedCompletionDate { // is Goal
+            if let createdAt = createdAt {
+                return date.withoutHours >= createdAt.withoutHours && date <= updatedCompletionDate ? workOnDay : false
+            }
+            return date <= updatedCompletionDate ? workOnDay : false
+        } else { // is Habit
+            if let completedAt = completedAt, date.withoutHours > completedAt.withoutHours {
+                if timeFrameType == .weekly, completedAt.weekOfYear == date.weekOfYear {
+                    return false
+                } else if timeFrameType == .monthly, completedAt.monthNumber == date.monthNumber {
+                    return false
+                } else {
+                    if let createdAt = createdAt {
+                        return date.withoutHours >= createdAt.withoutHours ? workOnDay : false
+                    }
+                    return workOnDay
+                }
+            } else {
+                if let createdAt = createdAt {
+                    return date.withoutHours >= createdAt.withoutHours ? workOnDay : false
+                }
+                return workOnDay
+            }
         }
-        return date <= updatedCompletionDate ? workOnDay : false
     }
 
     func resetAllInfo() {

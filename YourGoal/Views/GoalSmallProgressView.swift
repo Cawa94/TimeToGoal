@@ -67,7 +67,7 @@ public class GoalSmallProgressViewModel: ObservableObject {
     }
 
     var isLateThanOriginal: Bool {
-        return goal?.updatedCompletionDate.withoutHours ?? Date() > goal?.completionDateExtimated?.withoutHours ?? Date()
+        return goal?.updatedCompletionDate?.withoutHours ?? Date() > goal?.completionDateExtimated?.withoutHours ?? Date()
     }
 
 }
@@ -153,16 +153,23 @@ struct GoalSmallProgressView: View {
                         VStack {
                             if let goal = viewModel.goal {
                                 if viewModel.isCompleted {
-                                    Text(goal.whyDefinition ?? "")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.gray)
-                                        .multilineTextAlignment(.center)
-                                        .applyFont(.small)
-                                        .padding([.leading, .trailing], 5)
-                                    if goal.goalType.isHabit {
-                                        renewGoalButton
-                                    } else {
+                                    if !goal.goalType.isHabit {
+                                        Text("Hai raggiunto il tuo obiettivo!")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.grayText)
+                                            .multilineTextAlignment(.center)
+                                            .applyFont(.title)
+                                            .padding([.leading, .trailing], 15)
                                         archiveGoalButton
+                                    } else {
+                                        Text(goal.timeFrameType == .weekly
+                                                ? "Obiettivo settimanale completato!"
+                                                : "Obiettivo mensile completato!")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.grayText)
+                                            .multilineTextAlignment(.center)
+                                            .applyFont(.title)
+                                            .padding([.leading, .trailing], 15)
                                     }
                                 } else {
                                     Text(goal.whyDefinition ?? "")
@@ -176,7 +183,7 @@ struct GoalSmallProgressView: View {
                                 }
                             } else {
                                 Text("main_add_new_goal")
-                                    .applyFont(.title)
+                                    .applyFont(.title2)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(.grayText)
                                 newGoalButton
@@ -195,11 +202,9 @@ struct GoalSmallProgressView: View {
     }
 
     func updateCompleteGoalChallenge() {
-        if !(viewModel.goal?.goalType.isHabit ?? false) {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 10
-            challenge.progressMade = 1
-        }
+        let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+        challenge.id = 10
+        challenge.progressMade = 1
     }
 
     func updateTrackingChallenge() {
@@ -244,18 +249,50 @@ struct GoalSmallProgressView: View {
         viewModel.goal?.editedAt = Date()
         if viewModel.goal?.isCompleted ?? false {
             viewModel.goal?.completedAt = Date()
-            if viewModel.goal?.datesHasBeenCompleted != nil {
-                viewModel.goal?.datesHasBeenCompleted?.append(Date())
+            if viewModel.goal?.timesHasBeenCompleted != nil {
+                viewModel.goal?.timesHasBeenCompleted += 1
             } else {
-                viewModel.goal?.datesHasBeenCompleted = [Date()]
+                viewModel.goal?.timesHasBeenCompleted = 1
             }
             FirebaseService.logConversion(.goalCompleted, goal: viewModel.goal)
-            updateCompleteGoalChallenge()
+            if !(viewModel.goal?.goalType.isHabit ?? false) {
+                updateCompleteGoalChallenge()
+            } else if viewModel.goal?.timeFrameType == .weekly {
+                updatePerfectWeekChallenges()
+            }
         }
-        updateTrackingChallenge()
+        if viewModel.goal?.goalType.isHabit ?? false {
+            updateTrackingChallenge()
+        }
         PersistenceController.shared.saveContext()
         self.feedback.notificationOccurred(.success)
         viewModel.hasTrackedGoal = true
+    }
+
+    func updatePerfectWeekChallenges() {
+        if let challenge = viewModel.challenges.first(where: { $0.id == 2 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 2
+            challenge.progressMade = 1
+        }
+
+        if let challenge = viewModel.challenges.first(where: { $0.id == 3 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 3
+            challenge.progressMade = 1
+        }
+
+        if let challenge = viewModel.challenges.first(where: { $0.id == 4 }) {
+            challenge.progressMade += 1
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 4
+            challenge.progressMade = 1
+        }
     }
 
     var trackTimeButton: some View {
@@ -293,26 +330,6 @@ struct GoalSmallProgressView: View {
                 PersistenceController.shared.saveContext()
             }) {
                 Text("global_archive")
-                    .foregroundColor(.white)
-                    .applyFont(.smallButton)
-                    .multilineTextAlignment(.center)
-                    .padding([.top, .bottom], 10)
-                    .padding([.leading, .trailing], 15)
-                    .background(LinearGradient(gradient: Gradient(colors: Color.rainbow),
-                                               startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .cornerRadius(.defaultRadius)
-                    .shadow(color: .blackShadow, radius: 5, x: 5, y: 5)
-            }.accentColor(viewModel.goal?.goalColor)
-        }
-    }
-
-    var renewGoalButton: some View {
-        HStack {
-            Button(action: {
-                viewModel.goalToRenew = viewModel.goal
-                viewModel.activeSheet = .renewGoal
-            }) {
-                Text("Nuovo traguardo")
                     .foregroundColor(.white)
                     .applyFont(.smallButton)
                     .multilineTextAlignment(.center)
