@@ -12,9 +12,12 @@ public class StatisticsSmallViewModel: ObservableObject {
     @Published var goals: [Goal]
     @Published var journal: [JournalPage]
 
-    init(goals: [Goal], journal: [JournalPage]) {
+    @Published var hasTrackedGoal: Bool
+
+    init(goals: [Goal], journal: [JournalPage], hasTrackedGoal: Binding<Bool>) {
         self.goals = goals
         self.journal = journal
+        self.hasTrackedGoal = hasTrackedGoal.wrappedValue
     }
 
     var weekDates: [Date] {
@@ -52,6 +55,8 @@ struct StatisticsSmallView: View {
     
     @ObservedObject var viewModel: StatisticsSmallViewModel
 
+    @State var columnScale: [CGFloat] = [1, 1, 1, 1, 1, 1, 1]
+
     @ViewBuilder
     var body: some View {
         ZStack {
@@ -59,7 +64,7 @@ struct StatisticsSmallView: View {
 
             HStack(spacing: 20) {
                 ForEach(viewModel.weekDates, id: \.self) { date in
-                    VStack(spacing: 5) {
+                    VStack(spacing: 10) {
                         GeometryReader { container in
                             ZStack {
                                 let goalsOnDate = viewModel.goals.goalsWorkOn(date: date)
@@ -104,7 +109,22 @@ struct StatisticsSmallView: View {
                                         .opacity(0.3)
                                 }
                             }.clipShape(RoundedRectangle(cornerRadius: .defaultRadius))
-                        }
+                        }.scaleEffect(columnScale[date.dayNumber - 1])
+                        .onAppear(perform: {
+                            if date.withoutHours == Date().withoutHours {
+                                columnScale[date.dayNumber - 1] = 1.1
+                            }
+                        })
+                        .onReceive(viewModel.$hasTrackedGoal, perform: { hasTrackedGoal in
+                            if hasTrackedGoal, date.withoutHours == Date().withoutHours {
+                                if !viewModel.goals.goalsWorkOn(date: date).isEmpty, viewModel.goals.goalsWorkOn(date: date).areAllCompletedOn(date: date) {
+                                    columnScale[date.dayNumber - 1] = 0.95
+                                    withAnimation(Animation.interpolatingSpring(stiffness: 100, damping: 1.5, initialVelocity: 1)) {
+                                        columnScale[date.dayNumber - 1] = 1.1
+                                    }
+                                }
+                            }
+                        })
                         Text(viewModel.dayShortFor(date: date))
                             .multilineTextAlignment(.center)
                             .foregroundColor(.grayText)

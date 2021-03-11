@@ -119,6 +119,9 @@ struct ContentView: View {
                         ProfileView(viewModel: .init(profile: viewModel.profile,
                                                      challenges: viewModel.challenges,
                                                      refreshchallenges: $viewModel.refreshChallenges))
+                            .onDisappear(perform: {
+                                setChallengesHaveBounced()
+                            })
                     }
                     HStack(spacing: 35) {
                         TabBarIcon(viewRouter: viewRouter, assignedPage: .goals,
@@ -201,6 +204,15 @@ struct ContentView: View {
                 NewGoalFirstView(viewModel: .init(challenges: viewModel.challenges), activeSheet: $viewModel.activeSheet)
             }
         })
+    }
+
+    func setChallengesHaveBounced() {
+        for challenge in viewModel.challenges {
+            if challenge.isCompleted && !challenge.hasBounced {
+                challenge.hasBounced = true
+            }
+        }
+        PersistenceController.shared.saveContext()
     }
 
     func checkAndRestartHabits() {

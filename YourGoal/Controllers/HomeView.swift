@@ -141,7 +141,8 @@ struct HomeView: View {
                             .frame(height: 15)
 
                         StatisticsSmallView(viewModel: .init(goals: viewModel.goals,
-                                                             journal: viewModel.journal))
+                                                             journal: viewModel.journal,
+                                                             hasTrackedGoal: $viewModel.hasTrackedGoal))
                             .padding([.leading, .trailing], 25)
                             .frame(height: container.size.height/3)
 

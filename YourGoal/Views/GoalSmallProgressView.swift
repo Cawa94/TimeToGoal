@@ -299,6 +299,7 @@ struct GoalSmallProgressView: View {
         HStack {
             Button(action: {
                 withAnimation {
+                    viewModel.hasTrackedGoal = false
                     if MeasureUnit.getFrom(viewModel.goal?.customTimeMeasure ?? "") == .singleTime {
                         trackGoalWithSingleTime()
                         viewModel.showingTrackGoal = false

@@ -328,6 +328,8 @@ struct NewGoalQuestionsView: View {
                     challenge.progressMade = 1
                 }
             }
+        } else if viewModel.goal.timeRequired > viewModel.goal.timeCompleted {
+            viewModel.goal.completedAt = nil
         }
         PersistenceController.shared.saveContext()
         self.activeSheet = nil

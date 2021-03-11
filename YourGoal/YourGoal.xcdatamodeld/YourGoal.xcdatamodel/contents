@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D80" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Challenge" representedClassName="Challenge" syncable="YES" codeGenerationType="category">
+        <attribute name="hasBounced" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="progressMade" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
@@ -53,7 +54,7 @@
         <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Goal" inverseName="progress" inverseEntity="Goal"/>
     </entity>
     <elements>
-        <element name="Challenge" positionX="-54" positionY="144" width="128" height="59"/>
+        <element name="Challenge" positionX="-54" positionY="144" width="128" height="74"/>
         <element name="Goal" positionX="-63" positionY="-18" width="128" height="464"/>
         <element name="JournalPage" positionX="-63" positionY="144" width="128" height="89"/>
         <element name="Profile" positionX="-54" positionY="144" width="128" height="74"/>

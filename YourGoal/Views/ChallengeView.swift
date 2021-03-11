@@ -24,6 +24,13 @@ public class ChallengeViewModel: ObservableObject {
         return 0
     }
 
+    var hasBounced: Bool {
+        if let trackedChallenge = challenges.first(where: { $0.id == challenge.id }) {
+            return trackedChallenge.hasBounced
+        }
+        return false
+    }
+
     var isCompleted: Bool {
         percentageCompleted >= 100
     }
@@ -33,6 +40,7 @@ public class ChallengeViewModel: ObservableObject {
 struct ChallengeView: View {
 
     @ObservedObject var viewModel: ChallengeViewModel
+    @State var scaleSize: CGFloat = 1
 
     var body: some View {
         VStack(spacing: 5) {
@@ -41,6 +49,16 @@ struct ChallengeView: View {
                 .scaledToFit()
                 .padding(15)
                 .saturation(viewModel.isCompleted ? 1.0 : 0.0)
+                .scaleEffect(scaleSize)
+                .animation(
+                    Animation
+                        .easeInOut(duration: 0.45)
+                        .repeatForever(autoreverses: true)
+                ).onAppear(perform: {
+                    if viewModel.isCompleted && !viewModel.hasBounced {
+                        scaleSize = 1.15
+                    }
+                })
 
             Text(viewModel.challenge.name)
                 .foregroundColor(.grayText)
