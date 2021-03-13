@@ -14,10 +14,10 @@ extension Sequence where Element == Goal {
     }
 
     func areAllCompletedOn(date: Date) -> Bool {
-        goalsWorkOn(date: date).filter { !($0.isCompletedAt(date: date)) }.isEmpty
+        return goalsWorkOn(date: date).filter { !($0.isCompletedAt(date: date)) }.isEmpty
     }
 
-    var globalStreak: Int {
+    var currentStreak: Int {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let startDate = self.sorted(by: { ($0.createdAt ?? Date()) < ($1.createdAt ?? Date()) })
@@ -48,7 +48,7 @@ extension Sequence where Element == Goal {
                         isInStreak = false
                     }
                 }
-                record = currentStreak > record ? currentStreak : record
+                record = currentStreak
             }
         }
 

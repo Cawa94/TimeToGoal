@@ -143,7 +143,27 @@ public class Goal: NSManagedObject {
     }
 
     func isCompletedAt(date: Date) -> Bool {
-        dayPercentageAt(date: date) >= 1
+        dayPercentageAt(date: date) >= 100
+    }
+
+    var timeRemaining: String {
+        if timeTrackingType == .hoursWithMinutes {
+            let dateRemaining = Double(timeRequired).asHoursAndMinutes
+                .remove(Double(timeCompleted).asHoursAndMinutes)
+            if dateRemaining > Date().zeroHours {
+                return dateRemaining.formattedAsHoursString
+            } else {
+                return "0"
+            }
+        } else {
+            let timeRemaining = Double(timeRequired) - Double(timeCompleted)
+            if timeRemaining > 0 {
+                return timeTrackingType == .double
+                    ? "\(timeRemaining.stringWithTwoDecimals)" : "\(timeRemaining.stringWithoutDecimals)"
+            } else {
+                return "0"
+            }
+        }
     }
 
     var circleGradientColors: [Color] {
@@ -253,7 +273,6 @@ public class Goal: NSManagedObject {
 
         if timeTrackingType == .hoursWithMinutes {
             let percentage = (worked.asHoursAndMinutes.timeIntervalSince(0.00.asHoursAndMinutes)) / (toWork.asHoursAndMinutes.timeIntervalSince(0.00.asHoursAndMinutes))
-
             return CGFloat(percentage * 100)
         } else {
             return CGFloat(worked/toWork * 100)
@@ -323,7 +342,7 @@ public class Goal: NSManagedObject {
         self.whyDefinition = nil
     }
 
-    var consecutiveDays: Int {
+    func consecutiveDays(getRecord: Bool) -> Int {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let startDate = createdAt ?? formatter.date(from: "2021/01/01 23:00") ?? Date()
@@ -349,7 +368,11 @@ public class Goal: NSManagedObject {
                         isInStreak = false
                     }
                 }
-                record = currentStreak > record ? currentStreak : record
+                if getRecord {
+                    record = currentStreak > record ? currentStreak : record
+                } else {
+                    record = currentStreak
+                }
             }
         }
 

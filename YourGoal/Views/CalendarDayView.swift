@@ -73,7 +73,7 @@ struct CalendarDayView: View {
                         ForEach(0..<3) { column in
                             let index = getIndexFor(row: row, column: column)
                             if index < goalsOnDate.count {
-                                if goalsOnDate[index].dayPercentageAt(date: date) >= 1 {
+                                if goalsOnDate[index].isCompletedAt(date: date) {
                                     Circle()
                                         .fill(goalsOnDate[index].goalColor)
                                         .aspectRatio(1.0, contentMode: .fit)

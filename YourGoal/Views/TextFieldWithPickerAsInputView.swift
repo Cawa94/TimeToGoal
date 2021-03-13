@@ -41,7 +41,7 @@ struct TextFieldWithPickerAsInputView : UIViewRepresentable {
         uiView.text = text
     }
 
-    class Coordinator: NSObject, UIPickerViewDataSource, UIPickerViewDelegate , UITextFieldDelegate {
+    class Coordinator: NSObject, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
         private let parent : TextFieldWithPickerAsInputView
 

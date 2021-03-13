@@ -57,7 +57,7 @@ struct GoalListRow: View {
                             Text("Striscia attuale")
                                 .applyFont(.title2)
                                 .foregroundColor(.grayText)
-                            Text("\(viewModel.goal.consecutiveDays) giorni")
+                            Text("\(viewModel.goal.consecutiveDays(getRecord: false)) giorni")
                                 .applyFont(.title)
                                 .foregroundColor(viewModel.goal.goalColor)
                         } else {
@@ -67,9 +67,19 @@ struct GoalListRow: View {
                         }
 
                         Spacer()
-                            .frame(height: 5)
+                            .frame(height: 10)
 
                         if viewModel.goal.goalType.isHabit {
+                            Text("Miglior striscia")
+                                .applyFont(.title2)
+                                .foregroundColor(.grayText)
+                            Text("\(viewModel.goal.consecutiveDays(getRecord: true)) giorni")
+                                .applyFont(.title)
+                                .foregroundColor(viewModel.goal.goalColor)
+/*
+                            Spacer()
+                                .frame(height: 5)
+
                             Text(viewModel.goal.timeFrameType == .weekly
                                     ? "Settimane perfette"
                                     : "Mesi perfetti")
@@ -77,7 +87,7 @@ struct GoalListRow: View {
                                 .foregroundColor(.grayText)
                             Text("\(viewModel.goal.timesHasBeenCompleted)")
                                 .applyFont(.title)
-                                .foregroundColor(viewModel.goal.goalColor)
+                                .foregroundColor(viewModel.goal.goalColor)*/
                         }
                     }
 

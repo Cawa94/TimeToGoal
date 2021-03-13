@@ -147,35 +147,7 @@ struct JournalView: View {
             newPage.date = viewModel.selectedDay
             self.viewModel.journal.append(newPage)
         }
-/*
-        var journal: [JournalPage] = []
-        for page in viewModel.journal {
-            if !(journal.contains(where: { $0.dayId == page.dayId })) {
-                journal.append(page)
-            }
-        }
-        let totalPagesCount = journal.count
-        if let challenge = viewModel.challenges.first(where: { $0.id == 13 }) {
-            challenge.progressMade = Double(totalPagesCount)
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 13
-            challenge.progressMade = Double(totalPagesCount)
-        }
-        if let challenge = viewModel.challenges.first(where: { $0.id == 14 }) {
-            challenge.progressMade = Double(totalPagesCount)
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 14
-            challenge.progressMade = Double(totalPagesCount)
-        }
-        if let challenge = viewModel.challenges.first(where: { $0.id == 15 }) {
-            challenge.progressMade = Double(totalPagesCount)
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 15
-            challenge.progressMade = Double(totalPagesCount)
-        }*/
+
         PersistenceController.shared.saveContext()
     }
 

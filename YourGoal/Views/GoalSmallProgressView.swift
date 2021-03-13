@@ -160,7 +160,6 @@ struct GoalSmallProgressView: View {
                                             .multilineTextAlignment(.center)
                                             .applyFont(.title)
                                             .padding([.leading, .trailing], 15)
-                                        archiveGoalButton
                                     } else {
                                         Text(goal.timeFrameType == .weekly
                                                 ? "Obiettivo settimanale completato!"

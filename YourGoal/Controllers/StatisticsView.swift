@@ -23,8 +23,8 @@ public class StatisticsViewModel: ObservableObject {
         goals.filter( { !$0.goalType.isHabit && $0.isCompleted }).count
     }
 
-    var targetRenewed: Int {
-        goals.filter( { $0.goalType.isHabit }).map { Int(($0.timesHasBeenCompleted)) }.reduce(0, +)
+    var perfectWeeks: Int {
+        goals.filter( { $0.goalType.isHabit && $0.timeFrameType == .weekly }).map { Int(($0.timesHasBeenCompleted)) }.reduce(0, +)
     }
 
 }
@@ -113,12 +113,12 @@ struct StatisticsView: View {
                             }.frame(width: container.size.width/2 - 15)
 
                             VStack {
-                                Text("Traguardi raggiunti")
+                                Text("Settimane perfette")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
 
-                                Text("\(viewModel.targetRenewed)")
+                                Text("\(viewModel.perfectWeeks)")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)
@@ -131,7 +131,7 @@ struct StatisticsView: View {
                 }
             }
         }.onAppear {
-            currentGoalStreak = viewModel.validGoals.globalStreak
+            currentGoalStreak = viewModel.validGoals.currentStreak
             if let challenge = viewModel.challenges.first(where: { $0.id == 15 }) {
                 let streakRecord = challenge.progressMade
                 if currentGoalStreak > Int(streakRecord) {
@@ -140,6 +140,9 @@ struct StatisticsView: View {
                 } else {
                     recordGoalStreak = Int(streakRecord)
                 }
+            } else {
+                recordGoalStreak = Int(currentGoalStreak)
+                updateChallengesWith(record: currentGoalStreak)
             }
         }
     }

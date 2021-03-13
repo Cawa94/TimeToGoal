@@ -43,26 +43,6 @@ public class MainGoalViewModel: ObservableObject {
         return goal.isCompleted
     }
 
-    var timeRemaining: String {
-        if goal.timeTrackingType == .hoursWithMinutes {
-            let dateRemaining = Double(goal.timeRequired).asHoursAndMinutes
-                .remove(Double(goal.timeCompleted).asHoursAndMinutes)
-            if dateRemaining > Date().zeroHours {
-                return dateRemaining.formattedAsHoursString
-            } else {
-                return "0"
-            }
-        } else {
-            let timeRemaining = Double(goal.timeRequired) - Double(goal.timeCompleted)
-            if timeRemaining > 0 {
-                return goal.timeTrackingType == .double
-                    ? "\(timeRemaining.stringWithTwoDecimals)" : "\(timeRemaining.stringWithoutDecimals)"
-            } else {
-                return "0"
-            }
-        }
-    }
-
 }
 
 struct MainGoalView: View {
@@ -109,14 +89,30 @@ struct MainGoalView: View {
                                     .rotationEffect(Angle(degrees: 270))
                                     .padding(-(CGFloat.circleWidth/2))
 
-                                VStack(spacing: 10) {
+                                VStack(spacing: 0) {
                                     Image(viewModel.goal.goalIcon)
                                         .resizable()
                                         .aspectRatio(1.0, contentMode: .fit)
                                         .frame(width: 70)
 
-                                    Text(String(format: "main_time_required".localized(),
-                                                viewModel.timeRemaining, viewModel.goal.customTimeMeasure ?? ""))
+                                    Spacer()
+                                        .frame(height: 10)
+
+                                    if viewModel.goal.timeTrackingType == .hoursWithMinutes || viewModel.goal.timeTrackingType == .double {
+                                        Text(String(format: "%@ / %@".localized(),
+                                                    viewModel.goal.timeCompleted.stringWithTwoDecimals, viewModel.goal.timeRequired.stringWithTwoDecimals))
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.grayText)
+                                            .applyFont(.title)
+                                    } else {
+                                        Text(String(format: "%@ / %@".localized(),
+                                                    viewModel.goal.timeCompleted.stringWithoutDecimals, viewModel.goal.timeRequired.stringWithoutDecimals))
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.grayText)
+                                            .applyFont(.title)
+                                    }
+
+                                    Text(viewModel.goal.customTimeMeasure ?? "")
                                         .multilineTextAlignment(.center)
                                         .foregroundColor(.grayText)
                                         .applyFont(.title)
@@ -167,6 +163,27 @@ struct MainGoalView: View {
 
     var answersSummaryFirstPart: some View {
         VStack(spacing: 10) {
+            if viewModel.goal.goalType.isHabit {
+                HStack {
+                    Text("Frequenza")
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.grayLight)
+                        .applyFont(.title3)
+                    Spacer()
+                }
+
+                HStack {
+                    Text(viewModel.goal.timeFrameType == .weekly ? "Settimanale" : "Mensile")
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.grayText)
+                        .applyFont(.title3)
+                    Spacer()
+                }
+
+                Spacer()
+                    .frame(height: 0)
+            }
+
             HStack {
                 Text("goal_custom_main_question")
                     .multilineTextAlignment(.leading)
