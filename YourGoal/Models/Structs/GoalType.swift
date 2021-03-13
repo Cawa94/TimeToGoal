@@ -197,25 +197,22 @@ struct GoalType: Identifiable {
         .init(id: 52, label: "plan_day", name: "Pianifica la giornata", image: "write_5",
               categoryId: [1, 3], measureUnits: [.singleTime], timeSentence: "Pianificherò la giornata"),
 
-        .init(id: 53, label: "custom", name: "Personalizzato", image: "project_0",
-              categoryId: [6], measureUnits: [.session, .km, .page, .hour, .time, .singleTime]),
-
       ]
 
     static var allGoals: [GoalType] = [
 
         // GOALS
 
-        .init(id: 100, label: "goal_run", name: "Cura il giardino", image: "exercise_0",
-              measureUnits: [.singleTime], isHabit: false),
+        .init(id: 100, label: "goal_marathon", name: "Corri per tot chilometri", image: "exercise_6",
+              measureUnits: [.km], isHabit: false, ofGoalSentence: "di corsa"),
 
-        .init(id: 101, label: "goal_some", name: "Evita i social media", image: "exercise_1",
-              measureUnits: [.singleTime], isHabit: false),
+        .init(id: 101, label: "goal_website", name: "Crea il tuo sito web", image: "project_4",
+              measureUnits: [.hour], isHabit: false, ofGoalSentence: "di lavoro"),
 
-        .init(id: 102, label: "goal_some_2", name: "Pianifica la giornata", image: "exercise_2",
-              measureUnits: [.singleTime], isHabit: false),
+        .init(id: 102, label: "goal_read_book", name: "Leggi un libro", image: "book_5",
+              measureUnits: [.page], isHabit: false, ofGoalSentence: "di lettura", timeSentence: "Leggerò"),
 
-        .init(id: 103, label: "goal_some_3", name: "Personalizzato", image: "exercise_3",
+        .init(id: 1001, label: "goal_custom", name: "Personalizzato", image: "project_0",
               measureUnits: [.session, .km, .page, .hour, .time, .singleTime], isHabit: false)
 
     ]

@@ -91,7 +91,7 @@ struct NewGoalHabitsCategoriesView: View {
                                             selectedIndex = index
                                             if selectedIndex == 6 {
                                                 viewModel.newGoal.goalType = .init(
-                                                    id: 53, label: "custom", name: "Personalizzato", image: "project_0",
+                                                    id: 1000, label: "custom", name: "Personalizzato", image: "project_0",
                                                     categoryId: [6], measureUnits: [.session, .km, .page, .hour, .time, .singleTime])
                                                 showTimeView = true
                                             } else {

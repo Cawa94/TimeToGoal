@@ -112,8 +112,6 @@ struct TrackManualTimeView: View {
                         FirebaseService.logConversion(.goalCompleted, goal: currentGoal)
                         if !(currentGoal?.goalType.isHabit ?? false) {
                             updateCompleteGoalChallenge()
-                        } else if currentGoal?.timeFrameType == .weekly {
-                            updatePerfectWeekChallenges()
                         }
                     }
                     if currentGoal?.goalType.isHabit ?? false {
@@ -148,32 +146,6 @@ struct TrackManualTimeView: View {
                 .frame(height: 15)
         }.foregroundColor(.black)
         .buttonStyle(PlainButtonStyle())
-    }
-
-    func updatePerfectWeekChallenges() {
-        if let challenge = challenges.first(where: { $0.id == 2 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 2
-            challenge.progressMade = 1
-        }
-
-        if let challenge = challenges.first(where: { $0.id == 3 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 3
-            challenge.progressMade = 1
-        }
-
-        if let challenge = challenges.first(where: { $0.id == 4 }) {
-            challenge.progressMade += 1
-        } else {
-            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-            challenge.id = 4
-            challenge.progressMade = 1
-        }
     }
 
     func updateCompleteGoalChallenge() {

@@ -171,6 +171,8 @@ struct HomeView: View {
                         viewModel.showMotivation = true
                     }
                 }*/
+                updatePerfectWeekChallenges()
+
                 if viewModel.goals[viewModel.indexSelectedGoal].isCompleted {
                     #if RELEASE
                         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
@@ -180,6 +182,34 @@ struct HomeView: View {
                 }
             }
         })
+    }
+
+    func updatePerfectWeekChallenges() {
+        let perfectWeeks = Double(viewModel.goals.perfectWeeks)
+
+        if let challenge = viewModel.challenges.first(where: { $0.id == 2 }) {
+            challenge.progressMade = perfectWeeks
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 2
+            challenge.progressMade = perfectWeeks
+        }
+
+        if let challenge = viewModel.challenges.first(where: { $0.id == 3 }) {
+            challenge.progressMade = perfectWeeks
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 3
+            challenge.progressMade = perfectWeeks
+        }
+
+        if let challenge = viewModel.challenges.first(where: { $0.id == 4 }) {
+            challenge.progressMade = perfectWeeks
+        } else {
+            let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
+            challenge.id = 4
+            challenge.progressMade = perfectWeeks
+        }
     }
 
 }

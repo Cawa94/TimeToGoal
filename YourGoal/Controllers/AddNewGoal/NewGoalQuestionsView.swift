@@ -324,7 +324,7 @@ struct NewGoalQuestionsView: View {
                     challenge.progressMade += 1
                 } else {
                     let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
-                    challenge.id = 11
+                    challenge.id = 12
                     challenge.progressMade = 1
                 }
             }

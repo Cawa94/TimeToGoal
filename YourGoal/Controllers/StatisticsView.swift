@@ -23,10 +23,6 @@ public class StatisticsViewModel: ObservableObject {
         goals.filter( { !$0.goalType.isHabit && $0.isCompleted }).count
     }
 
-    var perfectWeeks: Int {
-        goals.filter( { $0.goalType.isHabit && $0.timeFrameType == .weekly }).map { Int(($0.timesHasBeenCompleted)) }.reduce(0, +)
-    }
-
 }
 
 struct StatisticsView: View {
@@ -118,7 +114,7 @@ struct StatisticsView: View {
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
 
-                                Text("\(viewModel.perfectWeeks)")
+                                Text("\(viewModel.goals.perfectWeeks)")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)

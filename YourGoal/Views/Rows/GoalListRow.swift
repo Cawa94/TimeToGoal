@@ -69,26 +69,13 @@ struct GoalListRow: View {
                         Spacer()
                             .frame(height: 10)
 
-                        if viewModel.goal.goalType.isHabit {
-                            Text("Miglior striscia")
-                                .applyFont(.title2)
-                                .foregroundColor(.grayText)
-                            Text("\(viewModel.goal.consecutiveDays(getRecord: true)) giorni")
-                                .applyFont(.title)
-                                .foregroundColor(viewModel.goal.goalColor)
-/*
-                            Spacer()
-                                .frame(height: 5)
+                        Text("Miglior striscia")
+                            .applyFont(.title2)
+                            .foregroundColor(.grayText)
+                        Text("\(viewModel.goal.consecutiveDays(getRecord: true)) giorni")
+                            .applyFont(.title)
+                            .foregroundColor(viewModel.goal.goalColor)
 
-                            Text(viewModel.goal.timeFrameType == .weekly
-                                    ? "Settimane perfette"
-                                    : "Mesi perfetti")
-                                .applyFont(.title2)
-                                .foregroundColor(.grayText)
-                            Text("\(viewModel.goal.timesHasBeenCompleted)")
-                                .applyFont(.title)
-                                .foregroundColor(viewModel.goal.goalColor)*/
-                        }
                     }
 
                     Spacer()

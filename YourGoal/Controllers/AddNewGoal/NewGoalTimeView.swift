@@ -199,7 +199,7 @@ struct NewGoalTimeView: View {
                                             saturdayBinding: saturdayBinding, sundayBinding: sundayBinding)
                     }
 
-                    if timeFrameBinding.wrappedValue == "free" {
+                    if !viewModel.goal.goalType.isHabit {
                         Section(header: Text("add_goal_extimated_date_title").applyFont(.fieldQuestion)) {
                             VStack {
                                 Text(completionDate.formattedAsDateString)

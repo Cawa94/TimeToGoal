@@ -169,7 +169,7 @@ struct ContentView: View {
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {
                 viewModel.goals = goals.filter { $0.isValid }
-                if ContentView.firstOpen && (Date().dayNumber == 2 || Date().monthDay == 1) {
+                if ContentView.firstOpen && (Date().isMonday || Date().monthDay == 1) {
                     checkAndRestartHabits()
                     ContentView.firstOpen = false
                 }
@@ -218,7 +218,7 @@ struct ContentView: View {
     func checkAndRestartHabits() {
         for goal in viewModel.goals.filter({ $0.goalType.isHabit }) {
             if goal.timeFrameType == .weekly,
-               Date().dayNumber == 2,
+               Date().isMonday,
                !(goal.progress?.compactMap({ $0 as? Progress }).contains(where: { $0.date?.withoutHours == Date().withoutHours }) ?? false) { // it's monday and user didn't already tracked today
                 goal.timeCompleted = 0
                 goal.completedAt = nil

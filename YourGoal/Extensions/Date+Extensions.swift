@@ -44,6 +44,10 @@ extension Date {
         return nextDate
     }
 
+    var isMonday: Bool {
+        dayNumber == 2
+    }
+
     var dayNumber: Int {
         Calendar.current.component(.weekday, from: self)
     }

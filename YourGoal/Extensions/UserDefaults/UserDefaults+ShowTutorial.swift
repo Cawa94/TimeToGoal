@@ -9,7 +9,7 @@ import Foundation
 
 private extension String {
 
-    static let showTutorial = "show_tutorial"
+    static let showTutorial = "show_new_tutorial"
 
 }
 
