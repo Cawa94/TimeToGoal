@@ -10,7 +10,7 @@ import Foundation
 extension Sequence where Element == Goal {
 
     func goalsWorkOn(date: Date) -> [Goal] {
-        self.filter { $0.workOn(date: date) }
+        self.filter { $0.workOn(date: date) && !($0.isArchived) }
     }
 
     func areAllCompletedOn(date: Date) -> Bool {
@@ -27,7 +27,7 @@ extension Sequence where Element == Goal {
         let calendar = Calendar.current
         let days = calendar.generateDates(
             inside: goalInterval,
-            matching: DateComponents(hour: 0, minute: 0, second: 0)
+            matching: DateComponents(hour: 1, minute: 1, second: 0)
         )
 
         var record = 0
@@ -48,7 +48,11 @@ extension Sequence where Element == Goal {
                         isInStreak = false
                     }
                 }
-                record = currentStreak
+                if date.isToday, record == 0 {
+                    record = currentStreak
+                } else if !date.isToday {
+                    record = currentStreak
+                }
             }
         }
 
@@ -60,12 +64,12 @@ extension Sequence where Element == Goal {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let startDate = self.sorted(by: { ($0.createdAt ?? Date()) < ($1.createdAt ?? Date()) })
             .first?.createdAt ?? formatter.date(from: "2021/01/01 23:00") ?? Date()
-        let endDate = formatter.date(from: "2021/04/01 23:00") ?? Date()
+        let endDate = Date()
         let goalInterval = DateInterval(start: startDate, end: endDate)
         let calendar = Calendar.current
         let days = calendar.generateDates(
             inside: goalInterval,
-            matching: DateComponents(hour: 0, minute: 0, second: 0)
+            matching: DateComponents(hour: 1, minute: 1, second: 0)
         )
 
         var perfectWeeks = 0

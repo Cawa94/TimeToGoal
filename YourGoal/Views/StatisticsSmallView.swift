@@ -21,13 +21,15 @@ public class StatisticsSmallViewModel: ObservableObject {
     }
 
     var weekDates: [Date] {
-        let startOfWeek = Date().startOfWeek ?? Date()
+        let startOfWeek = Date().startOfWeek?.withoutHours ?? Date()
+
         var datesArray: [Date] = []
 
         for index in 0...6 {
-            datesArray.append(startOfWeek.adding(days: index))
+            datesArray.append(startOfWeek.adding(days: index).withoutHours)
         }
 
+        debugPrint("WEEK DATES: \(datesArray)")
         return datesArray
     }
 

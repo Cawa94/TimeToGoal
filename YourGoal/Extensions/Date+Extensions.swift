@@ -37,15 +37,17 @@ extension Date {
     }
 
     func adding(days: Int) -> Date {
-        var dayComponent = DateComponents()
-        dayComponent.day = days
-        guard let nextDate = Calendar.current.date(byAdding: dayComponent, to: self)
+        guard let nextDate = Calendar.current.date(byAdding: .day, value: days, to: self)
             else { return self }
         return nextDate
     }
 
     var isMonday: Bool {
         dayNumber == 2
+    }
+
+    var isToday: Bool {
+        self.withoutHours == Date().withoutHours
     }
 
     var dayNumber: Int {
@@ -65,9 +67,7 @@ extension Date {
     }
 
     var startOfWeek: Date? {
-        let gregorian = Calendar(identifier: .gregorian)
-        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
-        return gregorian.date(byAdding: .day, value: 1, to: sunday)
+        Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear, .minute, .hour], from: self))
     }
 
     var zeroHours: Date {

@@ -351,7 +351,7 @@ public class Goal: NSManagedObject {
         let calendar = Calendar.current
         let days = calendar.generateDates(
             inside: goalInterval,
-            matching: DateComponents(hour: 0, minute: 0, second: 0)
+            matching: DateComponents(hour: 1, minute: 1, second: 0)
         )
 
         var record = 0
