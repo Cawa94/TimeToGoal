@@ -62,70 +62,109 @@ struct MainGoalView: View {
                             Spacer()
                                 .frame(height: 35)
 
-                            ZStack {
-                                Circle().strokeBorder(AngularGradient(
-                                                        gradient: Gradient(colors: viewModel.goal.circleGradientColors),
-                                                        center: .center,
-                                                        startAngle: .degrees(0),
-                                                        endAngle: .degrees(360)),
-                                                      lineWidth: .circleWidth)
-                                    .shadow(color: .black, radius: 5, x: 5, y: 5)
-                                    .opacity(0.3)
-                                    .padding(-(CGFloat.circleWidth/2))
-
-                                Circle()
-                                    .strokeBorder(AngularGradient(
-                                                    gradient: Gradient(colors: viewModel.goal.circleGradientColors),
-                                                    center: .center,
-                                                    startAngle: .degrees(0),
-                                                    endAngle: .degrees(360)),
-                                                  lineWidth: .circleWidth)
-                                    .mask(Circle()
-                                            .trim(from: 0.0,
-                                                  to: CGFloat(min(Double((viewModel.goal.timeCompleted) / (viewModel.goal.timeRequired)), 1.0)))
-                                            .stroke(style: StrokeStyle(lineWidth: .circleWidth, lineCap: .round, lineJoin: .round))
-                                            .padding(CGFloat.circleWidth/2)
-                                    )
-                                    .rotationEffect(Angle(degrees: 270))
-                                    .padding(-(CGFloat.circleWidth/2))
-
-                                VStack(spacing: 0) {
-                                    Image(viewModel.goal.goalIcon)
-                                        .resizable()
-                                        .aspectRatio(1.0, contentMode: .fit)
-                                        .frame(width: 70)
-
-                                    Spacer()
-                                        .frame(height: 10)
-
-                                    if viewModel.goal.timeTrackingType == .hoursWithMinutes || viewModel.goal.timeTrackingType == .double {
-                                        Text(String(format: "%@ / %@".localized(),
-                                                    viewModel.goal.timeCompleted.stringWithTwoDecimals, viewModel.goal.timeRequired.stringWithTwoDecimals))
-                                            .multilineTextAlignment(.center)
-                                            .foregroundColor(.grayText)
-                                            .applyFont(.title)
-                                    } else {
-                                        Text(String(format: "%@ / %@".localized(),
-                                                    viewModel.goal.timeCompleted.stringWithoutDecimals, viewModel.goal.timeRequired.stringWithoutDecimals))
-                                            .multilineTextAlignment(.center)
-                                            .foregroundColor(.grayText)
-                                            .applyFont(.title)
-                                    }
-
-                                    Text(viewModel.goal.customTimeMeasure ?? "")
-                                        .multilineTextAlignment(.center)
-                                        .foregroundColor(.grayText)
-                                        .applyFont(.title)
-                                }
-                            }
-                            .frame(width: .circleSize, height: .circleSize)
+                            progressBarCircle
 
                             Spacer()
                                 .frame(height: 40)
 
-                            answersSummaryFirstPart
+                            if viewModel.goal.goalType.isHabit {
+                                HStack {
+                                    Text("goal_time_frame")
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(.grayLight)
+                                        .applyFont(.title3)
+                                    Spacer()
+                                }
 
-                            answersSummarySecondPart
+                                HStack {
+                                    Text(viewModel.goal.timeFrameType == .weekly ? "global_week_frame" : "global_month_frame")
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(.grayText)
+                                        .applyFont(.title3)
+                                    Spacer()
+                                }
+
+                                Spacer()
+                                    .frame(height: 20)
+                            }
+
+                            HStack {
+                                Text("goal_custom_main_question")
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayLight)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
+
+                            HStack {
+                                Text(viewModel.goal.whatDefinition ?? "global_undefined".localized())
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayText)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
+                            
+                            Spacer()
+                                .frame(height: 20)
+
+                        }.padding([.leading, .trailing], 15)
+
+                        VStack(spacing: 10) {
+                            HStack {
+                                Text("goal_custom_why_question")
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayLight)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
+
+                            HStack {
+                                Text(viewModel.goal.whyDefinition ?? "global_undefined".localized())
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayText)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
+
+                            Spacer()
+                                .frame(height: 0)
+                            
+                            HStack {
+                                Text("goal_custom_what_change_question")
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayLight)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
+
+                            HStack {
+                                Text(viewModel.goal.whatWillChangeDefinition ?? "global_undefined".localized())
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayText)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
+
+                            Spacer()
+                                .frame(height: 0)
+                        }.padding([.leading, .trailing], 15)
+
+                        VStack(spacing: 10) {
+                            HStack {
+                                Text("goal_custom_support_question")
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayLight)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
+
+                            HStack {
+                                Text(viewModel.goal.supportDefinition ?? "global_undefined".localized())
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.grayText)
+                                    .applyFont(.title3)
+                                Spacer()
+                            }
 
                             Spacer()
                                 .frame(height: 25)
@@ -161,11 +200,71 @@ struct MainGoalView: View {
         })
     }
 
+    var progressBarCircle: some View {
+        ZStack {
+            Circle().strokeBorder(AngularGradient(
+                                    gradient: Gradient(colors: viewModel.goal.circleGradientColors),
+                                    center: .center,
+                                    startAngle: .degrees(0),
+                                    endAngle: .degrees(360)),
+                                  lineWidth: .circleWidth)
+                .shadow(color: .black, radius: 5, x: 5, y: 5)
+                .opacity(0.3)
+                .padding(-(CGFloat.circleWidth/2))
+
+            Circle()
+                .strokeBorder(AngularGradient(
+                                gradient: Gradient(colors: viewModel.goal.circleGradientColors),
+                                center: .center,
+                                startAngle: .degrees(0),
+                                endAngle: .degrees(360)),
+                              lineWidth: .circleWidth)
+                .mask(Circle()
+                        .trim(from: 0.0,
+                              to: CGFloat(min(Double((viewModel.goal.timeCompleted) / (viewModel.goal.timeRequired)), 1.0)))
+                        .stroke(style: StrokeStyle(lineWidth: .circleWidth, lineCap: .round, lineJoin: .round))
+                        .padding(CGFloat.circleWidth/2)
+                )
+                .rotationEffect(Angle(degrees: 270))
+                .padding(-(CGFloat.circleWidth/2))
+
+            VStack(spacing: 0) {
+                Image(viewModel.goal.goalIcon)
+                    .resizable()
+                    .aspectRatio(1.0, contentMode: .fit)
+                    .frame(width: 70)
+
+                Spacer()
+                    .frame(height: 10)
+
+                if viewModel.goal.timeTrackingType == .hoursWithMinutes || viewModel.goal.timeTrackingType == .double {
+                    Text(String(format: "%@ / %@".localized(),
+                                viewModel.goal.timeCompleted.stringWithTwoDecimals, viewModel.goal.timeRequired.stringWithTwoDecimals))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.grayText)
+                        .applyFont(.title)
+                } else {
+                    Text(String(format: "%@ / %@".localized(),
+                                viewModel.goal.timeCompleted.stringWithoutDecimals, viewModel.goal.timeRequired.stringWithoutDecimals))
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.grayText)
+                        .applyFont(.title)
+                }
+
+                Text(viewModel.goal.customTimeMeasure ?? "")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.grayText)
+                    .applyFont(.title)
+            }
+        }
+        .frame(width: .circleSize, height: .circleSize)
+    }
+
     var answersSummaryFirstPart: some View {
         VStack(spacing: 10) {
             if viewModel.goal.goalType.isHabit {
                 HStack {
-                    Text("Frequenza")
+                    Text("goal_time_frame")
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.grayLight)
                         .applyFont(.title3)
@@ -173,7 +272,7 @@ struct MainGoalView: View {
                 }
 
                 HStack {
-                    Text(viewModel.goal.timeFrameType == .weekly ? "Settimanale" : "Mensile")
+                    Text(viewModel.goal.timeFrameType == .weekly ? "global_week_frame" : "global_month_frame")
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.grayText)
                         .applyFont(.title3)
@@ -193,7 +292,7 @@ struct MainGoalView: View {
             }
 
             HStack {
-                Text(viewModel.goal.whatDefinition ?? "Non definito")
+                Text(viewModel.goal.whatDefinition ?? "global_undefined".localized())
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.grayText)
                     .applyFont(.title3)
@@ -212,7 +311,7 @@ struct MainGoalView: View {
             }
 
             HStack {
-                Text(viewModel.goal.whyDefinition ?? "Non definito")
+                Text(viewModel.goal.whyDefinition ?? "global_undefined".localized())
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.grayText)
                     .applyFont(.title3)
@@ -235,7 +334,7 @@ struct MainGoalView: View {
             }
 
             HStack {
-                Text(viewModel.goal.whatWillChangeDefinition ?? "Non definito")
+                Text(viewModel.goal.whatWillChangeDefinition ?? "global_undefined".localized())
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.grayText)
                     .applyFont(.title3)
@@ -254,7 +353,7 @@ struct MainGoalView: View {
             }
 
             HStack {
-                Text(viewModel.goal.supportDefinition ?? "Non definito")
+                Text(viewModel.goal.supportDefinition ?? "global_undefined".localized())
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.grayText)
                     .applyFont(.title3)
@@ -273,7 +372,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text(viewModel.goal.isArchived ? "Riattiva" : "global_archive")
+                    Text(viewModel.goal.isArchived ? "global_reactivate" : "global_archive")
                         .foregroundColor(viewModel.goal.goalColor)
                         .applyFont(.button)
                         .multilineTextAlignment(.center)
@@ -297,7 +396,7 @@ struct MainGoalView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Cancella")
+                    Text("global_cancel")
                         .foregroundColor(viewModel.goal.goalColor)
                         .applyFont(.button)
                         .multilineTextAlignment(.center)
@@ -312,9 +411,9 @@ struct MainGoalView: View {
                 )
             }.accentColor(viewModel.goal.goalColor)
             .alert(isPresented: $viewModel.showWarningAlert) {
-                Alert(title: Text("ASPETTA"),
-                      message: Text("Sei sicuro di voler cancellare quest'obiettivo o abitudine?"),
-                      primaryButton: .destructive(Text("Cancella")) {
+                Alert(title: Text("global_wait"),
+                      message: Text("main_delete_question_confirmation"),
+                      primaryButton: .destructive(Text("global_cancel")) {
                         viewModel.selectedIndex = nil
                         viewModel.goals.removeAll(where: { $0.id == viewModel.goal.id })
                         PersistenceController.shared.container.viewContext.delete(viewModel.goal)
@@ -334,7 +433,7 @@ struct MainGoalView: View {
             }
         }) {
             if !viewModel.goal.isArchived {
-                Text("Modifica")
+                Text("global_edit")
                     .foregroundColor(.grayText)
                     .applyFont(.title4)
             }

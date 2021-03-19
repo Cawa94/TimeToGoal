@@ -266,7 +266,7 @@ struct NewGoalQuestionsView: View {
                                      isPresented: $viewModel.isIconsVisible)
                 }
             }
-            .navigationBarTitle("SMART Goal", displayMode: .inline)
+            .navigationBarTitle("global_smart_goal", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
                 Button(action: {

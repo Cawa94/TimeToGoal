@@ -37,9 +37,9 @@ struct ProfileView: View {
     @ViewBuilder
     var body: some View {
         let nameBinding = Binding<String>(get: {
-            (viewModel.profile.name ?? "Nome")
+            (viewModel.profile.name ?? "profile_name".localized())
         }, set: {
-            if $0 != "Nome", !(viewModel.challenges.contains(where: { $0.id == 6 })) {
+            if $0 != "profile_name".localized(), !(viewModel.challenges.contains(where: { $0.id == 6 })) {
                 let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
                 challenge.id = 6
                 challenge.progressMade = 1
@@ -58,7 +58,7 @@ struct ProfileView: View {
                             .frame(height: DeviceFix.isRoundedScreen ? 50 : 20)
 
                         HStack {
-                            Text("Profilo")
+                            Text("profile_title")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.leading)
                                 .padding([.leading], 15)
@@ -86,10 +86,10 @@ struct ProfileView: View {
                         Spacer()
                             .frame(height: 20)
 
-                        TextField("Nome", text: nameBinding)
+                        TextField("profile_name", text: nameBinding)
                             .frame(width: 200)
                             .multilineTextAlignment(.center)
-                            .foregroundColor(nameBinding.wrappedValue == "Nome" ? .grayGradient2 : .grayText)
+                            .foregroundColor(nameBinding.wrappedValue == "profile_name".localized() ? .grayGradient2 : .grayText)
                             .background(Color.defaultBackground)
                             .cornerRadius(.defaultRadius)
                             .disableAutocorrection(true)

@@ -53,7 +53,7 @@ struct NewGoalHabitsCategoriesView: View {
                             Spacer()
                                 .frame(height: 10)
 
-                            Text("Che tipo di abitudine?")
+                            Text("add_goal_habit_category_title")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.center)
                                 .padding([.leading, .trailing], 10)
@@ -91,7 +91,7 @@ struct NewGoalHabitsCategoriesView: View {
                                             selectedIndex = index
                                             if selectedIndex == 6 {
                                                 viewModel.newGoal.goalType = .init(
-                                                    id: 1000, label: "custom", name: "Personalizzato", image: "project_0",
+                                                    id: 1000, label: "custom", name: "goal_custom_name", image: "project_0",
                                                     categoryId: [6], measureUnits: [.session, .km, .page, .hour, .time, .singleTime])
                                                 showTimeView = true
                                             } else {
@@ -109,7 +109,7 @@ struct NewGoalHabitsCategoriesView: View {
                             Spacer()
                         }
                     }
-                }.navigationBarTitle("SMART Habit", displayMode: .inline)
+                }.navigationBarTitle("global_smart_habit", displayMode: .inline)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading:
                     Button(action: {

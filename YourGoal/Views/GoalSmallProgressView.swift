@@ -86,7 +86,7 @@ struct GoalSmallProgressView: View {
 
                 VStack(spacing: 0) {
                     if viewModel.goal == nil {
-                        Text("Nuovo obiettivo")
+                        Text("goal_new_goal")
                             .applyFont(.title)
                             .multilineTextAlignment(.center)
                             .foregroundColor(.grayText)
@@ -154,7 +154,7 @@ struct GoalSmallProgressView: View {
                             if let goal = viewModel.goal {
                                 if viewModel.isCompleted {
                                     if !goal.goalType.isHabit {
-                                        Text("Hai raggiunto il tuo obiettivo!")
+                                        Text("goal_reached_target")
                                             .fontWeight(.bold)
                                             .foregroundColor(.grayText)
                                             .multilineTextAlignment(.center)
@@ -162,8 +162,8 @@ struct GoalSmallProgressView: View {
                                             .padding([.leading, .trailing], 15)
                                     } else {
                                         Text(goal.timeFrameType == .weekly
-                                                ? "Obiettivo settimanale completato!"
-                                                : "Obiettivo mensile completato!")
+                                                ? "goal_weekly_target_reached"
+                                                : "goal_monthly_target_reached")
                                             .fontWeight(.bold)
                                             .foregroundColor(.grayText)
                                             .multilineTextAlignment(.center)

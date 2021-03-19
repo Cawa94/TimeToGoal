@@ -54,14 +54,15 @@ struct GoalListRow: View {
                 HStack(spacing: 0) {
                     VStack(alignment: .leading, spacing: 0) {
                         if !viewModel.goal.isArchived {
-                            Text("Striscia attuale")
+                            Text("global_current_streak")
                                 .applyFont(.title2)
                                 .foregroundColor(.grayText)
-                            Text("\(viewModel.goal.consecutiveDays(getRecord: false)) giorni")
+                            Text(String(format: "global_streak_days".localized(),
+                                        "\(viewModel.goal.consecutiveDays(getRecord: false))"))
                                 .applyFont(.title)
                                 .foregroundColor(viewModel.goal.goalColor)
                         } else {
-                            Text("Archiviato".uppercased())
+                            Text("global_archived".localized().uppercased())
                                 .applyFont(.title)
                                 .foregroundColor(.grayText)
                         }
@@ -69,10 +70,11 @@ struct GoalListRow: View {
                         Spacer()
                             .frame(height: 10)
 
-                        Text("Miglior striscia")
+                        Text("global_best_streak")
                             .applyFont(.title2)
                             .foregroundColor(.grayText)
-                        Text("\(viewModel.goal.consecutiveDays(getRecord: true)) giorni")
+                        Text(String(format: "global_streak_days".localized(),
+                                    "\(viewModel.goal.consecutiveDays(getRecord: true))"))
                             .applyFont(.title)
                             .foregroundColor(viewModel.goal.goalColor)
 

@@ -23,7 +23,7 @@ struct HabitTypeRow: View {
 
     var body: some View {
         HStack(spacing: 15) {
-            Text(viewModel.habit.name)
+            Text(viewModel.habit.name.localized())
                 .applyFont(.largeTitle)
                 .foregroundColor(.grayText)
 

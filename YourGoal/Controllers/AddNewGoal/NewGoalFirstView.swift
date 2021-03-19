@@ -61,7 +61,7 @@ struct NewGoalFirstView: View {
                             Spacer()
                                 .frame(height: 10)
 
-                            Text("Cosa vuoi creare?")
+                            Text("add_goal_type_title")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.center)
                                 .padding([.leading, .trailing], 10)
@@ -110,7 +110,7 @@ struct NewGoalFirstView: View {
 
                             Spacer()
                         }.padding([.leading, .trailing], 20)
-                    }.navigationBarTitle("Nuovo obiettivo", displayMode: .large)
+                    }.navigationBarTitle("add_goal_first_title", displayMode: .large)
                     .navigationBarItems(trailing: closeButton)
                 }
             }
@@ -119,14 +119,14 @@ struct NewGoalFirstView: View {
 
     var goalSection: some View {
         VStack {
-            Text("SMART Goal")
+            Text("global_smart_goal")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
                 .lineLimit(2)
                 .applyFont(.largeTitle)
-            
-            Text("Scrivere un libro, creare un sito web, correre una maratona")
+
+            Text("add_goal_smart_goal_definition")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
@@ -137,14 +137,14 @@ struct NewGoalFirstView: View {
 
     var habitSection: some View {
         VStack {
-            Text("SMART Habit")
+            Text("global_smart_habit")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
                 .lineLimit(2)
                 .applyFont(.largeTitle)
             
-            Text("Lavarti i denti, meditare, pulire il giardino")
+            Text("add_goal_smart_habit_definition")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)

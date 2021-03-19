@@ -60,7 +60,7 @@ struct ChallengeView: View {
                     }
                 })
 
-            Text(viewModel.challenge.name)
+            Text(viewModel.challenge.name.localized())
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 15)

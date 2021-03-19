@@ -32,35 +32,33 @@ enum MeasureUnit: String {
     var namePlural: String {
         switch self {
         case .session:
-            return "sessioni"
+            return "measure_unit_session".localized()
         case .page:
-            return "pagine"
+            return "measure_unit_page".localized()
         case .km:
-            return "km"
+            return "measure_unit_km".localized()
         case .hour:
-            return "ore"
+            return "measure_unit_hour".localized()
         case .time:
-            return "volte"
+            return "measure_unit_time".localized()
         case .singleTime:
-            return "giorni"
+            return "measure_unit_single_time".localized()
         }
     }
 
-    // !!!!!! remember to replace both namePlural values and getFrom() with same identical localized values
-
     static func getFrom(_ rawValue: String) -> MeasureUnit {
         switch rawValue {
-        case "sessioni":
+        case "measure_unit_session".localized():
             return .session
-        case "pagine":
+        case "measure_unit_page".localized():
             return .page
-        case "km":
+        case "measure_unit_km".localized():
             return .km
-        case "ore":
+        case "measure_unit_hour".localized():
             return .hour
-        case "volte":
+        case "measure_unit_time".localized():
             return .time
-        case "giorni":
+        case "measure_unit_single_time".localized():
             return .singleTime
         default:
             return .session

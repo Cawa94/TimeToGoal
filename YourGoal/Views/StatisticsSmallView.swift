@@ -29,7 +29,6 @@ public class StatisticsSmallViewModel: ObservableObject {
             datesArray.append(startOfWeek.adding(days: index).withoutHours)
         }
 
-        debugPrint("WEEK DATES: \(datesArray)")
         return datesArray
     }
 

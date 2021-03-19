@@ -53,7 +53,7 @@ struct StatisticsView: View {
                             .frame(height: DeviceFix.isRoundedScreen ? 50 : 20)
 
                         HStack {
-                            Text("Progressi")
+                            Text("statistics_title")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.leading)
                                 .padding([.leading], 15)
@@ -71,7 +71,7 @@ struct StatisticsView: View {
 
                         HStack(spacing: 15) {
                             VStack {
-                                Text("Striscia attuale giorni consecutivi")
+                                Text("statistics_current_streak_days")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
@@ -83,7 +83,7 @@ struct StatisticsView: View {
                             }.frame(width: container.size.width/2 - 15)
 
                             VStack {
-                                Text("Record giorni consecutivi")
+                                Text("statistics_record_streak_days")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
@@ -97,7 +97,7 @@ struct StatisticsView: View {
 
                         HStack(spacing: 15) {
                             VStack {
-                                Text("Obiettivi SMART completati")
+                                Text("statistics_complete_goals")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
@@ -109,7 +109,7 @@ struct StatisticsView: View {
                             }.frame(width: container.size.width/2 - 15)
 
                             VStack {
-                                Text("Settimane perfette")
+                                Text("statistics_perfect_weeks")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)

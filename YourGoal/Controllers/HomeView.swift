@@ -34,9 +34,9 @@ public class HomeViewModel: ObservableObject {
         self._goalToRenew = goalToRenew
 
         if let name = profile?.name, !name.isEmpty {
-            headerText = "\(Date().isEvening ? "Buonasera" : "Buongiorno") \(name)"
+            headerText = "\(Date().isEvening ? "home_good_evening".localized() : "home_good_morning".localized()) \(name)"
         } else {
-            headerText = goals.isEmpty ? "Benvenuto" : "Bentornato"
+            headerText = goals.isEmpty ? "home_welcome".localized() : "home_welcome_back".localized()
         }
     }
 
@@ -82,7 +82,7 @@ struct HomeView: View {
                             .frame(height: 10)
                         
                         HStack {
-                            Text("I tuoi obiettivi")
+                            Text("home_your_goals")
                                 .foregroundColor(.grayLight)
                                 .multilineTextAlignment(.leading)
                                 .padding([.leading], 15)
@@ -129,7 +129,7 @@ struct HomeView: View {
                             .frame(height: 5)
 
                         HStack {
-                            Text("La tua settimana")
+                            Text("home_your_week")
                                 .foregroundColor(.grayLight)
                                 .multilineTextAlignment(.leading)
                                 .padding([.leading], 15)

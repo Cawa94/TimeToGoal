@@ -138,7 +138,7 @@ struct NewGoalTimeView: View {
 
                 Form {
                     Section(header: HStack {
-                        Text("Il tuo obiettivo").applyFont(.fieldQuestion).multilineTextAlignment(.center)
+                        Text("global_your_goal").applyFont(.fieldQuestion).multilineTextAlignment(.center)
                         Spacer()
                         /*if viewModel.goal.goalType.isHabit {
                             Button(action: {
@@ -157,7 +157,7 @@ struct NewGoalTimeView: View {
                             if MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .singleTime
                                 || MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .time
                                 || MeasureUnit.getFrom(customMeasureBinding.wrappedValue) == .page {
-                                Text(viewModel.goal.goalType.timeSentence ?? "")
+                                Text(viewModel.goal.goalType.timeSentence?.localized() ?? "")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.largeTitle)
@@ -166,7 +166,7 @@ struct NewGoalTimeView: View {
                                 Spacer()
                                     .frame(height: 10)
                                 timeRequiredView(timeRequiredBinding: timeRequiredBinding, customMeasureBinding: customMeasureBinding)
-                                Text(viewModel.goal.goalType.ofGoalSentence ?? "")
+                                Text(viewModel.goal.goalType.ofGoalSentence?.localized() ?? "")
                                     .foregroundColor(.grayText)
                                     .applyFont(.largeTitle)
                             }
@@ -176,7 +176,6 @@ struct NewGoalTimeView: View {
                                 HStack(spacing: 10) {
                                     weeklyButton(timeFrameBinding: timeFrameBinding)
                                     monthlyButton(timeFrameBinding: timeFrameBinding)
-                                    //freeButton(timeFrameBinding: timeFrameBinding)
                                 }
                             }
                         }
@@ -342,7 +341,7 @@ struct NewGoalTimeView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Alla settimana")
+                    Text("global_weekly")
                     Spacer()
                 }
                     .foregroundColor(timeFrameBinding.wrappedValue == "weekly" ? .white : .gray)
@@ -367,7 +366,7 @@ struct NewGoalTimeView: View {
             }) {
                 HStack {
                     Spacer()
-                    Text("Al mese")
+                    Text("global_monthly")
                     Spacer()
                 }
                     .foregroundColor(timeFrameBinding.wrappedValue == "monthly" ? .white : .gray)
@@ -375,31 +374,6 @@ struct NewGoalTimeView: View {
                     .multilineTextAlignment(.center)
                     .padding([.top, .bottom], 10)
                     .background(timeFrameBinding.wrappedValue == "monthly"
-                                    ? LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
-                                                     startPoint: .topLeading, endPoint: .bottomTrailing)
-                                    : nil)
-                    .cornerRadius(.defaultRadius)
-                    .overlay(RoundedRectangle(cornerRadius: .defaultRadius)
-                                .stroke(Color.grayBorder, lineWidth: 1))
-            }.accentColor(viewModel.goal.goalColor)
-        }
-    }
-
-    func freeButton(timeFrameBinding: Binding<String>) -> some View {
-        HStack {
-            Button(action: {
-                timeFrameBinding.wrappedValue = "free"
-            }) {
-                HStack {
-                    Spacer()
-                    Text("In totale")
-                    Spacer()
-                }
-                    .foregroundColor(timeFrameBinding.wrappedValue == "free" ? .white : .gray)
-                    .applyFont(.smallButton)
-                    .multilineTextAlignment(.center)
-                    .padding([.top, .bottom], 10)
-                    .background(timeFrameBinding.wrappedValue == "free"
                                     ? LinearGradient(gradient: Gradient(colors: viewModel.goal.rectGradientColors),
                                                      startPoint: .topLeading, endPoint: .bottomTrailing)
                                     : nil)
@@ -486,7 +460,7 @@ struct NewGoalTimeView: View {
                             tuesdayBinding: Binding<String>, wednesdayBinding: Binding<String>,
                             thursdayBinding: Binding<String>, fridayBinding: Binding<String>,
                             saturdayBinding: Binding<String>, sundayBinding: Binding<String>) -> some View {
-        Section(header: Text(String(format: "Che giorni lo farai?")).applyFont(.fieldQuestion)) {
+        Section(header: Text("goal_custom_what_days").applyFont(.fieldQuestion)) {
             VStack {
                 HStack(spacing: 15) {
                     VStack(spacing: 5) {

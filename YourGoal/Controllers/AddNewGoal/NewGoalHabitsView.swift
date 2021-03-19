@@ -53,7 +53,7 @@ struct NewGoalHabitsView: View {
                             Spacer()
                                 .frame(height: 10)
 
-                            Text(viewModel.newGoal.goalType.isHabit ? "Scegli un'abitudine" : "Scegli un'obiettivo")
+                            Text(viewModel.newGoal.goalType.isHabit ? "add_goal_pick_habit" : "add_goal_pick_goal")
                                 .foregroundColor(.grayText)
                                 .multilineTextAlignment(.center)
                                 .padding([.leading, .trailing], 10)
@@ -78,7 +78,7 @@ struct NewGoalHabitsView: View {
                                         .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
                                         .onTapGesture {
                                             viewModel.newGoal.goalType = viewModel.habits[index]
-                                            viewModel.newGoal.name = viewModel.habits[index].name
+                                            viewModel.newGoal.name = viewModel.habits[index].name.localized()
                                             selectedIndex = index
                                             showTimeView = true
                                         }
@@ -93,7 +93,7 @@ struct NewGoalHabitsView: View {
                             Spacer()
                         }
                     }
-                }.navigationBarTitle("SMART Habit", displayMode: .inline)
+                }.navigationBarTitle("global_smart_habit", displayMode: .inline)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading:
                     Button(action: {

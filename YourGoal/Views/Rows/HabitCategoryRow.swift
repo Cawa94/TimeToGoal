@@ -25,11 +25,11 @@ struct HabitCategoryRow: View {
     var body: some View {
         HStack(spacing: 15) {
             VStack(alignment: .leading) {
-                Text(viewModel.category.name)
+                Text(viewModel.category.name.localized())
                     .applyFont(.largeTitle)
                     .foregroundColor(.grayText)
 
-                Text(viewModel.category.subtitle)
+                Text(viewModel.category.subtitle.localized())
                     .applyFont(.title2)
                     .foregroundColor(.grayText)
             }
