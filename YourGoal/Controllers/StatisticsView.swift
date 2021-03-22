@@ -67,7 +67,7 @@ struct StatisticsView: View {
                         }
 
                         Spacer()
-                            .frame(height: 0)
+                            .frame(height: DeviceFix.is65Screen ? 30 : 0)
 
                         HStack(spacing: 15) {
                             VStack {

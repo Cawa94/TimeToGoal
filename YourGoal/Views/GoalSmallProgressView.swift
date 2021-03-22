@@ -185,6 +185,8 @@ struct GoalSmallProgressView: View {
                                     .applyFont(.title2)
                                     .multilineTextAlignment(.center)
                                     .foregroundColor(.grayText)
+                                    .padding([.leading, .trailing],
+                                             DeviceFix.is65Screen ? 15 : 0)
                                 newGoalButton
                             }
                         }.frame(width: container.size.width/100 * 55)

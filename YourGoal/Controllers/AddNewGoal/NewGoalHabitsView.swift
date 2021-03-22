@@ -48,7 +48,8 @@ struct NewGoalHabitsView: View {
                 ZStack {
                     Color.defaultBackground
 
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
+
                         VStack {
                             Spacer()
                                 .frame(height: 10)

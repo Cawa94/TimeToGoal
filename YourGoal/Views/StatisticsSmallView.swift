@@ -65,7 +65,7 @@ struct StatisticsSmallView: View {
 
             HStack(spacing: 20) {
                 ForEach(viewModel.weekDates, id: \.self) { date in
-                    VStack(spacing: 10) {
+                    VStack(spacing: DeviceFix.is65Screen ? 15 : 10) {
                         GeometryReader { container in
                             ZStack {
                                 let goalsOnDate = viewModel.goals.goalsWorkOn(date: date)

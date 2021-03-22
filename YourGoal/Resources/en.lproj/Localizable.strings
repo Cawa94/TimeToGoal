@@ -53,7 +53,7 @@
 "global_got_it" = "OK";
 "global_hours" = "Hours";
 "global_icon" = "Icon";
-"global_journal" = "Mu journal";
+"global_journal" = "Journal";
 "global_minutes" = "Minutes";
 "global_monday" = "Monday";
 "global_next" = "Next";
@@ -81,7 +81,7 @@
 "global_best_streak" = "Best streak";
 "global_streak_days" = "%@ days";
 
-"goal_new_goal" = "New goal";
+"goal_new_goal" = "New goal / habit";
 "goal_reached_target" = "You reached your goal!";
 "goal_weekly_target_reached" = "Weekly target achieved!";
 "goal_monthly_target_reached" = "Monthly target achieved!";
@@ -420,7 +420,7 @@
 "statistics_perfect_weeks" = "Perfect weeks";
 "statistics_title" = "Progress";
 
-"tutorial_introduction_first_step" = "Have you ever wanted to reach a goal or want to introduce a new habit in your life, but not be able to remain constant over time? \n\nThis is because the lack of a clear goal to reach made you lose view of what you initially wanted.\n";
+"tutorial_introduction_first_step" = "Have you ever wanted to reach a goal or introduce a new habit in your life, but you were not able to remain constant over time? \n\nThis is because the lack of a clear goal to reach made you lose view of what you initially wanted.\n";
 "tutorial_introduction_second_step" = "TimeToGoal is the first app that will allow you to create and track SMART goals and habits.\n\nIt's crazy to think about introducing new habits into your routine without having a clear idea of ​​what you want and why you want it.\n";
 "tutorial_introduction_third_step" = "TimeToGoal will ask you all the questions you need in order to understand what you want and how you can get it.\n\nYou will be able to track your progress on a calendar, to have a clear view of your goals and feel the sensation to be making progress.\n";
 "tutorial_introduction_fourth_step" = "And it doesn't end here!\n\nTimeToGoal provides you with a journal where you can write your thoughts and moods, useful statistics to analyze your habits and a series of personal challenges to complete.\n\nAre you ready to achieve success?\n";

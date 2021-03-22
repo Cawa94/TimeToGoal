@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Sequence where Element == Goal {
+extension Array where Element == Goal {
 
     func goalsWorkOn(date: Date) -> [Goal] {
         self.filter { $0.workOn(date: date) && !($0.isArchived) }
@@ -64,7 +64,7 @@ extension Sequence where Element == Goal {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let startDate = self.sorted(by: { ($0.createdAt ?? Date()) < ($1.createdAt ?? Date()) })
             .first?.createdAt ?? formatter.date(from: "2021/01/01 23:00") ?? Date()
-        let endDate = Date()
+        let endDate = Date().endOfWeek ?? Date()
         let goalInterval = DateInterval(start: startDate, end: endDate)
         let calendar = Calendar.current
         let days = calendar.generateDates(
@@ -86,7 +86,7 @@ extension Sequence where Element == Goal {
             }
         }
 
-        return perfectWeeks
+        return self.isEmpty ? 0 : perfectWeeks
     }
 
 }

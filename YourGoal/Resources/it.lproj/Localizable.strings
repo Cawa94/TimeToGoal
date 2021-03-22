@@ -81,7 +81,7 @@
 "global_best_streak" = "Miglior striscia";
 "global_streak_days" = "%@ giorni";
 
-"goal_new_goal" = "Nuovo obiettivo";
+"goal_new_goal" = "Nuovo obiettivo / abitudine";
 "goal_reached_target" = "Hai raggiunto il tuo obiettivo!";
 "goal_weekly_target_reached" = "Obiettivo settimanale completato!";
 "goal_monthly_target_reached" = "Obiettivo mensile completato!";

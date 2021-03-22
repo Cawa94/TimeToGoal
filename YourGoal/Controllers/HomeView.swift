@@ -102,13 +102,16 @@ struct HomeView: View {
                                                                                activeSheet: $viewModel.activeSheet,
                                                                                hasTrackedGoal: $viewModel.hasTrackedGoal,
                                                                                goalIndex: index))
-                                            .frame(height: container.size.height/3.2)
+                                            .frame(height: DeviceFix.is65Screen
+                                                    ? container.size.height/3 : container.size.height/3.2)
                                         Spacer()
                                     }
                                 }
                                 .padding([.leading, .trailing], 5)
                             }
-                            .frame(width: UIScreen.main.bounds.width, height: container.size.height/3.2 + 45)
+                            .frame(width: UIScreen.main.bounds.width,
+                                   height: DeviceFix.is65Screen
+                                    ? container.size.height/3 + 25 : container.size.height/3.2 + 45)
                             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
                             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                             .colorScheme(.light)
@@ -122,7 +125,9 @@ struct HomeView: View {
                                                                    hasTrackedGoal: $viewModel.hasTrackedGoal,
                                                                    goalIndex: nil))
                                 .padding([.leading, .trailing], 5)
-                                .frame(width: UIScreen.main.bounds.width, height: container.size.height/3.2)
+                                .frame(width: UIScreen.main.bounds.width,
+                                       height: DeviceFix.is65Screen
+                                        ? container.size.height/3 : container.size.height/3.2)
                         }
 
                         Spacer()
@@ -144,7 +149,8 @@ struct HomeView: View {
                                                              journal: viewModel.journal,
                                                              hasTrackedGoal: $viewModel.hasTrackedGoal))
                             .padding([.leading, .trailing], 25)
-                            .frame(height: container.size.height/3)
+                            .frame(height: DeviceFix.is65Screen
+                                    ? container.size.height/2.7 : container.size.height/3)
 
                         Spacer()
                     }
