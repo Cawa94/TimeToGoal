@@ -76,7 +76,7 @@ struct NewGoalQuestionsView: View {
         BackgroundView(color: .defaultBackground) {
             ZStack {
                 Form {
-                    Section(header: Text("goal_name_question").applyFont(.fieldQuestion)) {
+                    Section(header: Text(viewModel.goal.goalType.isHabit ? "habit_name_question" : "goal_name_question").applyFont(.fieldQuestion)) {
                         VStack {
                             TextField("", text: nameBinding)
                                 .padding()
@@ -92,27 +92,29 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text("goal_custom_main_question").applyFont(.fieldQuestion)) {
-                        VStack {
-                            ZStack {
-                                TextEditor(text: whatBinding)
-                                    .padding()
-                                    .foregroundColor(.fieldsTextForegroundColor)
-                                    .background(Color.fieldsBackground)
-                                    .cornerRadius(.defaultRadius)
-                                    .disableAutocorrection(true)
-                                    .applyFont(.body)
-                                Text(whatBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
+                    if !viewModel.goal.goalType.isHabit {
+                        Section(header: Text("goal_main_question").applyFont(.fieldQuestion)) {
+                            VStack {
+                                ZStack {
+                                    TextEditor(text: whatBinding)
+                                        .padding()
+                                        .foregroundColor(.fieldsTextForegroundColor)
+                                        .background(Color.fieldsBackground)
+                                        .cornerRadius(.defaultRadius)
+                                        .disableAutocorrection(true)
+                                        .applyFont(.body)
+                                    Text(whatBinding.wrappedValue).opacity(0).padding(.all, 8).applyFont(.body)
+                                }
+                                Spacer()
+                                    .frame(height: 7)
                             }
-                            Spacer()
-                                .frame(height: 7)
                         }
+                        .textCase(nil)
+                        .listRowBackground(Color.defaultBackground)
+                        .foregroundColor(.fieldsTitleForegroundColor)
                     }
-                    .textCase(nil)
-                    .listRowBackground(Color.defaultBackground)
-                    .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text("goal_custom_why_question").applyFont(.fieldQuestion)) {
+                    Section(header: Text(viewModel.goal.goalType.isHabit ? "habit_why_question" : "goal_why_question").applyFont(.fieldQuestion)) {
                         VStack {
                             ZStack {
                                 TextEditor(text: whyBinding)
@@ -132,7 +134,7 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text("goal_custom_what_change_question").applyFont(.fieldQuestion)) {
+                    Section(header: Text(viewModel.goal.goalType.isHabit ? "habit_what_change_question" : "goal_what_change_question").applyFont(.fieldQuestion)) {
                         VStack {
                             ZStack {
                                 TextEditor(text: whatChangeBinding)
@@ -152,7 +154,7 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text("goal_custom_support_question").applyFont(.fieldQuestion)) {
+                    Section(header: Text(viewModel.goal.goalType.isHabit ? "habit_support_question" : "goal_support_question").applyFont(.fieldQuestion)) {
                         VStack {
                             ZStack {
                                 TextEditor(text: supportBinding)

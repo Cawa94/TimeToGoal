@@ -17,8 +17,8 @@
 "add_goal_missing_total_time" = "Set the total number of %@";
 "add_goal_missing_work_time" = "Set at least 1 work day";
 "add_goal_first_title" = "New goal";
-"add_goal_smart_goal_definition" = "Write a book, create a website, run a marathon";
-"add_goal_smart_habit_definition" = "Wash your teeth, meditate, clean the garden";
+"add_goal_smart_goal_definition" = "Something with a well-defined duration, which has a beginning and an end";
+"add_goal_smart_habit_definition" = "Something that repeats itself over time, every week or every month";
 "add_goal_pick_habit" = "Choose an habit";
 "add_goal_pick_goal" = "Choose a goal";
 
@@ -86,64 +86,14 @@
 "goal_weekly_target_reached" = "Weekly target achieved!";
 "goal_monthly_target_reached" = "Monthly target achieved!";
 "goal_name_question" = "Goal title (max 50 characters)";
-
 "goal_time_frame" = "Frequency";
-
-"goal_book_main_question" = "Which book will you read?";
-"goal_run_main_question" = "What will you train for?";
-"goal_training_main_question" = "What will you train for?";
-"goal_project_main_question" = "What project do you want to carry out?";
-"goal_custom_main_question" = "What goal do you want to accomplish?";
-
-"goal_book_why_question" = "What makes important for you to read it?";
-"goal_run_why_question" = "What makes important for you to run?";
-"goal_training_why_question" = "What makes important for you to train?";
-"goal_project_why_question" = "What makes important for you to accomplish it?";
-"goal_custom_why_question" = "What makes important for you to achieve it?";
-
-"goal_book_what_change_question" = "What will change when you'll have finished it?";
-"goal_run_what_change_question" = "What will change for you when you'll have reached this goal?";
-"goal_training_what_change_question" = "What will change for you when you'll have reached this goal?";
-"goal_project_what_change_question" = "What will change for you when you'll have completed it?";
-"goal_custom_what_change_question" = "What will change for you when you'll have accomplish it?";
-
-"goal_book_support_question" = "What could support you in being consistent?";
-"goal_run_support_question" = "Who or what could support you in achieveing it?";
-"goal_training_support_question" = "Who or what could support you in achieveing it?";
-"goal_project_support_question" = "Who or what could support you in achieveing it?";
-"goal_custom_support_question" = "What could support you in your journey?";
-
-"goal_book_title" = "Book";
-"goal_run_title" = "Run";
-"goal_training_title" = "Training";
-"goal_project_title" = "Project";
-"goal_custom_title" = "Custom";
-
-"goal_book_measure_unit" = "pages";
-"goal_run_measure_unit" = "km";
-"goal_training_measure_unit" = "sessions";
-"goal_project_measure_unit" = "hours";
-"goal_custom_measure_unit" = "steps";
-
-"goal_book_time_required" = "How many pages are there in total?";
-"goal_run_time_required" = "How many km will you run in total?";
-"goal_training_time_required" = "How many sessions will you do?";
-"goal_project_time_required" = "How many hours will it take?";
-"goal_custom_time_required" = "%@ required to reach it";
-
-"goal_book_time_for_day" = "How many pages will you read per day?";
-"goal_run_time_for_day" = "How many km will you run each day?";
-"goal_training_time_for_day" = "How many sessions will you do each day?";
-"goal_project_time_for_day" = "How many hours will you work on it each day?";
-"goal_custom_time_for_day" = "%@ per day";
-
-"goal_book_time_spent" = "How many pages have you read?";
-"goal_run_time_spent" = "How many km did you run?";
-"goal_training_time_spent" = "How many training sessions have you done?";
-"goal_project_time_spent" = "How many hours did you work on it?";
-"goal_custom_time_spent" = "How many progress have you made?";
-
-"goal_custom_what_days" = "What days will you do it?";
+"goal_main_question" = "What goal do you want to accomplish?";
+"goal_why_question" = "What makes important for you to achieve it?";
+"goal_what_change_question" = "What will change for you when you'll have accomplish it?";
+"goal_support_question" = "What could support you in your journey?";
+"goal_time_for_day" = "%@ per day";
+"goal_time_spent" = "How many progress have you made?";
+"goal_what_days" = "What days will you do it?";
 
 "goal_marathon_name" = "Run for x chilometers";
 "goal_marathon_goal_sentence" = "of running";
@@ -152,6 +102,11 @@
 "goal_read_book" = "Read a book";
 "goal_read_book_goal_sentence" = "of reading";
 "goal_custom_name" = "Custom";
+
+"habit_name_question" = "Habit name (max 50 characters)";
+"habit_why_question" = "Why is it important to introduce this new habit?";
+"habit_what_change_question" = "What changes will you notice in your life in a few months?";
+"habit_support_question" = "Who or what could support you in staying constant?";
 
 "habit_category_body_name" = "Body";
 "habit_category_body_subtitle" = "Running, exercises, yoga";
@@ -426,3 +381,13 @@
 "tutorial_introduction_fourth_step" = "And it doesn't end here!\n\nTimeToGoal provides you with a journal where you can write your thoughts and moods, useful statistics to analyze your habits and a series of personal challenges to complete.\n\nAre you ready to achieve success?\n";
 "tutorial_introduction_button" = "Let's get started!";
 "tutorial_introduction_title" = "Welcome! 👊😎";
+
+"screenshots_first_goal_name" = "Exercise";
+"screenshots_first_goal_why" = "I want to feel proud of my body, have more energy during the day and feel better when I leave the house";
+"screenshots_second_goal_name" = "Plan your day";
+"screenshots_second_goal_why" = "I want to organize my time better and be more productive";
+"screenshots_third_goal_name" = "Read";
+"screenshots_third_goal_why" = "I want to spend my free time better and learn new things";
+"screenshots_fourth_goal_name" = "Write in the diary";
+"screenshots_fourth_goal_why" = "I want to keep track of my days and my moods to understand myself better";
+"screenshots_journal_text" = "Today I was able to do everything I wanted.\n\nI feel amazing!.\n\nIt's really cool to be productive and able to stay consistent day after day.";

@@ -5,20 +5,20 @@
   Created by Yuri Cavallin on 10/10/2020.
   
 */
-
+ 
 "add_goal_days_required" = "-%@ días";
 "add_goal_extimated_date_title" = "Alcanzarás tu objetivo el:";
 "add_goal_hours_for_day_title" = "¿Cuántas horas al día trabajaras en ello?";
 "add_goal_hours_required_title" = "¿Cuántas horas tomará?";
 "add_goal_type_title" = "¿Qué vas a crear?";
-"add_goal_type_title" = "¿Qué tipo de objetivo quieres alcanzar?";
+"add_goal_habit_category_title" = "¿Qué tipo de objetivo quieres alcanzar?";
 "add_goal_customize_title" = "Personaliza tu objetivo";
 "add_goal_missing_name" = "Nombra tu objetivo primero";
 "add_goal_missing_total_time" = "Estableces el número total de% @";
 "add_goal_missing_work_time" = "Estableces al menos 1 día laboral";
 "add_goal_first_title" = "Nuevo objetivo";
-"add_goal_smart_goal_definition" = "Escribir un libro, crear un sitio web, correr un maratón";
-"add_goal_smart_habit_definition" = "Lávate los dientes, medita, limpia el jardín";
+"add_goal_smart_goal_definition" = "Algo con una duración bien definida, que tiene un principio y un final";
+"add_goal_smart_habit_definition" = "Algo que se repite con el tiempo, cada semana o cada mes";
 "add_goal_pick_habit" = "Elige un hábito";
 "add_goal_pick_goal" = "Elije un objetivo";
 
@@ -31,7 +31,7 @@
 "challenge_third_name" = "Completa una semana perfecta 50 veces";
 "challenge_fourth_name" = "Completa una semana perfecta 25 veces";
 "challenge_fifth_name" = "Completa una semana perfecta 10 veces";
-"challenge_sixth_name" = "Elije un avatar para su perfil";
+"challenge_sixth_name" = "Elije un avatar para tu perfil";
 "challenge_seventh_name" = "Inserta tu nombre";
 "challenge_eigth_name" = "Seguimiento de un hábito 100 veces";
 "challenge_nineth_name" = "Seguimiento de un hábito 50 veces";
@@ -86,64 +86,14 @@
 "goal_weekly_target_reached" = "¡Objetivo semanal alcanzado!";
 "goal_monthly_target_reached" = "¡Objetivo mensual alcanzado!";
 "goal_name_question" = "Nombre del objetivo (máx 50 caracteres)";
-
 "goal_time_frame" = "Frecuencia";
-
-"goal_book_main_question" = "¿Qué libro leerás?";
-"goal_run_main_question" = "¿Para qué entrenarás?";
-"goal_training_main_question" = "¿Para qué entrenarás?";
-"goal_project_main_question" = "¿Qué proyecto deseas realizar?";
-"goal_custom_main_question" = "¿Qué objetivo deseas lograr?";
-
-"goal_book_why_question" = "¿Qué hace que sea importante que lo lea?";
-"goal_run_why_question" = "¿Qué hace que sea importante para ti correr?";
-"goal_training_why_question" = "¿Qué hace que sea importante para ti entrenar?";
-"goal_project_why_question" = "¿Qué es lo importante para que lo logres?";
-"goal_custom_why_question" = "¿Qué hace que sea importante para usted lograrlo?";
-
-"goal_book_what_change_question" = "¿Qué cambiará cuando lo hayas terminado?";
-"goal_run_what_change_question" = "¿Qué cambiará para ti cuando hayas alcanzado este objetivo?";
-"goal_training_what_change_question" = "¿Qué cambiará para ti cuando hayas alcanzado este objetivo?";
-"goal_project_what_change_question" = "¿Qué cambiará cuando lo hayas completado?";
-"goal_custom_what_change_question" = "¿Qué cambiará cuando lo hayas logrado?";
-
-"goal_book_support_question" = "¿Qué podría ayudarte a ser coherente?";
-"goal_run_support_question" = "¿Quién o qué podría ayudarte a lograrlo?";
-"goal_training_support_question" = "¿Quién o qué podría ayudarte a lograrlo?";
-"goal_project_support_question" = "¿Quién o qué podría ayudarte a lograrlo?";
-"goal_custom_support_question" = "¿Qué podría ayudarte en tu viaje?";
-
-"goal_book_title" = "Libro";
-"goal_run_title" = "Carrera";
-"goal_training_title" = "Entrenamiento";
-"goal_project_title" = "Proyecto";
-"goal_custom_title" = "Personalizado";
-
-"goal_book_measure_unit" = "páginas";
-"goal_run_measure_unit" = "km";
-"goal_training_measure_unit" = "sesiones";
-"goal_project_measure_unit" = "horas";
-"goal_custom_measure_unit" = "pasos";
-
-"goal_book_time_required" = "¿Cuántas páginas hay en total?";
-"goal_run_time_required" = "¿Cuántos km correrás en total?";
-"goal_training_time_required" = "¿Cuántas sesiones harás en total?";
-"goal_project_time_required" = "¿Cuántas horas se necesitaràn?";
-"goal_custom_time_required" = "%@ requerido para alcanzarlo";
-
-"goal_book_time_for_day" = "¿Cuántas páginas leerás al día?";
-"goal_run_time_for_day" = "¿Cuántos km correrás cada día?";
-"goal_training_time_for_day" = "¿Cuántas sesiones harás cada día?";
-"goal_project_time_for_day" = "¿Cuántas horas trabajarás en él cada día?";
-"goal_custom_time_for_day" = "%@ por día";
-
-"goal_book_time_spent" = "¿Cuántas páginas has leído?";
-"goal_run_time_spent" = "¿Cuántos km corriste?";
-"goal_training_time_spent" = "¿Cuántas sesiones has realizado?";
-"goal_project_time_spent" = "¿Cuántas horas trabajaste en él?";
-"goal_custom_time_spent" = "¿Cuánto has avanzado?";
-
-"goal_custom_what_days" = "¿Qué días lo harás?";
+"goal_main_question" = "¿Qué objetivo deseas lograr?";
+"goal_why_question" = "¿Qué hace que sea importante para usted lograrlo?";
+"goal_what_change_question" = "¿Qué cambiará cuando lo hayas logrado?";
+"goal_support_question" = "¿Qué podría ayudarte en tu viaje?";
+"goal_time_for_day" = "%@ por día";
+"goal_time_spent" = "¿Cuánto has avanzado?";
+"goal_what_days" = "¿Qué días lo harás?";
 
 "goal_marathon_name" = "Correr x chilometers";
 "goal_marathon_goal_sentence" = "de carrera";
@@ -152,6 +102,11 @@
 "goal_read_book" = "Leer un libro";
 "goal_read_book_goal_sentence" = "de lectura";
 "goal_custom_name" = "Personalizado";
+
+"habit_name_question" = "Nombre del hábito (máximo 50 caracteres)";
+"habit_why_question" = "¿Por qué es importante introducir este nuevo hábito?";
+"habit_what_change_question" = "¿Qué cambios notará en tu vida dentro de unos meses?";
+"habit_support_question" = "¿Quién o qué podría ayudarte a mantenerte constante?";
 
 "habit_category_body_name" = "Cuerpo";
 "habit_category_body_subtitle" = "Correr, ejercicios, yoga";
@@ -300,12 +255,12 @@
 "main_will_reach_goal" = "Alcanzarás tu objetivo el";
 "main_delete_question_confirmation" = "¿Quieres eliminar este objetivo?";
 
-"Measure_unit_session" = "sesiones";
-"Measure_unit_page" = "páginas";
+"measure_unit_session" = "sesiones";
+"measure_unit_page" = "páginas";
 "unidad_medida_km" = "km";
-"Measure_unit_hour" = "horas";
-"Measure_unit_time" = "tiempos";
-"Measure_unit_single_time" = "días";
+"measure_unit_hour" = "horas";
+"measure_unit_time" = "tiempos";
+"measure_unit_single_time" = "días";
 
 "motivational_sentence_1" = "Establecer metas es el primer paso para convertir lo invisible en visible";
 "motivational_author_1" = "Tony Robbins";
@@ -426,3 +381,13 @@
 "tutorial_introduction_fourth_step" = "¡Y no termina aquí!\n\nTimeToGoal te proporciona un diario en el que puedes escribir tus pensamientos y estados de ánimo, estadísticas útiles para analizar tus hábitos y una serie de desafíos personales para alcanzar.\n\nAre ¿Estás listo para lograr el éxito?\n";
 "tutorial_introduction_button" = "¡Empecemos!";
 "tutorial_introduction_title" = "¡Bienvenido! 👊😎";
+
+"screenshots_first_goal_name" = "Ejercicio";
+"screenshots_first_goal_why" = "Quiero sentirme orgulloso de mi cuerpo, tener más energía durante el día y sentirme mejor cuando salga de casa";
+"screenshots_second_goal_name" = "Planificar mi día";
+"screenshots_second_goal_why" = "Quiero organizar mejor mi tiempo y ser más productivo";
+"screenshots_third_goal_name" = "Leer";
+"screenshots_third_goal_why" = "Quiero pasar mejor mi tiempo libre y aprender cosas nuevas";
+"screenshots_fourth_goal_name" = "Escribir en mi diario";
+"screenshots_fourth_goal_why" = "Quiero hacer un seguimiento de mis días y mi estado de ánimo para entenderme mejor";
+"screenshots_journal_text" = "Hoy pude hacer lo que quería.\n\nMe siento muy bien.\n\nEs muy guay ser productivo y poder mantener la constancia día tras día.";

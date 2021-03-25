@@ -178,6 +178,10 @@ struct GoalSmallProgressView: View {
                                         .applyFont(.small)
                                         .lineSpacing(-20)
                                         .padding([.leading, .trailing], 5)
+
+                                    Spacer()
+                                        .frame(height: 10)
+
                                     trackTimeButton
                                 }
                             } else {

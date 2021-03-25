@@ -11,6 +11,8 @@ import Firebase
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
+    static var needScreenshots = false
+
     var window: UIWindow?
 
     lazy var appWindow: UIWindow = {

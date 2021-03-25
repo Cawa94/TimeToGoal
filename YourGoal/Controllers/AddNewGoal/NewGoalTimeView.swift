@@ -20,6 +20,8 @@ public class NewGoalTimeViewModel: ObservableObject {
         self.isNewGoal = isNew
         self.challenges = challenges
         self.goal = goal
+
+        debugPrint("GOAL TYPE: \(goal.goalType.id)")
     }
 
 }
@@ -388,7 +390,7 @@ struct NewGoalTimeView: View {
                              tuesdayBinding: Binding<String>, wednesdayBinding: Binding<String>,
                              thursdayBinding: Binding<String>, fridayBinding: Binding<String>,
                              saturdayBinding: Binding<String>, sundayBinding: Binding<String>) -> some View {
-        Section(header: Text(String(format: "goal_custom_time_for_day".localized(),
+        Section(header: Text(String(format: "goal_time_for_day".localized(),
                                     customMeasureBinding.wrappedValue.capitalized)).applyFont(.fieldQuestion)) {
             VStack {
                 HStack(spacing: 15) {
@@ -460,7 +462,7 @@ struct NewGoalTimeView: View {
                             tuesdayBinding: Binding<String>, wednesdayBinding: Binding<String>,
                             thursdayBinding: Binding<String>, fridayBinding: Binding<String>,
                             saturdayBinding: Binding<String>, sundayBinding: Binding<String>) -> some View {
-        Section(header: Text("goal_custom_what_days").applyFont(.fieldQuestion)) {
+        Section(header: Text("goal_what_days").applyFont(.fieldQuestion)) {
             VStack {
                 HStack(spacing: 15) {
                     VStack(spacing: 5) {

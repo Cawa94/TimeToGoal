@@ -197,6 +197,8 @@ struct GoalType: Identifiable {
         .init(id: 52, label: "plan_day", name: "habit_plan_day_name", image: "write_5",
               categoryId: [1, 3], measureUnits: [.singleTime], timeSentence: "habit_plan_day_time_sentence"),
 
+        .init(id: 1000, label: "custom", name: "goal_custom_name", image: "project_0",
+            categoryId: [6], measureUnits: [.session, .km, .page, .hour, .time, .singleTime])
       ]
 
     static var allGoals: [GoalType] = [
@@ -225,18 +227,6 @@ struct GoalType: Identifiable {
         return GoalType.allHabits.first(where: { $0.label == label })
             ?? GoalType.allGoals.first(where: { $0.label == label })
             ?? .dumbValue
-    }
-
-}
-
-extension GoalType {
-
-    var title: String {
-        return "goal_custom_title".localized()
-    }
-
-    var measureUnit: String {
-        return "goal_custom_measure_unit".localized()
     }
 
 }

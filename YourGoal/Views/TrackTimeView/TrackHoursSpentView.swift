@@ -36,7 +36,7 @@ struct TrackHoursSpentView: View {
                     VStack {
                         Spacer()
                             .frame(height: 30)
-                        Text("goal_custom_time_spent")
+                        Text("goal_time_spent")
                             .multilineTextAlignment(.center)
                             .foregroundColor(currentGoal?.goalColor)
                             .padding([.leading, .trailing], 10)

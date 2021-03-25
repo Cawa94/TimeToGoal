@@ -89,7 +89,7 @@ struct MainGoalView: View {
                             }
 
                             HStack {
-                                Text("goal_custom_main_question")
+                                Text("goal_main_question")
                                     .multilineTextAlignment(.leading)
                                     .foregroundColor(.grayLight)
                                     .applyFont(.title3)
@@ -111,7 +111,7 @@ struct MainGoalView: View {
 
                         VStack(spacing: 10) {
                             HStack {
-                                Text("goal_custom_why_question")
+                                Text("goal_why_question")
                                     .multilineTextAlignment(.leading)
                                     .foregroundColor(.grayLight)
                                     .applyFont(.title3)
@@ -130,7 +130,7 @@ struct MainGoalView: View {
                                 .frame(height: 0)
                             
                             HStack {
-                                Text("goal_custom_what_change_question")
+                                Text("goal_what_change_question")
                                     .multilineTextAlignment(.leading)
                                     .foregroundColor(.grayLight)
                                     .applyFont(.title3)
@@ -151,7 +151,7 @@ struct MainGoalView: View {
 
                         VStack(spacing: 10) {
                             HStack {
-                                Text("goal_custom_support_question")
+                                Text("goal_support_question")
                                     .multilineTextAlignment(.leading)
                                     .foregroundColor(.grayLight)
                                     .applyFont(.title3)
@@ -258,108 +258,6 @@ struct MainGoalView: View {
             }
         }
         .frame(width: .circleSize, height: .circleSize)
-    }
-
-    var answersSummaryFirstPart: some View {
-        VStack(spacing: 10) {
-            if viewModel.goal.goalType.isHabit {
-                HStack {
-                    Text("goal_time_frame")
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(.grayLight)
-                        .applyFont(.title3)
-                    Spacer()
-                }
-
-                HStack {
-                    Text(viewModel.goal.timeFrameType == .weekly ? "global_week_frame" : "global_month_frame")
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(.grayText)
-                        .applyFont(.title3)
-                    Spacer()
-                }
-
-                Spacer()
-                    .frame(height: 0)
-            }
-
-            HStack {
-                Text("goal_custom_main_question")
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayLight)
-                    .applyFont(.title3)
-                Spacer()
-            }
-
-            HStack {
-                Text(viewModel.goal.whatDefinition ?? "global_undefined".localized())
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayText)
-                    .applyFont(.title3)
-                Spacer()
-            }
-
-            Spacer()
-                .frame(height: 0)
-
-            HStack {
-                Text("goal_custom_why_question")
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayLight)
-                    .applyFont(.title3)
-                Spacer()
-            }
-
-            HStack {
-                Text(viewModel.goal.whyDefinition ?? "global_undefined".localized())
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayText)
-                    .applyFont(.title3)
-                Spacer()
-            }
-        }
-    }
-
-    var answersSummarySecondPart: some View {
-        VStack(spacing: 10) {
-            Spacer()
-                .frame(height: 0)
-
-            HStack {
-                Text("goal_custom_what_change_question")
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayLight)
-                    .applyFont(.title3)
-                Spacer()
-            }
-
-            HStack {
-                Text(viewModel.goal.whatWillChangeDefinition ?? "global_undefined".localized())
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayText)
-                    .applyFont(.title3)
-                Spacer()
-            }
-
-            Spacer()
-                .frame(height: 0)
-
-            HStack {
-                Text("goal_custom_support_question")
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayLight)
-                    .applyFont(.title3)
-                Spacer()
-            }
-
-            HStack {
-                Text(viewModel.goal.supportDefinition ?? "global_undefined".localized())
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.grayText)
-                    .applyFont(.title3)
-                Spacer()
-            }
-        }
     }
 
     var archiveGoalButton: some View {

@@ -17,8 +17,8 @@
 "add_goal_missing_total_time" = "Imposta il numero totale di %@";
 "add_goal_missing_work_time" = "Imposta almeno 1 giorno di lavoro";
 "add_goal_first_title" = "Nuovo obiettivo";
-"add_goal_smart_goal_definition" = "Scrivere un libro, creare un sito web, correre una maratona";
-"add_goal_smart_habit_definition" = "Lavarti i denti, meditare, pulire il giardino";
+"add_goal_smart_goal_definition" = "Qualcosa dalla duarata ben definita, che ha un inizio e una fine";
+"add_goal_smart_habit_definition" = "Qualcosa che si ripete nel tempo, ogni settimana o ogni mese";
 "add_goal_pick_habit" = "Scegli un'abitudine";
 "add_goal_pick_goal" = "Scegli un obiettivo";
 
@@ -86,64 +86,14 @@
 "goal_weekly_target_reached" = "Obiettivo settimanale completato!";
 "goal_monthly_target_reached" = "Obiettivo mensile completato!";
 "goal_name_question" = "Titolo dell'obiettivo (max 50 caratteri)";
-
 "goal_time_frame" = "Frequenza";
-
-"goal_book_main_question" = "Che libro leggerai?";
-"goal_run_main_question" = "Per cosa ti allenerai?";
-"goal_training_main_question" = "Per cosa ti allenerai?";
-"goal_project_main_question" = "Che progetto vuoi realizzare?";
-"goal_custom_main_question" = "Che obiettivo vuoi raggiungere?";
-
-"goal_book_why_question" = "Perchè è importante leggere questo libro?";
-"goal_run_why_question" = "Perchè è importante raggiungere questo obiettivo?";
-"goal_training_why_question" = "Perchè è importante raggiungere questo obiettivo?";
-"goal_project_why_question" = "Perchè è importante realizzare questo progetto?";
-"goal_custom_why_question" = "Perchè è importante raggiungere questo obiettivo?";
-
-"goal_book_what_change_question" = "Cosa cambierà per te quando l'avrai letto?";
-"goal_run_what_change_question" = "Cosa cambierà per te quando l'avrai raggiunto?";
-"goal_training_what_change_question" = "Cosa cambierà per te quando l'avrai raggiunto?";
-"goal_project_what_change_question" = "Cosa cambierà per te quando l'avrai completato?";
-"goal_custom_what_change_question" = "Cosa cambierà per te quando l'avrai raggiunto?";
-
-"goal_book_support_question" = "Chi o cosa potrebbe supportarti nel leggerlo?";
-"goal_run_support_question" = "Chi o cosa potrebbe supportarti nel raggiungerlo?";
-"goal_training_support_question" = "Chi o cosa potrebbe supportarti nel raggiungerlo?";
-"goal_project_support_question" = "Chi o cosa potrebbe supportarti nel completarlo?";
-"goal_custom_support_question" = "Chi o cosa potrebbe supportarti nel raggiungerlo?";
-
-"goal_book_title" = "Libro";
-"goal_run_title" = "Corsa";
-"goal_training_title" = "Allenamento";
-"goal_project_title" = "Progetto";
-"goal_custom_title" = "Personalizzato";
-
-"goal_book_measure_unit" = "pagine";
-"goal_run_measure_unit" = "km";
-"goal_training_measure_unit" = "sessioni";
-"goal_project_measure_unit" = "ore";
-"goal_custom_measure_unit" = "steps";
-
-"goal_book_time_required" = "Quante pagine sono in tutto?";
-"goal_run_time_required" = "Quanti km correrai in totale?";
-"goal_training_time_required" = "Quante sessioni farai in totale?";
-"goal_project_time_required" = "Quante ore di tempo richiederà?";
-"goal_custom_time_required" = "%@ per completarlo";
-
-"goal_book_time_for_day" = "Quante pagine leggerai al giorno?";
-"goal_run_time_for_day" = "Quanti km correrai ogni giorno?";
-"goal_training_time_for_day" = "Quante sessioni farai ogni giorni?";
-"goal_project_time_for_day" = "Quante ore ci lavorerai ogni giorno?";
-"goal_custom_time_for_day" = "%@ al giorno";
-
-"goal_book_time_spent" = "Quante pagine hai letto?";
-"goal_run_time_spent" = "Quanti km hai corso?";
-"goal_training_time_spent" = "Quante sessioni di allenamento hai fatto?";
-"goal_project_time_spent" = "Quante ore ci hai lavorato?";
-"goal_custom_time_spent" = "Quanti progressi hai fatto?";
-
-"goal_custom_what_days" = "Che giorni lo farai?";
+"goal_main_question" = "Che obiettivo vuoi raggiungere?";
+"goal_why_question" = "Perchè è importante raggiungere questo obiettivo?";
+"goal_what_change_question" = "Cosa cambierà per te quando l'avrai raggiunto?";
+"goal_support_question" = "Chi o cosa potrebbe supportarti nel raggiungerlo?";
+"goal_time_for_day" = "%@ al giorno";
+"goal_time_spent" = "Quanti progressi hai fatto?";
+"goal_what_days" = "Che giorni lo farai?";
 
 "goal_marathon_name" = "Corri per tot chilometri";
 "goal_marathon_goal_sentence" = "di corsa";
@@ -152,6 +102,11 @@
 "goal_read_book" = "Leggi un libro";
 "goal_read_book_goal_sentence" = "di lettura";
 "goal_custom_name" = "Personalizzato";
+
+"habit_name_question" = "Nome dell'abitudine (max 50 caratteri)";
+"habit_why_question" = "Perchè è importante introdurre questa nuova abitudine?";
+"habit_what_change_question" = "Quali cambiamenti potrai notare nella tua vita fra qualche mese?";
+"habit_support_question" = "Chi o cosa potrebbe supportarti nel rimanere costante?";
 
 "habit_category_body_name" = "Corpo";
 "habit_category_body_subtitle" = "Corsa, esercizi, yoga";
@@ -426,3 +381,13 @@
 "tutorial_introduction_fourth_step" = "E non finisce qui!\n\nTimeToGoal ti mette a disposizione un diario dove scrivere i tuoi pensieri e i tuoi stati d'animo, statistiche utili ad analizzare le tue abitudini e una serie di sfide personali da completare.\n\nSei pronto a raggiungere il successo?\n";
 "tutorial_introduction_button" = "Iniziamo!";
 "tutorial_introduction_title" = "Benvenuto!👊😎";
+
+"screenshots_first_goal_name" = "Fare attività fisica";
+"screenshots_first_goal_why" = "Voglio sentirmi orgoglioso del mio corpo, avere più energia durante la giornata e sentirmi in forma quando esco di casa";
+"screenshots_second_goal_name" = "Pianificare la giornata";
+"screenshots_second_goal_why" = "Voglio organizzare meglio il mio tempo ed essere più produttivo";
+"screenshots_third_goal_name" = "Leggere";
+"screenshots_third_goal_why" = "Voglio spendere meglio il mio tempo libero e imparare cose nuove";
+"screenshots_fourth_goal_name" = "Scrivere nel diario";
+"screenshots_fourth_goal_why" = "Voglio tenere traccia delle mie giornate e dei miei stati d'animo per comprendermi meglio";
+"screenshots_journal_text" = "Oggi sono riuscito a fare tutto ciò che volevo.\n\nMi sento benissimo.\n\nÈ davvero bello essere produttivi e riuscire a rimanere costanti giorno dopo giorno.";

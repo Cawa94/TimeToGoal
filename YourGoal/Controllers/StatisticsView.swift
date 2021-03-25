@@ -88,7 +88,7 @@ struct StatisticsView: View {
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
 
-                                Text("\(recordGoalStreak)")
+                                Text(AppDelegate.needScreenshots ? "13" : "\(recordGoalStreak)")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)
@@ -102,7 +102,7 @@ struct StatisticsView: View {
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
 
-                                Text("\(viewModel.completedGoals)")
+                                Text(AppDelegate.needScreenshots ? "2" : "\(viewModel.completedGoals)")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)
@@ -114,7 +114,7 @@ struct StatisticsView: View {
                                     .multilineTextAlignment(.center)
                                     .applyFont(.title2)
 
-                                Text("\(viewModel.goals.perfectWeeks)")
+                                Text(AppDelegate.needScreenshots ? "4" : "\(viewModel.goals.perfectWeeks)")
                                     .foregroundColor(.grayText)
                                     .multilineTextAlignment(.center)
                                     .applyFont(.navigationLargeTitle)

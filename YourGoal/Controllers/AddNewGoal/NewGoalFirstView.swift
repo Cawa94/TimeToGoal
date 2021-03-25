@@ -117,38 +117,34 @@ struct NewGoalFirstView: View {
         }
     }
 
-    var goalSection: some View {
-        VStack {
-            Text("global_smart_goal")
-                .foregroundColor(.grayText)
-                .multilineTextAlignment(.center)
-                .padding([.leading, .trailing], 10)
-                .lineLimit(2)
-                .applyFont(.largeTitle)
-
-            Text("add_goal_smart_goal_definition")
-                .foregroundColor(.grayText)
-                .multilineTextAlignment(.center)
-                .padding([.leading, .trailing], 10)
-                .lineLimit(2)
-                .applyFont(.title3)
-        }.padding(20)
-    }
-
     var habitSection: some View {
         VStack {
             Text("global_smart_habit")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
-                .lineLimit(2)
                 .applyFont(.largeTitle)
             
             Text("add_goal_smart_habit_definition")
                 .foregroundColor(.grayText)
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 10)
-                .lineLimit(2)
+                .applyFont(.title3)
+        }.padding(20)
+    }
+
+    var goalSection: some View {
+        VStack {
+            Text("global_smart_goal")
+                .foregroundColor(.grayText)
+                .multilineTextAlignment(.center)
+                .padding([.leading, .trailing], 10)
+                .applyFont(.largeTitle)
+
+            Text("add_goal_smart_goal_definition")
+                .foregroundColor(.grayText)
+                .multilineTextAlignment(.center)
+                .padding([.leading, .trailing], 10)
                 .applyFont(.title3)
         }.padding(20)
     }

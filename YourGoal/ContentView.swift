@@ -22,7 +22,7 @@ public class ContentViewModel: ObservableObject {
     @Published var journal: [JournalPage] = []
     @Published var profile: Profile?
     @Published var challenges: [Challenge] = []
-    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true ? .tutorial : nil
+    @Published var activeSheet: ActiveSheet? = UserDefaults.standard.showTutorial ?? true && !AppDelegate.needScreenshots ? .tutorial : nil
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
     @Published var refreshChallenges = false
@@ -76,6 +76,10 @@ struct ContentView: View {
             entity: Challenge.entity(),
             sortDescriptors: []
         )
+
+        if AppDelegate.needScreenshots {
+            fakeInfosForScreenshots()
+        }
     }
 
     @ViewBuilder
@@ -230,6 +234,175 @@ struct ContentView: View {
                 goal.completedAt = nil
             }
         }
+    }
+
+    func fakeInfosForScreenshots() {
+        UserDefaults.standard.showTutorial = false
+
+        let firstGoal = Goal(context: PersistenceController.shared.container.viewContext)
+        firstGoal.color = "purpleGoal"
+        firstGoal.name = "screenshots_first_goal_name".localized()
+        firstGoal.goalType = .init(id: 7, label: "excercise", name: "habit_excercise_name", image: "exercise_17",
+                                   categoryId: [0], measureUnits: [.session, .hour], ofGoalSentence: "habit_excercise_goal_sentence")
+        firstGoal.timeRequired = 3
+        firstGoal.customTimeMeasure = "measure_unit_session".localized()
+        firstGoal.timeFrame = "weekly"
+        firstGoal.monday = 1
+        firstGoal.wednesday = 1
+        firstGoal.friday = 1
+        firstGoal.whyDefinition = "screenshots_first_goal_why".localized()
+        firstGoal.completionDateExtimated = firstGoal.updatedCompletionDate
+        firstGoal.createdAt = Date().adding(days: -40)
+
+        createGoalProgressFor(goal: firstGoal)
+
+
+        let secondGoal = Goal(context: PersistenceController.shared.container.viewContext)
+        secondGoal.color = "greenGoal"
+        secondGoal.name = "screenshots_second_goal_name".localized()
+        secondGoal.goalType = .init(id: 52, label: "plan_day", name: "habit_plan_day_name", image: "write_5",
+                                    categoryId: [1, 3], measureUnits: [.singleTime], timeSentence: "habit_plan_day_time_sentence")
+        secondGoal.timeRequired = 20
+        secondGoal.customTimeMeasure = "measure_unit_single_time".localized()
+        secondGoal.timeFrame = "monthly"
+        secondGoal.monday = 1
+        secondGoal.tuesday = 1
+        secondGoal.wednesday = 1
+        secondGoal.thursday = 1
+        secondGoal.friday = 1
+        secondGoal.whyDefinition = "screenshots_second_goal_why".localized()
+        secondGoal.completionDateExtimated = secondGoal.updatedCompletionDate
+        secondGoal.createdAt = Date().adding(days: -40)
+
+        createGoalProgressFor(goal: secondGoal)
+
+
+        let thirdGoal = Goal(context: PersistenceController.shared.container.viewContext)
+        thirdGoal.color = "blueGoal"
+        thirdGoal.name = "screenshots_third_goal_name".localized()
+        thirdGoal.goalType = .init(id: 5, label: "reading", name: "habit_reading_name", image: "book_2",
+                                   categoryId: [1, 3], measureUnits: [.session, .page, .hour], ofGoalSentence: "habit_reading_goal_sentence", timeSentence: "habit_reading_time_sentence")
+        thirdGoal.timeRequired = 4
+        thirdGoal.customTimeMeasure = "measure_unit_hour".localized()
+        thirdGoal.timeFrame = "weekly"
+        thirdGoal.thursday = 1
+        thirdGoal.friday = 1
+        thirdGoal.saturday = 1
+        thirdGoal.sunday = 1
+        thirdGoal.whyDefinition = "screenshots_third_goal_why".localized()
+        thirdGoal.completionDateExtimated = thirdGoal.updatedCompletionDate
+        thirdGoal.createdAt = Date().adding(days: -40)
+
+        createGoalProgressFor(goal: thirdGoal)
+
+
+
+        let fourthGoal = Goal(context: PersistenceController.shared.container.viewContext)
+        fourthGoal.color = "orangeGoal"
+        fourthGoal.name = "screenshots_fourth_goal_name".localized()
+        fourthGoal.goalType = .init(id: 27, label: "journal", name: "habit_journal_name", image: "write_2",
+                                    categoryId: [1, 3], measureUnits: [.session, .singleTime], ofGoalSentence: "habit_journal_goal_sentence", timeSentence: "habit_journal_time_sentence")
+        fourthGoal.timeRequired = 7
+        fourthGoal.customTimeMeasure = "measure_unit_single_time".localized()
+        fourthGoal.timeFrame = "weekly"
+        fourthGoal.monday = 1
+        fourthGoal.tuesday = 1
+        fourthGoal.wednesday = 1
+        fourthGoal.thursday = 1
+        fourthGoal.friday = 1
+        fourthGoal.saturday = 1
+        fourthGoal.sunday = 1
+        fourthGoal.whyDefinition = "screenshots_fourth_goal_why".localized()
+        fourthGoal.completionDateExtimated = fourthGoal.updatedCompletionDate
+        fourthGoal.createdAt = Date().adding(days: -40)
+
+        createGoalProgressFor(goal: fourthGoal)
+
+
+
+        addFakeJournalPages()
+        addFakeChallenges()
+        addFakeProfileInfo()
+
+        PersistenceController.shared.saveContext()
+    }
+
+    func createGoalProgressFor(goal: Goal) {
+        let startDate = Date().adding(days: -40)
+        let endDate = Date()
+        let datesInterval = DateInterval(start: startDate, end: endDate)
+        let calendar = Calendar.current
+        let days = calendar.generateDates(
+            inside: datesInterval,
+            matching: DateComponents(hour: 1, minute: 1, second: 0)
+        )
+
+        for date in days where goal.workOn(date: date) {
+            let progress = Progress(context: PersistenceController.shared.container.viewContext)
+            progress.date = date
+            if date.withoutHours == Date().adding(days: -1).withoutHours
+                || date.withoutHours == Date().withoutHours {
+                progress.hoursOfWork = 1
+            } else {
+                progress.hoursOfWork = Double(Array(0...1).randomElement() ?? 0)
+            }
+            progress.dayId = date.customId
+            goal.addToProgress(progress)
+        }
+    }
+
+    func addFakeJournalPages() {
+        let firstPage = JournalPage(context: PersistenceController.shared.container.viewContext)
+        firstPage.dayId = Date().customId
+        firstPage.notes = "screenshots_journal_text".localized()
+        firstPage.mood = "veryHappy"
+        firstPage.date = Date()
+
+        let secondPage = JournalPage(context: PersistenceController.shared.container.viewContext)
+        secondPage.dayId = Date().adding(days: -1).customId
+        secondPage.notes = "screenshots_journal_text".localized()
+        secondPage.mood = "happy"
+        secondPage.date = Date().adding(days: -1)
+
+        let thirdPage = JournalPage(context: PersistenceController.shared.container.viewContext)
+        thirdPage.dayId = Date().adding(days: -2).customId
+        thirdPage.notes = "screenshots_journal_text".localized()
+        thirdPage.mood = "normal"
+        thirdPage.date = Date().adding(days: -2)
+
+        let fourthPage = JournalPage(context: PersistenceController.shared.container.viewContext)
+        fourthPage.dayId = Date().adding(days: -3).customId
+        fourthPage.notes = "screenshots_journal_text".localized()
+        fourthPage.mood = "happy"
+        fourthPage.date = Date().adding(days: -3)
+    }
+
+    func addFakeChallenges() {
+        let firstChallenge = Challenge(context: PersistenceController.shared.container.viewContext)
+        firstChallenge.id = 8
+        firstChallenge.progressMade = 30
+
+        let secondChallenge = Challenge(context: PersistenceController.shared.container.viewContext)
+        secondChallenge.id = 9
+        secondChallenge.progressMade = 30
+
+        let thirdChallenge = Challenge(context: PersistenceController.shared.container.viewContext)
+        thirdChallenge.id = 10
+        thirdChallenge.progressMade = 1
+
+        let fourthChallenge = Challenge(context: PersistenceController.shared.container.viewContext)
+        fourthChallenge.id = 11
+        fourthChallenge.progressMade = 3
+
+        let fifthChallenge = Challenge(context: PersistenceController.shared.container.viewContext)
+        fifthChallenge.id = 12
+        fifthChallenge.progressMade = 6
+    }
+
+    func addFakeProfileInfo() {
+        let profile = Profile(context: PersistenceController.shared.container.viewContext)
+        profile.created_at = Date()
+        profile.name = "Yuri"
     }
 
 }
