@@ -99,16 +99,19 @@ struct CalendarView<DateView>: View where DateView: View {
 
     @Environment(\.calendar) var calendar
 
-    @State var dateToScrollTo: Date = Date()
+    @State var dateToScrollTo = Date()
+
+    @Binding var month: Date
 
     let interval: DateInterval
     let monthWidth: CGFloat
     let content: (Date) -> DateView
 
-    init(interval: DateInterval, monthWidth: CGFloat, @ViewBuilder content: @escaping (Date) -> DateView) {
+    init(month: Binding<Date>, interval: DateInterval, monthWidth: CGFloat, @ViewBuilder content: @escaping (Date) -> DateView) {
         self.interval = interval
         self.monthWidth = monthWidth
         self.content = content
+        self._month = month
     }
 
     private var months: [Date] {
@@ -127,15 +130,11 @@ struct CalendarView<DateView>: View where DateView: View {
                             .frame(width: monthWidth)
                     }
                 }
-                .onAppear() {
-                    self.dateToScrollTo = months.last(where: { $0.monthNumber == (Date().monthNumber)}) ?? Date()
-                }
-                .onChange(of: self.dateToScrollTo, perform: { value in
-                    scrollView.scrollTo(value, anchor: .center)
-                })
+                
             }
         }
     }
+
 }
 /*
 struct CalendarView_Previews: PreviewProvider {

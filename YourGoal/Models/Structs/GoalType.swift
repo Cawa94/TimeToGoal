@@ -39,37 +39,37 @@ struct GoalType: Identifiable {
         // HABITS
 
         .init(id: 0, label: "run", name: "habit_run_name", image: "exercise_6",
-              categoryId: [0], measureUnits: [.session, .km, .hour], ofGoalSentence: "habit_run_goal_sentence"),
+              categoryId: [0], measureUnits: [.session, .km, .hour, .singleTime], ofGoalSentence: "habit_run_goal_sentence", timeSentence: "habit_run_time_sentence"),
 
         .init(id: 1, label: "walk", name: "habit_walk_name", image: "exercise_13",
-              categoryId: [0], measureUnits: [.session, .km, .hour], ofGoalSentence: "habit_walk_goal_sentence"),
+              categoryId: [0], measureUnits: [.session, .km, .hour, .singleTime], ofGoalSentence: "habit_walk_goal_sentence", timeSentence: "habit_walk_time_sentence"),
 
         .init(id: 2, label: "yoga", name: "habit_yoga_name", image: "exercise_19",
-              categoryId: [0], measureUnits: [.session, .hour], ofGoalSentence: "habit_yoga_goal_sentence"),
+              categoryId: [0], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_yoga_goal_sentence", timeSentence: "habit_yoga_time_sentence"),
 
         .init(id: 3, label: "study", name: "habit_study_name", image: "learn_0",
-              categoryId: [3], measureUnits: [.session, .hour], ofGoalSentence: "habit_study_goal_sentence"),
+              categoryId: [3], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_study_goal_sentence", timeSentence: "habit_study_time_sentence"),
 
         .init(id: 4, label: "new_language", name: "habit_new_language_name", image: "learn_2",
-              categoryId: [3], measureUnits: [.session, .hour], ofGoalSentence: "habit_new_language_goal_sentence"),
+              categoryId: [3], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_new_language_goal_sentence", timeSentence: "habit_new_language_time_sentence"),
 
         .init(id: 5, label: "reading", name: "habit_reading_name", image: "book_2",
-              categoryId: [1, 3], measureUnits: [.session, .page, .hour], ofGoalSentence: "habit_reading_goal_sentence", timeSentence: "habit_reading_time_sentence"),
+              categoryId: [1, 3], measureUnits: [.session, .page, .hour, .singleTime], ofGoalSentence: "habit_reading_goal_sentence", timeSentence: "habit_reading_time_sentence"),
 
         .init(id: 6, label: "drink_water", name: "habit_drink_name", image: "custom_2",
               categoryId: [0], measureUnits: [.time], timeSentence: "habit_drink_time_sentence"),
 
         .init(id: 7, label: "excercise", name: "habit_excercise_name", image: "exercise_17",
-              categoryId: [0], measureUnits: [.session, .hour], ofGoalSentence: "habit_excercise_goal_sentence"),
+              categoryId: [0], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_excercise_goal_sentence", timeSentence: "habit_excercise_time_sentence"),
 
         .init(id: 8, label: "teeth", name: "habit_teeth_name", image: "custom_1",
-              categoryId: [0], measureUnits: [.time], timeSentence: "habit_teeth_time_sentence"),
+              categoryId: [0], measureUnits: [.time, .singleTime], timeSentence: "habit_teeth_time_sentence"),
 
         .init(id: 9, label: "meditate", name: "habit_meditate_name", image: "exercise_2",
-              categoryId: [1], measureUnits: [.session, .hour], ofGoalSentence: "habit_meditate_goal_sentence"),
+              categoryId: [1], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_meditate_goal_sentence", timeSentence: "habit_meditate_time_sentence"),
 
         .init(id: 10, label: "eat_helthy", name: "habit_eat_helthy_name", image: "vegetable_2",
-              categoryId: [0], measureUnits: [.time], timeSentence: "habit_eat_helthy_time_sentence"),
+              categoryId: [0], measureUnits: [.time, .singleTime], timeSentence: "habit_eat_helthy_time_sentence"),
 
         .init(id: 11, label: "your_bed", name: "habit_your_bed_name", image: "home_1",
               categoryId: [5], measureUnits: [.singleTime], timeSentence: "habit_your_bed_time_sentence"),
@@ -81,43 +81,43 @@ struct GoalType: Identifiable {
               categoryId: [0, 1, 3], measureUnits: [.singleTime], timeSentence: "habit_bed_early_time_sentence"),
 
         .init(id: 14, label: "time_family", name: "habit_time_family_name", image: "love_1",
-              categoryId: [2], measureUnits: [.time, .hour], ofGoalSentence: "habit_time_family_goal_sentence", timeSentence: "habit_time_family_time_sentence"),
+              categoryId: [2], measureUnits: [.time, .hour, .singleTime], ofGoalSentence: "habit_time_family_goal_sentence", timeSentence: "habit_time_family_time_sentence"),
 
         .init(id: 15, label: "time_alone", name: "habit_time_alone_name", image: "music_2",
-              categoryId: [1], measureUnits: [.time, .hour], ofGoalSentence: "habit_time_alone_goal_sentence", timeSentence: "habit_time_alone_time_sentence"),
+              categoryId: [1], measureUnits: [.time, .hour, .singleTime], ofGoalSentence: "habit_time_alone_goal_sentence", timeSentence: "habit_time_alone_time_sentence"),
 
         .init(id: 16, label: "writing", name: "habit_writing_name", image: "write_7",
-              categoryId: [3], measureUnits: [.session, .hour, .page], ofGoalSentence: "habit_writing_goal_sentence"),
+              categoryId: [3], measureUnits: [.session, .hour, .page, .singleTime], ofGoalSentence: "habit_writing_goal_sentence", timeSentence: "habit_writing_time_sentence"),
 
         .init(id: 17, label: "play_instrment", name: "habit_play_instrument_name", image: "music_9",
-              categoryId: [3], measureUnits: [.session, .hour], ofGoalSentence: "habit_play_instrument_goal_sentence"),
+              categoryId: [3], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_play_instrument_goal_sentence", timeSentence: "habit_play_instrument_time_sentence"),
 
         .init(id: 18, label: "cook", name: "habit_cook_name", image: "cook_0",
-              categoryId: [5], measureUnits: [.time], timeSentence: "habit_cook_time_sentence"),
+              categoryId: [5], measureUnits: [.time, .singleTime], timeSentence: "habit_cook_time_sentence"),
 
         .init(id: 19, label: "sing", name: "habit_sing_name", image: "music_6",
-              categoryId: [3], measureUnits: [.session, .hour], ofGoalSentence: "habit_sing_goal_sentence"),
+              categoryId: [3], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_sing_goal_sentence", timeSentence: "habit_sing_time_sentence"),
 
         .init(id: 20, label: "project", name: "habit_project_name", image: "project_5",
-              categoryId: [3], measureUnits: [.session, .hour], ofGoalSentence: "habit_project_goal_sentence"),
+              categoryId: [3], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_project_goal_sentence", timeSentence: "habit_project_time_sentence"),
 
         .init(id: 21, label: "podcast", name: "habit_podcast_name", image: "music_0",
-              categoryId: [1], measureUnits: [.session, .hour], ofGoalSentence: "habit_podcast_goal_sentence"),
+              categoryId: [1], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_podcast_goal_sentence", timeSentence: "habit_podcast_time_sentence"),
 
         .init(id: 22, label: "something_new", name: "habit_something_new_name", image: "adventure_1",
               categoryId: [3], measureUnits: [.singleTime], timeSentence: "habit_something_new_time_sentence"),
 
         .init(id: 23, label: "eat_fruit", name: "habit_eat_fruit_name", image: "fruit_0",
-              categoryId: [0], measureUnits: [.time], timeSentence: "habit_eat_fruit_time_sentence"),
+              categoryId: [0], measureUnits: [.time, .singleTime], timeSentence: "habit_eat_fruit_time_sentence"),
 
         .init(id: 24, label: "eat_vegetables", name: "habit_eat_vegetables_name", image: "vegetable_0",
-              categoryId: [0], measureUnits: [.time], timeSentence: "habit_eat_vegetables_time_sentence"),
+              categoryId: [0], measureUnits: [.time, .singleTime], timeSentence: "habit_eat_vegetables_time_sentence"),
 
         .init(id: 25, label: "visualization", name: "habit_visualization_name", image: "mind_1",
-              categoryId: [1], measureUnits: [.session, .hour], ofGoalSentence: "habit_visualization_goal_sentence"),
+              categoryId: [1], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_visualization_goal_sentence", timeSentence: "habit_visualization_time_sentence"),
 
         .init(id: 26, label: "affirmations", name: "habit_affirmations_name", image: "mind_7",
-              categoryId: [1], measureUnits: [.session, .hour], ofGoalSentence: "habit_affirmations_goal_sentence"),
+              categoryId: [1], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_affirmations_goal_sentence", timeSentence: "habit_affirmations_time_sentence"),
 
         .init(id: 27, label: "journal", name: "habit_journal_name", image: "write_2",
               categoryId: [1, 3], measureUnits: [.session, .singleTime], ofGoalSentence: "habit_journal_goal_sentence", timeSentence: "habit_journal_time_sentence"),
@@ -141,28 +141,28 @@ struct GoalType: Identifiable {
               categoryId: [4], measureUnits: [.singleTime], timeSentence: "habit_avoid_caffeine_time_sentence"),
 
         .init(id: 34, label: "breath", name: "habit_breath_name", image: "exercise_25",
-              categoryId: [0, 1], measureUnits: [.session, .hour], ofGoalSentence: "habit_breath_goal_sentence"),
+              categoryId: [0, 1], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_breath_goal_sentence", timeSentence: "habit_breath_time_sentence"),
 
         .init(id: 35, label: "go_out", name: "habit_go_out_name", image: "hobby_5",
-              categoryId: [0, 1], measureUnits: [.time], timeSentence: "habit_go_out_time_sentence"),
+              categoryId: [0, 1], measureUnits: [.time, .singleTime], timeSentence: "habit_go_out_time_sentence"),
 
         .init(id: 36, label: "gratitude", name: "habit_gratitude_name", image: "exercise_26",
-              categoryId: [1], measureUnits: [.session], ofGoalSentence: "habit_gratitude_goal_sentence"),
+              categoryId: [1], measureUnits: [.session, .singleTime], ofGoalSentence: "habit_gratitude_goal_sentence", timeSentence: "habit_gratitude_time_sentence"),
 
         .init(id: 37, label: "cold_shower", name: "habit_cold_shower_name", image: "custom_3",
-              categoryId: [0, 1], measureUnits: [.time], timeSentence: "habit_cold_shower_time_sentence"),
+              categoryId: [0, 1], measureUnits: [.time, .singleTime], timeSentence: "habit_cold_shower_time_sentence"),
 
         .init(id: 38, label: "paint", name: "habit_paint_name", image: "hobby_1",
-              categoryId: [3], measureUnits: [.session, .hour], ofGoalSentence: "habit_paint_goal_sentence"),
+              categoryId: [3], measureUnits: [.session, .hour, .singleTime], ofGoalSentence: "habit_paint_goal_sentence", timeSentence: "habit_paint_time_sentence"),
 
         .init(id: 39, label: "swim", name: "habit_swim_name", image: "exercise_15",
-              categoryId: [0], measureUnits: [.session, .hour, .km], ofGoalSentence: "habit_swim_goal_sentence"),
+              categoryId: [0], measureUnits: [.session, .hour, .km, .singleTime], ofGoalSentence: "habit_swim_goal_sentence", timeSentence: "habit_swim_time_sentence"),
 
         .init(id: 40, label: "bicycle", name: "habit_bicycle_name", image: "exercise_5",
-              categoryId: [0], measureUnits: [.session, .hour, .km], ofGoalSentence: "habit_bicycle_goal_sentence"),
+              categoryId: [0], measureUnits: [.session, .hour, .km, .singleTime], ofGoalSentence: "habit_bicycle_goal_sentence", timeSentence: "habit_bicycle_time_sentence"),
 
         .init(id: 41, label: "track_expenses", name: "habit_track_expenses_name", image: "plan_0",
-              categoryId: [5], measureUnits: [.time], timeSentence: "habit_track_expenses_time_sentence"),
+              categoryId: [5], measureUnits: [.time, .singleTime], timeSentence: "habit_track_expenses_time_sentence"),
 
         .init(id: 42, label: "videocall_family", name: "habit_videocall_family_name", image: "learn_3",
               categoryId: [2], measureUnits: [.time, .singleTime], timeSentence: "habit_videocall_family_time_sentence"),

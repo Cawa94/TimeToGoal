@@ -70,6 +70,10 @@ extension Date {
         Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear, .minute, .hour], from: self))
     }
 
+    var startOfMonth: Date? {
+        Calendar.current.date(from:  Calendar.current.dateComponents([.year, .month], from: self))
+    }
+
     var endOfWeek: Date? {
         startOfWeek?.adding(days: 6)
     }

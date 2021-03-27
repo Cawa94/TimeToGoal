@@ -252,7 +252,7 @@ struct ContentView: View {
         firstGoal.friday = 1
         firstGoal.whyDefinition = "screenshots_first_goal_why".localized()
         firstGoal.completionDateExtimated = firstGoal.updatedCompletionDate
-        firstGoal.createdAt = Date().adding(days: -40)
+        firstGoal.createdAt = Date().adding(days: -120)
 
         createGoalProgressFor(goal: firstGoal)
 
@@ -272,7 +272,7 @@ struct ContentView: View {
         secondGoal.friday = 1
         secondGoal.whyDefinition = "screenshots_second_goal_why".localized()
         secondGoal.completionDateExtimated = secondGoal.updatedCompletionDate
-        secondGoal.createdAt = Date().adding(days: -40)
+        secondGoal.createdAt = Date().adding(days: -120)
 
         createGoalProgressFor(goal: secondGoal)
 
@@ -291,7 +291,7 @@ struct ContentView: View {
         thirdGoal.sunday = 1
         thirdGoal.whyDefinition = "screenshots_third_goal_why".localized()
         thirdGoal.completionDateExtimated = thirdGoal.updatedCompletionDate
-        thirdGoal.createdAt = Date().adding(days: -40)
+        thirdGoal.createdAt = Date().adding(days: -120)
 
         createGoalProgressFor(goal: thirdGoal)
 
@@ -314,7 +314,7 @@ struct ContentView: View {
         fourthGoal.sunday = 1
         fourthGoal.whyDefinition = "screenshots_fourth_goal_why".localized()
         fourthGoal.completionDateExtimated = fourthGoal.updatedCompletionDate
-        fourthGoal.createdAt = Date().adding(days: -40)
+        fourthGoal.createdAt = Date().adding(days: -120)
 
         createGoalProgressFor(goal: fourthGoal)
 
@@ -328,7 +328,7 @@ struct ContentView: View {
     }
 
     func createGoalProgressFor(goal: Goal) {
-        let startDate = Date().adding(days: -40)
+        let startDate = Date().adding(days: -120)
         let endDate = Date()
         let datesInterval = DateInterval(start: startDate, end: endDate)
         let calendar = Calendar.current

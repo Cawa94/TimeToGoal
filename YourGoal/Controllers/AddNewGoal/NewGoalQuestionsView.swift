@@ -174,7 +174,7 @@ struct NewGoalQuestionsView: View {
                     .listRowBackground(Color.defaultBackground)
                     .foregroundColor(.fieldsTitleForegroundColor)
 
-                    Section(header: Text("add_goal_customize_title").applyFont(.fieldQuestion)) {
+                    Section(header: Text(viewModel.goal.goalType.isHabit ? "add_goal_customize_title_habit" : "add_goal_customize_title").applyFont(.fieldQuestion)) {
                         VStack {
                             HStack(spacing: 15) {
                                 Text("\("global_color".localized()):")
@@ -268,7 +268,7 @@ struct NewGoalQuestionsView: View {
                                      isPresented: $viewModel.isIconsVisible)
                 }
             }
-            .navigationBarTitle("global_smart_goal", displayMode: .inline)
+            .navigationBarTitle(viewModel.goal.goalType.isHabit ? "global_smart_habit" : "global_smart_goal", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading:
                 Button(action: {

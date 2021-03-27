@@ -255,7 +255,7 @@ struct NewGoalTimeView: View {
                     .listRowBackground(Color.defaultBackground)
                 }
             }
-            .navigationBarTitle("global_time_required", displayMode: .inline)
+            .navigationBarTitle("goal_time_frame", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: leadingButton, trailing: trailingButton)
         }
