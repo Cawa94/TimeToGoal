@@ -10,17 +10,12 @@ import SwiftUI
 public class StatisticsViewModel: ObservableObject {
 
     @Published var goals: [Goal] = []
-    //@Published var validGoals: [Goal] = []
     @Published var challenges: [Challenge] = []
 
     var tempGoals: [Goal]
     var tempChallenges: [Challenge]
 
     init(goals: [Goal], challenges: [Challenge]) {
-        //self.goals = goals
-        //self.validGoals = goals.filter { !$0.isArchived }
-        //self.challenges = challenges
-
         self.tempGoals = goals
         self.tempChallenges = challenges
     }
@@ -42,7 +37,6 @@ struct StatisticsView: View {
     @State var isLoading: Bool = true
     @State var validGoals: [Goal] = []
     @State var goalsDateInterval = DateInterval(start: Date(), end: Date())
-    @State var currentMonth = Date()
 
     @ViewBuilder
     var body: some View {
@@ -64,13 +58,13 @@ struct StatisticsView: View {
                                 Spacer()
                             }
 
-                            CalendarView(month: $currentMonth, interval: goalsDateInterval, monthWidth: container.size.width) { date in
+                            CalendarView(interval: $goalsDateInterval, monthWidth: container.size.width) { date in
                                 CalendarDayView(goals: validGoals, date: date)
                             }
 
                             Spacer()
-                                .frame(height: 40)
-/*
+                                .frame(height: DeviceFix.is65Screen ? 30 : 0)
+
                             HStack(spacing: 15) {
                                 VStack {
                                     Text("statistics_current_streak_days")
@@ -96,7 +90,7 @@ struct StatisticsView: View {
                                         .applyFont(.navigationLargeTitle)
                                 }.frame(width: container.size.width/2 - 15)
                             }.padding(.bottom, 15)
-
+/*
                             HStack(spacing: 15) {
                                 VStack {
                                     Text("statistics_complete_goals")
@@ -130,15 +124,7 @@ struct StatisticsView: View {
                 }
 
                 if isLoading {
-                    Rectangle()
-                        .background(Color.black)
-                        .opacity(0.35)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-
-                    ProgressView()
-                        .frame(width: 100, height: 100)
-                        .foregroundColor(Color.orangeGoal)
-
+                    LoadingView()
                 }
             }
         }.onAppear {
@@ -148,10 +134,9 @@ struct StatisticsView: View {
                 viewModel.challenges = viewModel.tempChallenges
 
                 goalsDateInterval = DateInterval(start: Date().startOfMonth ?? Date(), end: Date())
-                currentMonth = Date().startOfMonth ?? Date()
-/*
+
                 currentGoalStreak = validGoals.currentStreak
-                if let challenge = viewModel.challenges.first(where: { $0.id == 15 }) {
+                if let challenge = viewModel.challenges.first(where: { $0.id == 13 }) {
                     let streakRecord = challenge.progressMade
                     if currentGoalStreak > Int(streakRecord) {
                         recordGoalStreak = currentGoalStreak
@@ -163,7 +148,7 @@ struct StatisticsView: View {
                     recordGoalStreak = Int(currentGoalStreak)
                     updateChallengesWith(record: currentGoalStreak)
                 }
-*/
+
                 isLoading = false
             }
         }

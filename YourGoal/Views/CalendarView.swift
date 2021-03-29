@@ -60,10 +60,13 @@ struct MonthView<DateView>: View where DateView: View {
 
     @Environment(\.calendar) var calendar
 
+    @Binding var interval: DateInterval
+
     let month: Date
     let content: (Date) -> DateView
 
-    init(month: Date, @ViewBuilder content: @escaping (Date) -> DateView) {
+    init(interval: Binding<DateInterval>, month: Date, @ViewBuilder content: @escaping (Date) -> DateView) {
+        self._interval = interval
         self.month = month
         self.content = content
     }
@@ -71,9 +74,8 @@ struct MonthView<DateView>: View where DateView: View {
     private var weeks: [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: month)
             else { return [] }
-        return calendar.generateDates(
-            inside: monthInterval,
-            matching: DateComponents(hour: 0, minute: 0, second: 0, weekday: calendar.firstWeekday)
+        return calendar.generateDates(inside: monthInterval,
+                                      matching: DateComponents(hour: 0, minute: 0, second: 0, weekday: calendar.firstWeekday)
         )
     }
 
@@ -86,7 +88,31 @@ struct MonthView<DateView>: View where DateView: View {
 
     var body: some View {
         VStack(spacing: 5) {
-            header
+            HStack {
+                Button(action: {
+                    let randomLastMonthDay = interval.start.adding(days: -3)
+                    guard let startDate = randomLastMonthDay.startOfMonth, let endDate = randomLastMonthDay.endOfMonth
+                        else { return }
+                    interval = DateInterval(start: startDate, end: endDate)
+                }) {
+                    Image(systemName: "chevron.left").foregroundColor(.black)
+                }
+
+                Spacer()
+
+                header
+
+                Spacer()
+
+                Button(action: {
+                    let randomNextMonthDay = interval.end.endOfMonth?.adding(days: 3)
+                    guard let startDate = randomNextMonthDay?.startOfMonth, let endDate = randomNextMonthDay?.endOfMonth
+                        else { return }
+                    interval = DateInterval(start: startDate, end: endDate)
+                }) {
+                    Image(systemName: "chevron.right").foregroundColor(.black)
+                }
+            }.padding([.leading, .trailing], 35)
 
             ForEach(weeks, id: \.self) { week in
                 WeekView(week: week, content: self.content)
@@ -99,25 +125,20 @@ struct CalendarView<DateView>: View where DateView: View {
 
     @Environment(\.calendar) var calendar
 
-    @State var dateToScrollTo = Date()
+    @Binding var interval: DateInterval
 
-    @Binding var month: Date
-
-    let interval: DateInterval
     let monthWidth: CGFloat
     let content: (Date) -> DateView
 
-    init(month: Binding<Date>, interval: DateInterval, monthWidth: CGFloat, @ViewBuilder content: @escaping (Date) -> DateView) {
-        self.interval = interval
+    init(interval: Binding<DateInterval>, monthWidth: CGFloat, @ViewBuilder content: @escaping (Date) -> DateView) {
+        self._interval = interval
         self.monthWidth = monthWidth
         self.content = content
-        self._month = month
     }
 
     private var months: [Date] {
-        let dates =
-        calendar.generateDates(inside: interval,
-                               matching: DateComponents(day: 1, hour: 0, minute: 0, second: 0))
+        let dates = calendar.generateDates(inside: interval,
+                                           matching: DateComponents(day: 1, hour: 0, minute: 0, second: 0))
         return dates
     }
 
@@ -126,11 +147,10 @@ struct CalendarView<DateView>: View where DateView: View {
             ScrollViewReader { scrollView in
                 HStack {
                     ForEach(months, id: \.self) { month in
-                        MonthView(month: month, content: self.content)
+                        MonthView(interval: $interval, month: month, content: self.content)
                             .frame(width: monthWidth)
                     }
                 }
-                
             }
         }
     }

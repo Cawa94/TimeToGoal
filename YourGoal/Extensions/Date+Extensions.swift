@@ -74,6 +74,13 @@ extension Date {
         Calendar.current.date(from:  Calendar.current.dateComponents([.year, .month], from: self))
     }
 
+    var endOfMonth: Date? {
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfMonth ?? Date())
+    }
+
     var endOfWeek: Date? {
         startOfWeek?.adding(days: 6)
     }

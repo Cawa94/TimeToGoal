@@ -10,7 +10,6 @@ import StoreKit
 
 public class HomeViewModel: ObservableObject {
 
-    @Published var goals: [Goal]
     @Published var journal: [JournalPage]
     @Published var challenges: [Challenge]
     @Published var profile: Profile?
@@ -20,19 +19,17 @@ public class HomeViewModel: ObservableObject {
     @Published var showMotivation = false
 
     @Binding var activeSheet: ActiveSheet?
-    @Binding var goalToRenew: Goal?
-    
+
+    @Published var tempGoals: [Goal]
     let quote = FamousQuote.getOneRandom()
     let headerText: String
 
-    init(goals: [Goal], journal: [JournalPage], challenges: [Challenge], profile: Profile?,
-         activeSheet: Binding<ActiveSheet?>, goalToRenew: Binding<Goal?>) {
-        self.goals = goals.filter { !$0.isArchived }
+    init(goals: [Goal], journal: [JournalPage], challenges: [Challenge], profile: Profile?, activeSheet: Binding<ActiveSheet?>) {
+        self.tempGoals = goals.filter { !$0.isArchived }
         self.journal = journal
         self.challenges = challenges
         self.profile = profile
         self._activeSheet = activeSheet
-        self._goalToRenew = goalToRenew
 
         if let name = profile?.name, !name.isEmpty {
             headerText = "\(Date().isEvening ? "home_good_evening".localized() : "home_good_morning".localized()) \(name)"
@@ -46,6 +43,9 @@ public class HomeViewModel: ObservableObject {
 struct HomeView: View {
 
     @ObservedObject var viewModel: HomeViewModel
+
+    @State var isLoading: Bool = true
+    @State var goals: [Goal] = []
 
     @ViewBuilder
     var body: some View {
@@ -91,14 +91,13 @@ struct HomeView: View {
                             Spacer()
                         }
 
-                        if !viewModel.goals.isEmpty {
+                        if !goals.isEmpty {
                             TabView {
-                                ForEach(0..<viewModel.goals.count) { index in
+                                ForEach(0..<goals.count) { index in
                                     VStack {
-                                        GoalSmallProgressView(viewModel: .init(goal: viewModel.goals[index],
+                                        GoalSmallProgressView(viewModel: .init(goal: goals[index],
                                                                                challenges: viewModel.challenges,
                                                                                showingTrackGoal: $viewModel.showingTrackGoal,
-                                                                               goalToRenew: $viewModel.goalToRenew,
                                                                                indexSelectedGoal: $viewModel.indexSelectedGoal,
                                                                                activeSheet: $viewModel.activeSheet,
                                                                                hasTrackedGoal: $viewModel.hasTrackedGoal,
@@ -120,7 +119,6 @@ struct HomeView: View {
                             GoalSmallProgressView(viewModel: .init(goal: nil,
                                                                    challenges: viewModel.challenges,
                                                                    showingTrackGoal: $viewModel.showingTrackGoal,
-                                                                   goalToRenew: $viewModel.goalToRenew,
                                                                    indexSelectedGoal: $viewModel.indexSelectedGoal,
                                                                    activeSheet: $viewModel.activeSheet,
                                                                    hasTrackedGoal: $viewModel.hasTrackedGoal,
@@ -128,7 +126,7 @@ struct HomeView: View {
                                 .padding([.leading, .trailing], 5)
                                 .frame(width: UIScreen.main.bounds.width,
                                        height: DeviceFix.is65Screen
-                                        ? container.size.height/3 : container.size.height/3.2)
+                                        ? container.size.height/3 : container.size.height/3.2 + 45)
                         }
 
                         Spacer()
@@ -146,9 +144,8 @@ struct HomeView: View {
                         Spacer()
                             .frame(height: 15)
 
-                        StatisticsSmallView(viewModel: .init(goals: viewModel.goals,
-                                                             journal: viewModel.journal,
-                                                             hasTrackedGoal: $viewModel.hasTrackedGoal))
+                        StatisticsSmallView(viewModel: .init(goals: goals,
+                                                             hasTrackedGoal: viewModel.hasTrackedGoal))
                             .padding([.leading, .trailing], 25)
                             .frame(height: DeviceFix.is65Screen
                                     ? container.size.height/2.7 : container.size.height/3)
@@ -159,10 +156,15 @@ struct HomeView: View {
                     if viewModel.showingTrackGoal {
                         TrackHoursSpentView(isPresented: $viewModel.showingTrackGoal,
                                             hasTrackedGoal: $viewModel.hasTrackedGoal,
-                                            currentGoal: viewModel.goals[viewModel.indexSelectedGoal],
+                                            currentGoal: goals[viewModel.indexSelectedGoal],
                                             challenges: viewModel.challenges)
                             .transition(.move(edge: .bottom))
                     }
+
+                    if isLoading {
+                        LoadingView()
+                    }
+
                     /*
                     if viewModel.showMotivation {
                         MotivationalView(viewModel: .init(isPresented: $viewModel.showMotivation))
@@ -170,17 +172,32 @@ struct HomeView: View {
                     }*/
                 }
             }
-        }.onReceive(viewModel.$hasTrackedGoal, perform: { hasTrackedGoal in
-            if hasTrackedGoal {
+        }.onAppear {
+            if ContentView.hasShowedGoalsOnFirstOpen {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
+                    goals = viewModel.tempGoals
+
+                    isLoading = false
+                }
+            }
+        }.onReceive(viewModel.$tempGoals, perform: {
+            if !ContentView.hasShowedGoalsOnFirstOpen, !viewModel.tempGoals.isEmpty {
+                goals = $0
+
+                isLoading = false
+                ContentView.hasShowedGoalsOnFirstOpen = true
+            }
+        }).onReceive(viewModel.$hasTrackedGoal, perform: {
+            if $0 {
                 /*if !ContentView.showedQuote {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         ContentView.showedQuote = true
                         viewModel.showMotivation = true
                     }
                 }*/
-                updatePerfectWeekChallenges()
+                //updatePerfectWeekChallenges()
 
-                if viewModel.goals[viewModel.indexSelectedGoal].isCompleted {
+                if goals[viewModel.indexSelectedGoal].isCompleted {
                     #if RELEASE
                         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                             SKStoreReviewController.requestReview(in: scene)
@@ -192,7 +209,7 @@ struct HomeView: View {
     }
 
     func updatePerfectWeekChallenges() {
-        let perfectWeeks = Double(viewModel.goals.perfectWeeks)
+        let perfectWeeks = Double(goals.perfectWeeks)
 
         if let challenge = viewModel.challenges.first(where: { $0.id == 2 }) {
             challenge.progressMade = perfectWeeks

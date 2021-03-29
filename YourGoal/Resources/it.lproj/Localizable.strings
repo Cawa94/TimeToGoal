@@ -77,8 +77,8 @@
 "global_cancel" = "Cancella";
 "global_edit" = "Modifica";
 "global_archived" = "Archiviato";
-"global_current_streak" = "Striscia attuale";
-"global_best_streak" = "Miglior striscia";
+"global_current_streak" = "Giorni consecutivi";
+"global_best_streak" = "Record giorni consecutivi";
 "global_streak_days" = "%@ giorni";
 
 "goal_new_goal" = "Nuovo obiettivo / abitudine";

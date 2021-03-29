@@ -46,6 +46,7 @@
 		DA59593725C5A9A60074CE85 /* ProfileImageSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */; };
 		DA6566BB2525E61A00923688 /* Goal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */; };
 		DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6DD3D4257A445400AACE45 /* JournalView.swift */; };
+		DA7158E5260F79D500BB8692 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7158E4260F79D500BB8692 /* LoadingView.swift */; };
 		DA790C27257B941C00598B96 /* JournalPage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */; };
 		DA794BC225272180005D8423 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BC125272180005D8423 /* CGFloat+Extensions.swift */; };
 		DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */; };
@@ -156,6 +157,7 @@
 		DA59593625C5A9A60074CE85 /* ProfileImageSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectorView.swift; sourceTree = "<group>"; };
 		DA6566B92525E61A00923688 /* Goal+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Goal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA6DD3D4257A445400AACE45 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		DA7158E4260F79D500BB8692 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		DA790C25257B941C00598B96 /* JournalPage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "JournalPage+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/JournalPage+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DA794BC125272180005D8423 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		DA794BCF2527343E005D8423 /* HorizontalHoursSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalHoursSelector.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				DABE55392567C84200923919 /* ExplanationView.swift */,
 				DAC0854C25C413CD00FE4DBC /* GoalSmallProgressView.swift */,
 				DAF5EDBF2534985A00B351FE /* HoursSelectorView.swift */,
+				DA7158E4260F79D500BB8692 /* LoadingView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
 				DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */,
 				DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */,
@@ -753,6 +756,7 @@
 				DA794BD02527343E005D8423 /* HorizontalHoursSelector.swift in Sources */,
 				DAAA9033257A58FD00525B14 /* JournalDatesView.swift in Sources */,
 				DA86E08525C87B4F000C44F7 /* NewGoalFirstView.swift in Sources */,
+				DA7158E5260F79D500BB8692 /* LoadingView.swift in Sources */,
 				DA0502872526166E000C4DC0 /* Date+Extensions.swift in Sources */,
 				DA55C8EF2528977200CA5297 /* TrackManualTimeView.swift in Sources */,
 				DA9D02FA2552F7BF00DBFB2E /* TimeSelectorType.swift in Sources */,
@@ -980,7 +984,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
 				DISPLAY_NAME = "Test Build";
@@ -991,7 +995,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.testyourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1006,7 +1010,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
 				DISPLAY_NAME = TimeToGoal;
@@ -1017,7 +1021,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.yourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;

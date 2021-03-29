@@ -27,8 +27,6 @@ public class ContentViewModel: ObservableObject {
     @Published var refreshJournal = false
     @Published var refreshChallenges = false
     @Published var currentPage: Page = .home
-    @Published var goalsButtonPressed = false // to animate button on tap
-    @Published var goalToRenew: Goal? // to animate button on tap
 
 }
 
@@ -37,6 +35,7 @@ struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel()
     @StateObject var viewRouter = ViewRouter()
 
+    static var hasShowedGoalsOnFirstOpen = false
     static var firstOpen = true
     static var showedQuote = false
 
@@ -108,8 +107,7 @@ struct ContentView: View {
                                                   journal: viewModel.journal,
                                                   challenges: viewModel.challenges,
                                                   profile: viewModel.profile,
-                                                  activeSheet: $viewModel.activeSheet,
-                                                  goalToRenew: $viewModel.goalToRenew))
+                                                  activeSheet: $viewModel.activeSheet))
                             .onDisappear(perform: {
                                 viewModel.refreshChallenges = true
                             })
@@ -144,11 +142,7 @@ struct ContentView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: geometry.size.width/6-20 , height: geometry.size.width/6-20)
                         }.offset(y: -geometry.size.height/6/4)
-                        .scaleEffect(viewModel.goalsButtonPressed ? 0.8 : 1.0)
                         .onLongPressGesture(minimumDuration: .infinity, maximumDistance: .infinity, pressing: { pressing in
-                            withAnimation(.easeInOut(duration: 0.2)) {
-                                viewModel.goalsButtonPressed = pressing
-                            }
                             viewRouter.currentPage = .home
                         }, perform: {})
                         TabBarIcon(viewRouter: viewRouter, assignedPage: .statistics,
@@ -175,8 +169,8 @@ struct ContentView: View {
                 viewModel.goals = goals.filter { $0.isValid }
                 if ContentView.firstOpen && (Date().isMonday || Date().monthDay == 1) {
                     checkAndRestartHabits()
-                    ContentView.firstOpen = false
                 }
+                ContentView.firstOpen = false
                 viewModel.refreshAllGoals = false
             }
         })

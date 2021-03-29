@@ -20,18 +20,16 @@ public class GoalSmallProgressViewModel: ObservableObject {
 
     @Binding var activeSheet: ActiveSheet?
     @Binding var showingTrackGoal: Bool
-    @Binding var goalToRenew: Goal?
     @Binding var indexSelectedGoal: Int
     @Binding var hasTrackedGoal: Bool
 
     var goalIndex: Int?
 
-    init(goal: Goal?, challenges: [Challenge], showingTrackGoal: Binding<Bool>, goalToRenew: Binding<Goal?>,
+    init(goal: Goal?, challenges: [Challenge], showingTrackGoal: Binding<Bool>,
          indexSelectedGoal: Binding<Int>, activeSheet: Binding<ActiveSheet?>, hasTrackedGoal: Binding<Bool>, goalIndex: Int?) {
         self.goal = goal
         self.challenges = challenges
         self._showingTrackGoal = showingTrackGoal
-        self._goalToRenew = goalToRenew
         self._indexSelectedGoal = indexSelectedGoal
         self._activeSheet = activeSheet
         self._hasTrackedGoal = hasTrackedGoal
@@ -252,6 +250,9 @@ struct GoalSmallProgressView: View {
         let progress = createGoalProgress(time: timeTracked)
         viewModel.goal?.addToProgress(progress)
         viewModel.goal?.editedAt = Date()
+        viewModel.goal?.currentStreak = Int64(viewModel.goal?.consecutiveDays(getRecord: false) ?? 0)
+        viewModel.goal?.bestStreak = viewModel.goal?.currentStreak ?? 0 > viewModel.goal?.bestStreak ?? 0
+            ? Int64(viewModel.goal?.currentStreak ?? 0) : Int64(viewModel.goal?.bestStreak ?? 0)
         if viewModel.goal?.isCompleted ?? false {
             viewModel.goal?.completedAt = Date()
             if viewModel.goal?.timesHasBeenCompleted != nil {
@@ -263,7 +264,7 @@ struct GoalSmallProgressView: View {
             if !(viewModel.goal?.goalType.isHabit ?? false) {
                 updateCompleteGoalChallenge()
             } else if viewModel.goal?.timeFrameType == .weekly {
-                updatePerfectWeekChallenges()
+                //updatePerfectWeekChallenges()
             }
         }
         if viewModel.goal?.goalType.isHabit ?? false {

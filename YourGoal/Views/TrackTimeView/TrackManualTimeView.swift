@@ -102,6 +102,9 @@ struct TrackManualTimeView: View {
                     let progress = createGoalProgress(time: timeTracked)
                     currentGoal?.addToProgress(progress)
                     currentGoal?.editedAt = Date()
+                    currentGoal?.currentStreak = Int64(currentGoal?.consecutiveDays(getRecord: false) ?? 0)
+                    currentGoal?.bestStreak = currentGoal?.currentStreak ?? 0 > currentGoal?.bestStreak ?? 0
+                        ? Int64(currentGoal?.currentStreak ?? 0) : Int64(currentGoal?.bestStreak ?? 0)
                     if currentGoal?.isCompleted ?? false {
                         currentGoal?.completedAt = Date()
                         if currentGoal?.timesHasBeenCompleted != nil {

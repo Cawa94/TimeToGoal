@@ -86,26 +86,27 @@ struct MainGoalView: View {
 
                                 Spacer()
                                     .frame(height: 20)
-                            }
+                            } else {
+                                HStack {
+                                    Text("goal_main_question")
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(.grayLight)
+                                        .applyFont(.title3)
+                                    Spacer()
+                                }
 
-                            HStack {
-                                Text("goal_main_question")
-                                    .multilineTextAlignment(.leading)
-                                    .foregroundColor(.grayLight)
-                                    .applyFont(.title3)
-                                Spacer()
-                            }
+                                HStack {
+                                    Text(viewModel.goal.whatDefinition ?? "global_undefined".localized())
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundColor(.grayText)
+                                        .applyFont(.title3)
+                                    Spacer()
+                                }
 
-                            HStack {
-                                Text(viewModel.goal.whatDefinition ?? "global_undefined".localized())
-                                    .multilineTextAlignment(.leading)
-                                    .foregroundColor(.grayText)
-                                    .applyFont(.title3)
                                 Spacer()
+                                    .frame(height: 20)
+
                             }
-                            
-                            Spacer()
-                                .frame(height: 20)
 
                         }.padding([.leading, .trailing], 15)
 

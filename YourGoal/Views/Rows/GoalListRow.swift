@@ -58,7 +58,7 @@ struct GoalListRow: View {
                                 .applyFont(.title2)
                                 .foregroundColor(.grayText)
                             Text(String(format: "global_streak_days".localized(),
-                                        "\(viewModel.goal.consecutiveDays(getRecord: false))"))
+                                        "\(viewModel.goal.currentStreak)"))
                                 .applyFont(.title)
                                 .foregroundColor(viewModel.goal.goalColor)
                         } else {
@@ -74,7 +74,7 @@ struct GoalListRow: View {
                             .applyFont(.title2)
                             .foregroundColor(.grayText)
                         Text(String(format: "global_streak_days".localized(),
-                                    "\(viewModel.goal.consecutiveDays(getRecord: true))"))
+                                    "\(viewModel.goal.bestStreak)"))
                             .applyFont(.title)
                             .foregroundColor(viewModel.goal.goalColor)
 
