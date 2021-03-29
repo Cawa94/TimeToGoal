@@ -179,6 +179,8 @@ struct HomeView: View {
 
                     isLoading = false
                 }
+            } else if !ContentView.hasShowedGoalsOnFirstOpen, viewModel.tempGoals.isEmpty { // called if there are no goals
+                isLoading = false
             }
         }.onReceive(viewModel.$tempGoals, perform: {
             if !ContentView.hasShowedGoalsOnFirstOpen, !viewModel.tempGoals.isEmpty {
