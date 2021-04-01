@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FBSDKCoreKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
@@ -21,12 +22,25 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
         #if RELEASE
-            FirebaseApp.configure()
+            ApplicationDelegate.initializeSDK(nil)
+            if FirebaseApp.app() == nil { // To avoid Firebase being initialised multiple times
+                FirebaseApp.configure()
+            }
         #else
             //FirebaseApp.configure()
         #endif
+
         return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        ApplicationDelegate.shared.application(app,
+                                               open: url,
+                                               sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                                               annotation: options[UIApplication.OpenURLOptionsKey.annotation])
+
     }
 
 }

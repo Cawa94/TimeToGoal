@@ -334,12 +334,12 @@ struct ContentView: View {
         for date in days where goal.workOn(date: date) {
             let progress = Progress(context: PersistenceController.shared.container.viewContext)
             progress.date = date
-            if date.withoutHours == Date().adding(days: -1).withoutHours
+            /*if date.withoutHours == Date().adding(days: -1).withoutHours
                 || date.withoutHours == Date().withoutHours {
                 progress.hoursOfWork = 1
-            } else {
+            } else {*/
                 progress.hoursOfWork = Double(Array(0...1).randomElement() ?? 0)
-            }
+            //}
             progress.dayId = date.customId
             goal.addToProgress(progress)
         }

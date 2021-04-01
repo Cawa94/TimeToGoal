@@ -30,8 +30,6 @@
 		DA1DD69925B746BF00981105 /* IndieFlower.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA1DD69525B746BF00981105 /* IndieFlower.ttf */; };
 		DA32B6CB25B7530600CAA773 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */; };
 		DA32B6CC25B7530600CAA773 /* Rubik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6CA25B7530600CAA773 /* Rubik.ttf */; };
-		DA32B6D525B7558700CAA773 /* Vollkorn-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */; };
-		DA32B6D625B7558700CAA773 /* Vollkorn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA32B6D425B7558700CAA773 /* Vollkorn.ttf */; };
 		DA352845254ADD6500FF19FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA352844254ADD6500FF19FB /* AppDelegate.swift */; };
 		DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3A3413252761A600597C73 /* MainGoalView.swift */; };
 		DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA47599A25470DE800A1ADA6 /* DeviceFix.swift */; };
@@ -83,6 +81,7 @@
 		DAC0856C25C431C000FE4DBC /* Goals+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */; };
 		DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */; };
 		DAC2CCED25CEA52800E363F5 /* MeasureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */; };
+		DAC6EEAE2614D2A500D195ED /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6EEAD2614D2A500D195ED /* FacebookService.swift */; };
 		DAD1993A25D3DC0300EDEC6F /* DayTogglerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1993925D3DC0300EDEC6F /* DayTogglerView.swift */; };
 		DAD1995125D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */; };
 		DAE321F8257B9BA6007DB9F0 /* JournalMood.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */; };
@@ -141,8 +140,6 @@
 		DA1DD69525B746BF00981105 /* IndieFlower.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IndieFlower.ttf; sourceTree = "<group>"; };
 		DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		DA32B6CA25B7530600CAA773 /* Rubik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rubik.ttf; sourceTree = "<group>"; };
-		DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vollkorn-Italic.ttf"; sourceTree = "<group>"; };
-		DA32B6D425B7558700CAA773 /* Vollkorn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vollkorn.ttf; sourceTree = "<group>"; };
 		DA352844254ADD6500FF19FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA3A3413252761A600597C73 /* MainGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainGoalView.swift; sourceTree = "<group>"; };
 		DA47599A25470DE800A1ADA6 /* DeviceFix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceFix.swift; sourceTree = "<group>"; };
@@ -200,6 +197,7 @@
 		DAC0856B25C431C000FE4DBC /* Goals+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goals+Extension.swift"; sourceTree = "<group>"; };
 		DAC0857325C434AC00FE4DBC /* Progress+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Progress+CoreDataClass.swift"; path = "/Users/yuri/Desktop/YourGoal/YourGoal/Models/CoreData/Progress+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		DAC2CCEC25CEA52800E363F5 /* MeasureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureUnit.swift; sourceTree = "<group>"; };
+		DAC6EEAD2614D2A500D195ED /* FacebookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		DAD1993925D3DC0300EDEC6F /* DayTogglerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTogglerView.swift; sourceTree = "<group>"; };
 		DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPickerAsInputView.swift; sourceTree = "<group>"; };
 		DAE321F7257B9BA6007DB9F0 /* JournalMood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalMood.swift; sourceTree = "<group>"; };
@@ -291,8 +289,6 @@
 		DA1DD68125B741CC00981105 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				DA32B6D325B7558700CAA773 /* Vollkorn-Italic.ttf */,
-				DA32B6D425B7558700CAA773 /* Vollkorn.ttf */,
 				DA32B6C925B7530600CAA773 /* Rubik-Italic.ttf */,
 				DA32B6CA25B7530600CAA773 /* Rubik.ttf */,
 				DA1DD69425B746BF00981105 /* Caveat.ttf */,
@@ -306,6 +302,7 @@
 			children = (
 				DA1DD67C25B73C9500981105 /* AppFonts.swift */,
 				DA47599A25470DE800A1ADA6 /* DeviceFix.swift */,
+				DAC6EEAD2614D2A500D195ED /* FacebookService.swift */,
 				DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */,
 			);
 			path = Services;
@@ -572,6 +569,8 @@
 			dependencies = (
 			);
 			name = YourGoal;
+			packageProductDependencies = (
+			);
 			productName = YourGoal;
 			productReference = DAB7DC76252232130087F9C8 /* YourGoal.app */;
 			productType = "com.apple.product-type.application";
@@ -645,6 +644,8 @@
 				es,
 			);
 			mainGroup = DAB7DC6D252232130087F9C8;
+			packageReferences = (
+			);
 			productRefGroup = DAB7DC77252232130087F9C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -664,12 +665,10 @@
 				DA32B6CC25B7530600CAA773 /* Rubik.ttf in Resources */,
 				DAB7DC81252232130087F9C8 /* Preview Assets.xcassets in Resources */,
 				DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */,
-				DA32B6D625B7558700CAA773 /* Vollkorn.ttf in Resources */,
 				DA1DD69925B746BF00981105 /* IndieFlower.ttf in Resources */,
 				DA1DD67825B72E1700981105 /* GoogleService-Info.plist in Resources */,
 				DA32B6CB25B7530600CAA773 /* Rubik-Italic.ttf in Resources */,
 				DA1DD69825B746BF00981105 /* Caveat.ttf in Resources */,
-				DA32B6D525B7558700CAA773 /* Vollkorn-Italic.ttf in Resources */,
 				DA084EFB2575547500CAC158 /* LaunchScreen.storyboard in Resources */,
 				DAB7DC7E252232130087F9C8 /* Assets.xcassets in Resources */,
 			);
@@ -781,6 +780,7 @@
 				DA3A3414252761A600597C73 /* MainGoalView.swift in Sources */,
 				DA1DD67D25B73C9500981105 /* AppFonts.swift in Sources */,
 				DA6DD3D5257A445400AACE45 /* JournalView.swift in Sources */,
+				DAC6EEAE2614D2A500D195ED /* FacebookService.swift in Sources */,
 				DAB4CE72252B556900DAA871 /* Double+Extensions.swift in Sources */,
 				DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
@@ -898,6 +898,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -959,6 +960,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -984,7 +986,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
 				DISPLAY_NAME = "Test Build";
@@ -995,7 +997,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.testyourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1010,7 +1012,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.1;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_ASSET_PATHS = "\"YourGoal/Preview Content\"";
 				DEVELOPMENT_TEAM = ZWDDZD6GHF;
 				DISPLAY_NAME = TimeToGoal;
@@ -1021,7 +1023,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.yourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseAnalytics
 import UIKit
 
 struct FirebaseService {
