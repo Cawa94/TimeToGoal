@@ -108,6 +108,8 @@
 "habit_what_change_question" = "What changes will you notice in your life in a few months?";
 "habit_support_question" = "Who or what could support you in staying constant?";
 
+"habit_category_socials_name" = "Social Media";
+"habit_category_socials_subtitle" = "Posts, videos, podcast";
 "habit_category_body_name" = "Body";
 "habit_category_body_subtitle" = "Running, exercises, yoga";
 "habit_category_mind_name" = "Mind";
@@ -252,6 +254,16 @@
 "habit_avoid_socials_time_sentence" = "I'll avoid social media";
 "habit_plan_day_name" = "Plan the day";
 "habit_plan_day_time_sentence" = "I'll plan the day";
+"habit_youtube_video_name" = "Publish a video";
+"habit_youtube_video_time_sentence" = "I'll publish a new video";
+"habit_instagram_picture_name" = "Post a picture";
+"habit_instagram_picture_time_sentence" = "I'll post a new picture";
+"habit_facebook_post_name" = "Publish a post";
+"habit_facebook_post_time_sentence" = "I'll publish a new post";
+"habit_blog_article_name" = "Publish an article";
+"habit_blog_article_time_sentence" = "I'll publish a new article";
+"habit_record_podcast_name" = "Publish a podcast";
+"habit_record_podcast_time_sentence" = "I'll publish a new podcast";
 
 "home_good_morning" = "Goodmorning";
 "home_good_evening" = "Goodevening";
@@ -400,6 +412,8 @@
 "tutorial_introduction_fourth_step" = "And it doesn't end here!\n\nTimeToGoal provides you with a journal where you can write your thoughts and moods, useful statistics to analyze your habits and a series of personal challenges to complete.\n\nAre you ready to achieve success?\n";
 "tutorial_introduction_button" = "Let's get started!";
 "tutorial_introduction_title" = "Welcome! 👊😎";
+
+"tutorial_time_explanation" = "REMEMBER\nYou can change the unity measure by tapping it";
 
 "screenshots_first_goal_name" = "Exercise";
 "screenshots_first_goal_why" = "I want to feel proud of my body, have more energy during the day and feel better when I leave the house";

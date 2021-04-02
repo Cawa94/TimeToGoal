@@ -15,15 +15,8 @@ public class ProfileViewModel: ObservableObject {
 
     @Binding var refreshchallenges: Bool
 
-    init(profile: Profile?, challenges: [Challenge], refreshchallenges: Binding<Bool>) {
-        if let profile = profile {
-            self.profile = profile
-        } else {
-            let profile = Profile(context: PersistenceController.shared.container.viewContext)
-            profile.created_at = Date()
-            PersistenceController.shared.saveContext()
-            self.profile = profile
-        }
+    init(profile: Profile, challenges: [Challenge], refreshchallenges: Binding<Bool>) {
+        self.profile = profile
         self.challenges = challenges
         self._refreshchallenges = refreshchallenges
     }
@@ -40,6 +33,7 @@ struct ProfileView: View {
             (viewModel.profile.name ?? "profile_name".localized())
         }, set: {
             if $0 != "profile_name".localized(), !(viewModel.challenges.contains(where: { $0.id == 6 })) {
+                FirebaseService.logEvent(.nameUpdated)
                 let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
                 challenge.id = 6
                 challenge.progressMade = 1
@@ -113,6 +107,8 @@ struct ProfileView: View {
                                              isPresented: $viewModel.isProfileImagesVisible)
                 }
             }
+        }.onAppear {
+            FirebaseService.logPageViewed(pageName: "Profile", className: "ProfileView")
         }
     }
 

@@ -26,6 +26,7 @@ public class ContentViewModel: ObservableObject {
     @Published var refreshAllGoals = false
     @Published var refreshJournal = false
     @Published var refreshChallenges = false
+    @Published var refreshProfile = false
     @Published var currentPage: Page = .home
 
 }
@@ -118,7 +119,7 @@ struct ContentView: View {
                                 viewModel.refreshChallenges = true
                             })
                     case .profile:
-                        ProfileView(viewModel: .init(profile: viewModel.profile,
+                        ProfileView(viewModel: .init(profile: viewModel.profile ?? Profile(),
                                                      challenges: viewModel.challenges,
                                                      refreshchallenges: $viewModel.refreshChallenges))
                             .onDisappear(perform: {
@@ -162,7 +163,7 @@ struct ContentView: View {
             viewModel.refreshAllGoals = true
             viewModel.refreshJournal = true
             viewModel.refreshChallenges = true
-            viewModel.profile = profile.map { $0 }.first
+            viewModel.refreshProfile = true
         })
         .onReceive(viewModel.$refreshAllGoals, perform: {
             if $0 {
@@ -186,8 +187,19 @@ struct ContentView: View {
                 viewModel.refreshChallenges = false
             }
         })
+        .onReceive(viewModel.$refreshProfile, perform: {
+            if $0 {
+                viewModel.profile = profile.map { $0 }.first
+                viewModel.refreshProfile = false
+            }
+        })
         .fullScreenCover(item: $viewModel.activeSheet, onDismiss: {
-            UserDefaults.standard.showTutorial = false
+            if UserDefaults.standard.showTutorial == nil { // <- IT'S APP VERY FIRST OPEN
+                UserDefaults.standard.showTutorial = false
+                let profile = Profile(context: PersistenceController.shared.container.viewContext)
+                profile.created_at = Date()
+                viewModel.refreshProfile = true
+            }
             for invalidGoal in goals.filter({ !$0.isValid }) {
                 PersistenceController.shared.container.viewContext.delete(invalidGoal)
             }

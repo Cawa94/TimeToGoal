@@ -79,6 +79,7 @@ struct ProfileImageSelectorView: View {
                                                 let index = getIndexFor(row: row, column: column)
                                                 let image = viewModel.images[index]
                                                 Button(action: {
+                                                    FirebaseService.logEvent(.avatarUpdated)
                                                     let challenge = Challenge(context: PersistenceController.shared.container.viewContext)
                                                     challenge.id = 5
                                                     challenge.progressMade = 1

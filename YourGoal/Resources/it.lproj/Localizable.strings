@@ -108,6 +108,8 @@
 "habit_what_change_question" = "Quali cambiamenti potrai notare nella tua vita fra qualche mese?";
 "habit_support_question" = "Chi o cosa potrebbe supportarti nel rimanere costante?";
 
+"habit_category_socials_name" = "Social Media";
+"habit_category_socials_subtitle" = "Posts, video, podcast";
 "habit_category_body_name" = "Corpo";
 "habit_category_body_subtitle" = "Corsa, esercizi, yoga";
 "habit_category_mind_name" = "Mente";
@@ -252,6 +254,16 @@
 "habit_avoid_socials_time_sentence" = "Eviterò i social media";
 "habit_plan_day_name" = "Pianifica la giornata";
 "habit_plan_day_time_sentence" = "Pianificherò la giornata";
+"habit_youtube_video_name" = "Pubblica un video";
+"habit_youtube_video_time_sentence" = "Pubblicherò un nuovo video";
+"habit_instagram_picture_name" = "Pubblica una foto";
+"habit_instagram_picture_time_sentence" = "Pubblicherò una nuova foto";
+"habit_facebook_post_name" = "Pubblica un post";
+"habit_facebook_post_time_sentence" = "Pubblicherò un nuovo post";
+"habit_blog_article_name" = "Pubblica un articolo";
+"habit_blog_article_time_sentence" = "Pubblicherò un nuovo articolo";
+"habit_record_podcast_name" = "Pubblica un podcast";
+"habit_record_podcast_time_sentence" = "Pubblicherò un nuovo podcast";
 
 "home_good_morning" = "Buongiorno";
 "home_good_evening" = "Buonasera";
@@ -400,6 +412,8 @@
 "tutorial_introduction_fourth_step" = "E non finisce qui!\n\nTimeToGoal ti mette a disposizione un diario dove scrivere i tuoi pensieri e i tuoi stati d'animo, statistiche utili ad analizzare le tue abitudini e una serie di sfide personali da completare.\n\nSei pronto a raggiungere il successo?\n";
 "tutorial_introduction_button" = "Iniziamo!";
 "tutorial_introduction_title" = "Benvenuto!👊😎";
+
+"tutorial_time_explanation" = "RICORDA\nPuoi cambiare l'unità di misura toccandola";
 
 "screenshots_first_goal_name" = "Fare attività fisica";
 "screenshots_first_goal_why" = "Voglio sentirmi orgoglioso del mio corpo, avere più energia durante la giornata e sentirmi in forma quando esco di casa";

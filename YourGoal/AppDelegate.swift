@@ -29,7 +29,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 FirebaseApp.configure()
             }
         #else
-            //FirebaseApp.configure()
+            // FirebaseApp.configure()
         #endif
 
         return true

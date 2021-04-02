@@ -113,6 +113,8 @@ struct NewGoalFirstView: View {
                     }.navigationBarTitle("add_goal_first_title", displayMode: .large)
                     .navigationBarItems(trailing: closeButton)
                 }
+            }.onAppear {
+                FirebaseService.logPageViewed(pageName: "NewGoalFirst", className: "NewGoalFirstView")
             }
         }
     }

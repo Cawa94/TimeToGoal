@@ -19,6 +19,7 @@
 		DA0861B52531F6EC00C4A3DD /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861B42531F6EC00C4A3DD /* BackgroundView.swift */; };
 		DA0861D125323DEB00C4A3DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA0861D325323DEB00C4A3DD /* Localizable.strings */; };
 		DA0861DA25323E5200C4A3DD /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0861D925323E5200C4A3DD /* String+Extensions.swift */; };
+		DA100F962617260F00A664EA /* TimeExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA100F952617260F00A664EA /* TimeExplanationView.swift */; };
 		DA125FC925C1B8F900DA577E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FC825C1B8F900DA577E /* HomeView.swift */; };
 		DA125FD125C1CAE800DA577E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FD025C1CAE800DA577E /* ProfileView.swift */; };
 		DA125FD625C1CAF200DA577E /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA125FD525C1CAF200DA577E /* StatisticsView.swift */; };
@@ -88,7 +89,7 @@
 		DAE32200257B9E41007DB9F0 /* JournalDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE321FF257B9E41007DB9F0 /* JournalDate.swift */; };
 		DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */; };
 		DAE7D785254C1A2200CA2300 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */; };
-		DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */; };
+		DAEFAA8725763BFF00B06680 /* UserDefaults+ShowTimeExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA8625763BFF00B06680 /* UserDefaults+ShowTimeExplanation.swift */; };
 		DAEFAA9D2576424400B06680 /* NewGoalTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEFAA9C2576424400B06680 /* NewGoalTimeView.swift */; };
 		DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8B9255173F800EBEAA6 /* GoalType.swift */; };
 		DAF1A8C32551770D00EBEAA6 /* ColorSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */; };
@@ -129,6 +130,7 @@
 		DA0861D725323DEF00C4A3DD /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0861D825323DF000C4A3DD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA0861D925323E5200C4A3DD /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		DA100F952617260F00A664EA /* TimeExplanationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeExplanationView.swift; sourceTree = "<group>"; };
 		DA125FC825C1B8F900DA577E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DA125FD025C1CAE800DA577E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DA125FD525C1CAF200DA577E /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
@@ -204,7 +206,7 @@
 		DAE321FF257B9E41007DB9F0 /* JournalDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDate.swift; sourceTree = "<group>"; };
 		DAE7D77F254C0F8200CA2300 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		DAE7D784254C1A2200CA2300 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
-		DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowSmartExplanation.swift"; sourceTree = "<group>"; };
+		DAEFAA8625763BFF00B06680 /* UserDefaults+ShowTimeExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+ShowTimeExplanation.swift"; sourceTree = "<group>"; };
 		DAEFAA9C2576424400B06680 /* NewGoalTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalTimeView.swift; sourceTree = "<group>"; };
 		DAF1A8B9255173F800EBEAA6 /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
 		DAF1A8C22551770D00EBEAA6 /* ColorSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorView.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				DA7158E4260F79D500BB8692 /* LoadingView.swift */,
 				DA9DA464257519320006B706 /* MotivationalView.swift */,
 				DAC0855425C4220300FE4DBC /* StatisticsSmallView.swift */,
+				DA100F952617260F00A664EA /* TimeExplanationView.swift */,
 				DAD1995025D4228B00EDEC6F /* TextFieldWithPickerAsInputView.swift */,
 			);
 			path = Views;
@@ -415,7 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				DA938A262536F64D00446580 /* UserDefaults+ShowTutorial.swift */,
-				DAEFAA8625763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift */,
+				DAEFAA8625763BFF00B06680 /* UserDefaults+ShowTimeExplanation.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -785,7 +788,7 @@
 				DAC0857425C434AC00FE4DBC /* Progress+CoreDataClass.swift in Sources */,
 				DAB7DC7C252232130087F9C8 /* ContentView.swift in Sources */,
 				DAE7D780254C0F8200CA2300 /* FirebaseService.swift in Sources */,
-				DAEFAA8725763BFF00B06680 /* UserDefaults+ShowSmartExplanation.swift in Sources */,
+				DAEFAA8725763BFF00B06680 /* UserDefaults+ShowTimeExplanation.swift in Sources */,
 				DA938A272536F64D00446580 /* UserDefaults+ShowTutorial.swift in Sources */,
 				DA47599B25470DE800A1ADA6 /* DeviceFix.swift in Sources */,
 				DAF1A8C32551770D00EBEAA6 /* ColorSelectorView.swift in Sources */,
@@ -802,6 +805,7 @@
 				DAB7DC86252232130087F9C8 /* YourGoal.xcdatamodeld in Sources */,
 				DAC2CCED25CEA52800E363F5 /* MeasureUnit.swift in Sources */,
 				DA9D02F22552AEE200DBFB2E /* WeekDay.swift in Sources */,
+				DA100F962617260F00A664EA /* TimeExplanationView.swift in Sources */,
 				DAF1A8BA255173F800EBEAA6 /* GoalType.swift in Sources */,
 				DA06DF7825C8B49500BACD0C /* HabitTypeRow.swift in Sources */,
 				DA084EE7257549BA00CAC158 /* ActiveSheet.swift in Sources */,
@@ -997,7 +1001,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.testyourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1023,7 +1027,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuricavallin.yourgoal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;

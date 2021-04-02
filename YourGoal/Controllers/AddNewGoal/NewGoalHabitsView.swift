@@ -103,6 +103,8 @@ struct NewGoalHabitsView: View {
                         Image(systemName: "chevron.left")
                 }, trailing: closeButton)
             }
+        }.onAppear {
+            FirebaseService.logPageViewed(pageName: "NewGoalHabits", className: "NewGoalHabitsView")
         }
     }
 

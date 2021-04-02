@@ -261,6 +261,7 @@ struct GoalSmallProgressView: View {
                 viewModel.goal?.timesHasBeenCompleted = 1
             }
             FirebaseService.logConversion(.goalCompleted, goal: viewModel.goal)
+            FacebookService.logAchieveLevelEvent(level: "goal_completed")
             if !(viewModel.goal?.goalType.isHabit ?? false) {
                 updateCompleteGoalChallenge()
             } else if viewModel.goal?.timeFrameType == .weekly {
@@ -310,7 +311,6 @@ struct GoalSmallProgressView: View {
                         trackGoalWithSingleTime()
                         viewModel.showingTrackGoal = false
                     } else {
-                        FirebaseService.logEvent(.trackTimeButton)
                         viewModel.indexSelectedGoal = viewModel.goalIndex ?? 0
                         viewModel.showingTrackGoal = true
                     }
@@ -353,6 +353,7 @@ struct GoalSmallProgressView: View {
     var newGoalButton: some View {
         HStack {
             Button(action: {
+                FirebaseService.logEvent(.addGoalButton)
                 viewModel.activeSheet = .newGoal
             }) {
                 Text("global_add")

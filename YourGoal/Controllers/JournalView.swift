@@ -73,6 +73,8 @@ struct JournalView: View {
             }
         }.onTapGesture {
             UIApplication.shared.endEditing()
+        }.onAppear {
+            FirebaseService.logPageViewed(pageName: "Journal", className: "JournalView")
         }
     }
 

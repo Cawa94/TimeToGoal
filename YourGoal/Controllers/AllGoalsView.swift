@@ -99,12 +99,15 @@ struct AllGoalsView: View {
                     }.navigationBarHidden(true)
                     .navigationBarTitle("")
                 }
+            }.onAppear {
+                FirebaseService.logPageViewed(pageName: "AllGoals", className: "AllGoalsView")
             }
         }
     }
 
     var addNewButton: some View {
         Button(action: {
+            FirebaseService.logEvent(.addGoalButton)
             viewModel.activeSheet = .newGoal
         }) {
             Text("global_add")

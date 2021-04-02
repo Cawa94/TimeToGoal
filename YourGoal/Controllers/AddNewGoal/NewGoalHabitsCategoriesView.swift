@@ -62,7 +62,7 @@ struct NewGoalHabitsCategoriesView: View {
                                 .listRowBackground(Color.defaultBackground)
 
                             if let index = selectedIndex {
-                                if index == 6 {
+                                if index == 1000 {
                                     NavigationLink(destination: NewGoalTimeView(viewModel: .init(goal: viewModel.newGoal,
                                                                                                  challenges: viewModel.challenges,
                                                                                                  isNew: true),
@@ -88,13 +88,14 @@ struct NewGoalHabitsCategoriesView: View {
                                     HabitCategoryRow(viewModel: .init(category: HabitCategory.allValues[index]))
                                         .scaleEffect(viewModel.pressedRow[index] ? 0.9 : 1.0)
                                         .onTapGesture {
-                                            selectedIndex = index
-                                            if selectedIndex == 6 {
+                                            if HabitCategory.allValues[index].id == 6 {
+                                                selectedIndex = 1000
                                                 viewModel.newGoal.goalType = .init(
                                                     id: 1000, label: "custom", name: "goal_custom_name", image: "project_0",
                                                     categoryId: [6], measureUnits: [.session, .km, .page, .hour, .time, .singleTime])
                                                 showTimeView = true
                                             } else {
+                                                selectedIndex = index
                                                 showHabitsView = true
                                             }
                                         }
@@ -118,6 +119,8 @@ struct NewGoalHabitsCategoriesView: View {
                         Image(systemName: "chevron.left")
                 }, trailing: closeButton)
             }
+        }.onAppear {
+            FirebaseService.logPageViewed(pageName: "NewGoalCategories", className: "NewGoalHabitsCategoriesView")
         }
     }
 

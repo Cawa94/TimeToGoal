@@ -13,6 +13,7 @@ public class NewGoalTimeViewModel: ObservableObject {
     @Published var challenges: [Challenge]
     @Published var showErrorAlert = false
     @Published var startDate = Date()
+    @Published var showTimeExplanation = false
 
     var isNewGoal: Bool
 
@@ -20,8 +21,6 @@ public class NewGoalTimeViewModel: ObservableObject {
         self.isNewGoal = isNew
         self.challenges = challenges
         self.goal = goal
-
-        debugPrint("GOAL TYPE: \(goal.goalType.id)")
     }
 
 }
@@ -254,6 +253,11 @@ struct NewGoalTimeView: View {
                     .buttonStyle(PlainButtonStyle())
                     .listRowBackground(Color.defaultBackground)
                 }
+
+                if viewModel.showTimeExplanation {
+                    TimeExplanationView(isPresented: $viewModel.showTimeExplanation)
+                        .transition(.move(edge: .bottom))
+                }
             }
             .navigationBarTitle("goal_time_frame", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
@@ -263,6 +267,13 @@ struct NewGoalTimeView: View {
             UIApplication.shared.endEditing()
         }
         .onAppear {
+            FirebaseService.logPageViewed(pageName: "NewGoalTime", className: "NewGoalTimeView")
+
+            if UserDefaults.standard.showTimeExplanation ?? true {
+                viewModel.showTimeExplanation = true
+                UserDefaults.standard.showTimeExplanation = false
+            }
+
             if self.viewModel.goal.customTimeMeasure == nil || self.viewModel.goal.customTimeMeasure == "" {
                 self.viewModel.goal.customTimeMeasure = self.viewModel.goal.goalType.measureUnits.first?.namePlural
             }

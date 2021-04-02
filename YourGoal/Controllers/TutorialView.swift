@@ -93,6 +93,8 @@ struct TutorialView: View {
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .colorScheme(.light)
                 .navigationBarTitle(viewModel.tutorialTitle, displayMode: .large)
+            }.onAppear {
+                FirebaseService.logPageViewed(pageName: "Tutorial", className: "TutorialView")
             }
         }
     }

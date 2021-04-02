@@ -128,6 +128,8 @@ struct StatisticsView: View {
                 }
             }
         }.onAppear {
+            FirebaseService.logPageViewed(pageName: "Statistics", className: "StatisticsView")
+
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                 viewModel.goals = viewModel.tempGoals
                 validGoals = viewModel.tempGoals.filter { !$0.isArchived }

@@ -113,6 +113,7 @@ struct TrackManualTimeView: View {
                             currentGoal?.timesHasBeenCompleted = 1
                         }
                         FirebaseService.logConversion(.goalCompleted, goal: currentGoal)
+                        FacebookService.logAchieveLevelEvent(level: "goal_completed")
                         if !(currentGoal?.goalType.isHabit ?? false) {
                             updateCompleteGoalChallenge()
                         }

@@ -190,6 +190,8 @@ struct MainGoalView: View {
                         Image(systemName: "chevron.left")
                 }, trailing: editButton)
             }
+        }.onAppear {
+            FirebaseService.logPageViewed(pageName: "MainGoal", className: "MainGoalView")
         }.fullScreenCover(isPresented: $viewModel.showingEditGoal, content: {
             NavigationView {
                 NewGoalTimeView(viewModel: .init(goal: viewModel.goal,

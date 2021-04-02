@@ -14,7 +14,6 @@ public class NewGoalQuestionsViewModel: ObservableObject {
 
     @Published var isColorsVisible = false
     @Published var isIconsVisible = false
-    @Published var showSmartExplanation = false
     @Published var showErrorAlert = false
 
     var isNewGoal: Bool
@@ -276,6 +275,8 @@ struct NewGoalQuestionsView: View {
                 }) {
                     Image(systemName: "chevron.left")
             }, trailing: closeButton)
+        }.onAppear {
+            FirebaseService.logPageViewed(pageName: "NewGoalQuestions", className: "NewGoalQuestionsView")
         }
         .onTapGesture {
             UIApplication.shared.endEditing()
@@ -302,6 +303,7 @@ struct NewGoalQuestionsView: View {
             viewModel.goal.timesHasBeenTracked = 0
             viewModel.goal.createdAt = Date()
             FirebaseService.logConversion(.goalCreated, goal: viewModel.goal)
+            FacebookService.logCompleteTutorialEvent(contentId: "\(viewModel.goal.goalType.id)")
 
             if viewModel.goal.goalType.isHabit {
                 if !viewModel.challenges.contains(where: { $0.id == 0 }) {

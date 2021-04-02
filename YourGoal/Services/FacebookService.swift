@@ -11,11 +11,35 @@ import FBSDKCoreKit
 struct FacebookService {
 
     static func logViewContentEvent(content: String) {
-        let parameters = [
-            AppEvents.ParameterName.contentType.rawValue: content
-        ]
+        #if RELEASE
+            let parameters = [
+                AppEvents.ParameterName.contentType.rawValue: content
+            ]
 
-        AppEvents.logEvent(.viewedContent, parameters: parameters)
+            AppEvents.logEvent(.viewedContent, parameters: parameters)
+        #endif
+    }
+
+    // User completed a full week/month of an habit
+    static func logAchieveLevelEvent(level: String) {
+        #if RELEASE
+            let parameters = [
+                AppEvents.ParameterName.level.rawValue: level
+            ]
+
+            AppEvents.logEvent(.achievedLevel, parameters: parameters)
+        #endif
+    }
+
+    // User created his first habit. ContentId = goalTypeId
+    static func logCompleteTutorialEvent(contentId: String) {
+        #if RELEASE
+            let parameters = [
+                AppEvents.ParameterName.contentID.rawValue: contentId
+            ]
+
+            AppEvents.logEvent(.completedTutorial, parameters: parameters)
+        #endif
     }
 
 }

@@ -12,10 +12,9 @@ import UIKit
 struct FirebaseService {
 
     enum Event: String {
-        case updateCompletionDate = "update_completion_date"
-        case trackTimeButton = "track_time_button"
         case addGoalButton = "add_goal_button"
-        case editGoalButton = "edit_goal_button"
+        case nameUpdated = "name_updated"
+        case avatarUpdated = "avatar_updated"
         case timeTracked = "time_tracked"
     }
 
@@ -52,6 +51,12 @@ struct FirebaseService {
 
     static func logEvent(_ event: Event, parameters: [String: NSObject]? = nil) {
         Analytics.logEvent(event.rawValue, parameters: parameters)
+    }
+
+    static func logPageViewed(pageName: String, className: String) {
+        Analytics.logEvent(AnalyticsEventScreenView,
+                           parameters: [AnalyticsParameterScreenName: pageName,
+                                        AnalyticsParameterScreenClass: className])
     }
 
 }

@@ -173,6 +173,7 @@ struct HomeView: View {
                 }
             }
         }.onAppear {
+            FirebaseService.logPageViewed(pageName: "Home", className: "HomeView")
             if ContentView.hasShowedGoalsOnFirstOpen {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                     goals = viewModel.tempGoals
