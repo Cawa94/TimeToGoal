@@ -254,16 +254,18 @@
 "habit_avoid_socials_time_sentence" = "Eviterò i social media";
 "habit_plan_day_name" = "Pianifica la giornata";
 "habit_plan_day_time_sentence" = "Pianificherò la giornata";
-"habit_youtube_video_name" = "Pubblica un video";
+"habit_youtube_video_name" = "Video di Youtube";
 "habit_youtube_video_time_sentence" = "Pubblicherò un nuovo video";
-"habit_instagram_picture_name" = "Pubblica una foto";
+"habit_instagram_picture_name" = "Foto su Instagram";
 "habit_instagram_picture_time_sentence" = "Pubblicherò una nuova foto";
-"habit_facebook_post_name" = "Pubblica un post";
+"habit_facebook_post_name" = "Post di Facebook";
 "habit_facebook_post_time_sentence" = "Pubblicherò un nuovo post";
-"habit_blog_article_name" = "Pubblica un articolo";
+"habit_blog_article_name" = "Articolo del blog";
 "habit_blog_article_time_sentence" = "Pubblicherò un nuovo articolo";
-"habit_record_podcast_name" = "Pubblica un podcast";
+"habit_record_podcast_name" = "Podcast";
 "habit_record_podcast_time_sentence" = "Pubblicherò un nuovo podcast";
+"habit_tiktok_video_name" = "Video di Tiktok";
+"habit_tiktok_video_time_sentence" = "I'll publish a new video";
 
 "home_good_morning" = "Buongiorno";
 "home_good_evening" = "Buonasera";

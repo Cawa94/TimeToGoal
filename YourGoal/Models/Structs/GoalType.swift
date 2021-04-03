@@ -197,19 +197,22 @@ struct GoalType: Identifiable {
         .init(id: 52, label: "plan_day", name: "habit_plan_day_name", image: "write_5",
               categoryId: [1, 3], measureUnits: [.singleTime], timeSentence: "habit_plan_day_time_sentence"),
 
-        .init(id: 53, label: "youtube_video", name: "habit_youtube_video_name", image: "write_5",
+        .init(id: 53, label: "youtube_video", name: "habit_youtube_video_name", image: "social_6",
               categoryId: [7], measureUnits: [.time, .singleTime], timeSentence: "habit_youtube_video_time_sentence"),
 
-        .init(id: 54, label: "instagram_picture", name: "habit_instagram_picture_name", image: "write_5",
+        .init(id: 54, label: "instagram_picture", name: "habit_instagram_picture_name", image: "social_1",
               categoryId: [7], measureUnits: [.time, .singleTime], timeSentence: "habit_instagram_picture_time_sentence"),
 
-        .init(id: 55, label: "facebook_post", name: "habit_facebook_post_name", image: "write_5",
+        .init(id: 55, label: "facebook_post", name: "habit_facebook_post_name", image: "social_0",
               categoryId: [7], measureUnits: [.time, .singleTime], timeSentence: "habit_facebook_post_time_sentence"),
 
-        .init(id: 56, label: "blog_article", name: "habit_blog_article_name", image: "write_5",
+        .init(id: 56, label: "tiktok_video", name: "habit_tiktok_video_name", image: "social_3",
+              categoryId: [7], measureUnits: [.time, .singleTime], timeSentence: "habit_tiktok_video_time_sentence"),
+
+        .init(id: 57, label: "blog_article", name: "habit_blog_article_name", image: "social_2",
               categoryId: [7], measureUnits: [.time, .singleTime], timeSentence: "habit_blog_article_time_sentence"),
 
-        .init(id: 57, label: "record_podcast", name: "habit_record_podcast_name", image: "write_5",
+        .init(id: 58, label: "record_podcast", name: "habit_record_podcast_name", image: "social_5",
               categoryId: [7], measureUnits: [.time, .singleTime], timeSentence: "habit_record_podcast_time_sentence"),
 
         .init(id: 1000, label: "custom", name: "goal_custom_name", image: "project_0",

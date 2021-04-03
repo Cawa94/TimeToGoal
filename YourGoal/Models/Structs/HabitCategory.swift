@@ -23,7 +23,7 @@ struct HabitCategory: Identifiable {
         .init(id: 2, name: "habit_category_relationship_name", subtitle: "habit_category_relationship_subtitle",
               image: Image("love_0"), habits: GoalType.allHabits.filter { ($0.categoryId?.contains(where: { $0 == 2 }) ?? false)}.sorted { $0.name < $1.name }),
         .init(id: 7, name: "habit_category_socials_name", subtitle: "habit_category_socials_subtitle",
-              image: Image("project_0"), habits: GoalType.allHabits.filter { ($0.categoryId?.contains(where: { $0 == 7 }) ?? false)}.sorted { $0.name < $1.name }),
+              image: Image("social_3"), habits: GoalType.allHabits.filter { ($0.categoryId?.contains(where: { $0 == 7 }) ?? false)}.sorted { $0.name < $1.name }),
         .init(id: 3, name: "habit_category_productivity_name", subtitle: "habit_category_productivity_subtitle",
               image: Image("project_1"), habits: GoalType.allHabits.filter { ($0.categoryId?.contains(where: { $0 == 3 }) ?? false)}.sorted { $0.name < $1.name }),
         .init(id: 4, name: "habit_category_vice_name", subtitle: "habit_category_vice_subtitle",

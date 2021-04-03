@@ -34,6 +34,7 @@ public class IconSelectorViewModel: ObservableObject {
                      "plan_0", "plan_1", "plan_2",
                      "project_0", "project_1", "project_2", "project_3", "project_4", "project_5", "project_6",
                      "quit_0", "quit_1", "quit_2", "quit_3", "quit_4", "quit_5",
+                     "social_0", "social_1", "social_2", "social_3", "social_5", "social_6",
                      "vegetable_0", "vegetable_1", "vegetable_2",
                      "write_0", "write_2", "write_3", "write_4", "write_5", "write_7", "write_8", "write_9"]
 
