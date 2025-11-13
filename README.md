@@ -1,4 +1,4 @@
-
+<img width="1920" height="680" alt="App Previews" src="https://github.com/user-attachments/assets/e00ea7ea-6614-4151-994b-5efef968cccd" />
 
 # 🏆 TimeToGoal
 
@@ -33,8 +33,6 @@ I designed and developed the entire application end-to-end, including:
 
 - **Navigation & flow design**  
   (NavigationStack, sheets, modals, onboarding)
-
-Additionally, I mentored a junior Android developer to reproduce the app on Android, ensuring architectural clarity, UI consistency, and feature parity.
 
 ---
 
@@ -94,3 +92,4 @@ LinkedIn: [https://www.linkedin.com/in/yuri-cavallin/]
 
 ## 📱 App Preview
 
+![PreviewTimeToGoal-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/6b2c5de6-aa2a-4c29-b24c-1f635f3d90a0)
